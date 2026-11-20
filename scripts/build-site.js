@@ -6,6 +6,7 @@ import { REPO, ROOT } from "./lib/config.js";
 import { readJSON, readGolden } from "./lib/store.js";
 import { readPrinciples, injectPrinciples } from "./lib/principles.js";
 import { injectModels } from "./lib/models-table.js";
+import { buildExamples } from "./lib/examples.js";
 import { loadConfig } from "./lib/config.js";
 
 const OUT = path.join(REPO, "_site");
@@ -87,6 +88,18 @@ fs.mkdirSync(path.join(OUT, "api/golden"), { recursive: true });
 for (const model of models) fs.writeFileSync(path.join(OUT, `api/golden/${model}.json`), JSON.stringify(goldenDoc(model), null, 2));
 fs.writeFileSync(path.join(OUT, "golden.json"), JSON.stringify({ ...goldenDoc(models[0]), models: Object.fromEntries(models.map((m) => [m, goldenDoc(m)])) }, null, 2));
 fs.writeFileSync(path.join(OUT, "golden.txt"), index.models[models[0]].golden.text + "\n");
+
+// Examples page: this week's eval articles, plain vs golden (vs challenger), side by side.
+{
+  const model = models[0];
+  const m = index.models[model];
+  const all = fs.existsSync(path.join(ROOT, "content/articles")) ? fs.readdirSync(path.join(ROOT, "content/articles")) : [];
+  const slugs = latest?.model === model && latest.contentSlugs?.length ? latest.contentSlugs.filter((s) => all.includes(s)) : all;
+  fs.writeFileSync(
+    path.join(OUT, "examples.html"),
+    buildExamples(ROOT, model, m.golden, m.challenger, slugs, { date: latest?.date, writer: latest?.writerModel || cfgNow.writerModel, judge: latest?.judgeModel || cfgNow.judgeModel })
+  );
+}
 fs.writeFileSync(path.join(OUT, ".nojekyll"), "");
 fs.writeFileSync(
   path.join(OUT, "js/config.js"),
