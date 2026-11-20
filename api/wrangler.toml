@@ -2,8 +2,9 @@ name = "slopfree-api"
 main = "src/index.js"
 compatibility_date = "2024-09-23"
 
-# Serve at api.slopfree.ca once the domain is on Cloudflare.
-# routes = [{ pattern = "api.slopfree.ca", custom_domain = true }]
+# Served at api.slopfree.ca (the domain is on Cloudflare). No workers.dev address.
+workers_dev = false
+routes = [{ pattern = "api.slopfree.ca", custom_domain = true }]
 
 [vars]
 ALLOWED_ORIGINS = "https://slopfree.ca,https://www.slopfree.ca,https://mvpete.github.io"
@@ -13,7 +14,7 @@ RATE_LIMIT_PER_HOUR = "30"
 [[d1_databases]]
 binding = "DB"
 database_name = "slopfree"
-database_id = "REPLACE_WITH_D1_DATABASE_ID"
+database_id = "eb3e8cac-4bac-42d8-8f10-4c55eb356973"
 migrations_dir = "migrations"
 
 # Secrets (set with `npx wrangler secret put <NAME>`):
