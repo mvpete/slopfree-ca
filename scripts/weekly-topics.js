@@ -25,6 +25,7 @@ const report = {
   model,
   writerModel: cfg.writerModel,
   judgeModel: cfg.judgeModel,
+  drafterModel: cfg.drafterModel,
   wrapper: cfg.wrapper,
   gate: cfg.gate,
   golden: { id: golden.id },
@@ -70,7 +71,7 @@ try {
       const q = queue.shift();
       const d = q
         ? { prompt: fs.readFileSync(path.join(ROOT, q), "utf8").trim(), idea: `Community submission ${path.basename(q)}` }
-        : await tasks.draft(golden.text, report.attempts.filter((a) => a.prompt));
+        : await tasks.draft(golden.text, report.attempts.filter((a) => a.prompt), report.golden.reason);
       if (q) { attempt.source = q; tested.push(q); }
       attempt.prompt = d.prompt;
       attempt.idea = d.idea;
@@ -202,7 +203,7 @@ const fullTitle = decision && decision.outcome !== "none" ? `${decision.title}. 
 
 let body = decision?.body ? decision.body + "\n" : "";
 body += `## ${title}\n\n`;
-body += `Summaries by \`${cfg.writerModel}\`, judged by \`${cfg.judgeModel}\`.\n\n`;
+body += `Summaries by \`${cfg.writerModel}\`, judged by \`${cfg.judgeModel}\`, candidates drafted by \`${cfg.drafterModel}\`.\n\n`;
 body += `Golden prompt **${promptName(golden.id)}** ${report.golden.passed ? "still passes" : "**fails**"} the gate. ${report.golden.reason || ""}\n\n`;
 body += `| Set | Articles | Coverage vs baseline | Worst article | Shorter than baseline | Unsupported (prompt / base) |\n|---|---|---|---|---|---|\n`;
 body += row(`Golden, search set`, report.golden.score) + "\n";

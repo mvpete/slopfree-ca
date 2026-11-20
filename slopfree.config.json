@@ -2,12 +2,13 @@
   "model": "openai",
   "writerModel": "gpt-6-luna",
   "judgeModel": "gpt-6.2-sol",
+  "drafterModel": "gpt-6.2-sol",
   "wrapper": "Summarize the following article:",
 
   "articles": 10,
   "screenArticles": 3,
   "quizArticles": 30,
-  "maxAttempts": 50,
+  "maxAttempts": 20,
   "minWords": 1500,
   "maxWords": 6000,
 

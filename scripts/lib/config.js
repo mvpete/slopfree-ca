@@ -15,6 +15,7 @@ export function loadConfig() {
     ...cfg,
     writerModel: env.WRITER_MODEL || cfg.writerModel,
     judgeModel: env.JUDGE_MODEL || cfg.judgeModel,
+    drafterModel: env.DRAFTER_MODEL || cfg.drafterModel || cfg.judgeModel,
     articles: int(env.ARTICLES) ?? cfg.articles,
     screenArticles: int(env.SCREEN_ARTICLES) ?? cfg.screenArticles,
     quizArticles: int(env.QUIZ_ARTICLES) ?? cfg.quizArticles,

@@ -19,10 +19,11 @@ You are not told who wrote the summary. Judge only what is written.
 Return JSON: {"covered": [<1-based numbers of covered points>], "unsupported": ["<claim>", ...]}`;
 
 const DRAFT_SYSTEM = `You improve a postfix prompt. It is pasted after this task: "Summarize the following article:" followed by the article.
-Goal, measured against the same task with no postfix:
-- keep at least 98% of the major points the plain summary keeps,
-- add no unsupported claims,
-- use at least 20% fewer words.
+Your targets, measured against the same task with no postfix (the plain summary):
+- Accuracy: keep at least {COVERAGE}% of the points the plain summary keeps, and at least {FLOOR}% on every single article.
+- Compression: use at least {SHORTER}% fewer words than the plain summary.
+- Add no more unsupported claims than the plain summary.
+A prompt that misses any target is rejected, so hit all of them.
 The postfix is also published for everyday use, so it must read as general guidance for clear, information-dense writing, not instructions specific to Wikipedia or to this test.
 Write plain, direct language. Keep it under {MAX} characters.
 Learn from the earlier attempts listed and do something meaningfully different from the ones that failed.
@@ -76,12 +77,18 @@ export function createTasks(cfg, llm) {
     };
   }
 
-  async function draft(golden, history) {
+  // The drafter (gpt-6.2-sol by default) writes candidate prompts aimed at the gate's own thresholds.
+  async function draft(golden, history, goldenResult) {
     const recent = history.slice(-12).map((h) => `Attempt ${h.n} (failed at ${h.stage}: ${h.reason})\n${h.prompt}`).join("\n\n---\n\n");
+    const g = cfg.gate;
+    const system = DRAFT_SYSTEM.replace("{MAX}", String(cfg.promptMaxChars))
+      .replace("{COVERAGE}", String(Math.round(g.coverage * 100)))
+      .replace("{FLOOR}", String(Math.round(g.floor * 100)))
+      .replace("{SHORTER}", String(Math.round((1 - g.lengthRatio) * 100)));
     const r = await llm.chat({
-      model: judgeModel,
-      system: DRAFT_SYSTEM.replace("{MAX}", String(cfg.promptMaxChars)),
-      user: `CURRENT GOLDEN PROMPT:\n${golden}\n\nEARLIER ATTEMPTS THIS WEEK:\n${recent || "(none yet)"}`,
+      model: cfg.drafterModel || judgeModel,
+      system,
+      user: `CURRENT GOLDEN PROMPT:\n${golden}\n\nHOW THE GOLDEN PROMPT DID THIS WEEK:\n${goldenResult || "(not measured)"}\n\nEARLIER ATTEMPTS THIS WEEK:\n${recent || "(none yet)"}`,
       json: true,
     });
     if (typeof r.prompt !== "string" || !r.prompt.trim()) throw new Error("drafter returned no prompt");

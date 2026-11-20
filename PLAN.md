@@ -8,7 +8,7 @@ A weekly cycle, one challenger per week. Every Monday:
 
 1. **Decide last week's trial.** If the challenger beat golden in the reader test, it becomes golden. Otherwise golden stays.
 2. **Archive the loser** in "Close but no cigar" with the reason it lost.
-3. **Eval (machine).** An AI drafts candidate prompts until one passes the gate against a plain summarization baseline, up to 50 attempts.
+3. **Eval (machine).** An AI drafts candidate prompts until one passes the gate against a plain summarization baseline, up to 20 attempts, drafted by `gpt-6.2-sol` with the gate targets (≥98% of the baseline's points, ≥20% fewer words).
 4. **Reader test (human).** The new challenger runs head to head against golden for the week.
 
 Every step is a bot PR that auto-merges, so the record of each change stays in git.
@@ -38,12 +38,12 @@ The eval tests the claim (lossless, shorter). The reader test checks that people
 1. **Pick 10 random articles.** Skip stubs, lists and disambiguation pages; require ~1,500+ words. Pin revisions.
 2. **List every point once per article**: every atomic claim the article makes, section by section, with no cap on the count. This is the answer key.
 3. **Baseline once per article**: summarize, then judge which points it covers and count tokens.
-4. **Search loop**, up to 50 attempts:
+4. **Search loop**, up to 20 attempts (drafter: `gpt-6.2-sol`):
    1. Draft a candidate: a variation of the golden prompt, or the next community submission. The drafter sees why earlier attempts failed (points dropped, length ratio).
    2. **Screen** on 3 of the 10 articles. Fail → next attempt.
    3. **Full run** on all 50. Fail → next attempt.
    4. **Confirm** on 10 fresh articles, so the winner isn't tuned to the search set. Golden is summarized on the same articles. Pass → summarize 20 more fresh articles with both prompts, open the challenger PR (auto-merges), and stop. These 30 articles are the week's quiz content, so a reader never sees the same article twice.
-5. No pass after 50 attempts: the three closest candidates go to "Close but no cigar", and golden runs alone for the week.
+5. No pass after 20 attempts: the three closest candidates go to "Close but no cigar", golden runs alone for the week, and the workflow run is marked failed.
 
 ### Gate (all must hold, across the article set)
 | Check | Pass if |

@@ -14,9 +14,10 @@ Losers are kept in [`prompts/openai/losers/`](prompts/openai/losers/) with why t
 | Role | Model | What it does |
 |---|---|---|
 | Writer | `gpt-6-luna` | Writes every summary: the plain baseline and each prompt being tested |
-| Judge | `gpt-6.2-sol` | Lists every point in each article, grades which points a summary kept, counts unsupported claims, and drafts new candidate prompts |
+| Judge | `gpt-6.2-sol` | Lists every point in each article, grades which points a summary kept, and counts unsupported claims |
+| Drafter | `gpt-6.2-sol` | Writes candidate prompts aimed at the gate: ≥98% of the baseline's points, ≥20% fewer words. Up to 20 attempts a week; the run fails if none passes |
 
-Set in [`slopfree.config.json`](slopfree.config.json) (`writerModel`, `judgeModel`). Every eval report, PR, loser file and the site's eval line records which models produced its numbers, so results from different models are never mixed up.
+Set in [`slopfree.config.json`](slopfree.config.json) (`writerModel`, `judgeModel`, `drafterModel`). Every eval report, PR, loser file and the site's eval line records which models produced its numbers, so results from different models are never mixed up.
 
 ## Run it
 

@@ -8,8 +8,8 @@ on:
   workflow_dispatch:
     inputs:
       max_attempts:
-        description: "Max candidate prompts to try"
-        default: "50"
+        description: "Max candidate prompts to try (10-20)"
+        default: "20"
 
 permissions:
   contents: read
@@ -72,6 +72,13 @@ jobs:
         run: gh pr merge --auto --squash "${{ steps.pr.outputs.pull-request-number }}"
         env:
           GH_TOKEN: ${{ steps.app.outputs.token }}
+
+      # The PR above still records the attempts and losers; the run itself goes red so a failed search is visible.
+      - name: Fail if no candidate prompt passed
+        if: steps.run.outputs.outcome != 'challenger'
+        run: |
+          echo "::error::No candidate prompt passed the eval (outcome: ${{ steps.run.outputs.outcome }}). See the PR and evals/${{ steps.run.outputs.date }}.json."
+          exit 1
 
       - name: Flag a failing golden prompt
         if: steps.run.outputs.golden_passed == 'false'
