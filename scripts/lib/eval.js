@@ -54,7 +54,7 @@ export async function runPrompt(ctx, postfix, articles) {
 }
 
 export function scoreRuns(cfg, articles, runs) {
-  const stats = articles.map((a, i) => articleStats(a.slug, a.baseline, runs[i]));
+  const stats = articles.map((a, i) => articleStats(a.slug, a.baseline, runs[i], a.source.words));
   const sc = score(stats);
   return { stats, score: sc, gate: checkGate(sc, cfg.gate) };
 }

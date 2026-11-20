@@ -2,7 +2,7 @@
 import { median, pct } from "./util.js";
 
 // Per-article numbers. Coverage only counts points the baseline covered.
-export function articleStats(slug, base, cand) {
+export function articleStats(slug, base, cand, articleWords = null) {
   let baseCovered = 0;
   let kept = 0;
   base.covered.forEach((c, i) => {
@@ -12,6 +12,8 @@ export function articleStats(slug, base, cand) {
   });
   return {
     slug,
+    totalPoints: base.covered.length,
+    articleWords,
     baseCovered,
     kept,
     baseUnsupported: base.unsupported,
@@ -36,6 +38,9 @@ export function score(stats) {
     candUnsupported: sum("candUnsupported"),
     baseWords: sum("baseWords"),
     candWords: sum("candWords"),
+    // Baseline vs the article itself: share of all points it keeps, and its length as a share of the article.
+    baseOfArticlePoints: sum("totalPoints") ? sum("baseCovered") / sum("totalPoints") : NaN,
+    baseOfArticleWords: valid.every((s) => s.articleWords) ? median(valid.map((s) => s.baseWords / s.articleWords)) : NaN,
     worst: per.slice(0, 3),
   };
 }

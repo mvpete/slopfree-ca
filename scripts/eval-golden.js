@@ -25,6 +25,7 @@ Golden prompt ${golden.id}: ${r.gate.passed ? "PASS" : "FAIL"}
   Worst article          ${pct(sc.floor)}   (needs >= ${pct(cfg.gate.floor)})
   Shorter than baseline  ${pct(1 - sc.lengthRatio)}   (needs >= ${pct(1 - cfg.gate.lengthRatio)})
   Unsupported claims     ${sc.candUnsupported} vs baseline ${sc.baseUnsupported}
+  Baseline vs article    keeps ${pct(sc.baseOfArticlePoints)} of the article's points in ${pct(sc.baseOfArticleWords)} of its words
   ${reasonOf(r.gate)}
   Tokens used: ${ctx.budget.used.toLocaleString()}`);
 
