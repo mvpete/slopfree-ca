@@ -1,7 +1,7 @@
 {
   "model": "openai",
-  "writerModel": "gpt-4.1-mini",
-  "judgeModel": "gpt-4.1",
+  "writerModel": "gpt-6-luna",
+  "judgeModel": "gpt-6.2-sol",
   "wrapper": "Summarize the following article:",
 
   "articles": 10,

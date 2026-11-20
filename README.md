@@ -13,8 +13,8 @@ Losers are kept in [`prompts/openai/losers/`](prompts/openai/losers/) with why t
 
 | Role | Model | What it does |
 |---|---|---|
-| Writer | `gpt-4.1-mini` | Writes every summary: the plain baseline and each prompt being tested |
-| Judge | `gpt-4.1` | Lists every point in each article, grades which points a summary kept, counts unsupported claims, and drafts new candidate prompts |
+| Writer | `gpt-6-luna` | Writes every summary: the plain baseline and each prompt being tested |
+| Judge | `gpt-6.2-sol` | Lists every point in each article, grades which points a summary kept, counts unsupported claims, and drafts new candidate prompts |
 
 Set in [`slopfree.config.json`](slopfree.config.json) (`writerModel`, `judgeModel`). Every eval report, PR, loser file and the site's eval line records which models produced its numbers, so results from different models are never mixed up.
 
