@@ -26,8 +26,10 @@ export async function prepareArticles(ctx, n, exclude, { baseline = true } = {})
     cursor += batch.length;
     const done = await pool(batch, cfg.concurrency, async (a) => {
       try {
+        // Quiz-only articles need just the summaries and a question written from them, so they skip
+        // listing every point (the expensive step) as well as the baseline and grading.
+        if (!baseline) return { ...a, points: [], key: [] };
         const { points, key } = await tasks.extractPoints(a);
-        if (!baseline) return { ...a, points, key }; // quiz-only: no baseline, no grading
         const s = await tasks.summarize(a, null);
         const j = await tasks.judge(a, points, s.text);
         return { ...a, points, key, baseline: { summary: s.text, words: s.words, dashes: s.dashes, ...j } };

@@ -1,0 +1,63 @@
+name: add-articles
+
+# Manual: add quiz-only articles to the current trial (both prompts' summaries + a checked question).
+on:
+  workflow_dispatch:
+    inputs:
+      count:
+        description: "How many articles to add"
+        default: "20"
+
+permissions:
+  contents: read
+
+jobs:
+  add:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm test
+
+      - name: Add the articles
+        id: run
+        run: node scripts/add-articles.js "${{ inputs.count }}"
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+
+      - name: Keep the results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: added-articles
+          path: |
+            content/
+            evals/
+          if-no-files-found: ignore
+
+      - uses: actions/create-github-app-token@v1
+        id: app
+        with:
+          app-id: ${{ vars.SLOPFREE_APP_ID }}
+          private-key: ${{ secrets.SLOPFREE_APP_PRIVATE_KEY }}
+
+      - uses: peter-evans/create-pull-request@v7
+        id: pr
+        with:
+          token: ${{ steps.app.outputs.token }}
+          branch: bot/add-articles-${{ github.run_id }}
+          title: ${{ steps.run.outputs.title }}
+          commit-message: ${{ steps.run.outputs.title }}
+          body: Quiz-only articles for the current trial. Each has both prompts' summaries and a question every summary answers (checked by quotation).
+          add-paths: |
+            content/
+            evals/
+          labels: bot
+
+      - if: steps.pr.outputs.pull-request-number
+        run: gh pr merge --auto --squash "${{ steps.pr.outputs.pull-request-number }}"
+        env:
+          GH_TOKEN: ${{ steps.app.outputs.token }}
