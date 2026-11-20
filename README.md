@@ -9,6 +9,15 @@ Every prompt has to earn its place:
 
 Losers are kept in [`prompts/openai/losers/`](prompts/openai/losers/) with why they lost. The full plan is in [PLAN.md](PLAN.md).
 
+## Models
+
+| Role | Model | What it does |
+|---|---|---|
+| Writer | `gpt-4.1-mini` | Writes every summary: the plain baseline and each prompt being tested |
+| Judge | `gpt-4.1` | Lists every point in each article, grades which points a summary kept, counts unsupported claims, and drafts new candidate prompts |
+
+Set in [`slopfree.config.json`](slopfree.config.json) (`writerModel`, `judgeModel`). Every eval report, PR, loser file and the site's eval line records which models produced its numbers, so results from different models are never mixed up.
+
 ## Run it
 
 Node 22+. No dependencies.

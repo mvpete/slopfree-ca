@@ -72,12 +72,12 @@ ${n.all ? `Quizzes: ${n.quizzes}. Chance it was faster: ${pct(n.all.pFaster)}. C
 const challengerText = fs.readFileSync(path.join(ROOT, `prompts/${model}/${challenger}.md`), "utf8").trim();
 let title;
 if (result.outcome === "win") {
-  writeLoser(model, { id: golden.id, date, stage: `reader test (replaced by prompt ${promptName(challenger)})`, reason: result.reason, table, prompt: golden.text, report: `evals/${date}-decision.json` });
+  writeLoser(model, { id: golden.id, date, stage: `reader test (replaced by prompt ${promptName(challenger)})`, reason: result.reason, table, prompt: golden.text, report: `evals/${date}-decision.json`, models: { writer: cfg.writerModel, judge: cfg.judgeModel } });
   fs.rmSync(path.join(ROOT, `prompts/${model}/${golden.id}.md`));
   writeJSON(`prompts/${model}/golden.json`, { id: challenger });
   title = `Prompt ${promptName(challenger)} is the new golden prompt`;
 } else {
-  writeLoser(model, { id: challenger, date, stage: "reader test", reason: result.reason, table, prompt: challengerText, report: `evals/${date}-decision.json` });
+  writeLoser(model, { id: challenger, date, stage: "reader test", reason: result.reason, table, prompt: challengerText, report: `evals/${date}-decision.json`, models: { writer: cfg.writerModel, judge: cfg.judgeModel } });
   fs.rmSync(path.join(ROOT, `prompts/${model}/${challenger}.md`));
   title = `Prompt ${promptName(challenger)} lost the reader test; prompt ${promptName(golden.id)} stays golden`;
 }

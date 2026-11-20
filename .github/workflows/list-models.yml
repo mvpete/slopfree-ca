@@ -1,0 +1,20 @@
+name: list-models
+
+# Manual: which OpenAI models can the repo's key use? Prints model IDs only.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  list:
+    runs-on: ubuntu-latest
+    steps:
+      - name: List models
+        run: |
+          curl -sf https://api.openai.com/v1/models -H "Authorization: Bearer $OPENAI_API_KEY" \
+            | jq -r '.data[].id' | sort | tee models.txt
+          { echo '```'; cat models.txt; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}

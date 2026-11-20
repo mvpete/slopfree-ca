@@ -48,10 +48,10 @@ for (const model of models) {
   // Claim numbers: this week's search-set result for golden, else the latest golden-only check.
   let evalNumbers = null;
   if (latest?.golden?.id === golden.id && latest.golden.score) {
-    evalNumbers = { date: latest.date, coverage: latest.golden.score.coverage, shorter: 1 - latest.golden.score.lengthRatio, articles: latest.golden.score.n, passed: latest.golden.passed };
+    evalNumbers = { date: latest.date, coverage: latest.golden.score.coverage, shorter: 1 - latest.golden.score.lengthRatio, articles: latest.golden.score.n, passed: latest.golden.passed, writerModel: latest.writerModel, judgeModel: latest.judgeModel };
   } else if (goldenEvals.length) {
     const g = readJSON(`evals/${goldenEvals.at(-1)}`);
-    if (g.golden === golden.id) evalNumbers = { date: g.date, coverage: g.score.coverage, shorter: 1 - g.score.lengthRatio, articles: g.score.n, passed: g.passed };
+    if (g.golden === golden.id) evalNumbers = { date: g.date, coverage: g.score.coverage, shorter: 1 - g.score.lengthRatio, articles: g.score.n, passed: g.passed, writerModel: g.writerModel, judgeModel: g.judgeModel };
   }
 
   index.models[model] = { label: LABELS[model] || model, golden, challenger, eval: evalNumbers, articles };

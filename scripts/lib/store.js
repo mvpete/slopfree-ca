@@ -46,7 +46,7 @@ export function existingSlugs() {
 }
 
 // One file per losing prompt: the prompt, why it lost, and its numbers.
-export function writeLoser(model, { id, date, by, stage, reason, score, table, prompt, report }) {
+export function writeLoser(model, { id, date, by, stage, reason, score, table, prompt, report, models }) {
   const rows = table
     ? table
     : score
@@ -65,7 +65,7 @@ ${by ? `**Submitted by:** @${by}
 
 ${rows}
 
-Full log: \`${report}\`
+${models ? `Summaries by \`${models.writer}\`, judged by \`${models.judge}\`. ` : ""}Full log: \`${report}\`
 
 ## Prompt
 

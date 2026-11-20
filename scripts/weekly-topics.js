@@ -178,7 +178,7 @@ const misses = report.attempts
 let nextId = Number(nextPromptId(model).slice(2));
 for (const m of misses) {
   m.loserId = "p-" + String(nextId++).padStart(4, "0"); // file name; shown to people as promptName()
-  writeLoser(model, { id: m.loserId, date, by: m.source ? path.basename(m.source, ".md").match(QUEUE_NAME)?.[1] : null, stage: `eval (${m.stage})`, reason: m.reason, score: m.score, prompt: m.prompt, report: reportPath });
+  writeLoser(model, { id: m.loserId, date, by: m.source ? path.basename(m.source, ".md").match(QUEUE_NAME)?.[1] : null, stage: `eval (${m.stage})`, reason: m.reason, score: m.score, prompt: m.prompt, report: reportPath, models: { writer: cfg.writerModel, judge: cfg.judgeModel } });
 }
 
 // Tested submissions leave the queue; their result is in the report (and a loser file if close).
@@ -202,6 +202,7 @@ const fullTitle = decision && decision.outcome !== "none" ? `${decision.title}. 
 
 let body = decision?.body ? decision.body + "\n" : "";
 body += `## ${title}\n\n`;
+body += `Summaries by \`${cfg.writerModel}\`, judged by \`${cfg.judgeModel}\`.\n\n`;
 body += `Golden prompt **${promptName(golden.id)}** ${report.golden.passed ? "still passes" : "**fails**"} the gate. ${report.golden.reason || ""}\n\n`;
 body += `| Set | Articles | Coverage vs baseline | Worst article | Shorter than baseline | Unsupported (prompt / base) |\n|---|---|---|---|---|---|\n`;
 body += row(`Golden, search set`, report.golden.score) + "\n";

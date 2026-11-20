@@ -19,7 +19,8 @@ const r = scoreRuns(cfg, articles, runs);
 const sc = r.score;
 
 console.log(`
-Golden ${golden.id}: ${r.gate.passed ? "PASS" : "FAIL"}
+Golden prompt ${golden.id}: ${r.gate.passed ? "PASS" : "FAIL"}
+  Summaries by ${cfg.writerModel}, judged by ${cfg.judgeModel}
   Coverage vs baseline   ${pct(sc.coverage)}   (needs >= ${pct(cfg.gate.coverage)})
   Worst article          ${pct(sc.floor)}   (needs >= ${pct(cfg.gate.floor)})
   Shorter than baseline  ${pct(1 - sc.lengthRatio)}   (needs >= ${pct(1 - cfg.gate.lengthRatio)})
