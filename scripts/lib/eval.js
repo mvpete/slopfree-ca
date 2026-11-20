@@ -26,11 +26,11 @@ export async function prepareArticles(ctx, n, exclude, { baseline = true } = {})
     cursor += batch.length;
     const done = await pool(batch, cfg.concurrency, async (a) => {
       try {
-        const { points, key, question } = await tasks.extractPoints(a);
-        if (!baseline) return { ...a, points, key, question }; // quiz-only: no baseline, no grading
+        const { points, key } = await tasks.extractPoints(a);
+        if (!baseline) return { ...a, points, key }; // quiz-only: no baseline, no grading
         const s = await tasks.summarize(a, null);
         const j = await tasks.judge(a, points, s.text);
-        return { ...a, points, key, question, baseline: { summary: s.text, words: s.words, dashes: s.dashes, ...j } };
+        return { ...a, points, key, baseline: { summary: s.text, words: s.words, dashes: s.dashes, ...j } };
       } catch (e) {
         if (e instanceof BudgetExceeded) throw e;
         log(`skipped ${a.slug}: ${e.message}`);
@@ -53,6 +53,24 @@ export async function runPrompt(ctx, postfix, articles, { judge = true } = {}) {
     const j = await tasks.judge(a, a.points, s.text);
     return { slug: a.slug, summary: s.text, words: s.words, dashes: s.dashes, ...j };
   });
+}
+
+// Quiz questions, written from the summaries readers will see (one per article, answerable from each).
+// Articles where no such question can be written are left out of the quiz.
+export async function addQuestions(ctx, articles, runsList) {
+  const { cfg, tasks, log } = ctx;
+  const bySlug = runsList.map((runs) => Object.fromEntries(runs.map((r) => [r.slug, r])));
+  await pool(articles, cfg.concurrency, async (a) => {
+    const summaries = bySlug.map((m) => m[a.slug]?.summary).filter(Boolean);
+    if (summaries.length !== runsList.length) return;
+    try {
+      a.question = await tasks.writeQuestion(a, summaries);
+    } catch (e) {
+      if (e instanceof BudgetExceeded) throw e;
+      log(`no question for ${a.slug}: ${e.message}`);
+    }
+  });
+  return articles.filter((a) => a.question);
 }
 
 export function scoreRuns(cfg, articles, runs) {

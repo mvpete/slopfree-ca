@@ -5,7 +5,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { loadConfig, ROOT } from "./lib/config.js";
-import { createContext, prepareArticles, runPrompt, scoreRuns, BudgetExceeded } from "./lib/eval.js";
+import { createContext, prepareArticles, runPrompt, scoreRuns, addQuestions, BudgetExceeded } from "./lib/eval.js";
 import { readGolden, nextPromptId, existingSlugs, writeJSON, writeText, writeLoser } from "./lib/store.js";
 import { reasonOf } from "./lib/gate.js";
 import { today, pct, promptName, QUEUE_NAME } from "./lib/util.js";
@@ -168,10 +168,14 @@ if (winner) {
       log(`quiz articles cut short: ${e.message}`);
     }
   }
-  writeArticles(quiz, { [golden.id]: runsBySlug(goldenQuiz), [id]: runsBySlug(challengerQuiz) });
+  const quizOk = await addQuestions(ctx, quiz, [goldenQuiz, challengerQuiz]).catch((e) => { if (e instanceof BudgetExceeded) return quiz.filter((a) => a.question); throw e; });
+  writeArticles(quizOk, { [golden.id]: runsBySlug(goldenQuiz), [id]: runsBySlug(challengerQuiz) });
 } else {
   writeJSON(`prompts/${model}/active.json`, []);
-  if (search?.goldenRuns) writeArticles(search, { [golden.id]: runsBySlug(search.goldenRuns) });
+  if (search?.goldenRuns) {
+    const ok = await addQuestions(ctx, search, [search.goldenRuns]).catch((e) => { if (e instanceof BudgetExceeded) return search.filter((a) => a.question); throw e; });
+    writeArticles(ok, { [golden.id]: runsBySlug(search.goldenRuns) });
+  }
 }
 
 // Three closest misses get a loser file.

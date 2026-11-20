@@ -27,7 +27,7 @@ export function validateResults(body, { models }) {
       if (!a || typeof a !== "object") bad(`Round ${i + 1} is not an object.`);
       if (typeof a.promptId !== "string" || !/^p-\d{4,}$/.test(a.promptId)) bad(`Round ${i + 1}: bad promptId.`);
       if (typeof a.slug !== "string" || !/^[a-z0-9-]{1,80}$/.test(a.slug)) bad(`Round ${i + 1}: bad slug.`);
-      if (!isInt(a.choice, 0, 3)) bad(`Round ${i + 1}: choice must be 0 to 3.`);
+      if (!isInt(a.choice, 0, 4)) bad(`Round ${i + 1}: choice must be 0 to 3, or 4 for too hard.`);
       if (!isInt(a.readMs, 0, 3600000)) bad(`Round ${i + 1}: bad readMs.`);
       if (!isInt(a.words, 0, 5000)) bad(`Round ${i + 1}: bad words.`);
       if (!isInt(a.round, 1, 10)) bad(`Round ${i + 1}: bad round.`);

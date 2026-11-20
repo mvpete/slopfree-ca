@@ -52,7 +52,9 @@ async function loadRows() {
   return (await res.json()).rows;
 }
 
-const rows = (await loadRows()).filter((r) => r.prompt_id === golden.id || r.prompt_id === challenger);
+// Answers to replaced questions don't count: only answers from trial.countFrom on.
+const countFrom = trial?.challenger === challenger ? trial.countFrom : null;
+const rows = (await loadRows()).filter((r) => (r.prompt_id === golden.id || r.prompt_id === challenger) && (!countFrom || r.created_at >= countFrom));
 
 // Answer key from the repo, so a client can't mark its own answers correct.
 const key = {};

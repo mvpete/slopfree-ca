@@ -6,7 +6,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { loadConfig, ROOT } from "./lib/config.js";
-import { createContext, prepareArticles, runPrompt, scoreRuns, BudgetExceeded } from "./lib/eval.js";
+import { createContext, prepareArticles, runPrompt, scoreRuns, addQuestions, BudgetExceeded } from "./lib/eval.js";
 import { readJSON, readGolden, readText, existingSlugs, writeJSON } from "./lib/store.js";
 import { reasonOf } from "./lib/gate.js";
 import { today, promptName } from "./lib/util.js";
@@ -45,15 +45,17 @@ try {
   report.challenger = { id: challenger.id, score: cs.score, passed: cs.gate.passed, reason: reasonOf(cs.gate), stats: cs.stats };
   log(`prompt ${promptName(golden.id)}: ${gs.gate.passed ? "passes" : "fails"}: ${reasonOf(gs.gate)}`);
   log(`prompt ${promptName(challenger.id)}: ${cs.gate.passed ? "passes" : "fails"}: ${reasonOf(cs.gate)}`);
+  const evalQuiz = await addQuestions(ctx, evalSet, [g, c]);
   write(evalSet, { [golden.id]: byslug(g), [challenger.id]: byslug(c) });
-  report.contentSlugs = evalSet.map((a) => a.slug);
+  report.contentSlugs = evalQuiz.map((a) => a.slug);
 
   const extra = Math.max(0, cfg.quizArticles - evalSet.length);
   if (extra) {
     const quiz = await prepareArticles(ctx, extra, exclude, { baseline: false });
     const [gq, cq] = await Promise.all([runPrompt(ctx, golden.text, quiz, { judge: false }), runPrompt(ctx, challenger.text, quiz, { judge: false })]);
-    write(quiz, { [golden.id]: byslug(gq), [challenger.id]: byslug(cq) });
-    report.contentSlugs.push(...quiz.map((a) => a.slug));
+    const quizOk = await addQuestions(ctx, quiz, [gq, cq]);
+    write(quizOk, { [golden.id]: byslug(gq), [challenger.id]: byslug(cq) });
+    report.contentSlugs.push(...quizOk.map((a) => a.slug));
   }
 } catch (e) {
   if (!(e instanceof BudgetExceeded)) throw e;

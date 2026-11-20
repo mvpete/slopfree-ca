@@ -14,10 +14,17 @@ Label each point "key" or "detail".
 - detail: supporting specifics a reader can do without: lists of examples, minor figures, secondary names, asides.
 Judge each point on its own merits; there is no quota.
 
-Also write one multiple-choice question that tests one key point. It must need understanding, not keyword spotting.
-Give 4 options; exactly one is correct, and the others are plausible but clearly wrong according to the article.
+Return JSON: {"points": [{"text": "...", "key": true}, ...]}`;
 
-Return JSON: {"points": [{"text": "...", "key": true}, ...], "question": {"point": <1-based point number>, "text": "...", "options": ["...","...","...","..."], "answer": <0-3>}}`;
+const QUESTION_SYSTEM = `You write one reading-comprehension question for a quiz. A reader sees exactly one of the summaries below, never the article.
+Pick one important fact that EVERY summary states. The question must be answerable from any one summary alone.
+Ask about something a reader would need to understand the subject, not a minor detail. Keep the question short and plain.
+Give 4 short options. Exactly one is correct according to every summary; the others are plausible but wrong.
+For each summary, quote the exact words that contain the answer (copy them character for character, 3 to 25 words).
+
+Return JSON: {"text": "...", "options": ["...","...","...","..."], "answer": <0-3>, "quotes": ["<quote from summary 1>", "<quote from summary 2>", ...]}`;
+
+const norm = (s) => s.toLowerCase().replace(/[\u2018\u2019]/g, "'").replace(/[\u201c\u201d]/g, '"').replace(/\s+/g, " ").trim();
 
 const JUDGE_SYSTEM = `You grade a summary against a numbered list of every point its source article makes. Be strict and literal.
 A point is covered only if the summary states it, or states something that clearly implies it. Paraphrase is fine. Partly stated means not covered.
@@ -55,11 +62,30 @@ export function createTasks(cfg, llm) {
       .filter((p) => p && typeof p.text === "string" && p.text.trim());
     const points = raw.map((p) => p.text.trim());
     const key = raw.map((p) => p.key === true);
-    const q = r.question || {};
     if (points.length < 5) throw new Error(`only ${points.length} points`);
     if (!key.some(Boolean)) throw new Error("no key points");
-    if (!Array.isArray(q.options) || q.options.length !== 4 || !(q.answer >= 0 && q.answer <= 3)) throw new Error("bad question");
-    return { points, key, question: { point: q.point, text: q.text, options: q.options, answer: q.answer } };
+    return { points, key };
+  }
+
+  // One question answerable from every summary. The judge quotes where each summary states the answer,
+  // and the quotes are checked against the summaries, so a question about a dropped fact can't get through.
+  async function writeQuestion(article, summaries) {
+    for (let attempt = 0; attempt < 2; attempt++) {
+      const r = await llm.chat({
+        model: judgeModel,
+        system: QUESTION_SYSTEM,
+        user: `TOPIC: ${article.source.title}\n\n${summaries.map((s, i) => `SUMMARY ${i + 1}:\n${s}`).join("\n\n")}`,
+        json: true,
+      });
+      const ok =
+        typeof r.text === "string" &&
+        Array.isArray(r.options) && r.options.length === 4 && r.options.every((o) => typeof o === "string") &&
+        Number.isInteger(r.answer) && r.answer >= 0 && r.answer <= 3 &&
+        Array.isArray(r.quotes) && r.quotes.length === summaries.length &&
+        r.quotes.every((q, i) => typeof q === "string" && q.trim().length > 5 && norm(summaries[i]).includes(norm(q)));
+      if (ok) return { text: r.text, options: r.options, answer: r.answer, quotes: r.quotes };
+    }
+    throw new Error("couldn't write a question answerable from every summary");
   }
 
   async function summarize(article, postfix) {
@@ -109,7 +135,7 @@ export function createTasks(cfg, llm) {
     return { prompt: r.prompt.trim(), idea: r.idea || "" };
   }
 
-  return { extractPoints, summarize, judge, draft, moderate: llm.moderate };
+  return { extractPoints, summarize, judge, writeQuestion, draft, moderate: llm.moderate };
 }
 
 // Deterministic stand-ins so the whole loop can be exercised without an API key.
@@ -122,7 +148,12 @@ export function createFakeTasks() {
       const points = sentences(article.text); // fake: every sentence is a point
       if (points.length < 5) throw new Error("too few sentences");
       const key = points.map((_, i) => i % 3 === 0); // fake: every third point is key
-      return { points, key, question: { point: 1, text: `Which is true of ${article.source.title}?`, options: [points[0].slice(0, 90), "Option B", "Option C", "Option D"], answer: 0 } };
+      return { points, key };
+    },
+    async writeQuestion(article, summaries) {
+      // fake: the first sentence all summaries share
+      const first = summaries[0].split(/(?<=[.!?])\s+/).find((s) => summaries.every((x) => x.includes(s.slice(0, 40)))) || summaries[0].slice(0, 60);
+      return { text: `Which is true of ${article.source.title}?`, options: [first.slice(0, 90), "Option B", "Option C", "Option D"], answer: 0, quotes: summaries.map(() => first.slice(0, 40)) };
     },
     // Fake writer: the baseline pads every sentence with filler. A postfix usually cuts the filler
     // (shorter, same points); some postfixes also drop a point or keep the filler, so attempts can fail.

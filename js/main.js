@@ -312,6 +312,20 @@
     const r = rounds[round];
     r.choice = Number(picked.value);
     r.correct = r.choice === r.article.question.answer;
+    nextRound();
+  }
+
+  // "Too hard / I don't know": stored as choice 4, which counts as a wrong answer.
+  const TOO_HARD = 4;
+  function tooHard() {
+    const r = rounds[round];
+    r.choice = TOO_HARD;
+    r.correct = false;
+    r.tooHard = true;
+    nextRound();
+  }
+
+  function nextRound() {
     round++;
     if (round < rounds.length) startRound();
     else if (recording()) askLanguage();
@@ -416,7 +430,7 @@
       left.append(mark, link);
       const meta = document.createElement("span");
       meta.className = "meta";
-      const who = r.guess ? "guess round" : r.promptId === m.golden.id ? `golden, prompt ${promptName(r.promptId)}` : `challenger, prompt ${promptName(r.promptId)}`;
+      const who = (r.tooHard ? "too hard · " : "") + (r.guess ? "guess round" : r.promptId === m.golden.id ? `golden, prompt ${promptName(r.promptId)}` : `challenger, prompt ${promptName(r.promptId)}`);
       meta.textContent = r.guess ? who : `${who} · ${Math.round(r.readMs / 1000)}s`;
       li.append(left, meta);
       ul.appendChild(li);
@@ -427,5 +441,6 @@
 
   $("to-question").addEventListener("click", showQuestion);
   $("submit").addEventListener("click", submitAnswer);
+  $("too-hard").addEventListener("click", tooHard);
   $("again").addEventListener("click", () => show("intro"));
 })();

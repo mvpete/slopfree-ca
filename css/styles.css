@@ -468,3 +468,5 @@ h3 { font-size: 1.05rem; letter-spacing: -0.01em; }
 @media (prefers-reduced-motion: reduce) { .car-track { scroll-behavior: auto; } }
 
 .ex-link { color: var(--gold); white-space: nowrap; }
+
+.answer-row { margin-top: 0; }

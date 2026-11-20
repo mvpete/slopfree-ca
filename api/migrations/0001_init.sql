@@ -14,7 +14,7 @@ CREATE TABLE answers (
   model TEXT NOT NULL,
   prompt_id TEXT NOT NULL,
   slug TEXT NOT NULL,
-  choice INTEGER NOT NULL,   -- index of the option picked; correctness is computed later from the repo
+  choice INTEGER NOT NULL,   -- index of the option picked (4 = too hard); correctness is computed later from the repo
   read_ms INTEGER NOT NULL,
   words INTEGER NOT NULL,
   round INTEGER NOT NULL,

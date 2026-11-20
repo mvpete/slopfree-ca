@@ -45,6 +45,7 @@ for (const model of models) {
     if (!summaries[golden.id]) continue;
     const src = readJSON(`content/articles/${slug}/source.json`);
     const { question } = readJSON(`content/articles/${slug}/points.json`);
+    if (!question) continue; // no question answerable from every summary: not in the quiz
     articles.push({ slug, title: src.title, url: src.url, question: { text: question.text, options: question.options, answer: question.answer }, summaries });
   }
 

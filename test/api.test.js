@@ -22,9 +22,13 @@ test("rejects unknown models and bad fields", () => {
   rejects({ ...ok, model: "gpt" }, /model/);
   rejects({ ...ok, firstLanguage: "maybe" }, /firstLanguage/);
   rejects({ ...ok, answers: [] }, /1 to 10/);
-  rejects({ ...ok, answers: [{ ...ok.answers[0], choice: 4 }] }, /choice/);
+  rejects({ ...ok, answers: [{ ...ok.answers[0], choice: 5 }] }, /choice/);
   rejects({ ...ok, answers: [{ ...ok.answers[0], slug: "../etc" }] }, /slug/);
   rejects({ ...ok, answers: [{ ...ok.answers[0], promptId: "golden" }] }, /promptId/);
+});
+
+test("accepts too hard as choice 4", () => {
+  assert.equal(validateResults({ ...ok, answers: [{ ...ok.answers[0], choice: 4 }] }, opts).answers[0].choice, 4);
 });
 
 test("strips unknown fields such as a client-claimed 'correct'", () => {
