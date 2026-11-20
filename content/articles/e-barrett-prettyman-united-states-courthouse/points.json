@@ -1,0 +1,18 @@
+{
+  "points": [],
+  "key": [],
+  "question": {
+    "text": "Which court has the Prettyman Courthouse hosted since 2009?",
+    "options": [
+      "U.S. Tax Court",
+      "Foreign Intelligence Surveillance Court",
+      "U.S. Court of International Trade",
+      "U.S. Court of Federal Claims"
+    ],
+    "answer": 1,
+    "quotes": [
+      "Since 2009, it has also hosted the U.S. Foreign Intelligence Surveillance Court.",
+      "Since 2009, it has also hosted the Foreign Intelligence Surveillance Court."
+    ]
+  }
+}

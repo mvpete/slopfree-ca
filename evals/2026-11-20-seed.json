@@ -474,7 +474,27 @@
     "theories-of-cloaking",
     "2021-in-art",
     "reed-blankenship",
-    "attack-on-pearl-harbor"
+    "attack-on-pearl-harbor",
+    "blackwater-river-virginia",
+    "hopscotch",
+    "12-characters-in-search-of-an-apocalypse-on-the-road",
+    "el-hadji-diouf",
+    "bill-elliott",
+    "andre-jobin",
+    "juri-reinvere",
+    "annual-vs-perennial-plant-evolution",
+    "nw-rota-1",
+    "multi-speed-europe",
+    "wonersh",
+    "you-see-colours",
+    "jon-moritsugu",
+    "charles-sousa",
+    "e-barrett-prettyman-united-states-courthouse",
+    "yana-zhdanova",
+    "4th-marine-regiment-sweden",
+    "rula-lenska",
+    "singapore-football-league",
+    "josip-torbar-politician-born-1889"
   ],
   "tokensUsed": 745778,
   "tokensByModel": {
@@ -486,5 +506,21 @@
       "input": 239035,
       "output": 26247
     }
-  }
+  },
+  "added": [
+    {
+      "count": 20,
+      "tokens": 153646,
+      "tokensByModel": {
+        "gpt-6-luna": {
+          "input": 123688,
+          "output": 15550
+        },
+        "gpt-6.2-sol": {
+          "input": 12414,
+          "output": 1994
+        }
+      }
+    }
+  ]
 }

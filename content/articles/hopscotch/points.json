@@ -1,0 +1,18 @@
+{
+  "points": [],
+  "key": [],
+  "question": {
+    "text": "Which square do players skip as they hop through the course?",
+    "options": [
+      "The first square",
+      "The square with the marker",
+      "The last square",
+      "The square after the marker"
+    ],
+    "answer": 1,
+    "quotes": [
+      "hop through the course while avoiding the marked space",
+      "Players toss a small marker into each square in sequence, then hop through the course while skipping the square containing it"
+    ]
+  }
+}
