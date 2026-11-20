@@ -2,17 +2,17 @@
   "points": [],
   "key": [],
   "question": {
-    "text": "How far did Diouf and Senegal go at the 2002 World Cup?",
+    "text": "What sport did El Hadji Diouf play for Senegal?",
     "options": [
-      "Group stage",
-      "Round of 16",
-      "Quarter-finals",
-      "Semi-finals"
+      "Basketball",
+      "Football",
+      "Rugby",
+      "Cricket"
     ],
-    "answer": 2,
+    "answer": 1,
     "quotes": [
-      "Senegal reached the quarter-finals",
-      "Senegal’s run to the World Cup quarter-finals"
+      "a Senegalese former forward whose standout 2002 World Cup helped launch a high-profile career in European football",
+      "a Senegalese former winger and forward whose career combined a standout 2002 World Cup"
     ]
   }
 }

@@ -2,17 +2,17 @@
   "points": [],
   "key": [],
   "question": {
-    "text": "Why did France’s highest court rule against convicting Zhdanova for sexual exhibition?",
+    "text": "What kind of work is Zhdanova known for?",
     "options": [
-      "The protest took place in private.",
-      "The law had been repealed.",
-      "A conviction would unduly restrict her political expression.",
-      "The court found that she had not taken part in the protest."
+      "Sports coaching",
+      "Feminist activism",
+      "Medical research",
+      "Film directing"
     ],
-    "answer": 2,
+    "answer": 1,
     "quotes": [
-      "convicting her for sexual exhibition in this case would disproportionately restrict her freedom of expression, given the protest’s political purpose.",
-      "convicting her in this case would disproportionately interfere with her freedom of expression because the act was political."
+      "a Ukrainian feminist activist",
+      "a Ukrainian feminist activist"
     ]
   }
 }

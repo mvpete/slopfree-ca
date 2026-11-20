@@ -610,17 +610,17 @@
     false
   ],
   "question": {
-    "text": "What was distinctive about Nasutoceratops’s brow horns?",
+    "text": "What kind of animal was Nasutoceratops?",
     "options": [
-      "They were unusually short.",
-      "They curved backward and inward.",
-      "They were unusually long.",
-      "They pointed straight up."
+      "A flying reptile",
+      "A horned dinosaur",
+      "A marine mammal",
+      "A giant turtle"
     ],
-    "answer": 2,
+    "answer": 1,
     "quotes": [
-      "exceptionally long brow horns",
-      "Its brow horns reached 457 mm, the longest known among centrosaurines"
+      "Nasutoceratops was a horned dinosaur",
+      "Nasutoceratops was a horned dinosaur"
     ]
   }
 }

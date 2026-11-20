@@ -2,17 +2,17 @@
   "points": [],
   "key": [],
   "question": {
-    "text": "What issue did the touring readings invite communities to discuss?",
+    "text": "What issue does Boyd’s essay explore through fictional viewpoints?",
     "options": [
+      "Space travel",
       "Climate change",
-      "Housing shortages",
-      "Public health",
-      "Economic inequality"
+      "City traffic",
+      "School exams"
     ],
-    "answer": 0,
+    "answer": 1,
     "quotes": [
-      "The events combined readings with facilitated conversations about climate change and its effects on communities.",
-      "took readings of the Characters on the road to prompt community discussions about climate change."
+      "presents twelve fictional perspectives on how people in the United States experience climate change",
+      "presents climate change through 12 fictional US viewpoints"
     ]
   }
 }

@@ -2,12 +2,12 @@
   "points": [],
   "key": [],
   "question": {
-    "text": "Which county is Wonersh in?",
+    "text": "How do the summaries describe Wonersh?",
     "options": [
-      "Kent",
-      "Surrey",
-      "Hampshire",
-      "West Sussex"
+      "A coastal resort",
+      "A village and civil parish",
+      "A large industrial city",
+      "A national park"
     ],
     "answer": 1,
     "quotes": [

@@ -512,17 +512,17 @@
     false
   ],
   "question": {
-    "text": "Where did SMS Posen mainly serve during World War I?",
+    "text": "What kind of ship was SMS Posen?",
     "options": [
-      "The Baltic Sea",
-      "The North Sea",
-      "The Mediterranean Sea",
-      "The Atlantic Ocean"
+      "A passenger liner",
+      "A dreadnought battleship",
+      "A cargo ship",
+      "A submarine"
     ],
     "answer": 1,
     "quotes": [
-      "During World War I, Posen served mainly in the North Sea",
-      "During World War I, Posen served mainly in the North Sea"
+      "one of the first dreadnoughts built for the German Imperial Navy",
+      "a German Nassau-class battleship, commissioned in 1910 and among the first dreadnoughts built for the Imperial Navy"
     ]
   }
 }

@@ -2,14 +2,14 @@
   "points": [],
   "key": [],
   "question": {
-    "text": "Which tiers of Singapore football does the Singapore Football League occupy?",
+    "text": "What kind of competition is the Singapore Football League?",
     "options": [
-      "First and second",
-      "Second and third",
-      "Third and fourth",
-      "Fourth and fifth"
+      "Top-tier club football",
+      "International football",
+      "Lower-tier club football",
+      "School football"
     ],
-    "answer": 1,
+    "answer": 2,
     "quotes": [
       "Singapore’s second- and third-tier football competition",
       "the country’s second and third football tiers"

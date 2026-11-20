@@ -2,17 +2,17 @@
   "points": [],
   "key": [],
   "question": {
-    "text": "Which political party did Josip Torbar belong to?",
+    "text": "What was Josip Torbar’s profession outside politics?",
     "options": [
-      "Yugoslav Radical Union",
-      "Croatian Peasant Party",
-      "Croatian Party of Rights",
-      "Communist Party of Yugoslavia"
+      "Physician",
+      "Engineer",
+      "Lawyer",
+      "Journalist"
     ],
-    "answer": 1,
+    "answer": 2,
     "quotes": [
-      "Croatian Peasant Party (HSS) politician",
-      "Croatian Peasant Party (HSS) politician"
+      "was a Croatian lawyer",
+      "was a Croatian Peasant Party (HSS) politician and lawyer"
     ]
   }
 }

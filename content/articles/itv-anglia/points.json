@@ -494,14 +494,14 @@
     false
   ],
   "question": {
-    "text": "Which part of England does ITV Anglia serve?",
+    "text": "What kind of service does ITV Anglia provide?",
     "options": [
-      "North West England",
-      "South West England",
-      "Eastern England",
-      "South East England"
+      "Nationwide sports coverage",
+      "Regional television broadcasting",
+      "International news coverage",
+      "On-demand film streaming"
     ],
-    "answer": 2,
+    "answer": 1,
     "quotes": [
       "ITV’s regional service for eastern England",
       "ITV’s regional service for the East of England"

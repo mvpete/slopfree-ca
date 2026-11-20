@@ -560,17 +560,17 @@
     false
   ],
   "question": {
-    "text": "What helped Sutton grow from a village into a town?",
+    "text": "What role does Sutton High Street play in Sutton?",
     "options": [
-      "The opening of a shopping centre",
-      "The arrival of the railway",
-      "The creation of a conservation area",
-      "The introduction of bus services"
+      "A major shopping destination",
+      "A residential estate",
+      "An industrial park",
+      "A university campus"
     ],
-    "answer": 1,
+    "answer": 0,
     "quotes": [
-      "the railway’s arrival in 1847 helped the village grow into a town",
-      "the railway’s arrival in 1847 helped Sutton grow into a town"
+      "Sutton’s main shopping street",
+      "a largely pedestrianised shopping and dining centre"
     ]
   }
 }

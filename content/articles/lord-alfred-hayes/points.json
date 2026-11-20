@@ -476,17 +476,17 @@
     false
   ],
   "question": {
-    "text": "Which wrestling organization was Lord Alfred Hayes best known for working with?",
+    "text": "What sport was Lord Alfred Hayes best known for?",
     "options": [
-      "World Championship Wrestling",
-      "American Wrestling Association",
-      "World Wrestling Federation",
-      "National Wrestling Alliance"
+      "Professional boxing",
+      "Professional wrestling",
+      "Horse racing",
+      "Cricket"
     ],
-    "answer": 2,
+    "answer": 1,
     "quotes": [
-      "best known for his work with the World Wrestling Federation",
-      "best known for his World Wrestling Federation work"
+      "was an English professional wrestler, manager and commentator",
+      "was an English wrestler, manager and commentator"
     ]
   }
 }

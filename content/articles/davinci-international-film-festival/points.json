@@ -524,17 +524,17 @@
     true
   ],
   "question": {
-    "text": "What does the festival’s FilmAfrica initiative promote?",
+    "text": "Where is the festival based?",
     "options": [
-      "Screenwriting",
-      "African cinema",
-      "Ultra-short films",
-      "Film restoration"
+      "New York",
+      "London",
+      "Los Angeles",
+      "Toronto"
     ],
-    "answer": 1,
+    "answer": 2,
     "quotes": [
-      "launched FilmAfrica to promote African cinema",
-      "launched FilmAfrica, an initiative with Swahili Village Group to promote African cinema"
+      "a Los Angeles festival",
+      "an annual Los Angeles event"
     ]
   }
 }

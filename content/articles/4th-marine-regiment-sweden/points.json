@@ -2,17 +2,17 @@
   "points": [],
   "key": [],
   "question": {
-    "text": "In what year was the 4th Marine Regiment reinstated?",
+    "text": "Where is the regiment based?",
     "options": [
-      "2000",
-      "2004",
-      "2014",
-      "2021"
+      "Stockholm",
+      "Gothenburg",
+      "Malmö",
+      "Uppsala"
     ],
-    "answer": 3,
+    "answer": 1,
     "quotes": [
-      "The regiment was reinstated on 1 October 2021",
-      "Reinstated on 1 October 2021"
+      "unit based in Gothenburg",
+      "based in Gothenburg"
     ]
   }
 }

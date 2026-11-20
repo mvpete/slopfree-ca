@@ -1152,17 +1152,17 @@
     false
   ],
   "question": {
-    "text": "How much did Beeple’s NFT sell for in 2021?",
+    "text": "What happened to major in-person art events that year?",
     "options": [
-      "$34.9 million",
-      "$62 million",
-      "$69.35 million",
-      "$92.2 million"
+      "They moved entirely online",
+      "They made a comeback",
+      "They became private gatherings",
+      "They were canceled everywhere"
     ],
-    "answer": 2,
+    "answer": 1,
     "quotes": [
-      "Beeple’s NFT *Everydays: The First 5000 Days* brought $69.35 million",
-      "Beeple’s NFT *Everydays: The First 5000 Days* fetched $69.35 million"
+      "the return of in-person art fairs",
+      "the return of major in-person events"
     ]
   }
 }

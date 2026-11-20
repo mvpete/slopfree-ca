@@ -426,17 +426,17 @@
     true
   ],
   "question": {
-    "text": "How do most populations of the viviparous lizard reproduce?",
+    "text": "What is unusual about where this lizard lives?",
     "options": [
-      "They lay eggs.",
-      "They give birth to live young.",
-      "They reproduce by budding.",
-      "They alternate between laying eggs and giving live birth."
+      "It lives only on islands",
+      "It has the widest range of any lizard",
+      "It lives only in deserts",
+      "It lives mainly in the ocean"
     ],
     "answer": 1,
     "quotes": [
-      "Most populations give birth to live young",
-      "Most populations give birth to live young"
+      "having the widest range of any lizard",
+      "with the widest range of any lizard"
     ]
   }
 }

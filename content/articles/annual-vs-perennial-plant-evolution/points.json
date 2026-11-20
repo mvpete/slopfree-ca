@@ -2,17 +2,17 @@
   "points": [],
   "key": [],
   "question": {
-    "text": "What kind of environment tends to favor perennial plants?",
+    "text": "How do the summaries describe annual and perennial life cycles?",
     "options": [
-      "One where adult plants often die",
-      "One where adult plants survive well",
-      "One with frequent disturbance",
-      "One with highly variable conditions"
+      "Flexible life strategies",
+      "Fixed family traits",
+      "Signs of disease",
+      "Types of pollination"
     ],
-    "answer": 1,
+    "answer": 0,
     "quotes": [
-      "perennials benefit where adults survive well",
-      "Perennials are more likely to persist where adult survival is high"
+      "flexible plant life-history strategies",
+      "flexible life-history strategies"
     ]
   }
 }

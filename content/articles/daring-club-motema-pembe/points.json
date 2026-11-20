@@ -812,17 +812,17 @@
     false
   ],
   "question": {
-    "text": "Which African trophy did DCMP win in 1994?",
+    "text": "What sport does Daring Club Motema Pembe play?",
     "options": [
-      "CAF Super Cup",
-      "African Cup Winners’ Cup",
-      "CAF Champions League",
-      "CAF Confederation Cup"
+      "Basketball",
+      "Football",
+      "Rugby",
+      "Volleyball"
     ],
     "answer": 1,
     "quotes": [
-      "In 1994, it won the African Cup Winners’ Cup",
-      "won the African Cup Winners’ Cup in 1994"
+      "a Kinshasa football club",
+      "a Kinshasa football club"
     ]
   }
 }

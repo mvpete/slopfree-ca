@@ -506,17 +506,17 @@
     false
   ],
   "question": {
-    "text": "When did film production revive in Chicago?",
+    "text": "What role did Chicago play in filmmaking before Hollywood rose?",
     "options": [
-      "In the 1920s",
-      "In the 1950s",
-      "In the 1980s",
-      "In the 2000s"
+      "A minor filming location",
+      "A major filmmaking center",
+      "A market for foreign films only",
+      "A city with no film industry"
     ],
-    "answer": 2,
+    "answer": 1,
     "quotes": [
-      "Film production returned in the 1980s.",
-      "Film production revived in Chicago in the 1980s"
+      "Chicago was a major center of American filmmaking before Hollywood",
+      "Chicago was a major film production and distribution center in the early 1900s"
     ]
   }
 }
