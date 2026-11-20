@@ -44,6 +44,20 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           MAX_ATTEMPTS: ${{ inputs.max_attempts }}
 
+      - name: Keep this run's results (also if the PR step fails)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: weekly-results
+          path: |
+            prompts/
+            content/
+            evals/
+            data/
+            .cache/pr-body.md
+          if-no-files-found: ignore
+          include-hidden-files: true
+
       - name: Get a bot token (so CI runs on the PR)
         id: app
         uses: actions/create-github-app-token@v1

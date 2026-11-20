@@ -54,7 +54,14 @@ export function checkGate(sc, gate) {
     if (sc.candUnsupported > sc.baseUnsupported)
       failures.push({ check: "accuracy", message: `${sc.candUnsupported} unsupported claims vs baseline's ${sc.baseUnsupported}.` });
     if (sc.lengthRatio > gate.lengthRatio)
-      failures.push({ check: "length", message: `Only ${pct(1 - sc.lengthRatio)} shorter than baseline (needs ${pct(1 - gate.lengthRatio)}).` });
+      failures.push({
+        check: "length",
+        message:
+          (sc.lengthRatio > 1
+            ? `${pct(sc.lengthRatio - 1)} longer than baseline`
+            : `Only ${pct(1 - sc.lengthRatio)} shorter than baseline`) +
+          ` (needs ${pct(1 - gate.lengthRatio)} shorter; ${sc.candWords} words vs baseline's ${sc.baseWords} across ${sc.n} articles).`,
+      });
     if (sc.floor < gate.floor)
       failures.push({ check: "floor", message: `Worst article kept ${pct(sc.floor)} of baseline points (needs ${pct(gate.floor)}).` });
   }
