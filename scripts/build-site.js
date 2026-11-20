@@ -89,6 +89,13 @@ for (const model of models) fs.writeFileSync(path.join(OUT, `api/golden/${model}
 fs.writeFileSync(path.join(OUT, "golden.json"), JSON.stringify({ ...goldenDoc(models[0]), models: Object.fromEntries(models.map((m) => [m, goldenDoc(m)])) }, null, 2));
 fs.writeFileSync(path.join(OUT, "golden.txt"), index.models[models[0]].golden.text + "\n");
 
+// The Examples page uses the same menu as the home page, so the two never drift apart.
+const homeNav = fs.readFileSync(path.join(REPO, "index.html"), "utf8").match(/<nav aria-label="Main">[\s\S]*?<\/nav>/)[0];
+const examplesNav = homeNav
+  .replace(/href="#/g, 'href="./#')
+  .replace(/ data-section="[^"]*"/g, "")
+  .replace('<a href="examples.html">', '<a href="examples.html" class="active" aria-current="page">');
+
 // Examples page: this week's eval articles, plain vs golden (vs challenger), side by side.
 {
   const model = models[0];
@@ -97,7 +104,7 @@ fs.writeFileSync(path.join(OUT, "golden.txt"), index.models[models[0]].golden.te
   const slugs = latest?.model === model && latest.contentSlugs?.length ? latest.contentSlugs.filter((s) => all.includes(s)) : all;
   fs.writeFileSync(
     path.join(OUT, "examples.html"),
-    buildExamples(ROOT, model, m.golden, m.challenger, slugs, { date: latest?.date, writer: latest?.writerModel || cfgNow.writerModel, judge: latest?.judgeModel || cfgNow.judgeModel })
+    buildExamples(ROOT, model, m.golden, m.challenger, slugs, { date: latest?.date, writer: latest?.writerModel || cfgNow.writerModel, judge: latest?.judgeModel || cfgNow.judgeModel, nav: examplesNav })
   );
 }
 fs.writeFileSync(path.join(OUT, ".nojekyll"), "");

@@ -117,14 +117,7 @@ ${slides}
 <body class="page-examples">
   <header class="topbar">
     <a class="wordmark" href="./">slopfree<span>.ca</span></a>
-    <nav aria-label="Main">
-      <a href="./#about">About</a>
-      <a href="./#how">How to use</a>
-      <a href="./#quiz">Quiz</a>
-      <a href="./#human-first">Human first</a>
-      <a href="examples.html" class="active">Examples</a>
-      <a href="https://github.com/sponsors/mvpete" class="sponsor">Sponsor</a>
-    </nav>
+    ${meta.nav}
   </header>
   <main class="examples-main">
     <div class="wrap">
