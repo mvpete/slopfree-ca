@@ -466,3 +466,5 @@ h3 { font-size: 1.05rem; letter-spacing: -0.01em; }
 .car-dot { width: 9px; height: 9px; border-radius: 50%; border: 0; padding: 0; background: var(--line); cursor: pointer; }
 .car-dot[aria-current="true"] { background: var(--gold); }
 @media (prefers-reduced-motion: reduce) { .car-track { scroll-behavior: auto; } }
+
+.ex-link { color: var(--gold); white-space: nowrap; }

@@ -22,7 +22,7 @@ function paragraphs(text) {
 
 function column(label, sub, run, base) {
   const kept = run.covered.filter(Boolean).length;
-  const vs = base ? ` <span class="delta">${pct(run.words / base.words - 1).replace(/^(\d)/, "+$1")} words vs plain</span>` : "";
+  const vs = "";
   const claims = run.unsupportedClaims?.length
     ? `<details class="claims"><summary>${run.unsupportedClaims.length} unsupported claim${run.unsupportedClaims.length === 1 ? "" : "s"}</summary><ul>${run.unsupportedClaims.map((c) => `<li>${esc(c)}</li>`).join("")}</ul></details>`
     : `<p class="claims none">No unsupported claims</p>`;
@@ -59,13 +59,13 @@ export function buildExamples(root, model, golden, challenger, slugs, meta) {
     if (c?.covered) add(totals.challenger, c);
     items.push({ ratio: g.words / base.words, html: `      <article class="example" aria-roledescription="slide">
         <header class="ex-head">
-          <h2><a href="${esc(src.url)}">${esc(src.title)}</a></h2>
-          <p>${src.words.toLocaleString()} words in the article (revision ${src.revision}) · ${pts ? pts.points.length : "?"} points listed</p>
+          <h2>${esc(src.title)}</h2>
+          <p>${src.words.toLocaleString()} words · ${pts ? pts.points.length : "?"} points · <a class="ex-link" href="${esc(src.url)}">Read the article</a></p>
         </header>
         <div class="ex-cols${c?.covered ? " three" : ""}">
-        ${column("Plain", "“Summarize the following article:”", base, null)}
-        ${column("Golden", `prompt ${name(golden.id)}`, g, base)}
-        ${c?.covered ? column("Challenger", `prompt ${name(challenger)}`, c, base) : ""}
+        ${column("Plain", "", base, null)}
+        ${column(`Golden ${name(golden.id)}`, "", g, base)}
+        ${c?.covered ? column(`Challenger ${name(challenger)}`, "", c, base) : ""}
         </div>
       </article>` });
   }
@@ -128,10 +128,8 @@ ${slides}
   <main class="examples-main">
     <div class="wrap">
       <p class="eyebrow">Examples</p>
-      <h1 class="ex-title">The same article, summarized side by side.</h1>
-      <p class="lede">Two typical articles from this week's eval. Each one is summarized by a plain "Summarize the following article:" and by the golden prompt${challenger ? " and the challenger" : ""}. Points are counted against every claim the article makes. Unsupported claims are what the judge flagged; open them to check its work.</p>
+      <h1 class="ex-title">Golden simplification.</h1>
       <p class="small">${meta.date ? `Eval of ${esc(meta.date)}. ` : ""}Summaries by <code>${esc(meta.writer)}</code>, judged by <code>${esc(meta.judge)}</code>.</p>
-      ${summary}
     </div>
     <div class="wrap examples">
     ${carousel}
