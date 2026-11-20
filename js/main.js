@@ -192,7 +192,7 @@
     });
 
   // ---------- Quiz ----------
-  const stages = ["intro", "read", "question", "lang", "result"];
+  const stages = ["intro", "read", "question", "rate", "result"];
   const show = (name) => stages.forEach((s) => ($("stage-" + s).hidden = s !== name));
   const shuffle = (xs) => {
     const a = xs.slice();
@@ -328,56 +328,56 @@
   function nextRound() {
     round++;
     if (round < rounds.length) startRound();
-    else if (recording()) askLanguage();
+    else if (recording()) show("rate");
     else showResult(null);
   }
 
-  // ---------- First-language question, bot check, and submit ----------
-  function askLanguage() {
-    show("lang");
-    const buttons = document.querySelectorAll(".lang-btn");
-    if (CONFIG.turnstileSiteKey) {
-      buttons.forEach((b) => (b.disabled = true));
-      loadTurnstile(() => {
+  // ---------- Bot check (only if a Turnstile site key is configured) and save ----------
+  let rating = null;
+  document.querySelectorAll(".rate-btn").forEach((b) =>
+    b.addEventListener("click", () => {
+      rating = b.dataset.rating;
+      finishAndSave();
+    })
+  );
+
+  function finishAndSave() {
+    showResult("Saving your answers…");
+    botCheck().then(record).then(
+      () => setStatus("Saved. Your answers now count toward this week's ranking."),
+      (e) => setStatus(`Your answers weren't saved: ${e.message}`)
+    );
+  }
+
+  function botCheck() {
+    if (!CONFIG.turnstileSiteKey) return Promise.resolve();
+    return new Promise((resolve, reject) => {
+      const render = () => {
         $("turnstile").innerHTML = "";
-        turnstileToken = null;
         window.turnstile.render("#turnstile", {
           sitekey: CONFIG.turnstileSiteKey,
           theme: "dark",
           callback: (t) => {
             turnstileToken = t;
-            buttons.forEach((b) => (b.disabled = false));
+            resolve();
           },
+          "error-callback": () => reject(new Error("the bot check didn't load. Reload the page and try again")),
         });
-      });
-    }
+      };
+      if (window.turnstile) return render();
+      const s = document.createElement("script");
+      s.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+      s.async = true;
+      s.onload = render;
+      s.onerror = () => reject(new Error("the bot check didn't load. Reload the page and try again"));
+      document.head.appendChild(s);
+    });
   }
 
-  function loadTurnstile(cb) {
-    if (window.turnstile) return cb();
-    const s = document.createElement("script");
-    s.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
-    s.async = true;
-    s.onload = cb;
-    s.onerror = () => document.querySelectorAll(".lang-btn").forEach((b) => (b.disabled = false));
-    document.head.appendChild(s);
-  }
-
-  document.querySelectorAll(".lang-btn").forEach((b) =>
-    b.addEventListener("click", () => {
-      const lang = b.dataset.lang || null;
-      showResult("Saving your answers…");
-      record(lang).then(
-        () => setStatus("Saved. Your answers now count toward this week's ranking."),
-        (e) => setStatus(`Your answers weren't saved: ${e.message}`)
-      );
-    })
-  );
-
-  function record(firstLanguage) {
+  function record() {
     const body = {
       model,
-      firstLanguage,
+      rating,
       token: turnstileToken,
       answers: rounds.map((r, i) => ({
         promptId: r.promptId,

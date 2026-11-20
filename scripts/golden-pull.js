@@ -78,6 +78,16 @@ const table = `| | Answers | Accuracy |
 
 ${n.all ? `Quizzes: ${n.quizzes}. Chance it was faster: ${pct(n.all.pFaster)}. Chance accuracy fell more than 10 points: ${pct(n.all.pClearlyWorse)}.` : "No answers for both prompts yet."}`;
 
+// How hard the quizzes felt (one rating per quiz).
+const ratings = {};
+for (const s of new Set(rows.map((r) => r.session_id))) {
+  const r = rows.find((x) => x.session_id === s)?.rating;
+  if (r) ratings[r] = (ratings[r] || 0) + 1;
+}
+const ratingLine = Object.keys(ratings).length
+  ? `Quiz difficulty: ${["too_hard", "too_easy", "good"].map((k) => `${(ratings[k] || 0)} ${k.replace("_", " ")}`).join(", ")}.`
+  : "Quiz difficulty: no ratings.";
+
 const challengerText = fs.readFileSync(path.join(ROOT, `prompts/${model}/${challenger}.md`), "utf8").trim();
 let title;
 if (result.outcome === "win") {
@@ -96,5 +106,5 @@ fs.rmSync(path.join(ROOT, `prompts/${model}/trial.json`), { force: true });
 finish({
   outcome: result.outcome,
   title,
-  body: `### Reader test: ${title}\n\n${result.reason}\n\n${table}\n\nData: \`${snapshot}\`. Decision: \`evals/${date}-decision.json\`.\n`,
+  body: `### Reader test: ${title}\n\n${result.reason}\n\n${table}\n\n${ratingLine}\n\nData: \`${snapshot}\`. Decision: \`evals/${date}-decision.json\`.\n`,
 });

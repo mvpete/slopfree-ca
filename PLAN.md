@@ -74,7 +74,7 @@ Target: about $1 a run. Point extraction is the only model call that reads an ar
 - Each quiz mixes golden and challenger at random.
 - Reading time is compared with the median of the quiz it came from, so a slow day doesn't count against one prompt.
 - Dropped: impossible reading speed, a hidden tab while reading, quizzes abandoned after one answer.
-- Optional "Is English your first language?" at the end. Once there are enough readers whose first language isn't English, a prompt that hurts them can't win.
+- Every question has a "Too hard / I don't know" button (counts as wrong). Each quiz ends with one tap, **Difficulty: Too hard · Too easy · Good**, reported in the Friday decision PR.
 - **Sized for one reader.** Expect about 25 answers a week, possibly all from the maintainer. Guess rounds are off, and the quiz never shows a browser the same article twice.
 - **One week per trial.** Reading speed is the main signal; accuracy is a veto. The challenger wins if there's a ≥90% chance readers were faster and under a 60% chance their accuracy fell by more than 10 points. Fewer than 10 answers per prompt is a thin week, and golden stays.
 - **What 25 answers can tell.** In simulation, a challenger with equal accuracy that reads 23% faster wins about 57% of weeks. One that isn't faster wins about 12% of weeks, and one at 40% accuracy against golden's 75% wins about 12%. Fifty answers (a two-week trial) raise the good case to about 81%.
@@ -155,7 +155,7 @@ Warm graphite background (`#34302A`, never black), gold accent (`#D4AF37`), crea
 
 ## Privacy and abuse
 
-- Stored per answer: model, prompt ID, article, correct or not, reading time, random session ID, round type, optional first-language answer. No IPs, accounts or cookies.
+- Stored per answer: model, prompt ID, article, correct or not, reading time, random session ID, round type, the quiz's difficulty rating. No IPs, accounts or cookies.
 - Turnstile on session start, rate limits on the Worker.
 - Each weekly decision commits its anonymous data snapshot to `data/answers-<date>.json`, so anyone can audit the ranking.
 

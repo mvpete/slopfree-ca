@@ -191,24 +191,21 @@
             </div>
           </div>
 
-          <div class="stage" id="stage-lang" hidden>
-            <p class="eyebrow">One last thing</p>
-            <h2>Is English your first language?</h2>
-            <p class="lede">Optional. It tells us whether a prompt helps everyone, not just fluent readers.</p>
-            <div id="turnstile"></div>
-            <div class="start-row" role="group" aria-label="First language">
-              <button class="btn lang-btn" type="button" data-lang="yes">Yes</button>
-              <button class="btn lang-btn" type="button" data-lang="no">No</button>
-              <button class="btn ghost lang-btn" type="button" data-lang="">Skip</button>
+          <div class="stage" id="stage-rate" hidden>
+            <h2>Difficulty</h2>
+            <div class="start-row" role="group" aria-label="Quiz difficulty">
+              <button class="btn rate-btn" type="button" data-rating="too_hard">Too hard</button>
+              <button class="btn rate-btn" type="button" data-rating="too_easy">Too easy</button>
+              <button class="btn rate-btn" type="button" data-rating="good">Good</button>
             </div>
           </div>
-
 
           <div class="stage" id="stage-result" hidden>
             <p class="eyebrow">Your result</p>
             <p class="score"><span id="score">0</span><span class="of" id="score-of">/5</span></p>
             <p class="lede" id="score-line"></p>
             <ul class="breakdown" id="breakdown"></ul>
+            <div id="turnstile"></div>
             <p class="note" id="record-status" hidden></p>
             <div class="start-row">
               <a class="btn" href="#home">Get the golden prompt</a>

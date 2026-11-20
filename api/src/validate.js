@@ -13,15 +13,17 @@ const isInt = (v, min, max) => Number.isInteger(v) && v >= min && v <= max;
 // Check and normalize a POST /v1/results body.
 export function validateResults(body, { models }) {
   if (!body || typeof body !== "object") bad("Body must be a JSON object.");
-  const { model, firstLanguage = null, token = null, answers } = body;
+  const { model, firstLanguage = null, rating = null, token = null, answers } = body;
   if (!models.includes(model)) bad("Unknown model.");
   if (![null, "yes", "no"].includes(firstLanguage)) bad("firstLanguage must be yes, no or null.");
+  if (![null, "too_hard", "too_easy", "good"].includes(rating)) bad("rating must be too_hard, too_easy, good or null.");
   if (token !== null && (typeof token !== "string" || token.length > 4096)) bad("Bad token.");
   if (!Array.isArray(answers) || answers.length < 1 || answers.length > 10) bad("answers must have 1 to 10 rounds.");
 
   return {
     model,
     firstLanguage,
+    rating,
     token,
     answers: answers.map((a, i) => {
       if (!a || typeof a !== "object") bad(`Round ${i + 1} is not an object.`);

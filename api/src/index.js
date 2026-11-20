@@ -67,7 +67,7 @@ async function postResults(req, env) {
     "INSERT INTO answers (session_id, created_at, model, prompt_id, slug, choice, read_ms, words, round, guess, hidden) VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?11)"
   );
   await env.DB.batch([
-    env.DB.prepare("INSERT INTO sessions (id, created_at, model, first_language) VALUES (?1, ?2, ?3, ?4)").bind(id, now, v.model, v.firstLanguage),
+    env.DB.prepare("INSERT INTO sessions (id, created_at, model, first_language, rating) VALUES (?1, ?2, ?3, ?4, ?5)").bind(id, now, v.model, v.firstLanguage, v.rating),
     ...v.answers.map((a) => insert.bind(id, now, v.model, a.promptId, a.slug, a.choice, a.readMs, a.words, a.round, a.guess ? 1 : 0, a.hidden ? 1 : 0)),
   ]);
   return { ok: true };
@@ -86,7 +86,7 @@ async function exportRows(req, env, url) {
   const model = url.searchParams.get("model") || "openai";
   const since = url.searchParams.get("since") || "1970-01-01";
   const { results } = await env.DB.prepare(
-    `SELECT a.session_id, a.created_at, a.model, a.prompt_id, a.slug, a.choice, a.read_ms, a.words, a.round, a.guess, a.hidden, s.first_language
+    `SELECT a.session_id, a.created_at, a.model, a.prompt_id, a.slug, a.choice, a.read_ms, a.words, a.round, a.guess, a.hidden, s.first_language, s.rating
      FROM answers a JOIN sessions s ON s.id = a.session_id
      WHERE a.model = ?1 AND a.created_at >= ?2 ORDER BY a.id`
   ).bind(model, since).all();

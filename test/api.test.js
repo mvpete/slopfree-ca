@@ -27,6 +27,11 @@ test("rejects unknown models and bad fields", () => {
   rejects({ ...ok, answers: [{ ...ok.answers[0], promptId: "golden" }] }, /promptId/);
 });
 
+test("accepts a quiz difficulty rating", () => {
+  assert.equal(validateResults({ ...ok, rating: "too_hard" }, opts).rating, "too_hard");
+  rejects({ ...ok, rating: "meh" }, /rating/);
+});
+
 test("accepts too hard as choice 4", () => {
   assert.equal(validateResults({ ...ok, answers: [{ ...ok.answers[0], choice: 4 }] }, opts).answers[0].choice, 4);
 });
