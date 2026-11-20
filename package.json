@@ -10,6 +10,7 @@
     "test": "node --test",
     "eval:golden": "node scripts/eval-golden.js",
     "weekly": "node scripts/weekly-topics.js",
-    "verify-pr": "node scripts/verify-pr.js"
+    "verify-pr": "node scripts/verify-pr.js",
+    "principles": "node scripts/render-principles.js"
   }
 }

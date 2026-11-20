@@ -8,7 +8,7 @@ import { loadConfig, ROOT } from "./lib/config.js";
 import { createContext, prepareArticles, runPrompt, scoreRuns, BudgetExceeded } from "./lib/eval.js";
 import { readGolden, nextPromptId, existingSlugs, writeJSON, writeText, writeLoser } from "./lib/store.js";
 import { reasonOf } from "./lib/gate.js";
-import { today, pct } from "./lib/util.js";
+import { today, pct, promptName, QUEUE_NAME } from "./lib/util.js";
 
 const cfg = loadConfig();
 const ctx = createContext(cfg);
@@ -35,7 +35,13 @@ const report = {
 const exclude = existingSlugs();
 const queueDir = path.join(ROOT, "prompts/queue");
 const queue = fs.existsSync(queueDir)
-  ? fs.readdirSync(queueDir).filter((f) => f.endsWith(".md") && f !== "README.md").sort().map((f) => `prompts/queue/${f}`)
+  ? fs
+      .readdirSync(queueDir)
+      .map((f) => ({ f, m: f.match(QUEUE_NAME) }))
+      .filter((x) => x.m)
+      // Oldest submission first; several from one person on one day keep their -2, -3 order.
+      .sort((a, b) => a.m[2].localeCompare(b.m[2]) || Number(a.m[3] || 1) - Number(b.m[3] || 1) || a.f.localeCompare(b.f))
+      .map((x) => `prompts/queue/${x.f}`)
   : [];
 const tested = [];
 let search, confirm, goldenConfirm;
@@ -171,8 +177,8 @@ const misses = report.attempts
   .slice(0, 3);
 let nextId = Number(nextPromptId(model).slice(2));
 for (const m of misses) {
-  m.loserId = "p-" + String(nextId++).padStart(4, "0");
-  writeLoser(model, { id: m.loserId, date, stage: `eval (${m.stage})`, reason: m.reason, score: m.score, prompt: m.prompt, report: reportPath });
+  m.loserId = "p-" + String(nextId++).padStart(4, "0"); // file name; shown to people as promptName()
+  writeLoser(model, { id: m.loserId, date, by: m.source ? path.basename(m.source, ".md").match(QUEUE_NAME)?.[1] : null, stage: `eval (${m.stage})`, reason: m.reason, score: m.score, prompt: m.prompt, report: reportPath });
 }
 
 // Tested submissions leave the queue; their result is in the report (and a loser file if close).
@@ -186,7 +192,7 @@ writeJSON(reportPath, report);
 const stageCounts = report.attempts.reduce((acc, a) => ((acc[a.passed ? "passed" : a.stage] = (acc[a.passed ? "passed" : a.stage] || 0) + 1), acc), {});
 const row = (label, sc) => sc ? `| ${label} | ${sc.n} | ${pct(sc.coverage)} | ${pct(sc.floor)} | ${pct(1 - sc.lengthRatio)} | ${sc.candUnsupported} / ${sc.baseUnsupported} |` : "";
 const title = winner
-  ? `Weekly eval ${date}: new challenger ${report.challenger.id}`
+  ? `Weekly eval ${date}: new challenger, prompt ${promptName(report.challenger.id)}`
   : `Weekly eval ${date}: no challenger${report.outcome === "budget" ? " (budget spent)" : ""}`;
 
 // golden-pull.js runs first in the same job; its decision leads the PR.
@@ -196,7 +202,7 @@ const fullTitle = decision && decision.outcome !== "none" ? `${decision.title}. 
 
 let body = decision?.body ? decision.body + "\n" : "";
 body += `## ${title}\n\n`;
-body += `Golden **${golden.id}** ${report.golden.passed ? "still passes" : "**fails**"} the gate. ${report.golden.reason || ""}\n\n`;
+body += `Golden prompt **${promptName(golden.id)}** ${report.golden.passed ? "still passes" : "**fails**"} the gate. ${report.golden.reason || ""}\n\n`;
 body += `| Set | Articles | Coverage vs baseline | Worst article | Shorter than baseline | Unsupported (prompt / base) |\n|---|---|---|---|---|---|\n`;
 body += row(`Golden, search set`, report.golden.score) + "\n";
 if (winner) {
@@ -208,7 +214,7 @@ if (winner) {
   body += `### Sample: [${a.source.title}](${a.source.url})\n\n**Baseline (${a.baseline.words} words)**\n\n> ${a.baseline.summary.replace(/\n+/g, "\n> ")}\n\n**Challenger (${c.words} words)**\n\n> ${c.summary.replace(/\n+/g, "\n> ")}\n\n`;
 } else body += "\n";
 body += `### Attempts\n\n${Object.entries(stageCounts).map(([k, v]) => `- ${k}: ${v}`).join("\n") || "- none"}\n\n`;
-if (misses.length) body += `### Close but no cigar\n\n${misses.map((m) => `- \`${m.loserId}\`: ${m.reason}`).join("\n")}\n\n`;
+if (misses.length) body += `### Close but no cigar\n\n${misses.map((m) => `- Prompt ${promptName(m.loserId)}${m.source ? ` (${path.basename(m.source, ".md")})` : ""}: ${m.reason}`).join("\n")}\n\n`;
 body += `Tokens used: ${ctx.budget.used.toLocaleString()}. Full log: \`${reportPath}\`.\n`;
 
 const cacheDir = path.join(ROOT, ".cache");

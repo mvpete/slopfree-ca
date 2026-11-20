@@ -2,7 +2,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { ROOT } from "./config.js";
-import { pct } from "./util.js";
+import { pct, promptName } from "./util.js";
 
 const abs = (rel) => path.join(ROOT, rel);
 
@@ -46,7 +46,7 @@ export function existingSlugs() {
 }
 
 // One file per losing prompt: the prompt, why it lost, and its numbers.
-export function writeLoser(model, { id, date, stage, reason, score, table, prompt, report }) {
+export function writeLoser(model, { id, date, by, stage, reason, score, table, prompt, report }) {
   const rows = table
     ? table
     : score
@@ -56,10 +56,11 @@ export function writeLoser(model, { id, date, stage, reason, score, table, promp
     : "No numbers: it failed before scoring.";
   writeText(
     `prompts/${model}/losers/${id}.md`,
-    `# ${id}: close but no cigar
+    `# Prompt ${promptName(id)}: close but no cigar
 
 **Date:** ${date}
-**Lost at:** ${stage}
+${by ? `**Submitted by:** @${by}
+` : ""}**Lost at:** ${stage}
 **Why it lost:** ${reason}
 
 ${rows}

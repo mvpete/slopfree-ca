@@ -28,7 +28,7 @@ Settings are in [`slopfree.config.json`](slopfree.config.json): models, gate thr
 
 ## Submit a prompt
 
-Add `prompts/queue/<your-handle>-<name>.md` containing only the prompt, and open a PR. After it's merged, the next weekly search tests it first.
+Add `prompts/queue/<github-username>-<YYYY-MM-DD>.md` containing only the prompt (add `-2`, `-3` for more on the same day), and open a PR. Submissions are tested oldest first. Details in [`prompts/queue/README.md`](prompts/queue/README.md).
 
 ## Setup (maintainers)
 

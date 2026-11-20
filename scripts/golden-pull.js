@@ -7,7 +7,7 @@ import path from "node:path";
 import { loadConfig, ROOT } from "./lib/config.js";
 import { readJSON, writeJSON, readGolden, writeLoser } from "./lib/store.js";
 import { decide } from "./lib/decide.js";
-import { today, pct } from "./lib/util.js";
+import { today, pct, promptName } from "./lib/util.js";
 
 const cfg = loadConfig();
 const model = cfg.model;
@@ -64,22 +64,22 @@ writeJSON(`evals/${date}-decision.json`, { date, model, golden: golden.id, chall
 const n = result.numbers;
 const table = `| | Answers | Accuracy |
 |---|---|---|
-| Golden ${golden.id} | ${n.answers.golden} | ${pct(n.accuracy.golden)} |
-| Challenger ${challenger} | ${n.answers.challenger} | ${pct(n.accuracy.challenger)} |
+| Golden, prompt ${promptName(golden.id)} | ${n.answers.golden} | ${pct(n.accuracy.golden)} |
+| Challenger, prompt ${promptName(challenger)} | ${n.answers.challenger} | ${pct(n.accuracy.challenger)} |
 
-${n.all ? `Paired sessions: ${n.all.sessions}. Chance it was better: ${pct(n.all.pBetter)}.` : "No sessions saw both prompts."}`;
+${n.all ? `Quizzes: ${n.quizzes}. Chance it was faster: ${pct(n.all.pFaster)}. Chance accuracy fell more than 10 points: ${pct(n.all.pClearlyWorse)}.` : "No answers for both prompts yet."}`;
 
 const challengerText = fs.readFileSync(path.join(ROOT, `prompts/${model}/${challenger}.md`), "utf8").trim();
 let title;
 if (result.outcome === "win") {
-  writeLoser(model, { id: golden.id, date, stage: `reader test (replaced by ${challenger})`, reason: result.reason, table, prompt: golden.text, report: `evals/${date}-decision.json` });
+  writeLoser(model, { id: golden.id, date, stage: `reader test (replaced by prompt ${promptName(challenger)})`, reason: result.reason, table, prompt: golden.text, report: `evals/${date}-decision.json` });
   fs.rmSync(path.join(ROOT, `prompts/${model}/${golden.id}.md`));
   writeJSON(`prompts/${model}/golden.json`, { id: challenger });
-  title = `${challenger} is the new golden prompt`;
+  title = `Prompt ${promptName(challenger)} is the new golden prompt`;
 } else {
   writeLoser(model, { id: challenger, date, stage: "reader test", reason: result.reason, table, prompt: challengerText, report: `evals/${date}-decision.json` });
   fs.rmSync(path.join(ROOT, `prompts/${model}/${challenger}.md`));
-  title = `${challenger} lost the reader test; ${golden.id} stays golden`;
+  title = `Prompt ${promptName(challenger)} lost the reader test; prompt ${promptName(golden.id)} stays golden`;
 }
 writeJSON(`prompts/${model}/active.json`, []);
 

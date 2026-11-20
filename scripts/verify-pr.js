@@ -5,6 +5,7 @@ import { execSync } from "node:child_process";
 import { loadConfig, ROOT } from "./lib/config.js";
 import { score, checkGate, reasonOf } from "./lib/gate.js";
 import { decide } from "./lib/decide.js";
+import { QUEUE_NAME } from "./lib/util.js";
 
 const cfg = loadConfig();
 const base = process.env.BASE_REF || "main";
@@ -20,6 +21,13 @@ if (isBot) {
 }
 
 for (const f of changed.filter((f) => /^prompts\/[^/]+\/p-\d+\.md$/.test(f) && exists(f))) {
+  const len = fs.readFileSync(file(f), "utf8").trim().length;
+  if (len > cfg.promptMaxChars) errors.push(`${f} is ${len} characters (limit ${cfg.promptMaxChars})`);
+}
+
+// Community submissions must be named <github-username>-<YYYY-MM-DD>[-<n>].md and fit the length cap.
+for (const f of changed.filter((f) => f.startsWith("prompts/queue/") && exists(f) && !f.endsWith("README.md"))) {
+  if (!QUEUE_NAME.test(path.basename(f))) errors.push(`${f}: name it <github-username>-<YYYY-MM-DD>.md (add -2, -3 for more on the same day)`);
   const len = fs.readFileSync(file(f), "utf8").trim().length;
   if (len > cfg.promptMaxChars) errors.push(`${f} is ${len} characters (limit ${cfg.promptMaxChars})`);
 }

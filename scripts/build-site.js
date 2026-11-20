@@ -4,6 +4,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { REPO, ROOT } from "./lib/config.js";
 import { readJSON, readGolden } from "./lib/store.js";
+import { readPrinciples, injectPrinciples } from "./lib/principles.js";
 
 const OUT = path.join(REPO, "_site");
 const LABELS = { openai: "OpenAI" };
@@ -59,6 +60,7 @@ for (const model of models) {
 // Write _site.
 fs.rmSync(OUT, { recursive: true, force: true });
 for (const d of ["css", "js"]) fs.cpSync(path.join(REPO, d), path.join(OUT, d), { recursive: true });
+fs.copyFileSync(path.join(REPO, "favicon.svg"), path.join(OUT, "favicon.svg"));
 fs.mkdirSync(path.join(OUT, "content"), { recursive: true });
 fs.writeFileSync(path.join(OUT, "content/index.json"), JSON.stringify(index));
 fs.writeFileSync(path.join(OUT, ".nojekyll"), "");
@@ -69,6 +71,7 @@ fs.writeFileSync(
 
 const first = index.models[models[0]];
 let html = fs.readFileSync(path.join(REPO, "index.html"), "utf8");
+html = injectPrinciples(html, readPrinciples(REPO));
 html = html.replace(/(<pre id="golden"><code>)[\s\S]*?(<\/code><\/pre>)/, `$1${esc(first.golden.text)}$2`);
 fs.writeFileSync(path.join(OUT, "index.html"), html);
 

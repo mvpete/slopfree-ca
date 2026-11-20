@@ -27,4 +27,10 @@ export async function pool(items, limit, fn) {
   return out;
 }
 
+// Files use p-0001; people see "1".
+export const promptName = (id) => String(Number(String(id).replace(/^p-/, "")));
+
+// Community submissions: prompts/queue/<github-username>-<YYYY-MM-DD>[-<n>].md, tested oldest first.
+export const QUEUE_NAME = /^([A-Za-z0-9][A-Za-z0-9-]{0,38})-(\d{4}-\d{2}-\d{2})(?:-(\d+))?\.md$/;
+
 export const sleep = (ms) => new Promise((r) => setTimeout(r, ms));

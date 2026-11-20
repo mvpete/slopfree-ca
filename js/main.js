@@ -125,6 +125,8 @@
 
   // ---------- Page content from the index ----------
   const pct = (x) => Math.round(x * 100) + "%";
+  // Files use p-0001; people see "1".
+  const promptName = (id) => String(Number(String(id).replace(/^p-/, "")));
 
   function renderPage() {
     const keys = Object.keys(DATA.models);
@@ -139,7 +141,7 @@
       cap.appendChild(el);
     };
     add("Golden prompt ");
-    add(first.golden.id, true);
+    add(promptName(first.golden.id), true);
     if (first.eval && first.eval.passed) {
       add(" · keeps ");
       add(pct(first.eval.coverage), true);
@@ -423,7 +425,7 @@
       left.append(mark, link);
       const meta = document.createElement("span");
       meta.className = "meta";
-      const who = r.guess ? "guess round" : r.promptId === m.golden.id ? `golden ${r.promptId}` : `challenger ${r.promptId}`;
+      const who = r.guess ? "guess round" : r.promptId === m.golden.id ? `golden, prompt ${promptName(r.promptId)}` : `challenger, prompt ${promptName(r.promptId)}`;
       meta.textContent = r.guess ? who : `${who} · ${Math.round(r.readMs / 1000)}s`;
       li.append(left, meta);
       ul.appendChild(li);

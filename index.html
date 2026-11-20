@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Slopfree</title>
   <meta name="description" content="An open experiment to find the prompt that makes AI get to the point, ranked by how well real people understand what it writes.">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <meta name="theme-color" content="#34302A">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,6 +19,7 @@
       <a href="#about" data-section="about">About</a>
       <a href="#how" data-section="how">How to use</a>
       <a href="#quiz" data-section="quiz">Quiz</a>
+      <a href="#human-first" data-section="human-first">Human first</a>
       <a href="https://github.com/mvpete/slopfree-ca" class="hide-narrow">GitHub</a>
       <a href="https://github.com/sponsors/mvpete" class="sponsor">Sponsor</a>
     </nav>
@@ -36,15 +38,12 @@
             <span class="codebox-name">golden-prompt.md</span>
             <button class="copy copy-golden" type="button" data-label="Copy">Copy</button>
           </div>
-<pre id="golden"><code>Write for a reader who wants to understand quickly.
-- Start with the main point. No preamble, and don't restate the question.
-- Use plain words. Prefer specifics over generalities: names, numbers, dates, causes.
-- Keep sentences short, but connect them (because, so, but) so the reader sees how ideas relate.
-- Cut anything that adds no information: praise, filler, stacked hedges, recaps, offers of more help.
-- Flag uncertainty once, plainly, only where it exists. Never invent facts.
-- Use lists or headers only for content that is actually a list. Otherwise write prose.
-- No buzzwords (delve, landscape, robust, seamless, leverage, tapestry, testament), no em dashes, no emojis.</code></pre>
-          <figcaption id="golden-caption">Golden prompt <strong id="golden-id">p-0001</strong> · paste it at the end of any prompt</figcaption>
+<pre id="golden"><code>Your reader is smart and busy. Give them the whole answer in the fewest words.
+- Lead with the answer.
+- Keep every fact; drop every word that carries none.
+- Plain words, short sentences, no filler or flourishes.
+- Unsure? Say so once. Never make things up.</code></pre>
+          <figcaption id="golden-caption">Golden prompt <strong id="golden-id">1</strong> · paste it at the end of any prompt</figcaption>
         </figure>
       </div>
       <a class="scroll-cue" href="#about" aria-label="Scroll to About">
@@ -108,8 +107,8 @@
             <p>Write your request as usual, leave a blank line, then paste the prompt.</p>
 <pre class="snippet">Explain how a heat pump keeps a house warm at -20°C.
 
-<span>Write for a reader who wants to understand quickly.
-- Start with the main point. ...</span></pre>
+<span>Your reader is smart and busy. Give them the whole answer in the fewest words.
+- Lead with the answer. ...</span></pre>
           </div>
           <div class="way">
             <h3>For every chat</h3>
@@ -200,7 +199,25 @@
 
         </div>
       </div>
+    </section>
 
+    <!-- 5. Human First Design (built from principles/*.md) -->
+    <section id="human-first" class="panel">
+      <div class="wrap">
+        <p class="eyebrow">Human First Design</p>
+        <h2>The principles behind the golden prompt.</h2>
+        <!-- principles:start -->
+        <dl class="principles">
+          <div class="principle"><dt>Design for the human first.</dt><dd><p>Most end users are people, and forcing them to sort through a wall of AI output is a bad experience.</p></dd></div>
+          <div class="principle"><dt>Protect the negative space.</dt><dd><p>Leave things out so the real point stands out. Human attention is small, and AI output is big. Edit. Edit. Edit.</p></dd></div>
+          <div class="principle"><dt>The burden is on the designer.</dt><dd><p>You, as the designer or writer, hold the context. It’s your responsibility to make the output understandable. Do not push the responsibility onto the reader to decode a confusing design or sift through a wall of text to find the point.</p></dd></div>
+          <div class="principle"><dt>Make it obvious.</dt><dd><p>Each paragraph should make its point obvious, as should each next step in an application. A user or reader shouldn’t have to guess what’s going on, and it should be easy to tell when something is wrong. Errors should give enough information to correct the problem, or at minimum enough to support troubleshooting.</p></dd></div>
+          <div class="principle"><dt>Peel the onion.</dt><dd><p>Show the essence first, then give the user a path to dig deeper. In writing, lead with the most important points and follow with the necessary details.</p></dd></div>
+          <div class="principle"><dt>Respect their time.</dt><dd><p>Just because we can create at light speed doesn’t mean anyone has to consume it. It’s still the user’s or reader’s choice. You have to earn the right for someone to spend time reading your doc or using your system.</p></dd></div>
+          <div class="principle"><dt>Never accept the first output.</dt><dd><p>Treat the first output, whether text or an application, as a draft. Edit it heavily using the principles above. Remember: put the human first.</p></dd></div>
+        </dl>
+        <!-- principles:end -->
+      </div>
       <footer class="footer">
         <span class="made">Proudly made in Canada <span class="leaf" role="img" aria-label="maple leaf">🍁</span> with imported AI</span>
         <span>Code MIT · content CC BY-SA 4.0 from Wikipedia</span>
