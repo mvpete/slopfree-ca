@@ -483,3 +483,13 @@ h3 { font-size: 1.05rem; letter-spacing: -0.01em; }
 .copy.icon-btn .icon-check { display: none; }
 .copy.icon-btn.done .icon-copy { display: none; }
 .copy.icon-btn.done .icon-check { display: block; }
+
+/* ---------- Examples: prompts used ---------- */
+.ex-prompts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-bottom: 28px; }
+.ex-prompts.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.ex-prompt { min-width: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; }
+.ex-prompt:nth-child(2) { border-color: var(--gold-soft); }
+.ex-prompt h3 { font-size: 0.95rem; margin-bottom: 8px; }
+.ex-prompt pre { margin: 0; font: 400 0.78rem/1.6 var(--mono); color: var(--text); white-space: pre-wrap; overflow-wrap: anywhere; }
+.ex-prompt .small { margin-top: 8px; }
+@media (max-width: 900px) { .ex-prompts, .ex-prompts.three { grid-template-columns: 1fr; } }

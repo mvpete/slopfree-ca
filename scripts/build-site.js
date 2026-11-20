@@ -105,7 +105,7 @@ const examplesNav = homeNav
   const slugs = latest?.model === model && latest.contentSlugs?.length ? latest.contentSlugs.filter((s) => all.includes(s)) : all;
   fs.writeFileSync(
     path.join(OUT, "examples.html"),
-    buildExamples(ROOT, model, m.golden, m.challenger, slugs, { date: latest?.date, writer: latest?.writerModel || cfgNow.writerModel, judge: latest?.judgeModel || cfgNow.judgeModel, nav: examplesNav })
+    buildExamples(ROOT, model, m.golden, m.challenger, slugs, { date: latest?.date, writer: latest?.writerModel || cfgNow.writerModel, judge: latest?.judgeModel || cfgNow.judgeModel, nav: examplesNav, wrapper: cfgNow.wrapper, challengerText: m.challenger ? fs.readFileSync(path.join(ROOT, `prompts/${model}/${m.challenger}.md`), "utf8").trim() : null })
   );
 }
 fs.writeFileSync(path.join(OUT, ".nojekyll"), "");

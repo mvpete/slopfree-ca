@@ -100,6 +100,17 @@ ${slides}
         </table>`
     : `<p class="lede">No examples yet. They appear after the first weekly eval publishes its articles.</p>`;
 
+  // The exact prompts behind each column.
+  const box = (label, body, note) => `<div class="ex-prompt">
+        <h3>${label}</h3>
+        <pre>${esc(body)}</pre>${note ? `<p class="small">${note}</p>` : ""}
+      </div>`;
+  const prompts = `<div class="ex-prompts${meta.challengerText ? " three" : ""}">
+      ${box("Plain", `${meta.wrapper}\n<article>`, "The baseline: no postfix.")}
+      ${box(`Golden ${name(golden.id)}`, `${meta.wrapper}\n<article>\n\n${golden.text}`, "Pasted after the article.")}
+      ${meta.challengerText ? box(`Challenger ${name(challenger)}`, `${meta.wrapper}\n<article>\n\n${meta.challengerText}`, "Pasted after the article.") : ""}
+    </div>`;
+
   return `<!doctype html>
 <html lang="en">
 <head>
@@ -126,6 +137,7 @@ ${slides}
       <p class="small">${meta.date ? `Eval of ${esc(meta.date)}. ` : ""}Summaries by <code>${esc(meta.writer)}</code>, judged by <code>${esc(meta.judge)}</code>.</p>
     </div>
     <div class="wrap examples">
+    ${prompts}
     ${carousel}
     </div>
   </main>
