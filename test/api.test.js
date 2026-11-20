@@ -32,6 +32,11 @@ test("accepts a quiz difficulty rating", () => {
   rejects({ ...ok, rating: "meh" }, /rating/);
 });
 
+test("accepts a question fingerprint and rejects a malformed one", () => {
+  assert.equal(validateResults({ ...ok, answers: [{ ...ok.answers[0], qid: "0a1b2c3d" }] }, opts).answers[0].qid, "0a1b2c3d");
+  rejects({ ...ok, answers: [{ ...ok.answers[0], qid: "nope" }] }, /qid/);
+});
+
 test("accepts too hard as choice 4", () => {
   assert.equal(validateResults({ ...ok, answers: [{ ...ok.answers[0], choice: 4 }] }, opts).answers[0].choice, 4);
 });

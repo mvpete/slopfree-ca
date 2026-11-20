@@ -173,7 +173,8 @@
       : "Practice mode: answers aren't recorded on this copy of the site.";
   }
 
-  fetch("content/index.json")
+  // Always revalidate: a cached copy could serve last week's (or replaced) questions.
+  fetch("content/index.json", { cache: "no-cache" })
     .then((r) => (r.ok ? r.json() : null))
     .then((d) => {
       if (d && d.models && Object.keys(d.models).length) DATA = d;
@@ -194,6 +195,50 @@
   // ---------- Quiz ----------
   const stages = ["intro", "read", "question", "rate", "result"];
   const show = (name) => stages.forEach((s) => ($("stage-" + s).hidden = s !== name));
+  // Fingerprint of the question's wording; the weekly decision only scores answers whose fingerprint
+  // matches the current question. Same function as scripts/lib/util.js.
+  const questionId = (q) => {
+    let h = 0x811c9dc5;
+    for (const ch of q.text + "\n" + q.options.join("\n")) {
+      h ^= ch.codePointAt(0);
+      h = Math.imul(h, 0x01000193) >>> 0;
+    }
+    return h.toString(16).padStart(8, "0");
+  };
+
+  // Small, safe markdown for summaries: escape everything, then headings, lists, bold, italics, paragraphs.
+  function markdown(src) {
+    const esc = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    const inline = (s) =>
+      esc(s)
+        .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
+        .replace(/__(.+?)__/g, "<strong>$1</strong>")
+        .replace(/(^|[^*])\*(?!\s)(.+?)\*(?!\*)/g, "$1<em>$2</em>");
+    const out = [];
+    let list = null;
+    const closeList = () => {
+      if (list) out.push(`</${list}>`);
+      list = null;
+    };
+    for (const block of src.replace(/\r\n/g, "\n").split(/\n\s*\n/)) {
+      for (const line of block.split("\n")) {
+        const t = line.trim();
+        if (!t) continue;
+        const h = t.match(/^#{1,6}\s+(.*)$/);
+        const ul = t.match(/^[-*•]\s+(.*)$/);
+        const ol = t.match(/^\d+[.)]\s+(.*)$/);
+        if (h) { closeList(); out.push(`<h4>${inline(h[1])}</h4>`); }
+        else if (ul || ol) {
+          const kind = ul ? "ul" : "ol";
+          if (list !== kind) { closeList(); out.push(`<${kind}>`); list = kind; }
+          out.push(`<li>${inline((ul || ol)[1])}</li>`);
+        } else { closeList(); out.push(`<p>${inline(t)}</p>`); }
+      }
+      closeList();
+    }
+    return out.join("");
+  }
+
   const shuffle = (xs) => {
     const a = xs.slice();
     for (let i = a.length - 1; i > 0; i--) {
@@ -273,11 +318,7 @@
     topic.appendChild(link);
     const box = $("paragraph");
     box.innerHTML = "";
-    text.split(/\n\s*\n/).forEach((para) => {
-      const p = document.createElement("p");
-      p.textContent = para.trim();
-      box.appendChild(p);
-    });
+    box.innerHTML = markdown(text);
     r.words = words(text);
     renderDots();
     show("read");
@@ -396,6 +437,7 @@
         round: i + 1,
         guess: r.guess,
         hidden: !!r.hidden,
+        qid: questionId(r.article.question),
       })),
     };
     return fetch(API + "/v1/results", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) })

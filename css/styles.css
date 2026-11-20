@@ -473,3 +473,7 @@ h3 { font-size: 1.05rem; letter-spacing: -0.01em; }
 .answer-row { margin-top: 0; }
 
 .topic a { color: var(--gold); text-decoration: underline; text-decoration-color: var(--gold-soft); text-underline-offset: 3px; }
+
+.paragraph h4 { margin: 14px 0 6px; font-size: 1rem; color: var(--gold); }
+.paragraph ul, .paragraph ol { margin: 0 0 14px; padding-left: 22px; }
+.paragraph li { margin-bottom: 4px; }

@@ -65,6 +65,16 @@ test("same inputs and seed give the same verdict", () => {
   assert.deepEqual(run(rows), run(rows));
 });
 
+test("answers to a replaced question don't count", () => {
+  const rows = simulate({}).map((r) => ({ ...r, qid: "aaaaaaaa" }));
+  const qids = Object.fromEntries(Object.keys(key).map((s) => [s, "aaaaaaaa"]));
+  const total = (r) => r.numbers.answers.golden + r.numbers.answers.challenger;
+  const n = total(run(rows, { qids }));
+  assert.ok(n > 0);
+  qids.a0 = "bbbbbbbb"; // article a0's question was rewritten
+  assert.equal(total(run(rows, { qids })), n - 1);
+});
+
 test("impossibly fast reads and hidden tabs are dropped", () => {
   const rows = simulate({});
   const n = run(rows).numbers.answers.challenger;

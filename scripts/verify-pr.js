@@ -5,7 +5,7 @@ import { execSync } from "node:child_process";
 import { loadConfig, ROOT } from "./lib/config.js";
 import { score, checkGate, reasonOf } from "./lib/gate.js";
 import { decide } from "./lib/decide.js";
-import { QUEUE_NAME } from "./lib/util.js";
+import { QUEUE_NAME, questionId } from "./lib/util.js";
 
 const cfg = loadConfig();
 const base = process.env.BASE_REF || "main";
@@ -51,11 +51,15 @@ for (const f of changed.filter((f) => /^evals\/\d{4}-\d{2}-\d{2}-decision\.json$
   const d = json(f);
   const snap = json(d.snapshot);
   const key = {};
+  const qids = {};
   for (const slug of new Set(snap.rows.map((r) => r.slug))) {
     const p = `content/articles/${slug}/points.json`;
-    if (exists(p)) key[slug] = json(p).question.answer;
+    if (exists(p) && json(p).question) {
+      key[slug] = json(p).question.answer;
+      qids[slug] = questionId(json(p).question);
+    }
   }
-  const again = decide(snap.rows, { golden: d.golden, challenger: d.challenger, key, seed: d.seed });
+  const again = decide(snap.rows, { golden: d.golden, challenger: d.challenger, key, qids, seed: d.seed });
   if (again.outcome !== d.outcome) errors.push(`${f}: says ${d.outcome}, but the data gives ${again.outcome}`);
   const golden = json(`prompts/${d.model}/golden.json`).id;
   const expected = d.outcome === "win" ? d.challenger : d.golden;

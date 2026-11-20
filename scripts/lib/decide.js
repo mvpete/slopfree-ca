@@ -59,10 +59,11 @@ const describe = (acc, time) => {
 
 // rows: { session_id, prompt_id, slug, choice, read_ms, words, guess, hidden, first_language }
 // key:  { [slug]: index of the correct option }
-export function decide(rows, { golden, challenger, key, seed, ...options }) {
+export function decide(rows, { golden, challenger, key, qids = null, seed, ...options }) {
   const o = { ...DEFAULTS, ...options };
   const correct = (r) => Number(r.choice === key[r.slug]);
-  const known = (r) => key[r.slug] !== undefined;
+  // With qids, an answer only counts if it carries the fingerprint of the article's current question.
+  const known = (r) => key[r.slug] !== undefined && (!qids || r.qid === qids[r.slug]);
 
   // Guess rounds (question without a summary), if any were served, measure how guessable an article is.
   const guess = {};

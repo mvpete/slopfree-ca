@@ -33,4 +33,15 @@ export const promptName = (id) => String(Number(String(id).replace(/^p-/, "")));
 // Community submissions: prompts/queue/<github-username>-<YYYY-MM-DD>[-<n>].md, tested oldest first.
 export const QUEUE_NAME = /^([A-Za-z0-9][A-Za-z0-9-]{0,38})-(\d{4}-\d{2}-\d{2})(?:-(\d+))?\.md$/;
 
+// Fingerprint of a quiz question's exact wording. Answers carry it, so an answer is only ever scored
+// against the question the reader actually saw. js/main.js has the same function.
+export const questionId = (q) => {
+    let h = 0x811c9dc5;
+    for (const ch of q.text + "\n" + q.options.join("\n")) {
+      h ^= ch.codePointAt(0);
+      h = Math.imul(h, 0x01000193) >>> 0;
+    }
+    return h.toString(16).padStart(8, "0");
+  };
+
 export const sleep = (ms) => new Promise((r) => setTimeout(r, ms));

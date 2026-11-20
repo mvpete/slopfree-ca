@@ -7,7 +7,7 @@ import path from "node:path";
 import { loadConfig, ROOT } from "./lib/config.js";
 import { readJSON, writeJSON, readGolden, writeLoser } from "./lib/store.js";
 import { decide } from "./lib/decide.js";
-import { today, pct, promptName } from "./lib/util.js";
+import { today, pct, promptName, questionId } from "./lib/util.js";
 
 const cfg = loadConfig();
 const model = cfg.model;
@@ -58,16 +58,20 @@ const rows = (await loadRows()).filter((r) => (r.prompt_id === golden.id || r.pr
 
 // Answer key from the repo, so a client can't mark its own answers correct.
 const key = {};
+const qids = {};
 for (const slug of new Set(rows.map((r) => r.slug))) {
   const p = readJSON(`content/articles/${slug}/points.json`, null);
-  if (p) key[slug] = p.question.answer;
+  if (p?.question) {
+    key[slug] = p.question.answer;
+    qids[slug] = questionId(p.question);
+  }
 }
 
 const snapshot = `data/answers-${date}.json`;
 writeJSON(snapshot, { date, model, golden: golden.id, challenger, rows });
 
 const seed = `${date}:${golden.id}:${challenger}`;
-const result = decide(rows, { golden: golden.id, challenger, key, seed });
+const result = decide(rows, { golden: golden.id, challenger, key, qids, seed });
 writeJSON(`evals/${date}-decision.json`, { date, model, golden: golden.id, challenger, seed, snapshot, ...result });
 
 const n = result.numbers;

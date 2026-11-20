@@ -33,6 +33,7 @@ export function validateResults(body, { models }) {
       if (!isInt(a.readMs, 0, 3600000)) bad(`Round ${i + 1}: bad readMs.`);
       if (!isInt(a.words, 0, 5000)) bad(`Round ${i + 1}: bad words.`);
       if (!isInt(a.round, 1, 10)) bad(`Round ${i + 1}: bad round.`);
+      if (a.qid !== undefined && (typeof a.qid !== "string" || !/^[0-9a-f]{8}$/.test(a.qid))) bad(`Round ${i + 1}: bad qid.`);
       return {
         promptId: a.promptId,
         slug: a.slug,
@@ -42,6 +43,7 @@ export function validateResults(body, { models }) {
         round: a.round,
         guess: a.guess === true,
         hidden: a.hidden === true,
+        qid: a.qid ?? null,
       };
     }),
   };

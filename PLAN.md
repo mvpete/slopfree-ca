@@ -155,7 +155,7 @@ Warm graphite background (`#34302A`, never black), gold accent (`#D4AF37`), crea
 
 ## Privacy and abuse
 
-- Stored per answer: model, prompt ID, article, correct or not, reading time, random session ID, round type, the quiz's difficulty rating. No IPs, accounts or cookies.
+- Stored per answer: model, prompt ID, article, correct or not, reading time, random session ID, round type, a fingerprint of the question wording (so answers are only scored against the question actually shown), the quiz's difficulty rating. No IPs, accounts or cookies.
 - Turnstile on session start, rate limits on the Worker.
 - Each weekly decision commits its anonymous data snapshot to `data/answers-<date>.json`, so anyone can audit the ranking.
 
