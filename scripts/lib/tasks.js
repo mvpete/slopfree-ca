@@ -16,10 +16,11 @@ Judge each point on its own merits; there is no quota.
 
 Return JSON: {"points": [{"text": "...", "key": true}, ...]}`;
 
-const QUESTION_SYSTEM = `You write one reading-comprehension question for a quiz. A reader sees exactly one of the summaries below, never the article.
-Pick one important fact that EVERY summary states. The question must be answerable from any one summary alone.
-Ask about something a reader would need to understand the subject, not a minor detail. Keep the question short and plain.
-Give 4 short options. Exactly one is correct according to every summary; the others are plausible but wrong.
+const QUESTION_SYSTEM = `You write one EASY reading check. A reader reads exactly one of the summaries below, once, at normal speed, then answers. It only confirms they read and understood the summary; it is not a test of memory or detail.
+Ask about the summary's main point: what the subject is or did, or the single most important thing the summary says about it. Take it from the first sentence or two. Every summary must state the answer.
+Anyone who read the summary once should get it right without thinking. Do not ask about numbers, dates, secondary names, lists or anything from later in the summary.
+The topic title is shown to the reader, so the answer must not be the title itself or guessable from the title alone.
+Keep the question under 15 words. Give 4 options of a few words each. One is correct; the other three are clearly wrong to anyone who read the summary.
 For each summary, quote the exact words that contain the answer (copy them character for character, 3 to 25 words).
 
 Return JSON: {"text": "...", "options": ["...","...","...","..."], "answer": <0-3>, "quotes": ["<quote from summary 1>", "<quote from summary 2>", ...]}`;

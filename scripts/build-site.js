@@ -2,6 +2,7 @@
 // and the current golden prompt baked into index.html (so it shows without JavaScript).
 import fs from "node:fs";
 import path from "node:path";
+import { createHash } from "node:crypto";
 import { REPO, ROOT } from "./lib/config.js";
 import { readJSON, readGolden } from "./lib/store.js";
 import { readPrinciples, injectPrinciples } from "./lib/principles.js";
@@ -120,5 +121,13 @@ html = injectPrinciples(html, readPrinciples(REPO));
 html = injectModels(html, loadConfig());
 html = html.replace(/(<pre id="golden"><code>)[\s\S]*?(<\/code><\/pre>)/, `$1${esc(first.golden.text)}$2`);
 fs.writeFileSync(path.join(OUT, "index.html"), html);
+
+// Versioned asset URLs, applied last: a browser can never pair a new page with an old cached script or stylesheet.
+const ver = (rel) => createHash("sha256").update(fs.readFileSync(path.join(OUT, rel))).digest("hex").slice(0, 10);
+for (const page of ["index.html", "examples.html"]) {
+  const p = path.join(OUT, page);
+  if (!fs.existsSync(p)) continue;
+  fs.writeFileSync(p, fs.readFileSync(p, "utf8").replace(/(href|src)="(css\/styles\.css|js\/main\.js|js\/config\.js)"/g, (_, attr, rel) => `${attr}="${rel}?v=${ver(rel)}"`));
+}
 
 console.log(`Built _site: ${models.length} model(s); ${models.map((m) => `${m}: golden ${index.models[m].golden.id}, challenger ${index.models[m].challenger || "none"}, ${index.models[m].articles.length} articles`).join("; ")}`);

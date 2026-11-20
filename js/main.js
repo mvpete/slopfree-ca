@@ -43,7 +43,8 @@
         return;
       }
       btn.textContent = label;
-      setTimeout(() => (btn.textContent = btn.dataset.label), 1500);
+      const original = btn.dataset.label || btn.textContent;
+      setTimeout(() => (btn.textContent = original), 1500);
     };
     const selectText = () => {
       const range = document.createRange();
@@ -349,29 +350,22 @@
     $("question").textContent = r.article.question.text;
     // Shuffle the display order; record the original option index.
     shuffle(r.article.question.options.map((text, i) => ({ text, i }))).forEach((o) => {
-      const label = document.createElement("label");
-      label.className = "choice";
-      const input = document.createElement("input");
-      input.type = "radio";
-      input.name = "answer";
-      input.value = o.i;
-      input.addEventListener("change", () => ($("submit").disabled = false));
-      const span = document.createElement("span");
-      span.textContent = o.text;
-      label.append(input, span);
-      fs.appendChild(label);
+      // Tapping an option is the answer: no separate Answer button.
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "choice";
+      btn.textContent = o.text;
+      btn.addEventListener("click", () => answer(o.i));
+      fs.appendChild(btn);
     });
-    $("submit").disabled = true;
     show("question");
-    fs.querySelector("input").focus();
+    fs.querySelector(".choice").focus();
   }
 
-  function submitAnswer() {
-    const picked = document.querySelector('#choices input[name="answer"]:checked');
-    if (!picked) return;
+  function answer(choice) {
     const r = rounds[round];
-    r.choice = Number(picked.value);
-    r.correct = r.choice === r.article.question.answer;
+    r.choice = choice;
+    r.correct = choice === r.article.question.answer;
     nextRound();
   }
 
@@ -501,7 +495,6 @@
   }
 
   $("to-question").addEventListener("click", showQuestion);
-  $("submit").addEventListener("click", submitAnswer);
   $("too-hard").addEventListener("click", tooHard);
   $("again").addEventListener("click", () => show("intro"));
 })();

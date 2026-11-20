@@ -306,8 +306,8 @@ h3 { font-size: 1.05rem; letter-spacing: -0.01em; }
   cursor: pointer;
 }
 .choice:hover { border-color: var(--gold-soft); }
-.choice:has(input:checked) { border-color: var(--gold); }
-.choice input { accent-color: var(--gold); margin: 0; }
+button.choice { width: 100%; text-align: left; font: inherit; color: var(--text); }
+button.choice:hover, button.choice:focus-visible { border-color: var(--gold); }
 
 .score { margin: 0; font: 600 5rem/1 var(--mono); color: var(--gold); }
 .score .of { font-size: 2rem; color: var(--dim); }
