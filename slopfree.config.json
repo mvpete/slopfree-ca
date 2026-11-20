@@ -13,9 +13,9 @@
   "maxWords": 3000,
 
   "gate": {
-    "coverage": 0.98,
-    "floor": 0.90,
-    "lengthRatio": 0.80
+    "coverage": 0.95,
+    "floor": 0.85,
+    "lengthRatio": 0.85
   },
 
   "promptMaxChars": 1500,

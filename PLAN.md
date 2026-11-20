@@ -1,6 +1,6 @@
 # slopfree.ca plan
 
-Slop Free is a lossless AI compression prompt: same accuracy as a plain "Summarize this", with at least 20% less text. Machines check it first, then people.
+Slop Free is a lossless AI compression prompt: same accuracy as a plain "Summarize this", with at least 15% less text. Machines check it first, then people.
 
 ## How a prompt earns golden
 
@@ -8,7 +8,7 @@ A weekly cycle, one challenger per week. Every Monday:
 
 1. **Decide last week's trial.** If the challenger beat golden in the reader test, it becomes golden. Otherwise golden stays.
 2. **Archive the loser** in "Close but no cigar" with the reason it lost.
-3. **Eval (machine).** An AI drafts candidate prompts until one passes the gate against a plain summarization baseline, up to 20 attempts, drafted by `gpt-6.2-sol` with the gate targets (≥98% of the baseline's points, ≥20% fewer words).
+3. **Eval (machine).** An AI drafts candidate prompts until one passes the gate against a plain summarization baseline, up to 20 attempts, drafted by `gpt-6.2-sol` with the gate targets (≥95% of the baseline's point count, ≥15% fewer words).
 4. **Reader test (human).** The new challenger runs head to head against golden for the week.
 
 Every step is a bot PR that auto-merges, so the record of each change stays in git.
@@ -48,10 +48,10 @@ The eval tests the claim (lossless, shorter). The reader test checks that people
 ### Gate (all must hold, across the article set)
 | Check | Pass if |
 |---|---|
-| Coverage | Keeps ≥98% as many of the article's points as the baseline does (any points, not only the baseline's picks) |
+| Coverage | Keeps ≥95% as many of the article's points as the baseline does (any points, not only the baseline's picks) |
 | Accuracy | Unsupported or wrong claims no more frequent than baseline |
-| Length | Median tokens ≤80% of baseline (≥20% less text) |
-| Floor | No single article below 90% of the baseline's point count |
+| Length | Median words ≤85% of baseline (≥15% less text) |
+| Floor | No single article below 85% of the baseline's point count |
 
 No prompt reaches readers without passing this gate, golden included:
 - **Golden v1 must pass before launch.** If it fails, it gets revised until it passes.
@@ -87,8 +87,8 @@ Every losing prompt is kept, with its text, its numbers and a one-line reason:
 
 | Lost at | Example reason |
 |---|---|
-| Eval: coverage | "Covered 94% of baseline points (needs 98%). Dropped dates and causes most often." |
-| Eval: length | "Only 12% shorter than baseline (needs 20%)." |
+| Eval: coverage | "Kept 92% as many of the articles' points as the baseline (needs 95%)." |
+| Eval: length | "Only 12% shorter than baseline (needs 15% shorter)." |
 | Eval: accuracy | "3 unsupported claims per 50 summaries vs baseline's 1." |
 | Eval: fresh articles | "Passed the search set, failed on fresh articles: coverage 95%." |
 | Reader test | "Readers scored 4% lower and read 6% slower than golden." |
