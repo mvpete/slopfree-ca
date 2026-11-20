@@ -65,6 +65,28 @@ for (const d of ["css", "js"]) fs.cpSync(path.join(REPO, d), path.join(OUT, d), 
 fs.copyFileSync(path.join(REPO, "favicon.svg"), path.join(OUT, "favicon.svg"));
 fs.mkdirSync(path.join(OUT, "content"), { recursive: true });
 fs.writeFileSync(path.join(OUT, "content/index.json"), JSON.stringify(index));
+
+// Public read API for the golden prompt (served by GitHub Pages, and by api.slopfree.ca/v1/golden).
+const cfgNow = loadConfig();
+const goldenDoc = (model) => {
+  const m = index.models[model];
+  return {
+    prompt: m.golden.text,
+    name: String(Number(m.golden.id.replace(/^p-/, ""))),
+    file: `prompts/${model}/${m.golden.id}.md`,
+    provider: model,
+    tunedFor: { writer: cfgNow.writerModel, judge: cfgNow.judgeModel },
+    eval: m.eval,
+    challenger: m.challenger ? String(Number(m.challenger.replace(/^p-/, ""))) : null,
+    updated: index.generated,
+    source: `https://github.com/mvpete/slopfree-ca/blob/main/prompts/${model}/${m.golden.id}.md`,
+    license: "MIT",
+  };
+};
+fs.mkdirSync(path.join(OUT, "api/golden"), { recursive: true });
+for (const model of models) fs.writeFileSync(path.join(OUT, `api/golden/${model}.json`), JSON.stringify(goldenDoc(model), null, 2));
+fs.writeFileSync(path.join(OUT, "golden.json"), JSON.stringify({ ...goldenDoc(models[0]), models: Object.fromEntries(models.map((m) => [m, goldenDoc(m)])) }, null, 2));
+fs.writeFileSync(path.join(OUT, "golden.txt"), index.models[models[0]].golden.text + "\n");
 fs.writeFileSync(path.join(OUT, ".nojekyll"), "");
 fs.writeFileSync(
   path.join(OUT, "js/config.js"),

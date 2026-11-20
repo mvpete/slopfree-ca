@@ -10,6 +10,7 @@ routes = [{ pattern = "api.slopfree.ca", custom_domain = true }]
 ALLOWED_ORIGINS = "https://slopfree.ca,https://www.slopfree.ca,https://mvpete.github.io"
 MODELS = "openai"
 RATE_LIMIT_PER_HOUR = "30"
+SITE_URL = "https://slopfree.ca"
 
 [[d1_databases]]
 binding = "DB"

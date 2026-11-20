@@ -19,6 +19,15 @@ Losers are kept in [`prompts/openai/losers/`](prompts/openai/losers/) with why t
 
 Set in [`slopfree.config.json`](slopfree.config.json) (`writerModel`, `judgeModel`, `drafterModel`). Every eval report, PR, loser file and the site's eval line records which models produced its numbers, so results from different models are never mixed up.
 
+## Read the golden prompt
+
+```sh
+curl https://api.slopfree.ca/v1/golden          # JSON: prompt, its number, models it's tuned for, latest eval numbers
+curl https://slopfree.ca/golden.txt             # just the prompt, as plain text
+```
+
+`/v1/golden?model=openai` picks a provider. Both are public, allow any origin, and refresh within 5 minutes of a new golden prompt.
+
 ## Run it
 
 Node 22+. No dependencies.

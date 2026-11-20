@@ -1,5 +1,6 @@
 // slopfree.ca scoring API.
 //   POST /v1/results  record one completed quiz
+//   GET  /v1/golden   the current golden prompt as JSON (public, open CORS, cached)
 //   GET  /v1/stats    reader counts per model (public, cached)
 //   GET  /v1/export   all answers for a model (bearer EXPORT_TOKEN)
 import { validateResults, HttpError } from "./validate.js";
@@ -92,6 +93,20 @@ async function exportRows(req, env, url) {
   return json({ rows: results.map((r) => ({ ...r, guess: r.guess === 1, hidden: r.hidden === 1 })) }, 200, {});
 }
 
+// The golden prompt is published with the site; this endpoint serves it from the API host with open CORS.
+async function golden(env, url) {
+  const model = url.searchParams.get("model");
+  if (model && !/^[a-z0-9-]{1,40}$/.test(model)) throw new HttpError(400, "Bad model name.");
+  const site = (env.SITE_URL || "https://slopfree.ca").replace(/\/$/, "");
+  const res = await fetch(model ? `${site}/api/golden/${model}.json` : `${site}/golden.json`, { cf: { cacheTtl: 300, cacheEverything: true } });
+  if (res.status === 404) throw new HttpError(404, `No golden prompt for model "${model}".`);
+  if (!res.ok) throw new HttpError(502, "Couldn't load the golden prompt. Try again in a minute.");
+  return new Response(await res.text(), {
+    status: 200,
+    headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*", "Cache-Control": "public, max-age=300" },
+  });
+}
+
 export default {
   async fetch(req, env) {
     const url = new URL(req.url);
@@ -99,6 +114,7 @@ export default {
     if (req.method === "OPTIONS") return new Response(null, { status: 204, headers });
     try {
       if (url.pathname === "/v1/results" && req.method === "POST") return json(await postResults(req, env), 200, headers);
+      if (url.pathname === "/v1/golden" && req.method === "GET") return await golden(env, url);
       if (url.pathname === "/v1/stats" && req.method === "GET")
         return json(await stats(env), 200, { ...headers, "Cache-Control": "public, max-age=300" });
       if (url.pathname === "/v1/export" && req.method === "GET") return await exportRows(req, env, url);
