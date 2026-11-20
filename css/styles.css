@@ -493,3 +493,6 @@ button.choice:hover, button.choice:focus-visible { border-color: var(--gold); }
 .ex-prompt pre { margin: 0; font: 400 0.78rem/1.6 var(--mono); color: var(--text); white-space: pre-wrap; overflow-wrap: anywhere; }
 .ex-prompt .small { margin-top: 8px; }
 @media (max-width: 900px) { .ex-prompts, .ex-prompts.three { grid-template-columns: 1fr; } }
+
+/* No section snapping while a quiz is in progress. */
+html.quiz-active { scroll-snap-type: none; }

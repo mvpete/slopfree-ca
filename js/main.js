@@ -206,7 +206,13 @@
 
   // ---------- Quiz ----------
   const stages = ["intro", "read", "question", "rate", "result"];
-  const show = (name) => stages.forEach((s) => ($("stage-" + s).hidden = s !== name));
+  // Switching quiz screens can shrink the page (a long summary becomes a short question). Snap back to the
+  // top of the quiz so the browser doesn't clamp or snap the scroll into the next section.
+  const show = (name) => {
+    stages.forEach((s) => ($("stage-" + s).hidden = s !== name));
+    document.documentElement.classList.toggle("quiz-active", name !== "intro");
+    if (name !== "intro") $("quiz").scrollIntoView({ block: "start", behavior: "instant" });
+  };
   // Fingerprint of the question's wording; the weekly decision only scores answers whose fingerprint
   // matches the current question. Same function as scripts/lib/util.js.
   const questionId = (q) => {
@@ -311,7 +317,6 @@
     const label = `Round ${round + 1} of ${rounds.length}`;
     $("round-label").textContent = label;
     $("round-label-q").textContent = label;
-    $("quiz").scrollIntoView({ block: "start" });
     if (r.guess) {
       r.readMs = 0;
       r.words = 0;
@@ -359,7 +364,7 @@
       fs.appendChild(btn);
     });
     show("question");
-    fs.querySelector(".choice").focus();
+    fs.querySelector(".choice").focus({ preventScroll: true });
   }
 
   function answer(choice) {
