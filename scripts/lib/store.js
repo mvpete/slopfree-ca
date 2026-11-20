@@ -50,9 +50,9 @@ export function writeLoser(model, { id, date, by, stage, reason, score, table, p
   const rows = table
     ? table
     : score
-    ? `| Articles | Coverage vs baseline | Worst article | Shorter than baseline | Unsupported (prompt / base) |
-|---|---|---|---|---|
-| ${score.n} | ${pct(score.coverage)} | ${pct(score.floor)} | ${pct(1 - score.lengthRatio)} | ${score.candUnsupported} / ${score.baseUnsupported} |`
+    ? `| Articles | Key points vs baseline | Worst article | Key points per word vs baseline | Unsupported (prompt / base) | Em dashes | AI-style phrases (prompt / base) |
+|---|---|---|---|---|---|---|
+| ${score.n} | ${pct(score.coverage)} | ${pct(score.floor)} | ${Number.isFinite(score.density) ? score.density.toFixed(2) + "×" : "n/a"} | ${score.candUnsupported} / ${score.baseUnsupported} | ${score.candDashes ?? 0} | ${score.candStyle ?? 0} / ${score.baseStyle ?? 0} |`
     : "No numbers: it failed before scoring.";
   writeText(
     `prompts/${model}/losers/${id}.md`,

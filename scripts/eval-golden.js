@@ -21,9 +21,12 @@ const sc = r.score;
 console.log(`
 Golden prompt ${golden.id}: ${r.gate.passed ? "PASS" : "FAIL"}
   Summaries by ${cfg.writerModel}, judged by ${cfg.judgeModel}
-  Coverage vs baseline   ${pct(sc.coverage)}   (needs >= ${pct(cfg.gate.coverage)})
+  Key points vs baseline ${pct(sc.coverage)}   (needs >= ${pct(cfg.gate.coverage)})
   Worst article          ${pct(sc.floor)}   (needs >= ${pct(cfg.gate.floor)})
-  Shorter than baseline  ${pct(1 - sc.lengthRatio)}   (needs >= ${pct(1 - cfg.gate.lengthRatio)})
+  Key points per word    ${sc.density.toFixed(2)}x baseline   (needs >= ${(1 / (1 - cfg.gate.efficiency)).toFixed(2)}x)
+  Length vs baseline     ${pct(sc.lengthRatio)}   (for information)
+  Em dashes              ${sc.candDashes}   (needs 0)
+  AI-style phrases       ${sc.candStyle} vs baseline ${sc.baseStyle}
   Unsupported claims     ${sc.candUnsupported} vs baseline ${sc.baseUnsupported}
   Baseline vs article    keeps ${pct(sc.baseOfArticlePoints)} of the article's points in ${pct(sc.baseOfArticleWords)} of its words
   ${reasonOf(r.gate)}

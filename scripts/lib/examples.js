@@ -20,15 +20,15 @@ function paragraphs(text) {
     .join("");
 }
 
-function column(label, sub, run, base) {
-  const kept = run.covered.filter(Boolean).length;
+function column(label, sub, run, base, key) {
+  const kept = run.covered.filter((c, i) => c && (!key || key[i])).length;
   const vs = "";
   const claims = run.unsupportedClaims?.length
     ? `<details class="claims"><summary>${run.unsupportedClaims.length} unsupported claim${run.unsupportedClaims.length === 1 ? "" : "s"}</summary><ul>${run.unsupportedClaims.map((c) => `<li>${esc(c)}</li>`).join("")}</ul></details>`
     : `<p class="claims none">No unsupported claims</p>`;
   return `<div class="ex-col">
           <h3>${label}${sub ? ` <span class="ex-sub">${sub}</span>` : ""}</h3>
-          <p class="ex-stats"><span><strong>${run.words}</strong> words</span><span><strong>${kept}</strong> points</span><span><strong>${run.unsupported}</strong> unsupported</span>${vs}</p>
+          <p class="ex-stats"><span><strong>${run.words}</strong> words</span><span><strong>${kept}</strong> key points</span><span><strong>${run.unsupported}</strong> unsupported</span>${run.dashes ? `<span><strong>${run.dashes}</strong> em dashes</span>` : ""}${vs}</p>
           <div class="ex-text">${paragraphs(run.summary)}</div>
           ${claims}
         </div>`;
@@ -60,12 +60,12 @@ export function buildExamples(root, model, golden, challenger, slugs, meta) {
     items.push({ ratio: g.words / base.words, html: `      <article class="example" aria-roledescription="slide">
         <header class="ex-head">
           <h2>${esc(src.title)}</h2>
-          <p>${src.words.toLocaleString()} words · ${pts ? pts.points.length : "?"} points · <a class="ex-link" href="${esc(src.url)}">Read the article</a></p>
+          <p>${src.words.toLocaleString()} words · ${pts ? (pts.key ? `${pts.key.filter(Boolean).length} key of ${pts.points.length} points` : `${pts.points.length} points`) : "?"} · <a class="ex-link" href="${esc(src.url)}">Read the article</a></p>
         </header>
         <div class="ex-cols${c?.covered ? " three" : ""}">
-        ${column("Plain", "", base, null)}
-        ${column(`Golden ${name(golden.id)}`, "", g, base)}
-        ${c?.covered ? column(`Challenger ${name(challenger)}`, "", c, base) : ""}
+        ${column("Plain", "", base, null, pts?.key)}
+        ${column(`Golden ${name(golden.id)}`, "", g, base, pts?.key)}
+        ${c?.covered ? column(`Challenger ${name(challenger)}`, "", c, base, pts?.key) : ""}
         </div>
       </article>` });
   }

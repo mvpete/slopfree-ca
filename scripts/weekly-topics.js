@@ -129,7 +129,7 @@ function writeArticles(articles, promptRuns) {
   for (const a of articles) {
     const dir = `content/articles/${a.slug}`;
     writeJSON(`${dir}/source.json`, a.source);
-    writeJSON(`${dir}/points.json`, { points: a.points, question: a.question });
+    writeJSON(`${dir}/points.json`, { points: a.points, key: a.key, question: a.question });
     if (a.baseline) writeJSON(`${dir}/baseline.json`, a.baseline);
     for (const [id, runs] of Object.entries(promptRuns)) {
       const r = runs[a.slug];
@@ -193,7 +193,7 @@ writeJSON(reportPath, report);
 
 // 5. PR text and workflow outputs.
 const stageCounts = report.attempts.reduce((acc, a) => ((acc[a.passed ? "passed" : a.stage] = (acc[a.passed ? "passed" : a.stage] || 0) + 1), acc), {});
-const row = (label, sc) => sc ? `| ${label} | ${sc.n} | ${pct(sc.coverage)} | ${pct(sc.floor)} | ${pct(1 - sc.lengthRatio)} | ${sc.candUnsupported} / ${sc.baseUnsupported} |` : "";
+const row = (label, sc) => sc ? `| ${label} | ${sc.n} | ${pct(sc.coverage)} | ${pct(sc.floor)} | ${sc.density.toFixed(2)}× | ${sc.candUnsupported} / ${sc.baseUnsupported} | ${sc.candDashes} | ${sc.candStyle} / ${sc.baseStyle} |` : "";
 const title = winner
   ? `Weekly eval ${date}: new challenger, prompt ${promptName(report.challenger.id)}`
   : `Weekly eval ${date}: no challenger${report.outcome === "budget" ? " (budget spent)" : ""}`;
@@ -207,7 +207,7 @@ let body = decision?.body ? decision.body + "\n" : "";
 body += `## ${title}\n\n`;
 body += `Summaries by \`${cfg.writerModel}\`, judged by \`${cfg.judgeModel}\`, candidates drafted by \`${cfg.drafterModel}\`.\n\n`;
 body += `Golden prompt **${promptName(golden.id)}** ${report.golden.passed ? "still passes" : "**fails**"} the gate. ${report.golden.reason || ""}\n\n`;
-body += `| Set | Articles | Coverage vs baseline | Worst article | Shorter than baseline | Unsupported (prompt / base) |\n|---|---|---|---|---|---|\n`;
+body += `| Set | Articles | Key points vs baseline | Worst article | Key points per word vs baseline | Unsupported (prompt / base) | Em dashes | AI-style phrases (prompt / base) |\n|---|---|---|---|---|---|---|---|\n`;
 body += row(`Golden, search set`, report.golden.score) + "\n";
 if (winner) {
   body += row(`Challenger, search set`, winner.search.score) + "\n" + row(`Challenger, fresh articles`, winner.confirm.score) + "\n\n";

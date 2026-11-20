@@ -2,57 +2,84 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { articleStats, score, checkGate } from "../scripts/lib/gate.js";
 
-const GATE = { coverage: 0.98, floor: 0.9, lengthRatio: 0.8 };
-const base = { covered: [true, true, true, true, true, true, true, true, true, true, false], unsupported: 1, words: 300 };
-const cand = (over = {}) => ({ covered: [...base.covered], unsupported: 1, words: 200, ...over });
-const run = (cands) => checkGate(score(cands.map((c, i) => articleStats("a" + i, base, c))), GATE);
+const GATE = { coverage: 0.95, floor: 0.85, efficiency: 0.15 };
+// 10 points: 0-4 key, 5-9 detail. The plain summary keeps all 10 in 300 words.
+const weights = [1, 1, 1, 1, 1, 0, 0, 0, 0, 0];
+const all = Array(10).fill(true);
+const base = { covered: all, unsupported: 1, words: 300 };
+const cand = (over = {}) => ({ covered: all, unsupported: 1, words: 240, ...over });
+const stats = (c) => articleStats("a", base, c, 3000, weights);
+const run = (cands) => checkGate(score(cands.map((c, i) => articleStats("a" + i, base, c, 3000, weights))), GATE);
+const keyOnly = [true, true, true, true, true, false, false, false, false, false];
 
-test("a candidate can keep different points than the baseline", () => {
-  // Baseline kept points 0-9. This candidate drops point 0 but keeps point 10 instead: same count.
-  const s = articleStats("x", base, cand({ covered: [false, true, true, true, true, true, true, true, true, true, true] }));
-  assert.equal(s.baseCovered, 10);
-  assert.equal(s.kept, 10);
-  assert.equal(s.overlap, 9);
-  assert.equal(checkGate(score([s]), GATE).passed, true);
+test("detail points are worth nothing; key points count", () => {
+  const s = stats(cand({ covered: keyOnly }));
+  assert.equal(s.baseCovered, 5);
+  assert.equal(s.kept, 5);
+  assert.equal(s.keyPoints, 5);
 });
 
-test("passes: same coverage, a third shorter, no extra errors", () => {
-  const r = run(Array.from({ length: 5 }, () => cand()));
-  assert.equal(r.passed, true);
+test("dropping the trivia and the words it took passes", () => {
+  // Same 5 key points in 150 words instead of 300: twice the key points per word.
+  const r = run([cand({ covered: keyOnly, words: 150 })]);
+  assert.equal(r.passed, true, r.failures.map((f) => f.message).join(" "));
   assert.equal(r.distance, 0);
 });
 
-test("fails coverage when points are dropped", () => {
-  const dropped = cand({ covered: [false, true, true, true, true, true, true, true, true, true, false] });
-  const r = run([dropped, dropped, cand(), cand(), cand()]);
-  assert.equal(r.passed, false);
+test("padding with trivia doesn't help: same length, same key points, fails efficiency", () => {
+  const r = run([cand({ words: 300 })]);
+  assert.deepEqual(r.failures.map((f) => f.check), ["efficiency"]);
+});
+
+test("15% fewer words with the same key points is exactly enough", () => {
+  assert.equal(run([cand({ words: 255 })]).passed, true);
+  assert.equal(run([cand({ words: 260 })]).passed, false);
+});
+
+test("losing key points fails accuracy even when short", () => {
+  const lost = [true, true, true, true, false, true, true, true, true, true]; // 4 of 5 key points
+  const r = run([cand({ covered: lost, words: 100 })]);
   assert.ok(r.failures.some((f) => f.check === "coverage"));
 });
 
-test("fails floor when one article loses a lot", () => {
-  const bad = cand({ covered: [false, false, true, true, true, true, true, true, true, true, false] });
-  const r = run([bad, ...Array.from({ length: 19 }, () => cand())]);
+test("a candidate can keep different points than the baseline", () => {
+  const b = { covered: [true, true, true, true, false, false, false, false, false, false], unsupported: 0, words: 200 };
+  const c = { covered: [false, true, true, true, true, false, false, false, false, false], unsupported: 0, words: 150 };
+  const s = articleStats("x", b, c, 3000, weights);
+  assert.equal(s.kept, 4);
+  assert.equal(s.overlap, 3);
+  assert.equal(checkGate(score([s]), GATE).passed, true);
+});
+
+test("one article losing too much fails the floor", () => {
+  const bad = cand({ covered: [true, true, true, false, false, false, false, false, false, false], words: 100 });
+  const r = run([bad, ...Array.from({ length: 19 }, () => cand({ covered: keyOnly, words: 150 }))]);
   assert.ok(r.failures.some((f) => f.check === "floor"));
-  assert.ok(!r.failures.some((f) => f.check === "coverage"), "99% overall still clears 98%");
 });
 
-test("fails length when under 20% shorter", () => {
-  const r = run(Array.from({ length: 3 }, () => cand({ words: 270 })));
-  assert.deepEqual(r.failures.map((f) => f.check), ["length"]);
-  assert.match(r.failures[0].message, /Only 10\.0% shorter/);
-});
-
-test("exactly 20% shorter passes", () => {
-  assert.equal(run([cand({ words: 240 })]).passed, true);
-});
-
-test("fails accuracy with more unsupported claims than baseline", () => {
-  const r = run([cand({ unsupported: 3 })]);
+test("more unsupported claims than the baseline fails", () => {
+  const r = run([cand({ covered: keyOnly, words: 150, unsupported: 3 })]);
   assert.deepEqual(r.failures.map((f) => f.check), ["accuracy"]);
 });
 
+test("older data without labels counts every point", () => {
+  const s = articleStats("x", base, cand(), 3000, null);
+  assert.equal(s.baseCovered, 10);
+});
+
 test("closer misses rank ahead of worse ones", () => {
-  const near = run([cand({ words: 250 })]);
-  const far = run([cand({ words: 300, covered: base.covered.map(() => false) })]);
+  const near = run([cand({ words: 270 })]);
+  const far = run([cand({ words: 400, covered: Array(10).fill(false) })]);
   assert.ok(near.distance < far.distance);
+});
+
+test("any em dash fails, even when everything else passes", () => {
+  const r = run([cand({ covered: keyOnly, words: 150, dashes: 1 })]);
+  assert.deepEqual(r.failures.map((f) => f.check), ["dashes"]);
+});
+
+test("more literary flourishes than the plain summary fails", () => {
+  const b = { ...base, style: 1 };
+  const s = articleStats("x", b, { covered: keyOnly, unsupported: 1, words: 150, style: 3 }, 3000, weights);
+  assert.deepEqual(checkGate(score([s]), GATE).failures.map((f) => f.check), ["style"]);
 });

@@ -15,7 +15,8 @@
   "gate": {
     "coverage": 0.95,
     "floor": 0.85,
-    "lengthRatio": 0.85
+    "efficiency": 0.15,
+    "detailWeight": 0
   },
 
   "promptMaxChars": 1500,

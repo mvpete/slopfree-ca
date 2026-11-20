@@ -26,11 +26,11 @@ export async function prepareArticles(ctx, n, exclude, { baseline = true } = {})
     cursor += batch.length;
     const done = await pool(batch, cfg.concurrency, async (a) => {
       try {
-        const { points, question } = await tasks.extractPoints(a);
-        if (!baseline) return { ...a, points, question }; // quiz-only: no baseline, no grading
+        const { points, key, question } = await tasks.extractPoints(a);
+        if (!baseline) return { ...a, points, key, question }; // quiz-only: no baseline, no grading
         const s = await tasks.summarize(a, null);
         const j = await tasks.judge(a, points, s.text);
-        return { ...a, points, question, baseline: { summary: s.text, words: s.words, ...j } };
+        return { ...a, points, key, question, baseline: { summary: s.text, words: s.words, dashes: s.dashes, ...j } };
       } catch (e) {
         if (e instanceof BudgetExceeded) throw e;
         log(`skipped ${a.slug}: ${e.message}`);
@@ -49,14 +49,16 @@ export async function runPrompt(ctx, postfix, articles, { judge = true } = {}) {
   const { cfg, tasks } = ctx;
   return pool(articles, cfg.concurrency, async (a) => {
     const s = await tasks.summarize(a, postfix);
-    if (!judge) return { slug: a.slug, summary: s.text, words: s.words };
+    if (!judge) return { slug: a.slug, summary: s.text, words: s.words, dashes: s.dashes };
     const j = await tasks.judge(a, a.points, s.text);
-    return { slug: a.slug, summary: s.text, words: s.words, ...j };
+    return { slug: a.slug, summary: s.text, words: s.words, dashes: s.dashes, ...j };
   });
 }
 
 export function scoreRuns(cfg, articles, runs) {
-  const stats = articles.map((a, i) => articleStats(a.slug, a.baseline, runs[i], a.source.words));
+  // Key points are worth 1, detail points cfg.gate.detailWeight (0 by default).
+  const weightsOf = (a) => (a.key ? a.key.map((k) => (k ? 1 : cfg.gate.detailWeight ?? 0)) : null);
+  const stats = articles.map((a, i) => articleStats(a.slug, a.baseline, runs[i], a.source.words, weightsOf(a)));
   const sc = score(stats);
   return { stats, score: sc, gate: checkGate(sc, cfg.gate) };
 }

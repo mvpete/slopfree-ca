@@ -48,10 +48,12 @@ The eval tests the claim (lossless, shorter). The reader test checks that people
 ### Gate (all must hold, across the article set)
 | Check | Pass if |
 |---|---|
-| Coverage | Keeps ≥95% as many of the article's points as the baseline does (any points, not only the baseline's picks) |
+| Key points | Keeps ≥95% as many key points as the baseline (any key points, not only the baseline's picks). Detail points count for nothing |
 | Accuracy | Unsupported or wrong claims no more frequent than baseline |
-| Length | Median words ≤85% of baseline (≥15% less text) |
-| Floor | No single article below 85% of the baseline's point count |
+| Efficiency | ≥1.18× the baseline's key points per word (the same key points in 15% fewer words), median article |
+| No AI style | Zero em dashes (counted mechanically); no more literary or AI-style phrases than the baseline (flagged by the judge) |
+
+| Floor | No single article below 85% of the baseline's key points |
 
 No prompt reaches readers without passing this gate, golden included:
 - **Golden v1 must pass before launch.** If it fails, it gets revised until it passes.
