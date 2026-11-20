@@ -5,12 +5,17 @@ export class BudgetExceeded extends Error {}
 
 export function createBudget(max) {
   let used = 0;
+  const byModel = {};
   return {
-    add(n) {
+    add(n, model = "unknown", input = 0, output = 0) {
       used += n;
+      const m = (byModel[model] ||= { input: 0, output: 0 });
+      m.input += input;
+      m.output += output;
       if (used > max) throw new BudgetExceeded(`Token budget of ${max.toLocaleString()} spent`);
     },
     get used() { return used; },
+    get byModel() { return byModel; },
   };
 }
 
@@ -49,7 +54,7 @@ export function createOpenAI({ apiKey, budget }) {
     const body = { model, messages };
     if (json) body.response_format = { type: "json_object" };
     const data = await post("/v1/chat/completions", body);
-    budget.add(data.usage?.total_tokens ?? 0);
+    budget.add(data.usage?.total_tokens ?? 0, model, data.usage?.prompt_tokens ?? 0, data.usage?.completion_tokens ?? 0);
     const text = data.choices?.[0]?.message?.content ?? "";
     return json ? parseJSON(text) : text;
   }

@@ -27,7 +27,8 @@ Golden prompt ${golden.id}: ${r.gate.passed ? "PASS" : "FAIL"}
   Unsupported claims     ${sc.candUnsupported} vs baseline ${sc.baseUnsupported}
   Baseline vs article    keeps ${pct(sc.baseOfArticlePoints)} of the article's points in ${pct(sc.baseOfArticleWords)} of its words
   ${reasonOf(r.gate)}
-  Tokens used: ${ctx.budget.used.toLocaleString()}`);
+  Tokens used: ${ctx.budget.used.toLocaleString()}
+${Object.entries(ctx.budget.byModel).map(([m, t]) => `    ${m}: ${t.input.toLocaleString()} in, ${t.output.toLocaleString()} out`).join("\n")}`);
 
 writeJSON(`evals/golden-${today()}.json`, {
   date: today(),

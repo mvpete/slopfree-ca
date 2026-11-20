@@ -11,9 +11,9 @@ Give 4 options; exactly one is correct, and the others are plausible but clearly
 
 Return JSON: {"points": ["..."], "question": {"point": <1-based point number>, "text": "...", "options": ["...","...","...","..."], "answer": <0-3>}}`;
 
-const JUDGE_SYSTEM = `You grade a summary against an article and a numbered list of major points. Be strict and literal.
+const JUDGE_SYSTEM = `You grade a summary against a numbered list of every point its source article makes. Be strict and literal.
 A point is covered only if the summary states it, or states something that clearly implies it. Paraphrase is fine. Partly stated means not covered.
-Also list every claim in the summary that the article does not support or that contradicts the article.
+Also list every claim in the summary that no point supports, or that contradicts a point.
 You are not told who wrote the summary. Judge only what is written.
 
 Return JSON: {"covered": [<1-based numbers of covered points>], "unsupported": ["<claim>", ...]}`;
@@ -53,28 +53,19 @@ export function createTasks(cfg, llm) {
     return { text, words: wordCount(text) };
   }
 
-  async function judgeOnce(article, points, summary) {
+  // One grading pass against the point list. The point list holds every claim in the article, so the judge
+  // never re-reads the article: that was about three quarters of the cost. Baseline and candidates are
+  // graded the same way, so the comparison stays fair.
+  async function judge(article, points, summary) {
     const r = await llm.chat({
       model: judgeModel,
       system: JUDGE_SYSTEM,
-      user: `ARTICLE:\n${article.text}\n\nPOINTS:\n${points.map((p, i) => `${i + 1}. ${p}`).join("\n")}\n\nSUMMARY:\n${summary}`,
+      user: `POINTS (from "${article.source.title}"):\n${points.map((p, i) => `${i + 1}. ${p}`).join("\n")}\n\nSUMMARY:\n${summary}`,
       json: true,
     });
-    return {
-      covered: new Set((r.covered || []).map(Number).filter((n) => n >= 1 && n <= points.length)),
-      unsupported: (r.unsupported || []).filter((c) => typeof c === "string"),
-    };
-  }
-
-  // Judged twice; a point counts only if both passes agree it's covered. Unsupported takes the worse pass.
-  async function judge(article, points, summary) {
-    const [a, b] = await Promise.all([judgeOnce(article, points, summary), judgeOnce(article, points, summary)]);
-    const worse = a.unsupported.length >= b.unsupported.length ? a : b;
-    return {
-      covered: points.map((_, i) => a.covered.has(i + 1) && b.covered.has(i + 1)),
-      unsupported: worse.unsupported.length,
-      unsupportedClaims: worse.unsupported,
-    };
+    const covered = new Set((r.covered || []).map(Number).filter((n) => n >= 1 && n <= points.length));
+    const unsupported = (r.unsupported || []).filter((c) => typeof c === "string");
+    return { covered: points.map((_, i) => covered.has(i + 1)), unsupported: unsupported.length, unsupportedClaims: unsupported };
   }
 
   // The drafter (gpt-6.2-sol by default) writes candidate prompts aimed at the gate's own thresholds.

@@ -16,7 +16,7 @@ export function createContext(cfg) {
 }
 
 // Pick n articles, extract major points, summarize with the plain baseline, judge it.
-export async function prepareArticles(ctx, n, exclude) {
+export async function prepareArticles(ctx, n, exclude, { baseline = true } = {}) {
   const { cfg, wiki, tasks, log } = ctx;
   const candidates = await wiki.pickArticles(Math.ceil(n * 1.25), { minWords: cfg.minWords, maxWords: cfg.maxWords, exclude });
   const ready = [];
@@ -27,6 +27,7 @@ export async function prepareArticles(ctx, n, exclude) {
     const done = await pool(batch, cfg.concurrency, async (a) => {
       try {
         const { points, question } = await tasks.extractPoints(a);
+        if (!baseline) return { ...a, points, question }; // quiz-only: no baseline, no grading
         const s = await tasks.summarize(a, null);
         const j = await tasks.judge(a, points, s.text);
         return { ...a, points, question, baseline: { summary: s.text, words: s.words, ...j } };
@@ -44,10 +45,11 @@ export async function prepareArticles(ctx, n, exclude) {
 }
 
 // Summarize every article with the postfix and judge it.
-export async function runPrompt(ctx, postfix, articles) {
+export async function runPrompt(ctx, postfix, articles, { judge = true } = {}) {
   const { cfg, tasks } = ctx;
   return pool(articles, cfg.concurrency, async (a) => {
     const s = await tasks.summarize(a, postfix);
+    if (!judge) return { slug: a.slug, summary: s.text, words: s.words };
     const j = await tasks.judge(a, a.points, s.text);
     return { slug: a.slug, summary: s.text, words: s.words, ...j };
   });

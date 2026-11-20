@@ -130,7 +130,7 @@ function writeArticles(articles, promptRuns) {
     const dir = `content/articles/${a.slug}`;
     writeJSON(`${dir}/source.json`, a.source);
     writeJSON(`${dir}/points.json`, { points: a.points, question: a.question });
-    writeJSON(`${dir}/baseline.json`, a.baseline);
+    if (a.baseline) writeJSON(`${dir}/baseline.json`, a.baseline);
     for (const [id, runs] of Object.entries(promptRuns)) {
       const r = runs[a.slug];
       if (r) writeJSON(`${dir}/${model}/${id}.json`, r);
@@ -155,8 +155,9 @@ if (winner) {
   const extra = Math.max(0, cfg.quizArticles - confirm.length);
   if (extra) {
     try {
-      const more = await prepareArticles(ctx, extra, exclude);
-      const [g, c] = await Promise.all([runPrompt(ctx, golden.text, more), runPrompt(ctx, winner.prompt, more)]);
+      // Quiz-only articles: points and the two summaries are all the quiz needs. No baseline, no grading.
+      const more = await prepareArticles(ctx, extra, exclude, { baseline: false });
+      const [g, c] = await Promise.all([runPrompt(ctx, golden.text, more, { judge: false }), runPrompt(ctx, winner.prompt, more, { judge: false })]);
       quiz = [...confirm, ...more];
       goldenQuiz = [...goldenConfirm, ...g];
       challengerQuiz = [...winner.confirmRuns, ...c];
@@ -186,6 +187,7 @@ for (const m of misses) {
 for (const q of tested) fs.rmSync(path.join(ROOT, q), { force: true });
 
 report.tokensUsed = ctx.budget.used;
+report.tokensByModel = ctx.budget.byModel;
 report.autoMerge = autoMerge;
 writeJSON(reportPath, report);
 
@@ -217,7 +219,7 @@ if (winner) {
 } else body += "\n";
 body += `### Attempts\n\n${Object.entries(stageCounts).map(([k, v]) => `- ${k}: ${v}`).join("\n") || "- none"}\n\n`;
 if (misses.length) body += `### Close but no cigar\n\n${misses.map((m) => `- Prompt ${promptName(m.loserId)}${m.source ? ` (${path.basename(m.source, ".md")})` : ""}: ${m.reason}`).join("\n")}\n\n`;
-body += `Tokens used: ${ctx.budget.used.toLocaleString()}. Full log: \`${reportPath}\`.\n`;
+body += `Tokens used: ${ctx.budget.used.toLocaleString()} (${Object.entries(ctx.budget.byModel).map(([m, t]) => `${m}: ${t.input.toLocaleString()} in, ${t.output.toLocaleString()} out`).join("; ") || "none"}). Full log: \`${reportPath}\`.\n`;
 
 const cacheDir = path.join(ROOT, ".cache");
 fs.mkdirSync(cacheDir, { recursive: true });

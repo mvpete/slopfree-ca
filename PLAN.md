@@ -60,12 +60,12 @@ No prompt reaches readers without passing this gate, golden included:
 
 ### Judging
 - A stronger model than the writer judges. It never sees which prompt wrote the summary.
-- One call per summary checks all points. Each point is judged twice, and a disagreement counts as missing.
+- One call per summary checks all points, against the point list only. The point list holds every claim in the article, so the judge never re-reads the article; unsupported claims are checked against the same list. Baseline and candidates are graded identically.
 - Before trusting the gate, validate the judge against ~20 hand-graded summaries.
 - Later: a second judge from another provider to cut same-family bias.
 
 ### Cost
-Baseline and point extraction run once per article. A failed screen costs ~20 calls; a full run ~100. Worst case (50 full attempts) is ~5,000 calls a week, so the workflow enforces a hard per-run token budget and stops when it's spent. Set a monthly spending limit on the API key too.
+Target: about $1 a run. Point extraction is the only model call that reads an article (cut to its first 3,000 words); summaries are written by the cheaper writer model; grading reads only the point list, once. The 20 quiz-only articles get points and the two summaries, with no baseline or grading. A hard stop at 1.2M tokens ends the run cleanly, and each PR reports tokens per model. First run with the old design (article re-read twice per grade, 6,000-word articles) cost about $4.
 
 ## The reader test
 
