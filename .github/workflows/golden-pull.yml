@@ -1,0 +1,55 @@
+name: golden-pull
+
+# Manual reader-test decision, for deciding mid-week. The weekly-topics workflow runs this automatically.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  decide:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm test
+
+      - name: Decide the reader test
+        id: decide
+        run: node scripts/golden-pull.js
+        env:
+          SLOPFREE_API_URL: ${{ vars.SLOPFREE_API_URL }}
+          SLOPFREE_EXPORT_TOKEN: ${{ secrets.SLOPFREE_EXPORT_TOKEN }}
+
+      - name: PR body
+        id: body
+        run: |
+          node -e 'const d=require("./.cache/decision.json"); require("fs").writeFileSync(".cache/decision.md", d.body || d.title); console.log("title=" + d.title)' >> "$GITHUB_OUTPUT"
+
+      - uses: actions/create-github-app-token@v1
+        id: app
+        with:
+          app-id: ${{ vars.SLOPFREE_APP_ID }}
+          private-key: ${{ secrets.SLOPFREE_APP_PRIVATE_KEY }}
+
+      - uses: peter-evans/create-pull-request@v7
+        id: pr
+        with:
+          token: ${{ steps.app.outputs.token }}
+          branch: bot/decision-${{ github.run_id }}
+          title: ${{ steps.body.outputs.title }}
+          body-path: .cache/decision.md
+          commit-message: ${{ steps.body.outputs.title }}
+          add-paths: |
+            prompts/
+            evals/
+            data/
+          labels: bot
+
+      - if: steps.pr.outputs.pull-request-number
+        run: gh pr merge --auto --squash "${{ steps.pr.outputs.pull-request-number }}"
+        env:
+          GH_TOKEN: ${{ steps.app.outputs.token }}

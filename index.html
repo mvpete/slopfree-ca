@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Slopfree</title>
+  <meta name="description" content="An open experiment to find the prompt that makes AI get to the point, ranked by how well real people understand what it writes.">
+  <meta name="theme-color" content="#34302A">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="wordmark" href="#home">slopfree<span>.ca</span></a>
+    <nav aria-label="Main">
+      <a href="#about" data-section="about">About</a>
+      <a href="#how" data-section="how">How to use</a>
+      <a href="#quiz" data-section="quiz">Quiz</a>
+      <a href="https://github.com/mvpete/slopfree-ca" class="hide-narrow">GitHub</a>
+      <a href="https://github.com/sponsors/mvpete" class="sponsor">Sponsor</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- 1. Home -->
+    <section id="home" class="panel hero">
+      <div class="wrap narrow">
+        <h1>I'm over the text wall.</h1>
+        <p class="lede slop">“Great question! It’s not a human, it’s AI! Let’s delve in. Blah. Blah. Blah. A literary flourish here, a tidy list of three there, and a recap of everything you just read. No point anywhere. I hope this helps!”</p>
+        <p class="lede plain">Let’s remember who we’re writing for.</p>
+
+        <figure class="codebox">
+          <div class="codebox-bar">
+            <span class="codebox-name">golden-prompt.md</span>
+            <button class="copy copy-golden" type="button" data-label="Copy">Copy</button>
+          </div>
+<pre id="golden"><code>Write for a reader who wants to understand quickly.
+- Start with the main point. No preamble, and don't restate the question.
+- Use plain words. Prefer specifics over generalities: names, numbers, dates, causes.
+- Keep sentences short, but connect them (because, so, but) so the reader sees how ideas relate.
+- Cut anything that adds no information: praise, filler, stacked hedges, recaps, offers of more help.
+- Flag uncertainty once, plainly, only where it exists. Never invent facts.
+- Use lists or headers only for content that is actually a list. Otherwise write prose.
+- No buzzwords (delve, landscape, robust, seamless, leverage, tapestry, testament), no em dashes, no emojis.</code></pre>
+          <figcaption id="golden-caption">Golden prompt <strong id="golden-id">p-0001</strong> · paste it at the end of any prompt</figcaption>
+        </figure>
+      </div>
+      <a class="scroll-cue" href="#about" aria-label="Scroll to About">
+        <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </section>
+
+    <!-- 2. About -->
+    <section id="about" class="panel">
+      <div class="wrap">
+        <p class="eyebrow">About</p>
+        <h2>Same meaning. At least 20% less text.</h2>
+        <p class="lede">Slop Free is lossless compression for AI writing. A prompt only becomes golden if machines can show it keeps the facts, and people can show they understand it at least as well.</p>
+        <p class="eval-line" id="eval-line" hidden></p>
+
+        <ol class="steps">
+          <li>
+            <span class="num">1</span>
+            <h3>Eval</h3>
+            <p>Every week, candidate prompts summarize 10 random Wikipedia articles. One passes only if it keeps 98% of the points a plain "Summarize this" keeps, adds no errors, and uses at least 20% fewer words.</p>
+          </li>
+          <li>
+            <span class="num">2</span>
+            <h3>Read</h3>
+            <p>The winner faces the golden prompt in the quiz. You read short summaries from both and answer one question each. You won't know which wrote what.</p>
+          </li>
+          <li>
+            <span class="num">3</span>
+            <h3>Rank</h3>
+            <p>If readers understand the challenger at least as well and read it faster, it becomes the new golden prompt. If not, it goes in the losers folder with why.</p>
+          </li>
+        </ol>
+
+        <div class="facts">
+          <div>
+            <h3>Why Wikipedia</h3>
+            <p>Random articles on every subject, with a pinned revision, so each prompt is judged on exactly the same text.</p>
+          </div>
+          <div>
+            <h3>Close but no cigar</h3>
+            <p>Every losing prompt is kept with the reason it lost. <a href="https://github.com/mvpete/slopfree-ca/tree/main/prompts/openai/losers">Browse the losers</a> or submit your own.</p>
+          </div>
+          <div>
+            <h3>No tracking</h3>
+            <p>We store your answers and reading times. No accounts, no cookies, no IP addresses.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. How to use it -->
+    <section id="how" class="panel">
+      <div class="wrap">
+        <p class="eyebrow">How to use it</p>
+        <h2>Paste it at the end, or save it once.</h2>
+        <p class="lede">The golden prompt is a postfix: text that goes after your request. Models pay close attention to the end of a prompt, so that's where it does the most work.</p>
+
+        <div class="ways">
+          <div class="way">
+            <h3>For one message</h3>
+            <p>Write your request as usual, leave a blank line, then paste the prompt.</p>
+<pre class="snippet">Explain how a heat pump keeps a house warm at -20°C.
+
+<span>Write for a reader who wants to understand quickly.
+- Start with the main point. ...</span></pre>
+          </div>
+          <div class="way">
+            <h3>For every chat</h3>
+            <p>Save it in your assistant's custom instructions and every reply follows it, without pasting.</p>
+            <button class="btn ghost copy-golden" type="button" data-label="Copy the golden prompt">Copy the golden prompt</button>
+          </div>
+        </div>
+
+        <h3 class="sub">Where to save it</h3>
+        <dl class="tools">
+          <div><dt>ChatGPT</dt><dd>Settings → Personalization → Custom instructions</dd></div>
+          <div><dt>Claude</dt><dd>Settings → Profile → personal preferences, or a Project's instructions</dd></div>
+          <div><dt>Gemini</dt><dd>Saved info, or a Gem's instructions</dd></div>
+          <div><dt>API and agents</dt><dd>The end of your system prompt</dd></div>
+        </dl>
+        <p class="small">Menu names change between app versions. If you can't find these, look for "custom instructions" or "personalization".</p>
+
+        <h3 class="sub">Tips</h3>
+        <ul class="tips">
+          <li><strong>Keep it last.</strong> Put task-specific instructions before it, so the golden prompt is the final thing the model reads.</li>
+          <li><strong>Re-paste in long chats.</strong> Models drift back to old habits as a conversation grows. Pasting it again resets them.</li>
+          <li><strong>Edit freely.</strong> Drop a rule you disagree with. Just know the quiz ranks the version shown here, not your edit.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 4. Quiz -->
+    <section id="quiz" class="panel">
+      <div class="wrap narrow">
+        <div class="quiz-card" id="quiz-card">
+
+          <div class="stage" id="stage-intro">
+            <p class="eyebrow">Quiz</p>
+            <h2>Five summaries. Five questions.</h2>
+            <p class="lede">About three minutes. Read at your normal pace.</p>
+            <p class="pick">Pick a model to start</p>
+            <div class="start-row models" role="group" aria-label="Model" id="models">
+              <button class="btn model-btn" type="button" data-model="openai">OpenAI</button>
+            </div>
+            <p class="note" id="mode-note" hidden></p>
+          </div>
+
+          <div class="stage" id="stage-read" hidden>
+            <div class="round-head">
+              <span id="round-label">Round 1 of 5</span>
+              <span class="dots" id="dots" aria-hidden="true"></span>
+            </div>
+            <p class="topic" id="topic"></p>
+            <div class="paragraph" id="paragraph"></div>
+            <button class="btn" id="to-question" type="button">I've read it</button>
+          </div>
+
+          <div class="stage" id="stage-question" hidden>
+            <div class="round-head">
+              <span id="round-label-q">Round 1 of 5</span>
+            </div>
+            <p class="note guess-note" id="guess-note" hidden>Guess round: no summary this time. Answer as best you can. This tells us how guessable the question is.</p>
+            <fieldset class="choices" id="choices">
+              <legend id="question"></legend>
+            </fieldset>
+            <button class="btn" id="submit" type="button" disabled>Answer</button>
+          </div>
+
+          <div class="stage" id="stage-lang" hidden>
+            <p class="eyebrow">One last thing</p>
+            <h2>Is English your first language?</h2>
+            <p class="lede">Optional. It tells us whether a prompt helps everyone, not just fluent readers.</p>
+            <div id="turnstile"></div>
+            <div class="start-row" role="group" aria-label="First language">
+              <button class="btn lang-btn" type="button" data-lang="yes">Yes</button>
+              <button class="btn lang-btn" type="button" data-lang="no">No</button>
+              <button class="btn ghost lang-btn" type="button" data-lang="">Skip</button>
+            </div>
+          </div>
+
+
+          <div class="stage" id="stage-result" hidden>
+            <p class="eyebrow">Your result</p>
+            <p class="score"><span id="score">0</span><span class="of" id="score-of">/5</span></p>
+            <p class="lede" id="score-line"></p>
+            <ul class="breakdown" id="breakdown"></ul>
+            <p class="note" id="record-status" hidden></p>
+            <div class="start-row">
+              <a class="btn" href="#home">Get the golden prompt</a>
+              <button class="btn ghost" id="again" type="button">Take it again</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <footer class="footer">
+        <span class="made">Proudly made in Canada <span class="leaf" role="img" aria-label="maple leaf">🍁</span> with imported AI</span>
+        <span>Code MIT · content CC BY-SA 4.0 from Wikipedia</span>
+        <a href="https://github.com/mvpete/slopfree-ca">GitHub</a>
+        <a href="https://github.com/sponsors/mvpete">Sponsor the API bill</a>
+      </footer>
+    </section>
+  </main>
+
+  <script src="js/config.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

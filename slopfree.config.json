@@ -1,0 +1,28 @@
+{
+  "model": "openai",
+  "writerModel": "gpt-4.1-mini",
+  "judgeModel": "gpt-4.1",
+  "wrapper": "Summarize the following article:",
+
+  "articles": 10,
+  "screenArticles": 3,
+  "quizArticles": 30,
+  "maxAttempts": 50,
+  "minWords": 1500,
+  "maxWords": 6000,
+
+  "gate": {
+    "coverage": 0.98,
+    "floor": 0.90,
+    "lengthRatio": 0.80
+  },
+
+  "promptMaxChars": 1500,
+  "maxTokensPerRun": 3000000,
+  "concurrency": 4,
+
+  "wikipedia": {
+    "lang": "en",
+    "userAgent": "slopfree-ca/0.1 (https://github.com/mvpete/slopfree-ca)"
+  }
+}

@@ -1,0 +1,30 @@
+name: ci
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - run: npm test
+
+      - name: Bot PR guardrails
+        if: github.event_name == 'pull_request'
+        run: node scripts/verify-pr.js
+        env:
+          BASE_REF: ${{ github.base_ref }}
+          BOT_PR: ${{ github.event.pull_request.user.type == 'Bot' }}

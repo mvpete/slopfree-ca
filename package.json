@@ -1,0 +1,15 @@
+{
+  "name": "slopfree-ca",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Find the shortest prompt that summarizes as accurately as a plain one, then test it on real readers.",
+  "license": "MIT",
+  "type": "module",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "test": "node --test",
+    "eval:golden": "node scripts/eval-golden.js",
+    "weekly": "node scripts/weekly-topics.js",
+    "verify-pr": "node scripts/verify-pr.js"
+  }
+}

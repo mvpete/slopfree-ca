@@ -1,0 +1,83 @@
+name: weekly-topics
+
+# Weekly cycle: decide last week's reader test, then search for a new challenger.
+# Both land in one bot PR that auto-merges when CI passes.
+on:
+  schedule:
+    - cron: "0 9 * * 1" # Mondays 09:00 UTC
+  workflow_dispatch:
+    inputs:
+      max_attempts:
+        description: "Max candidate prompts to try"
+        default: "50"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: weekly-topics
+  cancel-in-progress: false
+
+jobs:
+  search:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - run: npm test
+
+      - name: Decide last week's reader test
+        run: node scripts/golden-pull.js
+        env:
+          SLOPFREE_API_URL: ${{ vars.SLOPFREE_API_URL }}
+          SLOPFREE_EXPORT_TOKEN: ${{ secrets.SLOPFREE_EXPORT_TOKEN }}
+
+      - name: Run the eval and search
+        id: run
+        run: node scripts/weekly-topics.js
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          MAX_ATTEMPTS: ${{ inputs.max_attempts }}
+
+      - name: Get a bot token (so CI runs on the PR)
+        id: app
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ vars.SLOPFREE_APP_ID }}
+          private-key: ${{ secrets.SLOPFREE_APP_PRIVATE_KEY }}
+
+      - name: Open the PR
+        id: pr
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ steps.app.outputs.token }}
+          branch: bot/weekly-${{ steps.run.outputs.date }}
+          title: ${{ steps.run.outputs.title }}
+          body-path: ${{ steps.run.outputs.body_path }}
+          commit-message: ${{ steps.run.outputs.title }}
+          add-paths: |
+            prompts/
+            content/
+            evals/
+            data/
+          labels: bot
+
+      - name: Enable auto-merge
+        if: steps.pr.outputs.pull-request-number && steps.run.outputs.auto_merge == 'true'
+        run: gh pr merge --auto --squash "${{ steps.pr.outputs.pull-request-number }}"
+        env:
+          GH_TOKEN: ${{ steps.app.outputs.token }}
+
+      - name: Flag a failing golden prompt
+        if: steps.run.outputs.golden_passed == 'false'
+        run: |
+          gh issue create \
+            --title "Golden prompt failed the eval on ${{ steps.run.outputs.date }}" \
+            --body "See evals/${{ steps.run.outputs.date }}.json and PR #${{ steps.pr.outputs.pull-request-number }}."
+        env:
+          GH_TOKEN: ${{ steps.app.outputs.token }}

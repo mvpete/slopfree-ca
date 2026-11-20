@@ -1,0 +1,22 @@
+name = "slopfree-api"
+main = "src/index.js"
+compatibility_date = "2024-09-23"
+
+# Serve at api.slopfree.ca once the domain is on Cloudflare.
+# routes = [{ pattern = "api.slopfree.ca", custom_domain = true }]
+
+[vars]
+ALLOWED_ORIGINS = "https://slopfree.ca,https://www.slopfree.ca,https://mvpete.github.io"
+MODELS = "openai"
+RATE_LIMIT_PER_HOUR = "30"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "slopfree"
+database_id = "REPLACE_WITH_D1_DATABASE_ID"
+migrations_dir = "migrations"
+
+# Secrets (set with `npx wrangler secret put <NAME>`):
+#   TURNSTILE_SECRET  Turnstile secret key; if unset, the bot check is skipped
+#   EXPORT_TOKEN      bearer token for /v1/export (also the repo secret SLOPFREE_EXPORT_TOKEN)
+#   RATE_SALT         random string; IPs are only ever stored as salted hourly hashes
