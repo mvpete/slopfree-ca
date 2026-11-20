@@ -471,3 +471,5 @@ h3 { font-size: 1.05rem; letter-spacing: -0.01em; }
 .ex-link { color: var(--gold); white-space: nowrap; }
 
 .answer-row { margin-top: 0; }
+
+.topic a { color: var(--gold); text-decoration: underline; text-decoration-color: var(--gold-soft); text-underline-offset: 3px; }

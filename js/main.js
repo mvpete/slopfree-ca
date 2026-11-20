@@ -262,7 +262,15 @@
       return;
     }
     const text = r.article.summaries[r.promptId];
-    $("topic").textContent = r.article.title;
+    // Title links to the article. Opening it hides this tab, which flags the round as hidden and keeps it out of the scoring.
+    const topic = $("topic");
+    topic.textContent = "";
+    const link = document.createElement("a");
+    link.href = r.article.url;
+    link.target = "_blank";
+    link.rel = "noopener";
+    link.textContent = r.article.title;
+    topic.appendChild(link);
     const box = $("paragraph");
     box.innerHTML = "";
     text.split(/\n\s*\n/).forEach((para) => {
