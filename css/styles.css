@@ -528,3 +528,7 @@ html.quiz-active { scroll-snap-type: none; }
 .steps.four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 @media (max-width: 1000px) { .steps.four { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 760px) { .steps.four { grid-template-columns: 1fr; } }
+
+.facts.five { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 24px; }
+@media (max-width: 1000px) { .facts.five { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 760px) { .facts.five { grid-template-columns: 1fr; } }
