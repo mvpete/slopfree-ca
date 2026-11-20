@@ -52,7 +52,6 @@ The eval tests the claim (lossless, shorter). The reader test checks that people
 | Accuracy | Unsupported or wrong claims no more frequent than baseline |
 | Efficiency | ≥1.18× the baseline's key points per word (the same key points in 15% fewer words), median article |
 | No AI style | Zero em dashes (counted mechanically); no more literary or AI-style phrases than the baseline (flagged by the judge) |
-
 | Floor | No single article below 85% of the baseline's key points |
 
 No prompt reaches readers without passing this gate, golden included:
