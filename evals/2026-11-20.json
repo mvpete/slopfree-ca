@@ -1,0 +1,612 @@
+{
+  "date": "2026-11-20",
+  "model": "openai",
+  "writerModel": "gpt-6-luna",
+  "judgeModel": "gpt-6.2-sol",
+  "drafterModel": "gpt-6.2-sol",
+  "wrapper": "Summarize the following article:",
+  "gate": {
+    "coverage": 0.95,
+    "floor": 0.85,
+    "lengthRatio": 0.85
+  },
+  "golden": {
+    "id": "p-0001",
+    "score": {
+      "n": 10,
+      "coverage": 2.0136363636363637,
+      "floor": 1,
+      "lengthRatio": 1.6779713300671384,
+      "baseUnsupported": 19,
+      "candUnsupported": 31,
+      "kept": 443,
+      "baseKept": 220,
+      "overlap": 177,
+      "baseWords": 2224,
+      "candWords": 3658,
+      "baseOfArticlePoints": 0.07617728531855955,
+      "baseOfArticleWords": 0.09083333333333334,
+      "worst": [
+        {
+          "slug": "john-bercow",
+          "coverage": 1,
+          "ratio": 0.8768115942028986
+        },
+        {
+          "slug": "john-paul-mcqueen-and-craig-dean",
+          "coverage": 1.3529411764705883,
+          "ratio": 0.949438202247191
+        },
+        {
+          "slug": "american-football-union",
+          "coverage": 1.4166666666666667,
+          "ratio": 1.2635135135135136
+        }
+      ]
+    },
+    "passed": false,
+    "reason": "31 unsupported claims vs baseline's 19. 67.8% longer than baseline (needs 15.0% shorter; 3658 words vs baseline's 2224 across 10 articles).",
+    "stats": [
+      {
+        "slug": "section-33-of-the-canadian-charter-of-rights-and-freedoms",
+        "totalPoints": 238,
+        "articleWords": 3000,
+        "baseCovered": 30,
+        "kept": 87,
+        "overlap": 25,
+        "baseUnsupported": 2,
+        "candUnsupported": 3,
+        "baseWords": 356,
+        "candWords": 821
+      },
+      {
+        "slug": "karl-dietrich-bracher",
+        "totalPoints": 221,
+        "articleWords": 3000,
+        "baseCovered": 21,
+        "kept": 60,
+        "overlap": 21,
+        "baseUnsupported": 2,
+        "candUnsupported": 4,
+        "baseWords": 273,
+        "candWords": 506
+      },
+      {
+        "slug": "john-paul-mcqueen-and-craig-dean",
+        "totalPoints": 310,
+        "articleWords": 3000,
+        "baseCovered": 17,
+        "kept": 23,
+        "overlap": 15,
+        "baseUnsupported": 2,
+        "candUnsupported": 4,
+        "baseWords": 178,
+        "candWords": 169
+      },
+      {
+        "slug": "espresso-song",
+        "totalPoints": 333,
+        "articleWords": 2362,
+        "baseCovered": 31,
+        "kept": 57,
+        "overlap": 27,
+        "baseUnsupported": 0,
+        "candUnsupported": 1,
+        "baseWords": 189,
+        "candWords": 419
+      },
+      {
+        "slug": "john-bercow",
+        "totalPoints": 326,
+        "articleWords": 3000,
+        "baseCovered": 20,
+        "kept": 20,
+        "overlap": 10,
+        "baseUnsupported": 5,
+        "candUnsupported": 4,
+        "baseWords": 276,
+        "candWords": 242
+      },
+      {
+        "slug": "sao-paulo-state-university",
+        "totalPoints": 352,
+        "articleWords": 2077,
+        "baseCovered": 25,
+        "kept": 45,
+        "overlap": 20,
+        "baseUnsupported": 1,
+        "candUnsupported": 5,
+        "baseWords": 165,
+        "candWords": 284
+      },
+      {
+        "slug": "legrand-company",
+        "totalPoints": 325,
+        "articleWords": 1840,
+        "baseCovered": 19,
+        "kept": 50,
+        "overlap": 13,
+        "baseUnsupported": 1,
+        "candUnsupported": 6,
+        "baseWords": 200,
+        "candWords": 392
+      },
+      {
+        "slug": "little-dark-age",
+        "totalPoints": 189,
+        "articleWords": 1670,
+        "baseCovered": 22,
+        "kept": 40,
+        "overlap": 18,
+        "baseUnsupported": 3,
+        "candUnsupported": 2,
+        "baseWords": 167,
+        "candWords": 273
+      },
+      {
+        "slug": "american-football-union",
+        "totalPoints": 255,
+        "articleWords": 2174,
+        "baseCovered": 24,
+        "kept": 34,
+        "overlap": 22,
+        "baseUnsupported": 1,
+        "candUnsupported": 1,
+        "baseWords": 148,
+        "candWords": 187
+      },
+      {
+        "slug": "assault-on-t-j-joseph",
+        "totalPoints": 339,
+        "articleWords": 3000,
+        "baseCovered": 11,
+        "kept": 27,
+        "overlap": 6,
+        "baseUnsupported": 2,
+        "candUnsupported": 1,
+        "baseWords": 272,
+        "candWords": 365
+      }
+    ]
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "stage": "screen",
+      "passed": false,
+      "prompt": "Start with the main point. Draft a straightforward summary of the key events, findings, and relationships. Keep the details that make those points specific; don't try to recount the whole source.\n\nThen cut about one word in five without losing a distinct point. Cut setup, repeated context, and phrases like “the article explains.” Combine related facts under a shared subject and state each fact once. Use short, direct phrasing, but keep dates, numbers, and qualifications when they change the meaning.\n\nCheck each claim against the source. Preserve who said or did what, what is uncertain, and whether the source shows a cause or only a link. If a shorter phrase changes the claim, use the longer one. Return only the finished summary.",
+      "idea": "I replaced “keep every fact” with a two-pass edit that preserves the draft’s distinct points, cuts wording rather than substance, and checks each claim against the source.",
+      "score": {
+        "n": 3,
+        "coverage": 1.838235294117647,
+        "floor": 1.6,
+        "lengthRatio": 1.5617977528089888,
+        "baseUnsupported": 6,
+        "candUnsupported": 5,
+        "kept": 125,
+        "baseKept": 68,
+        "overlap": 50,
+        "baseWords": 807,
+        "candWords": 1151,
+        "baseOfArticlePoints": 0.08842652795838751,
+        "baseOfArticleWords": 0.091,
+        "worst": [
+          {
+            "slug": "section-33-of-the-canadian-charter-of-rights-and-freedoms",
+            "coverage": 1.6,
+            "ratio": 1.5617977528089888
+          },
+          {
+            "slug": "karl-dietrich-bracher",
+            "coverage": 1.9523809523809523,
+            "ratio": 1.120879120879121
+          },
+          {
+            "slug": "john-paul-mcqueen-and-craig-dean",
+            "coverage": 2.1176470588235294,
+            "ratio": 1.6235955056179776
+          }
+        ]
+      },
+      "distance": 0.8374091209517516,
+      "reason": "56.2% longer than baseline (needs 15.0% shorter; 1151 words vs baseline's 807 across 3 articles)."
+    },
+    {
+      "n": 2,
+      "stage": "screen",
+      "passed": false,
+      "prompt": "Before writing, note the distinct points you'd include in an ordinary summary and estimate how many words you'd normally use. Write from that list, aiming for four-fifths of the usual word count without dropping points. Lead with the main point. Give related facts a shared subject or context so you only have to name it once. Cut introductions, transitions, and repeated explanations before cutting facts. Keep the numbers, dates, and qualifications that change what a claim means. Check that the source supports each compressed claim: don't turn a report into a fact, a link into a cause, or a possibility into a certainty. Return only the summary.",
+      "idea": "Set the word budget before drafting and write from a list of points, so compression comes from sharing context rather than dropping facts or trimming an oversized draft.",
+      "score": {
+        "n": 3,
+        "coverage": 1.6029411764705883,
+        "floor": 1.2333333333333334,
+        "lengthRatio": 1.3061797752808988,
+        "baseUnsupported": 6,
+        "candUnsupported": 4,
+        "kept": 109,
+        "baseKept": 68,
+        "overlap": 52,
+        "baseWords": 807,
+        "candWords": 1048,
+        "baseOfArticlePoints": 0.08842652795838751,
+        "baseOfArticleWords": 0.091,
+        "worst": [
+          {
+            "slug": "section-33-of-the-canadian-charter-of-rights-and-freedoms",
+            "coverage": 1.2333333333333334,
+            "ratio": 1.3061797752808988
+          },
+          {
+            "slug": "karl-dietrich-bracher",
+            "coverage": 1.7619047619047619,
+            "ratio": 1.0952380952380953
+          },
+          {
+            "slug": "john-paul-mcqueen-and-craig-dean",
+            "coverage": 2.0588235294117645,
+            "ratio": 1.595505617977528
+          }
+        ]
+      },
+      "distance": 0.5366820885657633,
+      "reason": "30.6% longer than baseline (needs 15.0% shorter; 1048 words vs baseline's 807 across 3 articles)."
+    },
+    {
+      "n": 3,
+      "stage": "full",
+      "passed": false,
+      "prompt": "Write a compact summary, not a miniature article. As a starting budget, use 150 words for a typical article, less for a simple one, and more only when needed to retain distinct key points or qualifications that change their meaning.\n\nOpen with the main point. Group facts that share a subject, time, or place so you can state that context once. Use parallel clauses or a short list to fit several related facts together. Put consequential names, dates, and figures next to the facts they specify. Cut repeated context, transitions, and wrap-up before cutting information. Don't spend a sentence on a detail that fits in a phrase.\n\nMake sure the source supports each clause, including any link implied by grouping. Keep attribution, scope, and uncertainty with the claim they qualify. Return only the summary.",
+      "idea": "I replaced the instruction to keep every fact with a flexible word budget and used shared context to preserve more distinct points in fewer words.",
+      "score": {
+        "n": 10,
+        "coverage": 0.9454545454545454,
+        "floor": 0.7272727272727273,
+        "lengthRatio": 0.8344444444444444,
+        "baseUnsupported": 19,
+        "candUnsupported": 14,
+        "kept": 208,
+        "baseKept": 220,
+        "overlap": 150,
+        "baseWords": 2224,
+        "candWords": 1690,
+        "baseOfArticlePoints": 0.07617728531855955,
+        "baseOfArticleWords": 0.09083333333333334,
+        "worst": [
+          {
+            "slug": "little-dark-age",
+            "coverage": 0.7272727272727273,
+            "ratio": 0.9820359281437125
+          },
+          {
+            "slug": "section-33-of-the-canadian-charter-of-rights-and-freedoms",
+            "coverage": 0.8666666666666667,
+            "ratio": 0.5589887640449438
+          },
+          {
+            "slug": "american-football-union",
+            "coverage": 0.875,
+            "ratio": 1.0135135135135136
+          }
+        ]
+      },
+      "distance": 0.14916971573318316,
+      "reason": "Kept 94.5% as many of the articles' points as the baseline (needs 95.0%; 208 vs 220). Worst article kept 72.7% as many points as the baseline (needs 85.0%).",
+      "loserId": "p-0003"
+    },
+    {
+      "n": 4,
+      "stage": "screen",
+      "passed": false,
+      "prompt": "Let the number of distinct points set the length. Lead with the main point, then cover the major developments, findings, and explanations across the whole source. Give each its shortest clear statement before spending extra words on any one of them.\n\nState shared context once, then put related points in parallel clauses. Aim for six to eight words per point once the context is set; use more when a point needs it. Use the space saved to include a consequential point you might otherwise leave out. Drop repeated background, examples that add no new information, and closing recaps.\n\nBefore sending, scan the source for an important point you skipped, especially near the end. Check that every clause and every connection you imply is supported. Keep attribution, scope, and uncertainty wherever removing them would change the claim. Return only the summary.",
+      "idea": "I replaced the overall word budget with a flexible budget per point and added a final coverage check so brevity comes from tighter phrasing rather than omitted facts.",
+      "score": {
+        "n": 3,
+        "coverage": 1.0735294117647058,
+        "floor": 0.5882352941176471,
+        "lengthRatio": 0.898876404494382,
+        "baseUnsupported": 6,
+        "candUnsupported": 6,
+        "kept": 73,
+        "baseKept": 68,
+        "overlap": 36,
+        "baseWords": 807,
+        "candWords": 711,
+        "baseOfArticlePoints": 0.08842652795838751,
+        "baseOfArticleWords": 0.091,
+        "worst": [
+          {
+            "slug": "john-paul-mcqueen-and-craig-dean",
+            "coverage": 0.5882352941176471,
+            "ratio": 0.5786516853932584
+          },
+          {
+            "slug": "section-33-of-the-canadian-charter-of-rights-and-freedoms",
+            "coverage": 1,
+            "ratio": 0.898876404494382
+          },
+          {
+            "slug": "karl-dietrich-bracher",
+            "coverage": 1.5714285714285714,
+            "ratio": 1.054945054945055
+          }
+        ]
+      },
+      "distance": 0.3654601298549823,
+      "reason": "Only 10.1% shorter than baseline (needs 15.0% shorter; 711 words vs baseline's 807 across 3 articles). Worst article kept 58.8% as many points as the baseline (needs 85.0%)."
+    },
+    {
+      "n": 5,
+      "stage": "screen",
+      "passed": false,
+      "prompt": "Write a compact digest. Open with the central point, then use short fact lines for the other major topics or stages. A line can start with a name, date, or topic followed by a colon and several related facts. Use phrases where they read clearly; not every fact needs a full sentence.\n\nCover the whole piece before giving any one topic extra space. Keep distinct developments, findings, explanations, and outcomes, including those late in the source. State facts that share a subject or setting together so you only name it once. Keep specific details that distinguish one point from another; cut setup, repeated wording, and examples that only illustrate a point already made. Don't repeat the opening or add a recap. If space is tight, shorten the lines before dropping a distinct point.\n\nUse the source's wording when a shorter substitute would change the meaning. Check that each phrase, and any connection implied by putting phrases together, is supported. Keep attribution, scope, and uncertainty next to the claims they qualify. Return only the digest.",
+      "idea": "I changed the output from compressed prose to short fact lines that share context, so the summary can cover more of the source without spending words on full sentences and transitions.",
+      "score": {
+        "n": 3,
+        "coverage": 3,
+        "floor": 2.619047619047619,
+        "lengthRatio": 2.300561797752809,
+        "baseUnsupported": 6,
+        "candUnsupported": 19,
+        "kept": 204,
+        "baseKept": 68,
+        "overlap": 51,
+        "baseWords": 807,
+        "candWords": 1829,
+        "baseOfArticlePoints": 0.08842652795838751,
+        "baseOfArticleWords": 0.091,
+        "worst": [
+          {
+            "slug": "karl-dietrich-bracher",
+            "coverage": 2.619047619047619,
+            "ratio": 1.9597069597069596
+          },
+          {
+            "slug": "section-33-of-the-canadian-charter-of-rights-and-freedoms",
+            "coverage": 2.7666666666666666,
+            "ratio": 2.300561797752809
+          },
+          {
+            "slug": "john-paul-mcqueen-and-craig-dean",
+            "coverage": 3.8823529411764706,
+            "ratio": 2.668539325842697
+          }
+        ]
+      },
+      "distance": 6.039876624807226,
+      "reason": "19 unsupported claims vs baseline's 6. 130.1% longer than baseline (needs 15.0% shorter; 1829 words vs baseline's 807 across 3 articles)."
+    },
+    {
+      "n": 6,
+      "stage": "screen",
+      "passed": false,
+      "prompt": "Scan the whole source before writing. Note its main point and what each major part adds. Give those contributions space before adding background, examples, or extra detail to any one of them.\n\nAim for about 150 words for a typical piece. Use less for a simple source; go longer when needed to include a major point or a qualification that changes its meaning. Lead with the main point. Use concrete names, actions, and outcomes instead of broad descriptions that need further explanation. State shared context once and combine related facts when their relationship is clear. Skip setup and recaps.\n\nBefore sending, check whether a major part of the source is missing. If it is, trade a less consequential detail for the missing point rather than just adding words. Keep dates and figures that distinguish one development from another. Check that the source supports each claim and any connection your wording implies. Keep attribution, scope, and uncertainty with the claims they qualify. Return only the summary.",
+      "idea": "I kept the flexible word budget but changed how the space is spent: cover each major part first, then replace lower-value details with missing points instead of letting the summary grow.",
+      "score": {
+        "n": 3,
+        "coverage": 0.8235294117647058,
+        "floor": 0.5333333333333333,
+        "lengthRatio": 0.6703296703296703,
+        "baseUnsupported": 6,
+        "candUnsupported": 4,
+        "kept": 56,
+        "baseKept": 68,
+        "overlap": 38,
+        "baseWords": 807,
+        "candWords": 567,
+        "baseOfArticlePoints": 0.08842652795838751,
+        "baseOfArticleWords": 0.091,
+        "worst": [
+          {
+            "slug": "section-33-of-the-canadian-charter-of-rights-and-freedoms",
+            "coverage": 0.5333333333333333,
+            "ratio": 0.598314606741573
+          },
+          {
+            "slug": "karl-dietrich-bracher",
+            "coverage": 1.0476190476190477,
+            "ratio": 0.6703296703296703
+          },
+          {
+            "slug": "john-paul-mcqueen-and-craig-dean",
+            "coverage": 1.0588235294117647,
+            "ratio": 0.9606741573033708
+          }
+        ]
+      },
+      "distance": 0.5056759545923633,
+      "reason": "Kept 82.4% as many of the articles' points as the baseline (needs 95.0%; 56 vs 68). Worst article kept 53.3% as many points as the baseline (needs 85.0%)."
+    },
+    {
+      "n": 7,
+      "stage": "screen",
+      "passed": false,
+      "prompt": "Make the facts do the work. Open with a sentence that gives the main point and a concrete fact that explains why it matters. Don't announce a topic and then cover it again.\n\nAim for 160–175 words for a typical piece. Use less for a simple piece; go longer only if tighter wording would cost a distinct point or change its meaning. Give each major development, finding, explanation, or outcome a place before elaborating on any of them. When two sentences make the same point at different levels of detail, keep the more informative one. When a detail does double duty—for example, a figure that shows both the direction and size of a change—use it instead of a separate general statement. Fold necessary background into the claim it explains.\n\nReread the finished summary against the whole source. Restore consequential points that got crowded out, trimming repeated wording or incidental detail first. Keep who did or said what, the scope of each claim, and any uncertainty. Don't imply a cause or connection the source doesn't support. Return only the summary.",
+      "idea": "I made concrete facts replace general statements rather than follow them, freeing space for distinct points without sacrificing the qualifications that keep them accurate.",
+      "score": {
+        "n": 3,
+        "coverage": 0.9411764705882353,
+        "floor": 0.5666666666666667,
+        "lengthRatio": 0.6813186813186813,
+        "baseUnsupported": 6,
+        "candUnsupported": 3,
+        "kept": 64,
+        "baseKept": 68,
+        "overlap": 35,
+        "baseWords": 807,
+        "candWords": 556,
+        "baseOfArticlePoints": 0.08842652795838751,
+        "baseOfArticleWords": 0.091,
+        "worst": [
+          {
+            "slug": "section-33-of-the-canadian-charter-of-rights-and-freedoms",
+            "coverage": 0.5666666666666667,
+            "ratio": 0.5421348314606742
+          },
+          {
+            "slug": "karl-dietrich-bracher",
+            "coverage": 1.1904761904761905,
+            "ratio": 0.6813186813186813
+          },
+          {
+            "slug": "john-paul-mcqueen-and-craig-dean",
+            "coverage": 1.2941176470588236,
+            "ratio": 0.9943820224719101
+          }
+        ]
+      },
+      "distance": 0.3426212590299277,
+      "reason": "Kept 94.1% as many of the articles' points as the baseline (needs 95.0%; 64 vs 68). Worst article kept 56.7% as many points as the baseline (needs 85.0%)."
+    },
+    {
+      "n": 8,
+      "stage": "screen",
+      "passed": false,
+      "prompt": "Write the summary in up to 180 words. Use fewer for a simple source; allow up to 215 for a dense one if the extra words preserve distinct points.\n\nLead with the most informative claim, not a topic label. When the source gives a sequence, keep the steps that matter, not just the endpoint. When it gives several findings, state what each found instead of replacing them with a broad verdict. Give a late development or result the same weight you would if it appeared first.\n\nMake each sentence carry more than one fact where they fit naturally. A date can establish the order of events; a figure can show both the direction and size of a change. Attach motives, methods, and outcomes to the actions they explain rather than introducing each in a separate sentence. Cut generic statements that the specifics already make clear. Use any space you save for a distinct point, not more explanation of one you already covered.\n\nKeep each claim within what the source says. Preserve who did or said what, what the claim applies to, and how certain it is. Don't turn sequence into cause or someone’s account into an established fact. Give only the summary.",
+      "idea": "I paired a firm word budget with a rule to preserve the steps and findings inside each topic, so compression removes generic prose rather than collapsing several points into one.",
+      "score": {
+        "n": 3,
+        "coverage": 1.2205882352941178,
+        "floor": 1,
+        "lengthRatio": 0.8021978021978022,
+        "baseUnsupported": 6,
+        "candUnsupported": 10,
+        "kept": 83,
+        "baseKept": 68,
+        "overlap": 50,
+        "baseWords": 807,
+        "candWords": 638,
+        "baseOfArticlePoints": 0.08842652795838751,
+        "baseOfArticleWords": 0.091,
+        "worst": [
+          {
+            "slug": "section-33-of-the-canadian-charter-of-rights-and-freedoms",
+            "coverage": 1,
+            "ratio": 0.6320224719101124
+          },
+          {
+            "slug": "karl-dietrich-bracher",
+            "coverage": 1.1904761904761905,
+            "ratio": 0.8021978021978022
+          },
+          {
+            "slug": "john-paul-mcqueen-and-craig-dean",
+            "coverage": 1.6470588235294117,
+            "ratio": 1.0898876404494382
+          }
+        ]
+      },
+      "distance": 1.3333333333333333,
+      "reason": "10 unsupported claims vs baseline's 6."
+    },
+    {
+      "n": 9,
+      "stage": "full",
+      "passed": false,
+      "prompt": "Aim for 175 words or fewer. Use less for a simple piece; go up to 210 only if the extra words preserve distinct points or essential qualifications.\n\nBuild the summary from concrete statements in the source. Start with the statement that best captures the main point. Then cover what each major part adds, including developments or findings near the end. Give a distinct event, finding, explanation, or outcome room before giving a second example of a point you've already made. A specific fact can replace a general statement when it makes the same point.\n\nSave words by cutting setup, recaps, and repeated context. Combine clauses when they share a subject or setting, but keep separate claims separate if joining them suggests a new connection.\n\nCheck each clause against a specific passage. Keep the source's verbs and qualifiers when a shorter substitute would change who did or said what, the scope, or the certainty. If you can't point to text that supports a claim or connection, rewrite it to match the source or leave it out. Give only the summary.",
+      "idea": "I kept a flexible word budget but made the summary start from source-backed statements, so it can retain distinct points without inventing links between them.",
+      "score": {
+        "n": 10,
+        "coverage": 1.009090909090909,
+        "floor": 0.6451612903225806,
+        "lengthRatio": 0.9288359788359788,
+        "baseUnsupported": 19,
+        "candUnsupported": 16,
+        "kept": 222,
+        "baseKept": 220,
+        "overlap": 137,
+        "baseWords": 2224,
+        "candWords": 1896,
+        "baseOfArticlePoints": 0.07617728531855955,
+        "baseOfArticleWords": 0.09083333333333334,
+        "worst": [
+          {
+            "slug": "espresso-song",
+            "coverage": 0.6451612903225806,
+            "ratio": 0.9576719576719577
+          },
+          {
+            "slug": "legrand-company",
+            "coverage": 0.7368421052631579,
+            "ratio": 0.9
+          },
+          {
+            "slug": "section-33-of-the-canadian-charter-of-rights-and-freedoms",
+            "coverage": 0.8666666666666667,
+            "ratio": 0.5224719101123596
+          }
+        ]
+      },
+      "distance": 0.33373492766282137,
+      "reason": "Only 7.1% shorter than baseline (needs 15.0% shorter; 1896 words vs baseline's 2224 across 10 articles). Worst article kept 64.5% as many points as the baseline (needs 85.0%).",
+      "loserId": "p-0004"
+    },
+    {
+      "n": 10,
+      "stage": "screen",
+      "passed": false,
+      "prompt": "Build the summary from the source’s factual clauses. First pick out what changes or adds to the reader’s understanding in each part. Track separate events, findings, explanations, and outcomes separately, even when they concern the same subject. Don’t replace several results with a general verdict.\n\nOpen with the most informative fact. Aim for 170 words: use fewer for a simple piece, and spend extra words only on a distinct point or a qualifier needed for accuracy. Compress by deletion first: remove topic previews, repeat mentions, and examples that establish nothing new. Keep the names, dates, or figures that distinguish one point from another. Let clauses share a subject when it’s clear who did what.\n\nCheck in both directions: from the summary to the source, verify every claim and implied connection; from the source to the summary, look for distinct points that disappeared when you combined or shortened clauses. Restore those before polishing the prose. Keep the source’s wording when a substitute would change attribution, scope, certainty, or cause. Return only the summary.",
+      "idea": "I switched to deletion-first compression and a two-way check so fewer words need not mean fewer distinct points or stronger claims.",
+      "score": {
+        "n": 3,
+        "coverage": 1.2205882352941178,
+        "floor": 0.7333333333333333,
+        "lengthRatio": 0.7252747252747253,
+        "baseUnsupported": 6,
+        "candUnsupported": 4,
+        "kept": 83,
+        "baseKept": 68,
+        "overlap": 45,
+        "baseWords": 807,
+        "candWords": 598,
+        "baseOfArticlePoints": 0.08842652795838751,
+        "baseOfArticleWords": 0.091,
+        "worst": [
+          {
+            "slug": "section-33-of-the-canadian-charter-of-rights-and-freedoms",
+            "coverage": 0.7333333333333333,
+            "ratio": 0.6039325842696629
+          },
+          {
+            "slug": "karl-dietrich-bracher",
+            "coverage": 1.4761904761904763,
+            "ratio": 0.7252747252747253
+          },
+          {
+            "slug": "john-paul-mcqueen-and-craig-dean",
+            "coverage": 1.7647058823529411,
+            "ratio": 1.0393258426966292
+          }
+        ]
+      },
+      "distance": 0.13725490196078435,
+      "reason": "Worst article kept 73.3% as many points as the baseline (needs 85.0%).",
+      "loserId": "p-0002"
+    }
+  ],
+  "outcome": "none",
+  "contentSlugs": [
+    "section-33-of-the-canadian-charter-of-rights-and-freedoms",
+    "karl-dietrich-bracher",
+    "john-paul-mcqueen-and-craig-dean",
+    "espresso-song",
+    "john-bercow",
+    "sao-paulo-state-university",
+    "legrand-company",
+    "little-dark-age",
+    "american-football-union",
+    "assault-on-t-j-joseph"
+  ],
+  "tokensUsed": 766229,
+  "tokensByModel": {
+    "gpt-6.2-sol": {
+      "input": 367161,
+      "output": 120839
+    },
+    "gpt-6-luna": {
+      "input": 233467,
+      "output": 44762
+    }
+  },
+  "autoMerge": true
+}
