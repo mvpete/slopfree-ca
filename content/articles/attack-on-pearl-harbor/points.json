@@ -512,14 +512,14 @@
     false
   ],
   "question": {
-    "text": "What was Japan’s main military goal in attacking Pearl Harbor?",
+    "text": "What was Japan trying to do by attacking Pearl Harbor?",
     "options": [
-      "To capture Hawaii",
-      "To disable the US Pacific Fleet",
-      "To seize US oil supplies",
-      "To destroy the British Pacific Fleet"
+      "Disable the US Pacific Fleet",
+      "Defend Hawaii",
+      "Protect US supply ships",
+      "End its expansion overseas"
     ],
-    "answer": 1,
+    "answer": 0,
     "quotes": [
       "Japan aimed to disable the US Pacific Fleet",
       "was intended to disable the US Pacific Fleet"

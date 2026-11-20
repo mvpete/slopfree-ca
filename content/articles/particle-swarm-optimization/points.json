@@ -452,17 +452,17 @@
     false
   ],
   "question": {
-    "text": "Which positions guide each particle’s movement?",
+    "text": "What does particle swarm optimization search for solutions without using?",
     "options": [
-      "Its starting position and its neighbors’ average position",
-      "Its own best position and the best position found by its neighbors",
-      "Only its own best position",
-      "Only its neighbors’ current positions"
+      "Candidate solutions",
+      "A search space",
+      "Gradients",
+      "An optimization method"
     ],
-    "answer": 1,
+    "answer": 2,
     "quotes": [
-      "its own best-known position and the best position found by its neighbors",
-      "its own best-known position and the best-known position among its neighbors"
+      "a gradient-free method for searching large spaces of possible solutions",
+      "a gradient-free metaheuristic inspired by social behavior"
     ]
   }
 }

@@ -550,16 +550,16 @@
     false
   ],
   "question": {
-    "text": "Who was picked first overall in the 2024 NHL Entry Draft?",
+    "text": "Which team had the first overall pick?",
     "options": [
-      "Artyom Levshunov",
-      "Macklin Celebrini",
-      "Beckett Sennecke",
-      "Cayden Lindstrom"
+      "Chicago Blackhawks",
+      "Anaheim Ducks",
+      "San Jose Sharks",
+      "Utah Hockey Club"
     ],
-    "answer": 1,
+    "answer": 2,
     "quotes": [
-      "San Jose selected Macklin Celebrini first.",
+      "the San Jose Sharks held the first overall pick",
       "The San Jose Sharks made Macklin Celebrini the first overall pick"
     ]
   }

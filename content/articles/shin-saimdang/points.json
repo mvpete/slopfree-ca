@@ -536,17 +536,17 @@
     false
   ],
   "question": {
-    "text": "Which South Korean banknote made Shin Saimdang the first woman depicted on the country's currency?",
+    "text": "Which best describes Shin Saimdang?",
     "options": [
-      "The 1,000-won note",
-      "The 5,000-won note",
-      "The 10,000-won note",
-      "The 50,000-won note"
+      "A military commander",
+      "An artist and poet",
+      "A royal physician",
+      "A merchant and explorer"
     ],
-    "answer": 3,
+    "answer": 1,
     "quotes": [
-      "she became the first woman depicted on a South Korean banknote, the 50,000-won note.",
-      "she became the first woman depicted on a South Korean banknote, appearing on the 50,000-won note."
+      "Korean artist, writer, calligrapher, and poet",
+      "Korean artist, calligrapher, writer, and poet"
     ]
   }
 }

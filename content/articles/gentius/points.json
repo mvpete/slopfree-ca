@@ -514,17 +514,17 @@
     false
   ],
   "question": {
-    "text": "Who did Gentius support after switching sides against Rome?",
+    "text": "Who was Gentius?",
     "options": [
-      "Pleuratus III",
-      "Lucius Anicius Gallus",
-      "Perseus of Macedon",
-      "The leaders of Bassania"
+      "A Roman general",
+      "The last known Illyrian king",
+      "A Greek philosopher",
+      "An Egyptian priest"
     ],
-    "answer": 2,
+    "answer": 1,
     "quotes": [
-      "he switched sides in 169 BC and joined Perseus of Macedon",
-      "he switched sides to support Perseus of Macedon"
+      "Gentius was the last attested Illyrian king",
+      "Gentius ruled the Illyrian kingdom from 181 to 168 BC and was its last attested king"
     ]
   }
 }

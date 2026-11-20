@@ -2,17 +2,17 @@
   "points": [],
   "key": [],
   "question": {
-    "text": "In what year did Bill Elliott win the Winston Cup championship?",
+    "text": "What sport did Bill Elliott compete in?",
     "options": [
-      "1983",
-      "1985",
-      "1987",
-      "1988"
+      "Professional boxing",
+      "Major League Baseball",
+      "NASCAR racing",
+      "Professional golf"
     ],
-    "answer": 3,
+    "answer": 2,
     "quotes": [
-      "winning the 1988 Winston Cup championship",
-      "44 Winston Cup wins and the 1988 championship"
+      "a former NASCAR driver",
+      "a former NASCAR driver"
     ]
   }
 }

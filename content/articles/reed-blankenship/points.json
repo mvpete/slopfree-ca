@@ -574,17 +574,17 @@
     false
   ],
   "question": {
-    "text": "Which team did Reed Blankenship join in 2026?",
+    "text": "What position does Reed Blankenship play in the NFL?",
     "options": [
-      "Philadelphia Eagles",
-      "Kansas City Chiefs",
-      "Houston Texans",
-      "Dallas Cowboys"
+      "Quarterback",
+      "Safety",
+      "Wide receiver",
+      "Kicker"
     ],
-    "answer": 2,
+    "answer": 1,
     "quotes": [
-      "On March 13, 2026, Blankenship signed a three-year, $24.75 million contract with the Houston Texans.",
-      "joined the Houston Texans in 2026"
+      "Reed Blankenship is an NFL safety",
+      "Reed Blankenship is an NFL safety"
     ]
   }
 }

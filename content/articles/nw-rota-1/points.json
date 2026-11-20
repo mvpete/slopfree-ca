@@ -2,17 +2,17 @@
   "points": [],
   "key": [],
   "question": {
-    "text": "What did scientists directly observe for the first time at NW Rota-1?",
+    "text": "What kind of natural feature is NW Rota-1?",
     "options": [
-      "An underwater landslide",
-      "An explosive underwater eruption",
-      "Gas escaping from a deep-sea vent",
-      "Lava cooling on the seafloor"
+      "An ocean trench",
+      "An active underwater volcano",
+      "A coral reef",
+      "A floating ice shelf"
     ],
     "answer": 1,
     "quotes": [
-      "the first volcano where explosive underwater eruptions were directly observed",
-      "the first direct observations of explosive eruptions underwater"
+      "an active submarine volcano",
+      "an active submarine volcano"
     ]
   }
 }

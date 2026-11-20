@@ -466,17 +466,17 @@
     true
   ],
   "question": {
-    "text": "What was Centre Alliance called before it took its current name?",
+    "text": "What kind of organization is Centre Alliance?",
     "options": [
-      "SA-BEST (Federal)",
-      "Nick Xenophon Team",
-      "Australian Democrats",
-      "Liberal Party of Australia"
+      "A news outlet",
+      "A political party",
+      "A trade union",
+      "A charity"
     ],
     "answer": 1,
     "quotes": [
-      "founded in 2013 as the Nick Xenophon Team",
-      "it became the Nick Xenophon Team and adopted its current name in 2018"
+      "a South Australian centrist and socially liberal party",
+      "a South Australian centrist and social liberal party"
     ]
   }
 }

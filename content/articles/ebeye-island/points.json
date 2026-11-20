@@ -350,17 +350,17 @@
     false
   ],
   "question": {
-    "text": "Which atoll is Ebeye part of?",
+    "text": "How does Ebeye’s population compare with those of other islands in Kwajalein Atoll?",
     "options": [
-      "Bikini Atoll",
-      "Majuro Atoll",
-      "Kwajalein Atoll",
-      "Enewetak Atoll"
+      "It has the fewest residents",
+      "It has the most residents",
+      "It has about average population",
+      "It has no permanent residents"
     ],
-    "answer": 2,
+    "answer": 1,
     "quotes": [
-      "Ebeye is the most populous island in Kwajalein Atoll",
-      "Ebeye is the most populous island of Kwajalein Atoll"
+      "the most populous island in Kwajalein Atoll",
+      "the most populous island of Kwajalein Atoll"
     ]
   }
 }

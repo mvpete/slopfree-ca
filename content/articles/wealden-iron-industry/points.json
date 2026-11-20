@@ -290,17 +290,17 @@
     false
   ],
   "question": {
-    "text": "What fuel did Wealden ironworks get from local woodland?",
+    "text": "What materials did the Wealden iron industry use?",
     "options": [
-      "Coke",
-      "Peat",
-      "Charcoal",
-      "Coal"
+      "Copper and coal",
+      "Clay and straw",
+      "Local ironstone and charcoal",
+      "Sand and limestone"
     ],
     "answer": 2,
     "quotes": [
-      "charcoal made from woodland",
-      "charcoal from coppiced woodland"
+      "using local ironstone and charcoal made from woodland",
+      "used local ironstone, charcoal from coppiced woodland"
     ]
   }
 }

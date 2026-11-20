@@ -2,17 +2,17 @@
   "points": [],
   "key": [],
   "question": {
-    "text": "Who did Rula Lenska play in Coronation Street?",
+    "text": "What is Rula Lenska’s profession?",
     "options": [
-      "Claudia Colby",
-      "Audrey Roberts",
-      "Rita Tanner",
-      "Gail Platt"
+      "Journalist",
+      "Actress",
+      "Architect",
+      "Photographer"
     ],
-    "answer": 0,
+    "answer": 1,
     "quotes": [
-      "playing Claudia Colby in *Coronation Street*",
-      "She played Claudia Colby in *Coronation Street*"
+      "is a British actress",
+      "is a British actress"
     ]
   }
 }

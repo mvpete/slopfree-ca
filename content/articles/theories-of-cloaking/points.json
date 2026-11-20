@@ -290,17 +290,17 @@
     false
   ],
   "question": {
-    "text": "How does cloaking hide objects or events?",
+    "text": "What do researchers control to conceal objects or events?",
     "options": [
-      "By cooling them",
-      "By moving them out of sight",
-      "By controlling waves",
-      "By making them smaller"
+      "Temperature and pressure",
+      "Electromagnetic and sound waves",
+      "Chemical reactions",
+      "The force of gravity"
     ],
-    "answer": 2,
+    "answer": 1,
     "quotes": [
-      "hide objects or events by controlling electromagnetic or sound waves",
-      "guide or cancel electromagnetic and sound waves so objects or events are concealed"
+      "by controlling electromagnetic or sound waves",
+      "guide or cancel electromagnetic and sound waves"
     ]
   }
 }

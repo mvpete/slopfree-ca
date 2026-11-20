@@ -480,17 +480,17 @@
     false
   ],
   "question": {
-    "text": "What kind of doctor is Dan Hamilton in Holby City?",
+    "text": "What is Dan Hamilton’s job in Holby City?",
     "options": [
-      "Cardiologist",
-      "Neurosurgeon",
+      "Ward nurse",
+      "Hospital receptionist",
       "Orthopaedic surgeon",
-      "Emergency physician"
+      "Ambulance driver"
     ],
     "answer": 2,
     "quotes": [
-      "a fictional orthopaedic surgeon in the BBC medical drama *Holby City*",
-      "a consultant orthopaedic surgeon in *Holby City*"
+      "a fictional orthopaedic surgeon",
+      "a consultant orthopaedic surgeon"
     ]
   }
 }

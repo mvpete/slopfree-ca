@@ -384,17 +384,17 @@
     false
   ],
   "question": {
-    "text": "Whom did Thomas Cresap represent in the Maryland–Pennsylvania boundary dispute?",
+    "text": "What was Thomas Cresap known for in colonial Maryland?",
     "options": [
-      "King George II",
-      "Lord Dunmore",
-      "Lord Baltimore",
-      "Pennsylvania’s sheriff"
+      "Settling and trading",
+      "Building ships",
+      "Printing newspapers",
+      "Teaching school"
     ],
-    "answer": 2,
+    "answer": 0,
     "quotes": [
-      "became an agent for Lord Baltimore in the Maryland–Pennsylvania dispute",
-      "became an agent for Lord Baltimore, asserting Maryland’s claims in the Susquehanna Valley against Pennsylvania settlers"
+      "was an English-born Maryland settler, trader and land agent",
+      "was an English-born Maryland settler and trader"
     ]
   }
 }

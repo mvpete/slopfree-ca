@@ -428,14 +428,14 @@
     false
   ],
   "question": {
-    "text": "Which two musicians first appeared on a Fleetwood Mac album in 1975?",
+    "text": "What change in Fleetwood Mac did this album mark?",
     "options": [
-      "Bob Welch and Christine McVie",
-      "Mick Fleetwood and John McVie",
-      "Lindsey Buckingham and Stevie Nicks",
-      "Peter Green and Jeremy Spencer"
+      "The band switched to instrumentals",
+      "Two new members joined",
+      "The band broke up",
+      "The original lineup reunited"
     ],
-    "answer": 2,
+    "answer": 1,
     "quotes": [
       "the first to feature Lindsey Buckingham and Stevie Nicks",
       "introduced Lindsey Buckingham and Stevie Nicks to the band"

@@ -2,16 +2,16 @@
   "points": [],
   "key": [],
   "question": {
-    "text": "Which river joins the Blackwater River to form the Chowan River?",
+    "text": "What happens where the Blackwater River ends?",
     "options": [
-      "James River",
-      "Roanoke River",
-      "Nottoway River",
-      "Meherrin River"
+      "It empties into a lake",
+      "It joins another river",
+      "It flows directly into the ocean",
+      "It dries up"
     ],
-    "answer": 2,
+    "answer": 1,
     "quotes": [
-      "it joins the Nottoway River to form the Chowan River",
+      "where it joins the Nottoway River to form the Chowan River",
       "its confluence with the Nottoway River on the Virginia–North Carolina border, where the two form the Chowan River"
     ]
   }

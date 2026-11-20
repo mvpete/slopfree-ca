@@ -634,17 +634,17 @@
     false
   ],
   "question": {
-    "text": "Which court did John Dodson become a judge of in 1852?",
+    "text": "Besides his legal career, what political role did John Dodson have?",
     "options": [
-      "High Court of Admiralty",
-      "Court of King’s Bench",
-      "Prerogative Court of Canterbury",
-      "Court of Chancery"
+      "Town mayor",
+      "Tory MP",
+      "Party treasurer",
+      "Diplomatic envoy"
     ],
-    "answer": 2,
+    "answer": 1,
     "quotes": [
-      "judge of the Prerogative Court of Canterbury from 1852",
-      "From 1852 he was judge of the Prerogative Court of Canterbury"
+      "church lawyer and Tory MP",
+      "judge, and Tory MP"
     ]
   }
 }

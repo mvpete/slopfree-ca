@@ -966,17 +966,17 @@
     false
   ],
   "question": {
-    "text": "What rule did China’s National People’s Congress remove in March 2018?",
+    "text": "What major political change did China make?",
     "options": [
-      "Presidential age limits",
-      "Presidential term limits",
-      "Vice-presidential term limits",
-      "Congressional term limits"
+      "It abolished the presidency",
+      "It removed presidential term limits",
+      "It introduced direct presidential elections",
+      "It shortened presidential terms"
     ],
     "answer": 1,
     "quotes": [
-      "The National People’s Congress removed presidential term limits in March",
-      "the National People’s Congress amended the constitution to remove presidential term limits"
+      "removed presidential term limits",
+      "amended the constitution to remove presidential term limits"
     ]
   }
 }

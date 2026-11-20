@@ -2,17 +2,17 @@
   "points": [],
   "key": [],
   "question": {
-    "text": "What kind of government did Jobin support after the rebellion?",
+    "text": "What was André Jobin known for?",
     "options": [
-      "Direct rule from Britain",
-      "Responsible government",
-      "An independent republic",
-      "Rule by an appointed council"
+      "Medicine and teaching",
+      "Notarial work and politics",
+      "Painting and sculpture",
+      "Exploration and trade"
     ],
     "answer": 1,
     "quotes": [
-      "He supported Louis-Hippolyte LaFontaine, responsible government, and compensation for losses suffered during the rebellion.",
-      "He backed responsible government, the Rebellion Losses Bill and measures supporting French-language rights."
+      "was a Montreal notary and politician",
+      "was a Montreal notary and French-Canadian political figure"
     ]
   }
 }

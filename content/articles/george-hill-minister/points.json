@@ -568,17 +568,17 @@
     false
   ],
   "question": {
-    "text": "Which party in the Church of Scotland did George Hill lead?",
+    "text": "Which group did George Hill help lead?",
     "options": [
-      "The Evangelicals",
-      "The Moderates",
-      "The Seceders",
-      "The Cameronians"
+      "A university debating club",
+      "The Church’s Moderate party",
+      "A group of merchants",
+      "A military regiment"
     ],
     "answer": 1,
     "quotes": [
-      "succeeded William Robertson as leader of the Moderates",
-      "led the Church of Scotland’s Moderate party after Principal William Robertson’s death"
+      "became a leading figure in the Church of Scotland’s Moderate party",
+      "led the Church of Scotland’s Moderate party"
     ]
   }
 }
