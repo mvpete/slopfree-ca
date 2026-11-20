@@ -164,16 +164,8 @@
       line.hidden = false;
     }
 
-    const box = $("models");
-    box.innerHTML = "";
-    keys.forEach((k) => {
-      const b = document.createElement("button");
-      b.className = "btn model-btn";
-      b.type = "button";
-      b.textContent = DATA.models[k].label;
-      b.addEventListener("click", () => startQuiz(k));
-      box.appendChild(b);
-    });
+    // One model for now, so the quiz just starts. Bring back a model picker here if a second model is added.
+    $("start").onclick = () => startQuiz(keys[0]);
 
     const note = $("mode-note");
     note.hidden = recording();
