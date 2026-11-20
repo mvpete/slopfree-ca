@@ -648,17 +648,17 @@
     false
   ],
   "question": {
-    "text": "What does Meyer work to protect?",
+    "text": "What does Mario-Christian Meyer primarily work to protect?",
     "options": [
-      "Historic buildings and monuments",
       "Amazonian biodiversity and Indigenous knowledge",
-      "Coral reefs and marine wildlife",
-      "Rare books and manuscripts"
+      "Medical advancements in urban areas",
+      "European cultural heritage",
+      "Global economic policies"
     ],
-    "answer": 1,
+    "answer": 0,
     "quotes": [
-      "works to protect Amazonian biodiversity and Indigenous cultural knowledge",
-      "works to preserve Amazonian biodiversity and Indigenous cultural knowledge"
+      "Mario-Christian Meyer is a Swiss-Brazilian physician who works to protect Amazonian biodiversity and Indigenous cultural knowledge.",
+      "Mario-Christian Meyer is a Swiss-Brazilian physician who works to preserve Amazonian biodiversity and Indigenous cultural knowledge by linking traditional expertise with Western science and biotechnology."
     ]
   }
 }

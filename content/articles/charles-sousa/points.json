@@ -2,17 +2,17 @@
   "points": [],
   "key": [],
   "question": {
-    "text": "What is Sousa’s role in Canadian politics?",
+    "text": "What position did Anthony Sousa hold from 2013 to 2018?",
     "options": [
-      "Provincial premier",
-      "Liberal member of Parliament",
-      "City mayor",
-      "Governor general"
+      "Ontario's Finance Minister",
+      "Member of Parliament",
+      "Chair of National Defence Committee",
+      "Banking executive"
     ],
-    "answer": 1,
+    "answer": 0,
     "quotes": [
-      "a Canadian Liberal politician and the Member of Parliament for Mississauga–Lakeshore",
-      "a Canadian Liberal politician who has represented Mississauga—Lakeshore in the House of Commons"
+      "As finance minister, he helped secure an agreement to enhance the Canada Pension Plan and presented Ontario’s first balanced budget since the 2008 recession.",
+      "he served as Ontario’s finance minister from 2013 to 2018 after representing Mississauga South in the provincial legislature from 2007."
     ]
   }
 }

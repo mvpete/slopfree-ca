@@ -2,17 +2,17 @@
   "points": [],
   "key": [],
   "question": {
-    "text": "Where do players toss a marker in hopscotch?",
+    "text": "What is hopscotch primarily described as?",
     "options": [
-      "Into a basket",
-      "Over a net",
-      "Into a numbered space",
-      "Through a hoop"
+      "A children's game played worldwide",
+      "An ancient battlefield strategy",
+      "A coloring activity for kids",
+      "A type of athletic competition"
     ],
-    "answer": 2,
+    "answer": 0,
     "quotes": [
-      "Players toss a small marker into numbered spaces drawn on the ground",
-      "Players toss a small marker into each square in sequence"
+      "Hopscotch is a children’s game played around the world.",
+      "Hopscotch is a children’s game played worldwide on a numbered course drawn on the ground."
     ]
   }
 }

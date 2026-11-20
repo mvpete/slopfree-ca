@@ -384,17 +384,17 @@
     false
   ],
   "question": {
-    "text": "What was Thomas Cresap known for in colonial Maryland?",
+    "text": "What was the main role of Thomas Cresap in the colonies?",
     "options": [
-      "Settling and trading",
-      "Building ships",
-      "Printing newspapers",
-      "Teaching school"
+      "Settler and land agent",
+      "Native American chief",
+      "Colonial governor",
+      "British soldier"
     ],
     "answer": 0,
     "quotes": [
-      "was an English-born Maryland settler, trader and land agent",
-      "was an English-born Maryland settler and trader"
+      "Thomas Cresap (c.1694–c.1790) was an English-born Maryland settler, trader and land agent whose actions shaped colonial boundary disputes and westward expansion.",
+      "Thomas Cresap (c.1694–c.1790) was an English-born Maryland settler and trader who took part in colonial boundary disputes and westward expansion."
     ]
   }
 }

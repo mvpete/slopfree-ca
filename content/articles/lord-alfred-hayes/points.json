@@ -476,17 +476,17 @@
     false
   ],
   "question": {
-    "text": "What sport was Lord Alfred Hayes best known for?",
+    "text": "What was Lord Alfred Hayes best known for in his career?",
     "options": [
-      "Professional boxing",
-      "Professional wrestling",
-      "Horse racing",
-      "Cricket"
+      "Wrestling in Britain",
+      "Working for the WWF",
+      "Being a Conservative councillor",
+      "Training in judo"
     ],
     "answer": 1,
     "quotes": [
-      "was an English professional wrestler, manager and commentator",
-      "was an English wrestler, manager and commentator"
+      "Lord Alfred Hayes (1928–2005) was an English professional wrestler, manager and commentator, best known for his work with the World Wrestling Federation from 1982 to 1995.",
+      "Alfred “Lord” Hayes (1928–2005) was an English wrestler, manager and commentator best known for his World Wrestling Federation work from 1982 to 1995."
     ]
   }
 }

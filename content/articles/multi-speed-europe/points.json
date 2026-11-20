@@ -2,17 +2,17 @@
   "points": [],
   "key": [],
   "question": {
-    "text": "What does multi-speed Europe let EU countries do?",
+    "text": "What does Multi-speed Europe allow EU members to do?",
     "options": [
-      "Replace the EU with trade deals",
       "Integrate at different rates",
-      "Adopt identical national laws",
-      "Stop cooperating altogether"
+      "Use the euro only",
+      "Leave the EU easily",
+      "Form a new union"
     ],
-    "answer": 1,
+    "answer": 0,
     "quotes": [
-      "EU countries can integrate at different speeds and levels",
-      "allows EU members to integrate at different rates or levels"
+      "Multi-speed Europe is the idea that EU countries can integrate at different speeds and levels.",
+      "Multi-speed Europe allows EU members to integrate at different rates or levels, a long-standing response to the difficulty of reaching agreement across a growing Union."
     ]
   }
 }

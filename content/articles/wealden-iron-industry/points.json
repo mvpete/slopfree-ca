@@ -290,17 +290,17 @@
     false
   ],
   "question": {
-    "text": "What materials did the Wealden iron industry use?",
+    "text": "What did the Wealden iron industry mainly produce in the 16th century?",
     "options": [
-      "Copper and coal",
-      "Clay and straw",
-      "Local ironstone and charcoal",
-      "Sand and limestone"
+      "English bar iron",
+      "Imported Swedish iron",
+      "Coal for furnaces",
+      "Coke-fired iron"
     ],
-    "answer": 2,
+    "answer": 0,
     "quotes": [
-      "using local ironstone and charcoal made from woodland",
-      "used local ironstone, charcoal from coppiced woodland"
+      "It was a major source of English bar iron in the 16th century and supplied most British cannon until about 1770.",
+      "The industry peaked in the late 16th century, producing more than 9,000 tons of iron a year in the 1590s."
     ]
   }
 }

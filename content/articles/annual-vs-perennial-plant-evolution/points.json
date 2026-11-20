@@ -2,17 +2,17 @@
   "points": [],
   "key": [],
   "question": {
-    "text": "How do the summaries describe annual and perennial life cycles?",
+    "text": "What do annual and perennial plants primarily differ in?",
     "options": [
-      "Flexible life strategies",
-      "Fixed family traits",
-      "Signs of disease",
-      "Types of pollination"
+      "Life cycle duration",
+      "Flower color",
+      "Root depth",
+      "Leaf shape"
     ],
     "answer": 0,
     "quotes": [
-      "flexible plant life-history strategies",
-      "flexible life-history strategies"
+      "Annuals complete their life cycle in one year; perennials live for more than two.",
+      "Annuals make up about 6% of plant species and 15% of herbaceous species, and evolved independently in more than 120 plant families."
     ]
   }
 }

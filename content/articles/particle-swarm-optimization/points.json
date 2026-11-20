@@ -452,17 +452,17 @@
     false
   ],
   "question": {
-    "text": "What does particle swarm optimization search for solutions without using?",
+    "text": "What does particle swarm optimization (PSO) primarily do?",
     "options": [
-      "Candidate solutions",
-      "A search space",
-      "Gradients",
-      "An optimization method"
+      "Searches large solution spaces",
+      "Guarantees finding best solution",
+      "Solves only differentiable problems",
+      "Uses gradient information"
     ],
-    "answer": 2,
+    "answer": 0,
     "quotes": [
-      "a gradient-free method for searching large spaces of possible solutions",
-      "a gradient-free metaheuristic inspired by social behavior"
+      "Particle swarm optimization (PSO) is a gradient-free method for searching large spaces of possible solutions.",
+      "Particle swarm optimization (PSO), introduced by Kennedy and Eberhart, is a gradient-free metaheuristic inspired by social behavior. It searches for good solutions by moving a population of candidate solutions, or particles, through a search space."
     ]
   }
 }

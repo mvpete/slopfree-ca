@@ -506,17 +506,17 @@
     false
   ],
   "question": {
-    "text": "What role did Chicago play in filmmaking before Hollywood rose?",
+    "text": "What was Chicago's early role in the film industry?",
     "options": [
-      "A minor filming location",
-      "A major filmmaking center",
-      "A market for foreign films only",
-      "A city with no film industry"
+      "Major production center before Hollywood",
+      "Home to Hollywood studios",
+      "Only a film exhibition city",
+      "A late film production area"
     ],
-    "answer": 1,
+    "answer": 0,
     "quotes": [
-      "Chicago was a major center of American filmmaking before Hollywood",
-      "Chicago was a major film production and distribution center in the early 1900s"
+      "Chicago was a major center of American filmmaking before Hollywood,",
+      "Chicago was a major film production and distribution center in the early 1900s, before Hollywood became the industry’s leading hub."
     ]
   }
 }

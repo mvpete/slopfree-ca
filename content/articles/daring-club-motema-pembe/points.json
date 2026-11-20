@@ -812,17 +812,17 @@
     false
   ],
   "question": {
-    "text": "What sport does Daring Club Motema Pembe play?",
+    "text": "Who founded Daring Club Motema Pembe?",
     "options": [
-      "Basketball",
-      "Football",
-      "Rugby",
-      "Volleyball"
+      "A group of local players",
+      "Missionary Father Raphaël de la Kethulle",
+      "Kinshasa city council",
+      "A European football company"
     ],
     "answer": 1,
     "quotes": [
-      "a Kinshasa football club",
-      "a Kinshasa football club"
+      "Daring Club Motema Pembe (DCMP) is a Kinshasa football club founded in 1936 by missionary Father Raphaël de la Kethulle.",
+      "DCMP is a Kinshasa football club founded in 1936 by missionary Father Raphaël de la Kethulle"
     ]
   }
 }

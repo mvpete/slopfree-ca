@@ -560,17 +560,17 @@
     false
   ],
   "question": {
-    "text": "What role does Sutton High Street play in Sutton?",
+    "text": "What is Sutton High Street mainly known for?",
     "options": [
-      "A major shopping destination",
-      "A residential estate",
-      "An industrial park",
-      "A university campus"
+      "Shopping and dining centre",
+      "Historic church site",
+      "Industrial district",
+      "Residential neighborhood"
     ],
     "answer": 0,
     "quotes": [
-      "Sutton’s main shopping street",
-      "a largely pedestrianised shopping and dining centre"
+      "Sutton High Street is Sutton’s main shopping street",
+      "Sutton High Street is a largely pedestrianised shopping and dining centre in the London Borough of Sutton"
     ]
   }
 }

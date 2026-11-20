@@ -426,17 +426,17 @@
     true
   ],
   "question": {
-    "text": "What is unusual about where this lizard lives?",
+    "text": "What is notable about the common lizard's reproduction?",
     "options": [
-      "It lives only on islands",
-      "It has the widest range of any lizard",
-      "It lives only in deserts",
-      "It lives mainly in the ocean"
+      "Mostly live birth",
+      "Mostly egg-laying",
+      "Mostly asexual reproduction",
+      "Mostly external fertilization"
     ],
-    "answer": 1,
+    "answer": 0,
     "quotes": [
-      "having the widest range of any lizard",
-      "with the widest range of any lizard"
+      "Most populations give birth to live young, but some in northern Spain and southwestern France lay eggs.",
+      "Most populations give birth to live young, while egg-laying populations occur in northern Spain and southwestern France."
     ]
   }
 }

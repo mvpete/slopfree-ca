@@ -610,17 +610,17 @@
     false
   ],
   "question": {
-    "text": "What kind of animal was Nasutoceratops?",
+    "text": "What kind of dinosaur was Nasutoceratops?",
     "options": [
-      "A flying reptile",
-      "A horned dinosaur",
-      "A marine mammal",
-      "A giant turtle"
+      "Horned dinosaur",
+      "Sauropod dinosaur",
+      "Theropod dinosaur",
+      "Duck-billed dinosaur"
     ],
-    "answer": 1,
+    "answer": 0,
     "quotes": [
-      "Nasutoceratops was a horned dinosaur",
-      "Nasutoceratops was a horned dinosaur"
+      "Nasutoceratops was a horned dinosaur that lived in what is now Utah about 76 million years ago.",
+      "Nasutoceratops was a horned dinosaur that lived in Utah about 76–75.5 million years ago."
     ]
   }
 }

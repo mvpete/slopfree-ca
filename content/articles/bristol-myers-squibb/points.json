@@ -660,17 +660,17 @@
     false
   ],
   "question": {
-    "text": "What kind of company is Bristol Myers Squibb?",
+    "text": "What type of company is Bristol Myers Squibb?",
     "options": [
-      "A software company",
-      "A pharmaceutical company",
-      "A clothing retailer",
-      "An airline"
+      "Pharmaceutical company",
+      "Technology company",
+      "Automotive company",
+      "Financial services company"
     ],
-    "answer": 1,
+    "answer": 0,
     "quotes": [
-      "a multinational pharmaceutical company",
-      "a multinational pharmaceutical company"
+      "Bristol Myers Squibb (BMS) is a multinational pharmaceutical company headquartered in Princeton, New Jersey.",
+      "Bristol Myers Squibb (BMS), headquartered in Princeton, New Jersey, is a multinational pharmaceutical company."
     ]
   }
 }

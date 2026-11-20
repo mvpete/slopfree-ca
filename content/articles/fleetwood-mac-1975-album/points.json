@@ -428,17 +428,17 @@
     false
   ],
   "question": {
-    "text": "What change in Fleetwood Mac did this album mark?",
+    "text": "What did Fleetwood Mac's 1975 album introduce to the band?",
     "options": [
-      "The band switched to instrumentals",
-      "Two new members joined",
-      "The band broke up",
-      "The original lineup reunited"
+      "New members Buckingham and Nicks",
+      "A new record label",
+      "A live concert recording",
+      "A greatest hits collection"
     ],
-    "answer": 1,
+    "answer": 0,
     "quotes": [
-      "the first to feature Lindsey Buckingham and Stevie Nicks",
-      "introduced Lindsey Buckingham and Stevie Nicks to the band"
+      "*Fleetwood Mac* is the band’s 1975 tenth studio album and the first to feature Lindsey Buckingham and Stevie Nicks.",
+      "Fleetwood Mac’s 1975 self-titled album introduced Lindsey Buckingham and Stevie Nicks to the band and launched its most successful lineup."
     ]
   }
 }

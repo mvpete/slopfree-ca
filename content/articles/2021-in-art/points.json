@@ -1150,19 +1150,5 @@
     false,
     true,
     false
-  ],
-  "question": {
-    "text": "What happened to major in-person art events that year?",
-    "options": [
-      "They moved entirely online",
-      "They made a comeback",
-      "They became private gatherings",
-      "They were canceled everywhere"
-    ],
-    "answer": 1,
-    "quotes": [
-      "the return of in-person art fairs",
-      "the return of major in-person events"
-    ]
-  }
+  ]
 }

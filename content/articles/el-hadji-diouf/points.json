@@ -2,17 +2,17 @@
   "points": [],
   "key": [],
   "question": {
-    "text": "What sport did El Hadji Diouf play for Senegal?",
+    "text": "What was El Hadji Diouf's notable achievement at the 2002 World Cup?",
     "options": [
-      "Basketball",
-      "Football",
-      "Rugby",
-      "Cricket"
+      "Reached quarter-finals with Senegal",
+      "Scored most goals in the tournament",
+      "Won the Golden Boot",
+      "Played as a goalkeeper"
     ],
-    "answer": 1,
+    "answer": 0,
     "quotes": [
-      "a Senegalese former forward whose standout 2002 World Cup helped launch a high-profile career in European football",
-      "a Senegalese former winger and forward whose career combined a standout 2002 World Cup"
+      "El Hadji Diouf is a Senegalese former forward whose standout 2002 World Cup helped launch a high-profile career in European football.",
+      "El Hadji Diouf is a Senegalese former winger and forward whose career combined a standout 2002 World Cup with repeated disciplinary controversies."
     ]
   }
 }

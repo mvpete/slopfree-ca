@@ -2,17 +2,17 @@
   "points": [],
   "key": [],
   "question": {
-    "text": "What is You See Colours?",
+    "text": "What is the main musical style shift in *You See Colours*?",
     "options": [
-      "A concert film",
-      "An album by Delays",
-      "A music magazine",
-      "A record label"
+      "From guitar-focused to indie rock and pop",
+      "From electronic to heavy metal",
+      "From jazz to classical",
+      "From pop punk to country"
     ],
-    "answer": 1,
+    "answer": 0,
     "quotes": [
-      "the second studio album by British rock band Delays",
-      "Delays’ second album, *You See Colours*"
+      "shift from the guitar-focused sound of their debut toward indie rock and pop, with catchy melodies",
+      "Shifting from the guitar-focused sound of their 2004 debut, the record blends indie rock and pop"
     ]
   }
 }

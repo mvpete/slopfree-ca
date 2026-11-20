@@ -350,17 +350,17 @@
     false
   ],
   "question": {
-    "text": "How does Ebeye’s population compare with those of other islands in Kwajalein Atoll?",
+    "text": "What is Ebeye Island mainly known for?",
     "options": [
-      "It has the fewest residents",
-      "It has the most residents",
-      "It has about average population",
-      "It has no permanent residents"
+      "Being the most populous island in Kwajalein Atoll",
+      "Having a large airstrip",
+      "A major tourist destination",
+      "Home to a large military base"
     ],
-    "answer": 1,
+    "answer": 0,
     "quotes": [
-      "the most populous island in Kwajalein Atoll",
-      "the most populous island of Kwajalein Atoll"
+      "Ebeye is the most populous island in Kwajalein Atoll and a major center of Marshallese culture.",
+      "Ebeye is the most populous island of Kwajalein Atoll and the Marshall Islands’ second most populous island."
     ]
   }
 }

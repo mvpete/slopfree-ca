@@ -574,17 +574,17 @@
     false
   ],
   "question": {
-    "text": "What position does Reed Blankenship play in the NFL?",
+    "text": "What is Reed Blankenship's profession?",
     "options": [
-      "Quarterback",
-      "Safety",
-      "Wide receiver",
-      "Kicker"
+      "NFL safety",
+      "College football coach",
+      "Sports broadcaster",
+      "Basketball player"
     ],
-    "answer": 1,
+    "answer": 0,
     "quotes": [
-      "Reed Blankenship is an NFL safety",
-      "Reed Blankenship is an NFL safety"
+      "Reed Blankenship is an NFL safety who went from undrafted rookie to starter with the Philadelphia Eagles and won Super Bowl LIX.",
+      "Reed Blankenship is an NFL safety who joined the Houston Texans in 2026 after four seasons with the Philadelphia Eagles."
     ]
   }
 }

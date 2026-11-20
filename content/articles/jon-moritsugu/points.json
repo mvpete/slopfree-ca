@@ -4,15 +4,15 @@
   "question": {
     "text": "What is Jon Moritsugu known for?",
     "options": [
-      "Writing historical novels",
-      "Making low-budget film parodies",
-      "Painting outdoor murals",
-      "Designing video games"
+      "Low-budget genre parody films",
+      "Classical music compositions",
+      "Documentary filmmaking",
+      "High-budget Hollywood movies"
     ],
-    "answer": 1,
+    "answer": 0,
     "quotes": [
-      "low-budget films that satirize popular genres",
-      "low-budget films parody popular genres"
+      "Jon Moritsugu is an American underground filmmaker and musician known for low-budget films that satirize popular genres",
+      "Jon Moritsugu is an American underground filmmaker and musician whose low-budget films parody popular genres through absurdist comedy"
     ]
   }
 }

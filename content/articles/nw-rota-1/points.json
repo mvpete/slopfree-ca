@@ -2,17 +2,17 @@
   "points": [],
   "key": [],
   "question": {
-    "text": "What kind of natural feature is NW Rota-1?",
+    "text": "What is notable about NW Rota-1 volcano?",
     "options": [
-      "An ocean trench",
-      "An active underwater volcano",
-      "A coral reef",
-      "A floating ice shelf"
+      "Explosive underwater eruptions observed",
+      "Located in the Atlantic Ocean",
+      "Known for dormant activity",
+      "Only emits lava"
     ],
-    "answer": 1,
+    "answer": 0,
     "quotes": [
-      "an active submarine volcano",
-      "an active submarine volcano"
+      " NW Rota-1 is an active submarine volcano in the Mariana Islands, northwest of Rota. It matters because it was the first volcano where explosive underwater eruptions were directly observed, in 2004.",
+      "NW Rota-1 is an active submarine volcano 64 km northwest of Rota in the Mariana Islands. Its summit lies 517 m below sea level, and its active crater, Brimstone Pit, has provided the first direct observations of explosive eruptions underwater, beginning in 2004."
     ]
   }
 }

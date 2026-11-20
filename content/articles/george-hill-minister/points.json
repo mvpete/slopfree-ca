@@ -568,17 +568,17 @@
     false
   ],
   "question": {
-    "text": "Which group did George Hill help lead?",
+    "text": "What was George Hill's role in the Church of Scotland?",
     "options": [
-      "A university debating club",
-      "The Church’s Moderate party",
-      "A group of merchants",
-      "A military regiment"
+      "A leading figure in the Moderate party",
+      "A radical reformer",
+      "A missionary abroad",
+      "A financial officer"
     ],
-    "answer": 1,
+    "answer": 0,
     "quotes": [
-      "became a leading figure in the Church of Scotland’s Moderate party",
-      "led the Church of Scotland’s Moderate party"
+      "George Hill (1750–1819) was a Scottish minister and academic who became a leading figure in the Church of Scotland’s Moderate party.",
+      "George Hill (1750–1819) was a Scottish minister and academic who led the Church of Scotland’s Moderate party after Principal William Robertson’s death."
     ]
   }
 }

@@ -466,17 +466,17 @@
     true
   ],
   "question": {
-    "text": "What kind of organization is Centre Alliance?",
+    "text": "What type of party is Centre Alliance?",
     "options": [
-      "A news outlet",
-      "A political party",
-      "A trade union",
-      "A charity"
+      "South Australian centrist and socially liberal",
+      "National conservative and traditionalist",
+      "Federal right-wing populist",
+      "International green party"
     ],
-    "answer": 1,
+    "answer": 0,
     "quotes": [
-      "a South Australian centrist and socially liberal party",
-      "a South Australian centrist and social liberal party"
+      "Centre Alliance is a South Australian centrist and socially liberal party founded in 2013 as the Nick Xenophon Team.",
+      "Centre Alliance is a South Australian centrist and social liberal party that grew from Nick Xenophon’s independent political movement."
     ]
   }
 }

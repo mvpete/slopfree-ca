@@ -288,19 +288,5 @@
     false,
     false,
     false
-  ],
-  "question": {
-    "text": "What do researchers control to conceal objects or events?",
-    "options": [
-      "Temperature and pressure",
-      "Electromagnetic and sound waves",
-      "Chemical reactions",
-      "The force of gravity"
-    ],
-    "answer": 1,
-    "quotes": [
-      "by controlling electromagnetic or sound waves",
-      "guide or cancel electromagnetic and sound waves"
-    ]
-  }
+  ]
 }
