@@ -143,7 +143,10 @@
   function renderPage() {
     const keys = Object.keys(DATA.models);
     const first = DATA.models[keys[0]];
-    if (first.golden.text) $("golden").querySelector("code").textContent = first.golden.text;
+    if (first.golden.text) {
+      $("golden").querySelector("code").textContent = first.golden.text;
+      $("snippet-golden").textContent = first.golden.text.split("\n").slice(0, 2).join("\n") + " ...";
+    }
 
     const cap = $("golden-caption");
     cap.textContent = "";

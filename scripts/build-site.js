@@ -120,6 +120,8 @@ let html = fs.readFileSync(path.join(REPO, "index.html"), "utf8");
 html = injectPrinciples(html, readPrinciples(REPO));
 html = injectModels(html, loadConfig());
 html = html.replace(/(<pre id="golden"><code>)[\s\S]*?(<\/code><\/pre>)/, `$1${esc(first.golden.text)}$2`);
+// The How to use example shows the start of the current golden prompt.
+html = html.replace(/(<span id="snippet-golden">)[\s\S]*?(<\/span>)/, `$1${esc(first.golden.text.split("\n").slice(0, 2).join("\n"))} ...$2`);
 fs.writeFileSync(path.join(OUT, "index.html"), html);
 
 // Versioned asset URLs, applied last: a browser can never pair a new page with an old cached script or stylesheet.
