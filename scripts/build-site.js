@@ -5,6 +5,8 @@ import path from "node:path";
 import { REPO, ROOT } from "./lib/config.js";
 import { readJSON, readGolden } from "./lib/store.js";
 import { readPrinciples, injectPrinciples } from "./lib/principles.js";
+import { injectModels } from "./lib/models-table.js";
+import { loadConfig } from "./lib/config.js";
 
 const OUT = path.join(REPO, "_site");
 const LABELS = { openai: "OpenAI" };
@@ -72,6 +74,7 @@ fs.writeFileSync(
 const first = index.models[models[0]];
 let html = fs.readFileSync(path.join(REPO, "index.html"), "utf8");
 html = injectPrinciples(html, readPrinciples(REPO));
+html = injectModels(html, loadConfig());
 html = html.replace(/(<pre id="golden"><code>)[\s\S]*?(<\/code><\/pre>)/, `$1${esc(first.golden.text)}$2`);
 fs.writeFileSync(path.join(OUT, "index.html"), html);
 

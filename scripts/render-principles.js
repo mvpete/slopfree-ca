@@ -4,8 +4,10 @@ import fs from "node:fs";
 import path from "node:path";
 import { REPO } from "./lib/config.js";
 import { readPrinciples, injectPrinciples } from "./lib/principles.js";
+import { injectModels } from "./lib/models-table.js";
+import { loadConfig } from "./lib/config.js";
 
 const file = path.join(REPO, "index.html");
 const list = readPrinciples(REPO);
-fs.writeFileSync(file, injectPrinciples(fs.readFileSync(file, "utf8"), list));
-console.log(`index.html: ${list.length} principles`);
+fs.writeFileSync(file, injectModels(injectPrinciples(fs.readFileSync(file, "utf8"), list), loadConfig()));
+console.log(`index.html: ${list.length} principles, models table refreshed`);

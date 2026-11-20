@@ -91,6 +91,19 @@
             <p>We store your answers and reading times. No accounts, no cookies, no IP addresses.</p>
           </div>
         </div>
+
+        <h3 class="sub">Models we use</h3>
+        <!-- models:start -->
+        <table class="models-table">
+          <thead><tr><th>Job</th><th>Model</th></tr></thead>
+          <tbody>
+            <tr><td>Writes the summaries</td><td><code>gpt-6-luna</code></td></tr>
+            <tr><td>Judges which points were kept</td><td><code>gpt-6.2-sol</code></td></tr>
+            <tr><td>Drafts new candidate prompts</td><td><code>gpt-6.2-sol</code></td></tr>
+          </tbody>
+        </table>
+        <!-- models:end -->
+        <p class="small">A prompt that works on one model can fail on another, so every result on this site names the models that produced it.</p>
       </div>
     </section>
 
