@@ -31,7 +31,7 @@ export async function pool(items, limit, fn) {
 export const promptName = (id) => String(Number(String(id).replace(/^p-/, "")));
 
 // Community submissions: prompts/queue/<github-username>-<YYYY-MM-DD>[-<n>].md, tested oldest first.
-export const QUEUE_NAME = /^([A-Za-z0-9][A-Za-z0-9-]{0,38})-(\d{4}-\d{2}-\d{2})(?:-(\d+))?\.md$/;
+export const QUEUE_NAME = /^([A-Za-z0-9][A-Za-z0-9-]{0,38})-(\d{4}-\d{2}-\d{2})\.md$/; // one per person per day
 
 // Fingerprint of a quiz question's exact wording. Answers carry it, so an answer is only ever scored
 // against the question the reader actually saw. js/main.js has the same function.

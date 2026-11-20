@@ -60,6 +60,13 @@ export function score(stats) {
     candDashes: sum("candDashes"),
     baseStyle: sum("baseStyle"),
     candStyle: sum("candStyle"),
+    // Composite: net key points (kept minus unsupported claims) per word, as a multiple of the plain
+    // summary's. Higher is better; 1.00 = plain.
+    composite: (() => {
+      const cand = (sum("kept") - sum("candUnsupported")) / sum("candWords");
+      const base = (sum("baseCovered") - sum("baseUnsupported")) / sum("baseWords");
+      return base > 0 ? cand / base : NaN;
+    })(),
     baseOfArticlePoints: sum("totalPoints") ? sum("baseCovered") / sum("keyPoints") : NaN,
     baseOfArticleWords: valid.every((s) => s.articleWords) ? median(valid.map((s) => s.baseWords / s.articleWords)) : NaN,
     worst: per.slice(0, 3),

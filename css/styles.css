@@ -453,8 +453,13 @@ button.choice:hover, button.choice:focus-visible { border-color: var(--gold); }
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
   overscroll-behavior-x: contain;
+  align-items: start;
+  overflow-y: hidden;
+  transition: height 0.25s ease;
 }
 .car-track::-webkit-scrollbar { display: none; }
+@media (prefers-reduced-motion: reduce) { .car-track { transition: none; } }
+.page-examples .footer { margin-top: 24px; padding-bottom: 24px; }
 .car-track > .example { scroll-snap-align: start; min-width: 0; }
 .car-nav { display: flex; align-items: center; justify-content: center; gap: 16px; margin-top: 18px; }
 .car-btn {
@@ -497,33 +502,6 @@ button.choice:hover, button.choice:focus-visible { border-color: var(--gold); }
 /* No section snapping while a quiz is in progress. */
 html.quiz-active { scroll-snap-type: none; }
 
-/* ---------- "Days since" safety-board joke ---------- */
-.slop-sign {
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  margin: 0 0 22px;
-  padding: 8px 16px 8px 10px;
-  border: 2px solid var(--gold);
-  border-radius: 6px;
-  font: 600 0.72rem/1.25 var(--mono);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  text-align: left;
-  color: var(--text);
-}
-.slop-num {
-  display: grid;
-  place-items: center;
-  min-width: 2.2rem;
-  height: 2.2rem;
-  padding: 0 6px;
-  border-radius: 4px;
-  background: var(--surface);
-  color: var(--gold);
-  font: 600 1.5rem/1 var(--mono);
-  font-variant-numeric: tabular-nums;
-}
 
 .steps.four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 @media (max-width: 1000px) { .steps.four { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
@@ -532,3 +510,59 @@ html.quiz-active { scroll-snap-type: none; }
 .facts.five { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 24px; }
 @media (max-width: 1000px) { .facts.five { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 @media (max-width: 760px) { .facts.five { grid-template-columns: 1fr; } }
+
+/* ---------- Latest eval: small table ---------- */
+.eval-table { margin-top: 18px; border-collapse: collapse; font-size: 0.85rem; }
+.eval-table th { text-align: left; font-weight: 500; color: var(--dim); padding: 4px 20px 4px 0; }
+.eval-table td { padding: 4px 0; }
+.eval-table code { font-family: var(--mono); color: var(--gold); }
+
+.facts.four { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; }
+@media (max-width: 1000px) { .facts.four { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 760px) { .facts.four { grid-template-columns: 1fr; } }
+
+.tools dd code { font-family: var(--mono); font-size: 0.82rem; color: var(--gold); overflow-wrap: anywhere; }
+
+/* ---------- Examples: flip card (summaries front, unsupported claims back) ---------- */
+.example { padding: 0; background: none; border: 0; }
+.ex-card { display: grid; perspective: 1600px; }
+.ex-face {
+  grid-area: 1 / 1;
+  align-self: stretch;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: clamp(18px, 3vw, 28px);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transition: transform 0.5s ease;
+}
+.ex-back { transform: rotateY(180deg); }
+.ex-card.flipped .ex-front { transform: rotateY(-180deg); }
+.ex-card.flipped .ex-back { transform: rotateY(0deg); }
+.ex-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; flex-wrap: wrap; }
+.ex-flip { padding: 8px 14px; font-size: 0.82rem; }
+.ex-back .claims { margin: 8px 0 0; padding-left: 18px; color: var(--text); font-size: 0.88rem; }
+.ex-back .claims li { margin-bottom: 6px; }
+.ex-back .claims.none { color: var(--dim); }
+@media (prefers-reduced-motion: reduce) { .ex-face { transition: none; } }
+
+/* ---------- Examples: eval score under each prompt ---------- */
+.ex-score { margin-top: 12px; border-collapse: collapse; font-size: 0.82rem; width: 100%; }
+.ex-score th { text-align: left; font-weight: 500; color: var(--dim); padding: 4px 12px 4px 0; border-top: 1px solid var(--line); }
+.ex-score td { text-align: right; padding: 4px 0; border-top: 1px solid var(--line); font-variant-numeric: tabular-nums; color: var(--text); }
+.ex-score .ok { color: var(--good); }
+.ex-score .no { color: var(--bad); }
+
+/* Score sits at the bottom of each prompt box, under a single line. */
+.ex-prompt { display: flex; flex-direction: column; }
+.ex-score { margin-top: auto; padding-top: 0; border-top: 1px solid var(--line); }
+.ex-prompt .small + .ex-score, .ex-prompt pre + .ex-score { margin-top: auto; }
+.ex-score tbody tr:first-child th, .ex-score tbody tr:first-child td { padding-top: 10px; }
+.ex-score th, .ex-score td { border-top: 0; }
+.ex-prompt > .small { margin-bottom: 14px; }
+
+p.ex-score { margin: auto 0 0; padding-top: 10px; border-top: 1px solid var(--line); font-size: 0.9rem; color: var(--dim); }
+p.ex-score strong { color: var(--gold); font: 600 1.1rem var(--mono); }
+
+.thanks { margin: 0 0 24px; font-size: clamp(2rem, 5vw, 3rem); color: var(--gold); }

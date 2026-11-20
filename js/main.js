@@ -155,8 +155,7 @@
       el.textContent = text;
       cap.appendChild(el);
     };
-    add("Golden prompt ");
-    add(promptName(first.golden.id), true);
+    add("Golden prompt", true);
     if (first.eval && first.eval.passed) {
       add(first.eval.coverage >= 1 ? " · as many facts as a plain summary in " : ` · ${pct(first.eval.coverage)} of a plain summary's facts in `);
       add(pct(first.eval.shorter), true);
@@ -171,10 +170,37 @@
 
     const line = $("eval-line");
     if (first.eval) {
-      line.textContent = first.eval.passed
-        ? `Latest eval (${first.eval.date}, ${first.eval.articles} articles): the golden prompt kept ${pct(first.eval.coverage)} as many of the articles' points as a plain summary, in ${pct(first.eval.shorter)} fewer words.`
-        : `Latest eval (${first.eval.date}): the golden prompt didn't pass this week. It's being revised.`;
-      if (first.eval.writerModel) line.textContent += ` Summaries by ${first.eval.writerModel}, judged by ${first.eval.judgeModel}.`;
+      line.textContent = "";
+      const body = document.createElement("tbody");
+      [["Latest eval", first.eval.date], ["Summaries", first.eval.writerModel], ["Judge", first.eval.judgeModel]]
+        .filter(([, v]) => v)
+        .forEach(([k, v]) => {
+          const tr = document.createElement("tr");
+          const th = document.createElement("th");
+          th.scope = "row";
+          th.textContent = k;
+          const td = document.createElement("td");
+          const code = document.createElement("code");
+          code.textContent = v;
+          td.appendChild(code);
+          tr.append(th, td);
+          body.appendChild(tr);
+        });
+      // Candidate: link to its prompt file on GitHub.
+      if (first.challenger) {
+        const tr = document.createElement("tr");
+        const th = document.createElement("th");
+        th.scope = "row";
+        th.textContent = "Challenger";
+        const td = document.createElement("td");
+        const a = document.createElement("a");
+        a.href = `https://github.com/mvpete/slopfree-ca/blob/main/prompts/${keys[0]}/${first.challenger}.md`;
+        a.textContent = "View on GitHub";
+        td.appendChild(a);
+        tr.append(th, td);
+        body.appendChild(tr);
+      }
+      line.appendChild(body);
       line.hidden = false;
     }
 
@@ -476,7 +502,7 @@
     $("score").textContent = correct;
     $("score-of").textContent = "/" + scored.length;
     const avg = scored.length ? Math.round(scored.reduce((a, r) => a + r.readMs, 0) / scored.length / 1000) : 0;
-    $("score-line").textContent = `You averaged ${avg} seconds per summary. Each answer scores the prompt that wrote that summary.`;
+    $("score-line").textContent = `You averaged ${avg} seconds per summary.`;
     const ul = $("breakdown");
     ul.innerHTML = "";
     rounds.forEach((r) => {
@@ -493,7 +519,7 @@
       left.append(mark, link);
       const meta = document.createElement("span");
       meta.className = "meta";
-      const who = (r.tooHard ? "too hard · " : "") + (r.guess ? "guess round" : r.promptId === m.golden.id ? `golden, prompt ${promptName(r.promptId)}` : `challenger, prompt ${promptName(r.promptId)}`);
+      const who = (r.tooHard ? "too hard · " : "") + (r.guess ? "guess round" : r.promptId === m.golden.id ? "golden" : "challenger");
       meta.textContent = r.guess ? who : `${who} · ${Math.round(r.readMs / 1000)}s`;
       li.append(left, meta);
       ul.appendChild(li);

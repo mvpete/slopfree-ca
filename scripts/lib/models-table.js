@@ -1,4 +1,4 @@
-// "Models we use" table on the site, generated from slopfree.config.json so it can't drift.
+// "Models used" table on the site, generated from slopfree.config.json so it can't drift.
 const ROWS = [
   ["writerModel", "Writes the summaries"],
   ["judgeModel", "Judges which points were kept"],

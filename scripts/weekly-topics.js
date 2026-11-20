@@ -40,8 +40,8 @@ const queue = fs.existsSync(queueDir)
       .readdirSync(queueDir)
       .map((f) => ({ f, m: f.match(QUEUE_NAME) }))
       .filter((x) => x.m)
-      // Oldest submission first; several from one person on one day keep their -2, -3 order.
-      .sort((a, b) => a.m[2].localeCompare(b.m[2]) || Number(a.m[3] || 1) - Number(b.m[3] || 1) || a.f.localeCompare(b.f))
+      // Oldest submission first (one per person per day).
+      .sort((a, b) => a.m[2].localeCompare(b.m[2]) || a.f.localeCompare(b.f))
       .map((x) => `prompts/queue/${x.f}`)
   : [];
 const tested = [];

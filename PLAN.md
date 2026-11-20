@@ -145,7 +145,7 @@ api/                                          Worker + D1 schema
 
 Five snap-scroll sections under a fixed menu (About, How to use, Quiz, Human first, GitHub, Sponsor):
 
-1. **Home**: "I'm over the text wall.", slop parody line, "Let's remember who we're writing for.", golden prompt code box.
+1. **Home**: "I'm over the wall of text.", slop parody line, "Let's remember who we're writing for.", golden prompt code box.
 2. **About**: how a prompt earns golden. Should lead with the compression claim and this week's eval numbers.
 3. **How to use it**: one message vs custom instructions, where to save it, tips.
 4. **Quiz**: one button per model, 5 rounds, results.

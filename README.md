@@ -48,7 +48,7 @@ Settings are in [`slopfree.config.json`](slopfree.config.json): models, gate thr
 
 ## Submit a prompt
 
-Add `prompts/queue/<github-username>-<YYYY-MM-DD>.md` containing only the prompt (add `-2`, `-3` for more on the same day), and open a PR. Submissions are tested oldest first. Details in [`prompts/queue/README.md`](prompts/queue/README.md).
+Add `prompts/queue/<github-username>-<YYYY-MM-DD>.md` containing only the prompt, and open a PR. One submission per person per day. Submissions are tested oldest first. Details in [`prompts/queue/README.md`](prompts/queue/README.md).
 
 ## Setup (maintainers)
 

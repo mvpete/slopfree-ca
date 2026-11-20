@@ -27,7 +27,7 @@ for (const f of changed.filter((f) => /^prompts\/[^/]+\/p-\d+\.md$/.test(f) && e
 
 // Community submissions must be named <github-username>-<YYYY-MM-DD>[-<n>].md and fit the length cap.
 for (const f of changed.filter((f) => f.startsWith("prompts/queue/") && exists(f) && !f.endsWith("README.md"))) {
-  if (!QUEUE_NAME.test(path.basename(f))) errors.push(`${f}: name it <github-username>-<YYYY-MM-DD>.md (add -2, -3 for more on the same day)`);
+  if (!QUEUE_NAME.test(path.basename(f))) errors.push(`${f}: name it <github-username>-<YYYY-MM-DD>.md (one submission per person per day)`);
   const len = fs.readFileSync(file(f), "utf8").trim().length;
   if (len > cfg.promptMaxChars) errors.push(`${f} is ${len} characters (limit ${cfg.promptMaxChars})`);
 }

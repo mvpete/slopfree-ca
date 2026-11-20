@@ -30,8 +30,7 @@
     <!-- 1. Home -->
     <section id="home" class="panel hero">
       <div class="wrap narrow">
-        <p class="slop-sign" aria-label="Zero days since the last AI wall of text"><span class="slop-num" aria-hidden="true">0</span><span class="slop-label" aria-hidden="true">days since the last<br>AI wall of text</span></p>
-        <h1>I'm over the text wall.</h1>
+        <h1>I'm over the wall of text.</h1>
         <p class="lede slop">“Great question! It’s not a human, it’s AI! Let’s delve in. Blah. Blah. Blah. A literary flourish here, a tidy list of three there, and a recap of everything you just read. No point anywhere. I hope this helps!”</p>
         <p class="lede plain">Let’s remember who we’re writing for.</p>
 
@@ -45,7 +44,7 @@
 - Keep every fact; drop every word that carries none.
 - Plain words, short sentences, no filler or flourishes.
 - Unsure? Say so once. Never make things up.</code></pre>
-          <figcaption id="golden-caption">Golden prompt <strong id="golden-id">1</strong> · paste it at the end of any prompt</figcaption>
+          <figcaption id="golden-caption"><strong>Golden prompt</strong> · paste it at the end of any prompt</figcaption>
         </figure>
       </div>
       <a class="scroll-cue" href="#about" aria-label="Scroll to About">
@@ -60,7 +59,7 @@
         <h2>Stop with the slop. Get to the point.</h2>
         <p class="lede">LLMs work in two directions. Summarizing is lossy compression: a long input becomes a short one, and detail is lost. Expanding a short prompt into a long output inflates it with invented detail.</p>
         <p class="lede">Slop Free is an experiment to find a prompt that minimizes loss in compression and reduces inflated detail. What is left is text that gets to the point.</p>
-        <p class="eval-line" id="eval-line" hidden></p>
+        <table class="eval-table" id="eval-line" hidden></table>
 
         <ol class="steps four">
           <li>
@@ -85,7 +84,7 @@
           </li>
         </ol>
 
-        <div class="facts five">
+        <div class="facts four">
           <div>
             <h3>Why Wikipedia</h3>
             <p>It offers access to articles on every subject. Revisions are pinned, allowing for traceability.</p>
@@ -102,11 +101,9 @@
             <h3>No tracking</h3>
             <p>Only answers and reading time are stored. No personal data. We don't want your data.</p>
           </div>
-          <div>
-            <h3>See examples</h3>
-            <p><a href="examples.html">Plain summary vs golden prompt, side by side</a>.</p>
-          </div>
         </div>
+
+        <p class="small"><a href="examples.html">See examples</a></p>
 
         <h3 class="sub">Models used</h3>
         <!-- models:start -->
@@ -127,13 +124,13 @@
     <section id="how" class="panel">
       <div class="wrap">
         <p class="eyebrow">How to use it</p>
-        <h2>Paste it at the end, or save it once.</h2>
-        <p class="lede">The golden prompt is a postfix: text that goes after your request. Models pay close attention to the end of a prompt, so that's where it does the most work.</p>
+        <h2>Paste it or save it. Doesn't matter. Just use it.</h2>
+        <p class="lede">Include the golden prompt in your agent and witness the magic. Less filler and more directness. Fewer walls of AI text.</p>
 
         <div class="ways">
           <div class="way">
             <h3>For one message</h3>
-            <p>Write your request as usual, leave a blank line, then paste the prompt.</p>
+            <p>Write your request, leave a blank line, paste the prompt.</p>
 <pre class="snippet">Explain how a heat pump keeps a house warm at -20°C.
 
 <span id="snippet-golden">Give the reader the essentials in as few words as possible.
@@ -141,7 +138,7 @@
           </div>
           <div class="way">
             <h3>For every chat</h3>
-            <p>Save it in your assistant's custom instructions and every reply follows it, without pasting.</p>
+            <p>Save it as a personal preference, a custom instruction in your agent, or embed it in your system prompt.</p>
             <button class="btn ghost copy-golden" type="button" data-label="Copy the golden prompt">Copy the golden prompt</button>
           </div>
         </div>
@@ -151,16 +148,14 @@
           <div><dt>ChatGPT</dt><dd>Settings → Personalization → Custom instructions</dd></div>
           <div><dt>Claude</dt><dd>Settings → Profile → personal preferences, or a Project's instructions</dd></div>
           <div><dt>Gemini</dt><dd>Saved info, or a Gem's instructions</dd></div>
-          <div><dt>API and agents</dt><dd>The end of your system prompt</dd></div>
+          <div><dt>API and agents</dt><dd>The end of your system prompt. Always fetch the latest: <a href="https://api.slopfree.ca/v1/golden"><code>api.slopfree.ca/v1/golden</code></a> (JSON) or <a href="https://slopfree.ca/golden.txt"><code>slopfree.ca/golden.txt</code></a> (plain text)</dd></div>
         </dl>
-        <p class="small">Menu names change between app versions. If you can't find these, look for "custom instructions" or "personalization".</p>
-        <p class="small">Building something? Always fetch the latest: <code>https://api.slopfree.ca/v1/golden</code> (JSON) or <code>https://slopfree.ca/golden.txt</code> (plain text).</p>
 
         <h3 class="sub">Tips</h3>
         <ul class="tips">
           <li><strong>Keep it last.</strong> Put task-specific instructions before it, so the golden prompt is the final thing the model reads.</li>
           <li><strong>Re-paste in long chats.</strong> Models drift back to old habits as a conversation grows. Pasting it again resets them.</li>
-          <li><strong>Edit freely.</strong> Drop a rule you disagree with. Just know the quiz ranks the version shown here, not your edit.</li>
+          <li><strong>Edit freely.</strong> Mix it, mash it. Do whatever you want. Please <a href="https://github.com/mvpete/slopfree-ca/blob/main/prompts/queue/README.md">contribute</a> any prompt that you think works better.</li>
         </ul>
       </div>
     </section>
@@ -213,6 +208,7 @@
           </div>
 
           <div class="stage" id="stage-result" hidden>
+            <h2 class="thanks">Thank you!</h2>
             <p class="eyebrow">Your result</p>
             <p class="score"><span id="score">0</span><span class="of" id="score-of">/5</span></p>
             <p class="lede" id="score-line"></p>

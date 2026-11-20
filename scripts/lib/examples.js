@@ -23,14 +23,19 @@ function paragraphs(text) {
 function column(label, sub, run, base, key) {
   const kept = run.covered.filter((c, i) => c && (!key || key[i])).length;
   const vs = "";
-  const claims = run.unsupportedClaims?.length
-    ? `<details class="claims"><summary>${run.unsupportedClaims.length} unsupported claim${run.unsupportedClaims.length === 1 ? "" : "s"}</summary><ul>${run.unsupportedClaims.map((c) => `<li>${esc(c)}</li>`).join("")}</ul></details>`
-    : `<p class="claims none">No unsupported claims</p>`;
   return `<div class="ex-col">
           <h3>${label}${sub ? ` <span class="ex-sub">${sub}</span>` : ""}</h3>
-          <p class="ex-stats"><span><strong>${run.words}</strong> words</span><span><strong>${kept}</strong> key points</span><span><strong>${run.unsupported}</strong> unsupported</span>${run.dashes ? `<span><strong>${run.dashes}</strong> em dashes</span>` : ""}${vs}</p>
+          <p class="ex-stats"><span><strong>${run.words}</strong> words</span><span><strong>${kept}</strong> key points</span><span><strong>${run.unsupported}</strong> unsupported claim${run.unsupported === 1 ? "" : "s"}</span>${run.dashes ? `<span><strong>${run.dashes}</strong> em dashes</span>` : ""}${vs}</p>
           <div class="ex-text">${paragraphs(run.summary)}</div>
-          ${claims}
+        </div>`;
+}
+
+// Back of the card: every flagged claim, one column per prompt.
+function claimsColumn(label, run) {
+  const list = run.unsupportedClaims || [];
+  return `<div class="ex-col">
+          <h3>${label}</h3>
+          ${list.length ? `<ul class="claims">${list.map((c) => `<li>${esc(c)}</li>`).join("")}</ul>` : `<p class="claims none">None flagged.</p>`}
         </div>`;
 }
 
@@ -57,26 +62,40 @@ export function buildExamples(root, model, golden, challenger, slugs, meta) {
     add(totals.plain, base);
     add(totals.golden, g);
     if (c?.covered) add(totals.challenger, c);
+    const runs = [["Plain", base], ["Golden", g], ...(c?.covered ? [["Challenger", c]] : [])];
+    const three = c?.covered ? " three" : "";
+    const head = (flipLabel) => `<header class="ex-head">
+          <div>
+            <h2><a href="${esc(src.url)}">${esc(src.title)}</a></h2>
+            <p>${src.words.toLocaleString()}-word article${pts?.points?.length ? (pts.key?.length ? ` · ${pts.key.filter(Boolean).length} key points of ${pts.points.length} total` : ` · ${pts.points.length} points total`) : ""}</p>
+          </div>
+          <button class="btn ghost ex-flip" type="button">${flipLabel}</button>
+        </header>`;
     items.push({ ratio: g.words / base.words, html: `      <article class="example" aria-roledescription="slide">
-        <header class="ex-head">
-          <h2><a href="${esc(src.url)}">${esc(src.title)}</a></h2>
-          <p>${src.words.toLocaleString()} words · ${pts ? (pts.key ? `${pts.key.filter(Boolean).length} key of ${pts.points.length} points` : `${pts.points.length} points`) : "?"}</p>
-        </header>
-        <div class="ex-cols${c?.covered ? " three" : ""}">
-        ${column("Plain", "", base, null, pts?.key)}
-        ${column(`Golden ${name(golden.id)}`, "", g, base, pts?.key)}
-        ${c?.covered ? column(`Challenger ${name(challenger)}`, "", c, base, pts?.key) : ""}
+        <div class="ex-card">
+          <div class="ex-face ex-front">
+        ${head("Flip to see unsupported claims")}
+        <div class="ex-cols${three}">
+        ${runs.map(([label, r]) => column(label, "", r, r === base ? null : base, pts?.key)).join("\n        ")}
+        </div>
+          </div>
+          <div class="ex-face ex-back" aria-hidden="true">
+        ${head("Back to summaries")}
+        <div class="ex-cols${three}">
+        ${runs.map(([label, r]) => claimsColumn(label, r)).join("\n        ")}
+        </div>
+          </div>
         </div>
       </article>` });
   }
 
-  // Show two typical examples: the articles whose golden-vs-plain length change is closest to the median.
+  // Show five typical examples: the articles whose golden-vs-plain length change is closest to the median.
   const sorted = [...items].sort((a, b) => a.ratio - b.ratio);
   const mid = (sorted.length - 1) / 2;
   const shown = sorted
     .map((it, i) => ({ ...it, d: Math.abs(i - mid) }))
     .sort((a, b) => a.d - b.d)
-    .slice(0, 2);
+    .slice(0, 5);
   const slides = shown.map((s) => s.html).join("\n");
   const dots = shown.map((_, i) => `<button class="car-dot" type="button" aria-label="Example ${i + 1}"${i === 0 ? ' aria-current="true"' : ""}></button>`).join("");
   const carousel = shown.length
@@ -101,14 +120,26 @@ ${slides}
     : `<p class="lede">No examples yet. They appear after the first weekly eval publishes its articles.</p>`;
 
   // The exact prompts behind each column.
-  const box = (label, body, note) => `<div class="ex-prompt">
+  // One composite score per prompt: net key points (kept minus unsupported claims) per word,
+  // as a multiple of the plain summary's. Higher is better; plain is 1.00 by definition.
+  const scoreRows = (s) => {
+    if (s?.baseline) return `<p class="ex-score">Score: <strong>1.00</strong></p>`;
+    const sc = s?.score;
+    if (!sc) return "";
+    const v = Number.isFinite(sc.composite)
+      ? sc.composite
+      : (sc.kept - sc.candUnsupported) / sc.candWords / ((sc.baseKept - sc.baseUnsupported) / sc.baseWords);
+    return Number.isFinite(v) ? `<p class="ex-score">Score: <strong>${v.toFixed(2)}</strong></p>` : "";
+  };
+  const box = (label, body, note, s) => `<div class="ex-prompt">
         <h3>${label}</h3>
         <pre>${esc(body)}</pre>${note ? `<p class="small">${note}</p>` : ""}
+        ${scoreRows(s, meta.gate)}
       </div>`;
   const prompts = `<div class="ex-prompts${meta.challengerText ? " three" : ""}">
-      ${box("Plain", `${meta.wrapper}\n<article>`, "The baseline: no postfix.")}
-      ${box(`Golden ${name(golden.id)}`, `${meta.wrapper}\n<article>\n\n${golden.text}`, "Pasted after the article.")}
-      ${meta.challengerText ? box(`Challenger ${name(challenger)}`, `${meta.wrapper}\n<article>\n\n${meta.challengerText}`, "Pasted after the article.") : ""}
+      ${box("Plain", `${meta.wrapper}\n<article>`, "The baseline every score is measured against.", { baseline: true })}
+      ${box("Golden", `${meta.wrapper}\n<article>\n\n${golden.text}`, "", meta.scores?.golden)}
+      ${meta.challengerText ? box("Challenger", `${meta.wrapper}\n<article>\n\n${meta.challengerText}`, "", meta.scores?.challenger) : ""}
     </div>`;
 
   return `<!doctype html>
@@ -151,8 +182,16 @@ ${slides}
       var track = document.getElementById("car-track");
       if (!track) return;
       var slides = track.children, dots = document.querySelectorAll(".car-dot");
-      var at = function () { return Math.round(track.scrollLeft / track.clientWidth); };
-      var go = function (i) { i = Math.max(0, Math.min(slides.length - 1, i)); track.scrollTo({ left: i * track.clientWidth, behavior: "smooth" }); };
+      // One slide's step includes the gap between slides.
+      var step = function () { return slides.length > 1 ? slides[1].offsetLeft - slides[0].offsetLeft : track.clientWidth; };
+      var at = function () { return Math.max(0, Math.min(slides.length - 1, Math.round(track.scrollLeft / step()))); };
+      var go = function (i) { i = Math.max(0, Math.min(slides.length - 1, i)); track.scrollTo({ left: i * step(), behavior: "smooth" }); };
+      // The carousel is as tall as the slide on screen, not the tallest slide.
+      var fit = function () {
+        var card = slides[at()].querySelector(".ex-card");
+        // Both faces share one grid cell, so the card is as tall as its taller face and keeps that size when flipped.
+        track.style.height = (card ? card.offsetHeight : slides[at()].offsetHeight) + "px";
+      };
       var prev = document.getElementById("car-prev"), next = document.getElementById("car-next");
       if (prev) prev.onclick = function () { go(at() - 1); };
       if (next) next.onclick = function () { go(at() + 1); };
@@ -162,8 +201,29 @@ ${slides}
         dots.forEach(function (d, j) { if (j === i) d.setAttribute("aria-current", "true"); else d.removeAttribute("aria-current"); });
         if (prev) prev.disabled = i === 0;
         if (next) next.disabled = i === slides.length - 1;
+        fit();
       }, { passive: true });
+      window.addEventListener("resize", fit);
+      window.addEventListener("load", fit);
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+      // Re-measure whenever any card face changes size (fonts loading, wrapping, flipping).
+      if (window.ResizeObserver) {
+        var ro = new ResizeObserver(fit);
+        track.querySelectorAll(".ex-face").forEach(function (f) { ro.observe(f); });
+      }
+      document.querySelectorAll(".ex-flip").forEach(function (b) {
+        b.onclick = function () {
+          var card = b.closest(".ex-card");
+          var flipped = card.classList.toggle("flipped");
+          card.querySelector(".ex-front").setAttribute("aria-hidden", flipped ? "true" : "false");
+          card.querySelector(".ex-back").setAttribute("aria-hidden", flipped ? "false" : "true");
+          var other = card.querySelector(flipped ? ".ex-back .ex-flip" : ".ex-front .ex-flip");
+          if (other) other.focus({ preventScroll: true });
+          fit();
+        };
+      });
       if (prev) prev.disabled = true;
+      fit();
     })();
   </script>
 </body>
