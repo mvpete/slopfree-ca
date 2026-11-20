@@ -419,7 +419,7 @@ h3 { font-size: 1.05rem; letter-spacing: -0.01em; }
 .ex-title { font-size: clamp(2rem, 4.5vw, 3rem); }
 .ex-totals { margin-top: 24px; }
 .ex-totals td:not(:first-child), .ex-totals th:not(:first-child) { text-align: right; font-variant-numeric: tabular-nums; }
-.examples { display: grid; gap: 28px; margin-top: 40px; }
+.examples { margin-top: 40px; }
 .example { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: clamp(18px, 3vw, 28px); }
 .ex-head h2 { font-size: 1.3rem; }
 .ex-head h2 a { color: var(--text); }
@@ -441,3 +441,28 @@ h3 { font-size: 1.05rem; letter-spacing: -0.01em; }
 .claims li { margin-bottom: 4px; }
 .claims.none { margin: 10px 0 0; }
 @media (max-width: 900px) { .ex-cols, .ex-cols.three { grid-template-columns: 1fr; } }
+
+/* ---------- Examples carousel ---------- */
+.car-track {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 100%;
+  gap: 24px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  overscroll-behavior-x: contain;
+}
+.car-track::-webkit-scrollbar { display: none; }
+.car-track > .example { scroll-snap-align: start; min-width: 0; }
+.car-nav { display: flex; align-items: center; justify-content: center; gap: 16px; margin-top: 18px; }
+.car-btn {
+  width: 40px; height: 40px; border-radius: 50%;
+  border: 1px solid var(--gold-soft); background: transparent; color: var(--gold);
+  font-size: 1.1rem; cursor: pointer;
+}
+.car-btn:disabled { opacity: 0.3; cursor: default; }
+.car-dots { display: flex; gap: 8px; }
+.car-dot { width: 9px; height: 9px; border-radius: 50%; border: 0; padding: 0; background: var(--line); cursor: pointer; }
+.car-dot[aria-current="true"] { background: var(--gold); }
+@media (prefers-reduced-motion: reduce) { .car-track { scroll-behavior: auto; } }

@@ -57,7 +57,7 @@ export function buildExamples(root, model, golden, challenger, slugs, meta) {
     add(totals.plain, base);
     add(totals.golden, g);
     if (c?.covered) add(totals.challenger, c);
-    items.push(`      <article class="example">
+    items.push({ ratio: g.words / base.words, html: `      <article class="example" aria-roledescription="slide">
         <header class="ex-head">
           <h2><a href="${esc(src.url)}">${esc(src.title)}</a></h2>
           <p>${src.words.toLocaleString()} words in the article (revision ${src.revision}) · ${pts ? pts.points.length : "?"} points listed</p>
@@ -67,8 +67,26 @@ export function buildExamples(root, model, golden, challenger, slugs, meta) {
         ${column("Golden", `prompt ${name(golden.id)}`, g, base)}
         ${c?.covered ? column("Challenger", `prompt ${name(challenger)}`, c, base) : ""}
         </div>
-      </article>`);
+      </article>` });
   }
+
+  // Show two typical examples: the articles whose golden-vs-plain length change is closest to the median.
+  const sorted = [...items].sort((a, b) => a.ratio - b.ratio);
+  const mid = (sorted.length - 1) / 2;
+  const shown = sorted
+    .map((it, i) => ({ ...it, d: Math.abs(i - mid) }))
+    .sort((a, b) => a.d - b.d)
+    .slice(0, 2);
+  const slides = shown.map((s) => s.html).join("\n");
+  const dots = shown.map((_, i) => `<button class="car-dot" type="button" aria-label="Example ${i + 1}"${i === 0 ? ' aria-current="true"' : ""}></button>`).join("");
+  const carousel = shown.length
+    ? `<div class="carousel" aria-roledescription="carousel" aria-label="Examples">
+      <div class="car-track" id="car-track">
+${slides}
+      </div>
+      ${shown.length > 1 ? `<div class="car-nav"><button class="car-btn" type="button" id="car-prev" aria-label="Previous example">←</button><span class="car-dots">${dots}</span><button class="car-btn" type="button" id="car-next" aria-label="Next example">→</button></div>` : ""}
+    </div>`
+    : "";
 
   const row = (label, t) => (t.w ? `<tr><td>${label}</td><td>${t.w.toLocaleString()}</td><td>${t.p}</td><td>${t.u}</td></tr>` : "");
   const summary = items.length
@@ -111,12 +129,12 @@ export function buildExamples(root, model, golden, challenger, slugs, meta) {
     <div class="wrap">
       <p class="eyebrow">Examples</p>
       <h1 class="ex-title">The same article, summarized side by side.</h1>
-      <p class="lede">This week's articles from the eval. Each one is summarized by a plain "Summarize the following article:" and by the golden prompt${challenger ? " and the challenger" : ""}. Points are counted against every claim the article makes. Unsupported claims are what the judge flagged; open them to check its work.</p>
+      <p class="lede">Two typical articles from this week's eval. Each one is summarized by a plain "Summarize the following article:" and by the golden prompt${challenger ? " and the challenger" : ""}. Points are counted against every claim the article makes. Unsupported claims are what the judge flagged; open them to check its work.</p>
       <p class="small">${meta.date ? `Eval of ${esc(meta.date)}. ` : ""}Summaries by <code>${esc(meta.writer)}</code>, judged by <code>${esc(meta.judge)}</code>.</p>
       ${summary}
     </div>
     <div class="wrap examples">
-${items.join("\n")}
+    ${carousel}
     </div>
   </main>
   <footer class="footer">
@@ -124,6 +142,26 @@ ${items.join("\n")}
     <span>Code MIT · content CC BY-SA 4.0 from Wikipedia</span>
     <a href="https://github.com/mvpete/slopfree-ca">GitHub</a>
   </footer>
+  <script>
+    (function () {
+      var track = document.getElementById("car-track");
+      if (!track) return;
+      var slides = track.children, dots = document.querySelectorAll(".car-dot");
+      var at = function () { return Math.round(track.scrollLeft / track.clientWidth); };
+      var go = function (i) { i = Math.max(0, Math.min(slides.length - 1, i)); track.scrollTo({ left: i * track.clientWidth, behavior: "smooth" }); };
+      var prev = document.getElementById("car-prev"), next = document.getElementById("car-next");
+      if (prev) prev.onclick = function () { go(at() - 1); };
+      if (next) next.onclick = function () { go(at() + 1); };
+      dots.forEach(function (d, i) { d.onclick = function () { go(i); }; });
+      track.addEventListener("scroll", function () {
+        var i = at();
+        dots.forEach(function (d, j) { if (j === i) d.setAttribute("aria-current", "true"); else d.removeAttribute("aria-current"); });
+        if (prev) prev.disabled = i === 0;
+        if (next) next.disabled = i === slides.length - 1;
+      }, { passive: true });
+      if (prev) prev.disabled = true;
+    })();
+  </script>
 </body>
 </html>
 `;
