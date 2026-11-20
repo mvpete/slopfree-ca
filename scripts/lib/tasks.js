@@ -20,7 +20,7 @@ const QUESTION_SYSTEM = `You write one EASY reading check. A reader reads exactl
 Ask about the summary's main point: what the subject is or did, or the single most important thing the summary says about it. Take it from the first sentence or two. Every summary must state the answer.
 Anyone who read the summary once should get it right without thinking. Do not ask about numbers, dates, secondary names, lists or anything from later in the summary.
 The topic title is shown to the reader, so the answer must not be the title itself or guessable from the title alone.
-Keep the question under 15 words. Give 4 options of a few words each. One is correct; the other three are clearly wrong to anyone who read the summary.
+Keep the question under 15 words. Give 4 options of a few words each. One is correct. The other three are plausible fakes: the kind of confident, believable answer an AI would invent. Same kind of answer as the correct one, similar length and wording, the sort of thing that could be true of this subject, so a reader who skimmed or guessed from the title could pick one. Each fake must be wrong according to the summary.
 For each summary, quote the exact words that contain the answer (copy them character for character, 3 to 25 words).
 
 Return JSON: {"text": "...", "options": ["...","...","...","..."], "answer": <0-3>, "quotes": ["<quote from summary 1>", "<quote from summary 2>", ...]}`;
@@ -73,7 +73,7 @@ export function createTasks(cfg, llm) {
   async function writeQuestion(article, summaries) {
     for (let attempt = 0; attempt < 2; attempt++) {
       const r = await llm.chat({
-        model: judgeModel,
+        model: cfg.questionModel || judgeModel,
         system: QUESTION_SYSTEM,
         user: `TOPIC: ${article.source.title}\n\n${summaries.map((s, i) => `SUMMARY ${i + 1}:\n${s}`).join("\n\n")}`,
         json: true,

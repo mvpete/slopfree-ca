@@ -3,6 +3,7 @@ const ROWS = [
   ["writerModel", "Writes the summaries"],
   ["judgeModel", "Judges which points were kept"],
   ["drafterModel", "Drafts new candidate prompts"],
+  ["questionModel", "Writes the quiz questions from the summaries"],
 ];
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 

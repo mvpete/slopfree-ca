@@ -3,6 +3,7 @@
   "writerModel": "gpt-6-luna",
   "judgeModel": "gpt-6.2-sol",
   "drafterModel": "gpt-6.2-sol",
+  "questionModel": "gpt-4.1-mini",
   "wrapper": "Summarize the following article:",
 
   "articles": 10,
