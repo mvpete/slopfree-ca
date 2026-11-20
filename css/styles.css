@@ -372,19 +372,26 @@ h3 { font-size: 1.05rem; letter-spacing: -0.01em; }
 #turnstile { margin-top: 20px; }
 
 /* ---------- Human First Design ---------- */
-.principles { margin: 40px 0 0; display: grid; gap: 0; }
+.principles { list-style: none; padding: 0; margin: 40px 0 0; }
 .principle {
   display: grid;
-  grid-template-columns: minmax(0, 18rem) minmax(0, 1fr);
-  gap: 8px 40px;
-  padding: 18px 0;
+  grid-template-columns: 4.5rem minmax(0, 16rem) minmax(0, 1fr);
+  gap: 8px 32px;
+  align-items: baseline;
+  padding: 20px 0;
   border-top: 1px solid var(--line);
 }
 .principle:last-child { border-bottom: 1px solid var(--line); }
-.principle dt { color: var(--gold); font-weight: 600; font-size: 1.05rem; }
-.principle dd { margin: 0; color: var(--text); max-width: 62ch; }
-.principle dd p { margin: 0 0 8px; }
-.principle dd p:last-child { margin-bottom: 0; }
+.principle-num {
+  font: 500 3rem/1 var(--mono);
+  color: var(--gold);
+  font-variant-numeric: tabular-nums;
+}
+.principle h3 { color: var(--gold); font-weight: 600; font-size: 1.05rem; }
+.principle-text { color: var(--text); max-width: 62ch; }
+.principle-text p { margin: 0 0 8px; }
+.principle-text p:last-child { margin-bottom: 0; }
 @media (max-width: 760px) {
-  .principle { grid-template-columns: 1fr; }
+  .principle { grid-template-columns: 3.25rem minmax(0, 1fr); }
+  .principle-num { font-size: 2.25rem; grid-row: span 2; }
 }

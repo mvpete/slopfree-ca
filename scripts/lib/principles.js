@@ -30,9 +30,11 @@ export function readPrinciples(root) {
 
 export function renderPrinciples(list) {
   const items = list
-    .map((p) => `          <div class="principle"><dt>${inline(p.title)}</dt><dd>${p.html}</dd></div>`)
+    .map((p, i) => `          <li class="principle"><span class="principle-num" aria-hidden="true">${i + 1}</span><h3>${inline(p.title)}</h3><div class="principle-text">${p.html}</div></li>`)
     .join("\n");
-  return `<dl class="principles">\n${items}\n        </dl>`;
+  return `<ol class="principles">
+${items}
+        </ol>`;
 }
 
 const START = "<!-- principles:start -->";
