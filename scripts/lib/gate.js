@@ -1,21 +1,20 @@
 // Pure scoring: no I/O, so CI can re-check a report from its stored numbers.
 import { median, pct } from "./util.js";
 
-// Per-article numbers. Coverage only counts points the baseline covered.
+// Per-article numbers. Both summaries are scored against every point in the article:
+// baseCovered = points the baseline kept, kept = points the candidate kept (any of them, not only
+// the baseline's picks), overlap = points both kept (for information only).
 export function articleStats(slug, base, cand, articleWords = null) {
-  let baseCovered = 0;
-  let kept = 0;
-  base.covered.forEach((c, i) => {
-    if (!c) return;
-    baseCovered++;
-    if (cand.covered[i]) kept++;
-  });
+  const baseCovered = base.covered.filter(Boolean).length;
+  const kept = cand.covered.filter(Boolean).length;
+  const overlap = base.covered.filter((c, i) => c && cand.covered[i]).length;
   return {
     slug,
     totalPoints: base.covered.length,
     articleWords,
     baseCovered,
     kept,
+    overlap,
     baseUnsupported: base.unsupported,
     candUnsupported: cand.unsupported,
     baseWords: base.words,
@@ -36,6 +35,9 @@ export function score(stats) {
     lengthRatio: median(per.map((p) => p.ratio)),
     baseUnsupported: sum("baseUnsupported"),
     candUnsupported: sum("candUnsupported"),
+    kept: sum("kept"),
+    baseKept: sum("baseCovered"),
+    overlap: sum("overlap"),
     baseWords: sum("baseWords"),
     candWords: sum("candWords"),
     // Baseline vs the article itself: share of all points it keeps, and its length as a share of the article.
@@ -50,7 +52,7 @@ export function checkGate(sc, gate) {
   if (!sc.n) failures.push({ check: "data", message: "No usable articles." });
   else {
     if (sc.coverage < gate.coverage)
-      failures.push({ check: "coverage", message: `Covered ${pct(sc.coverage)} of baseline points (needs ${pct(gate.coverage)}).` });
+      failures.push({ check: "coverage", message: `Kept ${pct(sc.coverage)} as many of the articles' points as the baseline (needs ${pct(gate.coverage)}; ${sc.kept} vs ${sc.baseKept}).` });
     if (sc.candUnsupported > sc.baseUnsupported)
       failures.push({ check: "accuracy", message: `${sc.candUnsupported} unsupported claims vs baseline's ${sc.baseUnsupported}.` });
     if (sc.lengthRatio > gate.lengthRatio)
@@ -63,7 +65,7 @@ export function checkGate(sc, gate) {
           ` (needs ${pct(1 - gate.lengthRatio)} shorter; ${sc.candWords} words vs baseline's ${sc.baseWords} across ${sc.n} articles).`,
       });
     if (sc.floor < gate.floor)
-      failures.push({ check: "floor", message: `Worst article kept ${pct(sc.floor)} of baseline points (needs ${pct(gate.floor)}).` });
+      failures.push({ check: "floor", message: `Worst article kept ${pct(sc.floor)} as many points as the baseline (needs ${pct(gate.floor)}).` });
   }
   // How far from passing, for ranking near-misses. 0 means passed.
   const short = (have, need) => Math.max(0, need - have) / need;

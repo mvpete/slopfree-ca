@@ -48,10 +48,10 @@ The eval tests the claim (lossless, shorter). The reader test checks that people
 ### Gate (all must hold, across the article set)
 | Check | Pass if |
 |---|---|
-| Coverage | ≥98% of the points the baseline covers (equally accurate) |
+| Coverage | Keeps ≥98% as many of the article's points as the baseline does (any points, not only the baseline's picks) |
 | Accuracy | Unsupported or wrong claims no more frequent than baseline |
 | Length | Median tokens ≤80% of baseline (≥20% less text) |
-| Floor | No single article below 90% of baseline coverage |
+| Floor | No single article below 90% of the baseline's point count |
 
 No prompt reaches readers without passing this gate, golden included:
 - **Golden v1 must pass before launch.** If it fails, it gets revised until it passes.

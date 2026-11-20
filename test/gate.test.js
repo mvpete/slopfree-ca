@@ -7,10 +7,13 @@ const base = { covered: [true, true, true, true, true, true, true, true, true, t
 const cand = (over = {}) => ({ covered: [...base.covered], unsupported: 1, words: 200, ...over });
 const run = (cands) => checkGate(score(cands.map((c, i) => articleStats("a" + i, base, c))), GATE);
 
-test("only points the baseline covered count", () => {
-  const s = articleStats("x", base, cand({ covered: [true, true, true, true, true, true, true, true, true, true, true] }));
+test("a candidate can keep different points than the baseline", () => {
+  // Baseline kept points 0-9. This candidate drops point 0 but keeps point 10 instead: same count.
+  const s = articleStats("x", base, cand({ covered: [false, true, true, true, true, true, true, true, true, true, true] }));
   assert.equal(s.baseCovered, 10);
   assert.equal(s.kept, 10);
+  assert.equal(s.overlap, 9);
+  assert.equal(checkGate(score([s]), GATE).passed, true);
 });
 
 test("passes: same coverage, a third shorter, no extra errors", () => {

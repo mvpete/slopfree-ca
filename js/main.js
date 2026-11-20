@@ -143,9 +143,7 @@
     add("Golden prompt ");
     add(promptName(first.golden.id), true);
     if (first.eval && first.eval.passed) {
-      add(" · keeps ");
-      add(pct(first.eval.coverage), true);
-      add(" of the key points in ");
+      add(first.eval.coverage >= 1 ? " · as many facts as a plain summary in " : ` · ${pct(first.eval.coverage)} of a plain summary's facts in `);
       add(pct(first.eval.shorter), true);
       add(" less text");
     }
@@ -159,7 +157,7 @@
     const line = $("eval-line");
     if (first.eval) {
       line.textContent = first.eval.passed
-        ? `Latest eval (${first.eval.date}, ${first.eval.articles} articles): the golden prompt kept ${pct(first.eval.coverage)} of the key points a plain summary keeps, in ${pct(first.eval.shorter)} fewer words.`
+        ? `Latest eval (${first.eval.date}, ${first.eval.articles} articles): the golden prompt kept ${pct(first.eval.coverage)} as many of the articles' points as a plain summary, in ${pct(first.eval.shorter)} fewer words.`
         : `Latest eval (${first.eval.date}): the golden prompt didn't pass this week. It's being revised.`;
       if (first.eval.writerModel) line.textContent += ` Summaries by ${first.eval.writerModel}, judged by ${first.eval.judgeModel}.`;
       line.hidden = false;

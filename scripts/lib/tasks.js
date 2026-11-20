@@ -20,7 +20,7 @@ Return JSON: {"covered": [<1-based numbers of covered points>], "unsupported": [
 
 const DRAFT_SYSTEM = `You improve a postfix prompt. It is pasted after this task: "Summarize the following article:" followed by the article.
 Your targets, measured against the same task with no postfix (the plain summary):
-- Accuracy: keep at least {COVERAGE}% of the points the plain summary keeps, and at least {FLOOR}% on every single article.
+- Accuracy: keep at least {COVERAGE}% as many of the article's points as the plain summary does, and at least {FLOOR}% as many on every single article. They don't have to be the same points the plain summary chose.
 - Compression: use at least {SHORTER}% fewer words than the plain summary.
 - Add no more unsupported claims than the plain summary.
 A prompt that misses any target is rejected, so hit all of them.
