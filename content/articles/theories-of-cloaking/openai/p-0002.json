@@ -1,0 +1,6 @@
+{
+  "slug": "theories-of-cloaking",
+  "summary": "Cloaking research explores ways to guide or cancel electromagnetic and sound waves so objects or events are concealed. The first electromagnetic cloak, demonstrated in 2006 with gradient-index metamaterials, helped establish transformation optics, which controls wave propagation through engineered materials. Spatial cloaks route waves around an object; related methods use resonance, plasmonic covers or tunneling between resonant inclusions to reduce scattering or increase transmission. Some approaches work only at particular frequencies or for very small objects.\n\nEvent cloaking creates a temporary gap in light signals, concealing events from distant observers. Proposed in 2010, the method can use time lenses to alter light’s speed; an experiment reported a cloaked interval of about 10 picoseconds. Events that emit light may still be detected as a flash. Other proposals cloak objects externally while leaving them able to sense their surroundings.\n\nAcoustic cloaking applies similar ideas to sound, with potential uses in sonar evasion, medical imaging and earthquake protection. A laboratory device for evading sonar has been demonstrated for sound frequencies of 40 to 80 kHz.",
+  "words": 171,
+  "dashes": 0
+}

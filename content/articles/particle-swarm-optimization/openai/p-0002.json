@@ -1,0 +1,6 @@
+{
+  "slug": "particle-swarm-optimization",
+  "summary": "Particle swarm optimization (PSO), introduced by Kennedy and Eberhart, is a gradient-free metaheuristic inspired by social behavior. It searches for good solutions by moving a population of candidate solutions, or particles, through a search space. Each particle’s movement reflects its own best-known position and the best-known position among its neighbors; improved solutions update those records. PSO can address problems that are not differentiable, but it does not guarantee finding a global optimum.\n\nThe basic algorithm uses inertia and cognitive and social coefficients to control particle movement. A global communication topology lets every particle use the swarm’s best solution, while local topologies share information among smaller groups and can reduce the risk of premature convergence. Parameter choices affect convergence and search behavior.\n\nMany variants adjust parameters during the search, combine PSO with other methods, or use multiple swarms to reduce stagnation. Other adaptations address multi-objective, discrete, combinatorial, and high-dimensional problems. Simplified versions can omit velocities, while some versions remove both velocities and individual best positions.",
+  "words": 164,
+  "dashes": 0
+}

@@ -1,0 +1,6 @@
+{
+  "slug": "particle-swarm-optimization",
+  "summary": "Particle swarm optimization (PSO) is a gradient-free method for searching large spaces of possible solutions. It matters because it can optimize problems that do not have differentiable objective functions, though it cannot guarantee the best solution.\n\nKennedy and Eberhart introduced PSO to simulate social behavior. In the method, a population of candidate solutions, called particles, moves through a search space. Each particle’s movement reflects its own best-known position and the best position found by its neighbors. The swarm repeatedly evaluates solutions and updates these positions until a stopping condition is reached.\n\nThe inertia weight and cognitive and social coefficients influence particle movement. The communication structure among particles also affects the search. These choices can shape convergence and the balance between broad exploration and focused improvement.\n\nMany variants adapt these settings, change how particles move, or extend PSO to discrete and multi-objective problems. Research has also addressed premature convergence and large-scale optimization. Despite extensive analysis and development, performance depends on the problem and algorithm settings, and theoretical guarantees of finding an optimum remain limited.",
+  "words": 173,
+  "dashes": 0
+}
