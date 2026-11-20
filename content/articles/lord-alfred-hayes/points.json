@@ -476,14 +476,17 @@
     false
   ],
   "question": {
-    "point": 8,
-    "text": "Which phase of Hayes's career does the article identify as the main source of his fame overall, rather than his most famous run as a wrestler in Britain?",
+    "text": "Which wrestling organization was Lord Alfred Hayes best known for working with?",
     "options": [
-      "His run as the masked White Angel for Paul Lincoln Promotions",
-      "His American WWF run, in which audiences knew him as Lord Alfred Hayes",
-      "His work as Billy Robinson's heel manager in Montreal",
-      "His return to commentary with the American Wrestling Federation"
+      "World Championship Wrestling",
+      "American Wrestling Association",
+      "World Wrestling Federation",
+      "National Wrestling Alliance"
     ],
-    "answer": 1
+    "answer": 2,
+    "quotes": [
+      "best known for his work with the World Wrestling Federation",
+      "best known for his World Wrestling Federation work"
+    ]
   }
 }

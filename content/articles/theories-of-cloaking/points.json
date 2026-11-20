@@ -290,14 +290,17 @@
     false
   ],
   "question": {
-    "point": 44,
-    "text": "Why would a distant observer using the illumination to monitor a scene fail to see a non-radiating event hidden by an event cloak?",
+    "text": "How does cloaking hide objects or events?",
     "options": [
-      "The cloak absorbs the illumination during the event, leaving a dark interval that remains visible to the observer.",
-      "The cloak opens a gap in the illumination while the event occurs, then closes the gap before the light reaches the observer.",
-      "The cloak guides light around the whole scene indefinitely, so events before and after the hidden interval are also concealed.",
-      "The cloak leaves the illumination unchanged and cancels only light emitted by the event."
+      "By cooling them",
+      "By moving them out of sight",
+      "By controlling waves",
+      "By making them smaller"
     ],
-    "answer": 1
+    "answer": 2,
+    "quotes": [
+      "hide objects or events by controlling electromagnetic or sound waves",
+      "guide or cancel electromagnetic and sound waves so objects or events are concealed"
+    ]
   }
 }

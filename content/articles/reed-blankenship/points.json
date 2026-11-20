@@ -574,14 +574,17 @@
     false
   ],
   "question": {
-    "point": 135,
-    "text": "Why did the Eagles turn to Blankenship as their starting strong safety late in his rookie season?",
+    "text": "Which team did Reed Blankenship join in 2026?",
     "options": [
-      "They had signed him to replace a starter who left in free agency before the season.",
-      "They needed a replacement after C. J. Gardner-Johnson suffered an injury and went on injured reserve.",
-      "They moved him there after he opened the season as the starting free safety.",
-      "They promoted him when Vic Fangio took over as defensive coordinator."
+      "Philadelphia Eagles",
+      "Kansas City Chiefs",
+      "Houston Texans",
+      "Dallas Cowboys"
     ],
-    "answer": 1
+    "answer": 2,
+    "quotes": [
+      "On March 13, 2026, Blankenship signed a three-year, $24.75 million contract with the Houston Texans.",
+      "joined the Houston Texans in 2026"
+    ]
   }
 }

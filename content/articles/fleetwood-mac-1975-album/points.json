@@ -428,14 +428,17 @@
     false
   ],
   "question": {
-    "point": 6,
-    "text": "Why would a discography need to give the year when listing an album simply titled Fleetwood Mac?",
+    "text": "Which two musicians first appeared on a Fleetwood Mac album in 1975?",
     "options": [
-      "The band released both its 1968 debut and its tenth studio album under that title.",
-      "The tenth album used that title only in the US and a different title in the UK.",
-      "The band reused that title for the studio album and its 1997 reunion album.",
-      "The 1975 release was a reissue of the band's debut rather than a new studio album."
+      "Bob Welch and Christine McVie",
+      "Mick Fleetwood and John McVie",
+      "Lindsey Buckingham and Stevie Nicks",
+      "Peter Green and Jeremy Spencer"
     ],
-    "answer": 0
+    "answer": 2,
+    "quotes": [
+      "the first to feature Lindsey Buckingham and Stevie Nicks",
+      "introduced Lindsey Buckingham and Stevie Nicks to the band"
+    ]
   }
 }

@@ -634,14 +634,17 @@
     false
   ],
   "question": {
-    "point": 46,
-    "text": "What brought Dodson's tenure as judge of the Prerogative Court of Canterbury to an end?",
+    "text": "Which court did John Dodson become a judge of in 1852?",
     "options": [
-      "He resigned that judgeship to become King's Advocate.",
-      "The court's jurisdiction was abolished.",
-      "He gave up the judgeship when he was sworn in as a privy councillor.",
-      "He remained in that judgeship until his death."
+      "High Court of Admiralty",
+      "Court of King’s Bench",
+      "Prerogative Court of Canterbury",
+      "Court of Chancery"
     ],
-    "answer": 1
+    "answer": 2,
+    "quotes": [
+      "judge of the Prerogative Court of Canterbury from 1852",
+      "From 1852 he was judge of the Prerogative Court of Canterbury"
+    ]
   }
 }

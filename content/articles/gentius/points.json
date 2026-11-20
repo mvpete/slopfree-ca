@@ -514,14 +514,17 @@
     false
   ],
   "question": {
-    "point": 17,
-    "text": "How did Gentius's position in the conflict between Rome and Macedonia change before his defeat?",
+    "text": "Who did Gentius support after switching sides against Rome?",
     "options": [
-      "He first backed Rome against Macedonia, then joined Perseus against Rome.",
-      "He first backed Perseus against Rome, then switched to the Roman side.",
-      "He backed Rome throughout the conflict, even after marrying Etuta.",
-      "He stayed neutral until Rome defeated him, then allied with Perseus."
+      "Pleuratus III",
+      "Lucius Anicius Gallus",
+      "Perseus of Macedon",
+      "The leaders of Bassania"
     ],
-    "answer": 0
+    "answer": 2,
+    "quotes": [
+      "he switched sides in 169 BC and joined Perseus of Macedon",
+      "he switched sides to support Perseus of Macedon"
+    ]
   }
 }

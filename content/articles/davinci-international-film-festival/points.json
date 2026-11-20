@@ -524,14 +524,17 @@
     true
   ],
   "question": {
-    "point": 219,
-    "text": "How was FilmAfrica meant to build on its launch at the Los Angeles festival?",
+    "text": "What does the festival’s FilmAfrica initiative promote?",
     "options": [
-      "By keeping its programming in Los Angeles and giving out a new Leo Award there.",
-      "By following its Los Angeles showcase of African films with a separate awards platform in Nairobi.",
-      "By moving the entire DaVinci International Film Festival from Los Angeles to Nairobi.",
-      "By turning the Cannes masquerade into the main awards event for African filmmakers."
+      "Screenwriting",
+      "African cinema",
+      "Ultra-short films",
+      "Film restoration"
     ],
-    "answer": 1
+    "answer": 1,
+    "quotes": [
+      "launched FilmAfrica to promote African cinema",
+      "launched FilmAfrica, an initiative with Swahili Village Group to promote African cinema"
+    ]
   }
 }

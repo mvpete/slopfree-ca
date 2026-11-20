@@ -494,14 +494,17 @@
     false
   ],
   "question": {
-    "point": 90,
-    "text": "What would a viewer who had been watching one of Anglia's two local news editions have noticed after the February 2009 cutbacks?",
+    "text": "Which part of England does ITV Anglia serve?",
     "options": [
-      "The same local edition continued, but it was no longer produced in Norwich.",
-      "A single news programme for the whole Anglia region took the place of the separate East and West editions.",
-      "The two editions stayed separate, but both switched to weekends only.",
-      "The East edition remained on air, while the West edition was replaced by national ITV news."
+      "North West England",
+      "South West England",
+      "Eastern England",
+      "South East England"
     ],
-    "answer": 1
+    "answer": 2,
+    "quotes": [
+      "ITV’s regional service for eastern England",
+      "ITV’s regional service for the East of England"
+    ]
   }
 }

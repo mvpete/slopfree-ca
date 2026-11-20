@@ -470,14 +470,17 @@
     false
   ],
   "question": {
-    "point": 11,
-    "text": "Why does the article treat the massacre as distinct from the Italian losses in the battle for Cephalonia?",
+    "text": "About how many Italian prisoners did German troops execute in the Cephalonia massacre?",
     "options": [
-      "The massacre was the killing of Italian prisoners by German troops, not the deaths of Italian soldiers in combat.",
-      "The massacre was the name given to the drownings aboard the ships taking the Italians to concentration camps.",
-      "The massacre was the initial German air attack, which accounted for nearly all Italian deaths on the island.",
-      "The massacre was the execution of Italians on Corfu, while the troops who surrendered on Cephalonia were sent home."
+      "1,300",
+      "3,000",
+      "5,155",
+      "8,000"
     ],
-    "answer": 0
+    "answer": 2,
+    "quotes": [
+      "German troops executed about 5,155 Italian soldiers",
+      "German troops then executed 5,155 prisoners"
+    ]
   }
 }

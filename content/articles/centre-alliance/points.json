@@ -466,14 +466,17 @@
     true
   ],
   "question": {
-    "point": 180,
-    "text": "How did NXT manage to win more Senate seats in 2016 even though its share of South Australia's Senate vote fell?",
+    "text": "What was Centre Alliance called before it took its current name?",
     "options": [
-      "The double dissolution lowered the share of votes needed to elect each senator.",
-      "NXT made up for its losses in South Australia by winning Senate seats in other states.",
-      "NXT's victory in Mayo gave it an additional seat in the Senate.",
-      "The Liberal Party's decision to stand fewer candidates increased NXT's primary vote."
+      "SA-BEST (Federal)",
+      "Nick Xenophon Team",
+      "Australian Democrats",
+      "Liberal Party of Australia"
     ],
-    "answer": 0
+    "answer": 1,
+    "quotes": [
+      "founded in 2013 as the Nick Xenophon Team",
+      "it became the Nick Xenophon Team and adopted its current name in 2018"
+    ]
   }
 }

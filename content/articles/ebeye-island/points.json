@@ -350,14 +350,17 @@
     false
   ],
   "question": {
-    "point": 71,
-    "text": "Why did U.S. authorities move Marshallese residents from Kwajalein Island to a planned community on Ebeye in the early 1950s?",
+    "text": "Which atoll is Ebeye part of?",
     "options": [
-      "Kwajalein Island was being turned into a support base for nuclear tests conducted on other atolls.",
-      "Radioactive fallout from Castle Bravo had made Kwajalein Island uninhabitable.",
-      "The Nike-Zeus program needed to clear Kwajalein Island itself for use as a missile target.",
-      "The United States needed the residents to rebuild the former Japanese seaplane base on Ebeye."
+      "Bikini Atoll",
+      "Majuro Atoll",
+      "Kwajalein Atoll",
+      "Enewetak Atoll"
     ],
-    "answer": 0
+    "answer": 2,
+    "quotes": [
+      "Ebeye is the most populous island in Kwajalein Atoll",
+      "Ebeye is the most populous island of Kwajalein Atoll"
+    ]
   }
 }

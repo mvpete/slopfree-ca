@@ -648,14 +648,17 @@
     false
   ],
   "question": {
-    "point": 3,
-    "text": "Which proposal best reflects what sustainable development in Amazonia means in Meyer's work?",
+    "text": "What does Mario-Christian Meyer work to protect?",
     "options": [
-      "Protect the forest by ruling out all economic uses of its medicinal plants.",
-      "Help Indigenous communities use their plant knowledge and green biotechnology to earn income while preserving biodiversity.",
-      "Move medicinal-plant production abroad and leave Amazonian communities to focus on conservation alone.",
-      "Expand plantation agriculture first and use the proceeds to document Indigenous knowledge later."
+      "Coastal fisheries and fishing traditions",
+      "Amazonian biodiversity and Indigenous cultural knowledge",
+      "Historic buildings and public archives",
+      "Mountain habitats and farming traditions"
     ],
-    "answer": 1
+    "answer": 1,
+    "quotes": [
+      "works to protect Amazonian biodiversity and Indigenous cultural knowledge",
+      "works to preserve Amazonian biodiversity and Indigenous cultural knowledge"
+    ]
   }
 }

@@ -812,14 +812,17 @@
     false
   ],
   "question": {
-    "point": 16,
-    "text": "How can the article rank DCMP as the most successful club in the DRC while also saying TP Mazembe has more trophies?",
+    "text": "Which African trophy did DCMP win in 1994?",
     "options": [
-      "DCMP leads when international trophies are included, while TP Mazembe leads when only national titles are counted.",
-      "DCMP leads by national-level titles, while TP Mazembe leads when international trophies are included.",
-      "DCMP leads only in Kinshasa competitions, while TP Mazembe leads in national competitions even without international trophies.",
-      "DCMP leads by league titles alone, while TP Mazembe overtakes it when domestic cup titles are added, even without international trophies."
+      "CAF Super Cup",
+      "African Cup Winners’ Cup",
+      "CAF Champions League",
+      "CAF Confederation Cup"
     ],
-    "answer": 1
+    "answer": 1,
+    "quotes": [
+      "In 1994, it won the African Cup Winners’ Cup",
+      "won the African Cup Winners’ Cup in 1994"
+    ]
   }
 }
