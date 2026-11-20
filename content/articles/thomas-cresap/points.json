@@ -384,14 +384,17 @@
     false
   ],
   "question": {
-    "point": 6,
-    "text": "Why did Cresap and the settlers he evicted disagree over who had the right to occupy the land along the Susquehanna?",
+    "text": "Whom did Thomas Cresap represent in the Maryland–Pennsylvania boundary dispute?",
     "options": [
-      "Cresap enforced a royal settlement that had already awarded the area to Maryland, but the settlers rejected it.",
-      "Cresap acted for Lord Baltimore under Maryland's charter, while the settlers believed Pennsylvania's charter authorized them to be there.",
-      "Cresap and the settlers agreed that Pennsylvania controlled the area but disagreed over the limits of his ferry patent.",
-      "Cresap defended a Virginia claim that both Maryland and Pennsylvania had agreed to recognize."
+      "King George II",
+      "Lord Dunmore",
+      "Lord Baltimore",
+      "Pennsylvania’s sheriff"
     ],
-    "answer": 1
+    "answer": 2,
+    "quotes": [
+      "became an agent for Lord Baltimore in the Maryland–Pennsylvania dispute",
+      "became an agent for Lord Baltimore, asserting Maryland’s claims in the Susquehanna Valley against Pennsylvania settlers"
+    ]
   }
 }

@@ -966,14 +966,17 @@
     false
   ],
   "question": {
-    "point": 61,
-    "text": "What changed for Xi Jinping as a result of the constitutional amendment approved in March?",
+    "text": "What rule did China’s National People’s Congress remove in March 2018?",
     "options": [
-      "He gained the ability to remain president beyond the previous term limits.",
-      "He had to leave the presidency to remain Communist Party general secretary.",
-      "He became subject to a new cap on the number of presidential terms he could serve.",
-      "He gained a longer presidential term, but the cap on how many terms he could serve stayed in place."
+      "Presidential age limits",
+      "Presidential term limits",
+      "Vice-presidential term limits",
+      "Congressional term limits"
     ],
-    "answer": 0
+    "answer": 1,
+    "quotes": [
+      "The National People’s Congress removed presidential term limits in March",
+      "the National People’s Congress amended the constitution to remove presidential term limits"
+    ]
   }
 }

@@ -480,14 +480,17 @@
     false
   ],
   "question": {
-    "point": 16,
-    "text": "Which event turns Dan's professional rivalry with Malick into a secret that Dan wants him to forget?",
+    "text": "What kind of doctor is Dan Hamilton in Holby City?",
     "options": [
-      "Malick offers Chrissie operating theatre slots without asking Dan.",
-      "Dan tells Malick he loves Chrissie after they operate together.",
-      "Dan kisses Malick in the middle of a fight.",
-      "Dan gets Ric to take the blame for a surgical error."
+      "Cardiologist",
+      "Neurosurgeon",
+      "Orthopaedic surgeon",
+      "Emergency physician"
     ],
-    "answer": 2
+    "answer": 2,
+    "quotes": [
+      "a fictional orthopaedic surgeon in the BBC medical drama *Holby City*",
+      "a consultant orthopaedic surgeon in *Holby City*"
+    ]
   }
 }

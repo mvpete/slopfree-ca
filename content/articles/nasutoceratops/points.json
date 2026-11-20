@@ -610,14 +610,17 @@
     false
   ],
   "question": {
-    "point": 40,
-    "text": "How might the direction of the brow horns have helped Nasutoceratops in a face-to-face contest?",
+    "text": "What was distinctive about Nasutoceratops’s brow horns?",
     "options": [
-      "Their forward reach may have allowed it to lock horns with an opponent.",
-      "Their backward sweep may have allowed it to hook behind an opponent's frill.",
-      "Their short length may have kept them from making contact with another animal's horns.",
-      "Their position over the nostrils may have allowed the animal to strike with its nasal horn instead."
+      "They were unusually short.",
+      "They curved backward and inward.",
+      "They were unusually long.",
+      "They pointed straight up."
     ],
-    "answer": 0
+    "answer": 2,
+    "quotes": [
+      "exceptionally long brow horns",
+      "Its brow horns reached 457 mm, the longest known among centrosaurines"
+    ]
   }
 }

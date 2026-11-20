@@ -550,14 +550,17 @@
     false
   ],
   "question": {
-    "point": 32,
-    "text": "Why could Chicago still win the 2025 draft lottery after winning drawings in both 2023 and 2024?",
+    "text": "Who was picked first overall in the 2024 NHL Entry Draft?",
     "options": [
-      "Only drawings for the first overall pick count toward the five-year limit.",
-      "The limit applies to wins that move a team up, and Chicago's 2024 win left it in its original position.",
-      "The five-year limit resets whenever the lottery leaves the draft order unchanged.",
-      "The rule lets a team move up three times in five years as long as the wins are not all for the same pick."
+      "Artyom Levshunov",
+      "Macklin Celebrini",
+      "Beckett Sennecke",
+      "Cayden Lindstrom"
     ],
-    "answer": 1
+    "answer": 1,
+    "quotes": [
+      "San Jose selected Macklin Celebrini first.",
+      "The San Jose Sharks made Macklin Celebrini the first overall pick"
+    ]
   }
 }

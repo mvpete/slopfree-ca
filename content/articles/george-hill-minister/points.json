@@ -568,14 +568,17 @@
     false
   ],
   "question": {
-    "point": 139,
-    "text": "Why did Hill oppose having parish ministers promote the wartime levy even though he was willing to contribute to it himself?",
+    "text": "Which party in the Church of Scotland did George Hill lead?",
     "options": [
-      "He thought the government had no right to ask private citizens for voluntary contributions.",
-      "He distinguished a personal contribution from using the pulpit to advance a government policy.",
-      "He supported contributions only if every parish was required to raise the same amount.",
-      "He believed landowners, rather than ministers or their congregations, should pay the levy."
+      "The Evangelicals",
+      "The Moderates",
+      "The Seceders",
+      "The Cameronians"
     ],
-    "answer": 1
+    "answer": 1,
+    "quotes": [
+      "succeeded William Robertson as leader of the Moderates",
+      "led the Church of Scotland’s Moderate party after Principal William Robertson’s death"
+    ]
   }
 }

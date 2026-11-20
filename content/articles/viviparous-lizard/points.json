@@ -426,14 +426,17 @@
     true
   ],
   "question": {
-    "point": 6,
-    "text": "A researcher observes one population laying eggs and another giving birth to live young. How does the article explain these observations?",
+    "text": "How do most populations of the viviparous lizard reproduce?",
     "options": [
-      "Only the live-bearing population can be a population of the viviparous lizard.",
-      "Both observations fit the article's account of the viviparous lizard, which includes both egg-laying and live-bearing populations.",
-      "Only the egg-laying population can be a population of the viviparous lizard.",
-      "Both observations fit only if every female lays eggs before giving birth to live young in the same breeding season."
+      "They lay eggs.",
+      "They give birth to live young.",
+      "They reproduce by budding.",
+      "They alternate between laying eggs and giving live birth."
     ],
-    "answer": 1
+    "answer": 1,
+    "quotes": [
+      "Most populations give birth to live young",
+      "Most populations give birth to live young"
+    ]
   }
 }

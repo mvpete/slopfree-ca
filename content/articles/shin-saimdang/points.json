@@ -536,14 +536,17 @@
     false
   ],
   "question": {
-    "point": 16,
-    "text": "Which interpretation best explains how Shin Saimdang could be celebrated as a Confucian model even though the article says she did not readily obey her husband?",
+    "text": "Which South Korean banknote made Shin Saimdang the first woman depicted on the country's currency?",
     "options": [
-      "Her reputation rested partly on her role as a mother and educator, not on obedience in every aspect of married life.",
-      "She earned that reputation by setting aside art after marriage and accepting her husband's decisions.",
-      "She was praised for rejecting her family's Confucian education in favor of an official career.",
-      "Her reputation came from the public offices she held rather than from her family life."
+      "The 1,000-won note",
+      "The 5,000-won note",
+      "The 10,000-won note",
+      "The 50,000-won note"
     ],
-    "answer": 0
+    "answer": 3,
+    "quotes": [
+      "she became the first woman depicted on a South Korean banknote, the 50,000-won note.",
+      "she became the first woman depicted on a South Korean banknote, appearing on the 50,000-won note."
+    ]
   }
 }

@@ -660,14 +660,17 @@
     false
   ],
   "question": {
-    "point": 116,
-    "text": "How did BMS's restructuring fit into its longer-term business strategy?",
+    "text": "How was Bristol Myers Squibb formed?",
     "options": [
-      "It was meant to build a more diversified company by expanding into nutrition and consumer products.",
-      "It was meant to shift a diversified pharmaceutical company toward specialty biopharmaceuticals.",
-      "It was meant to refocus the company on mass-market antibiotics and away from biologic medicines.",
-      "It was meant to expand the manufacturing network while shifting research away from pharmaceutical products."
+      "Bristol-Myers and Squibb merged.",
+      "Bristol-Myers spun off its research division.",
+      "Squibb and Celgene merged.",
+      "Squibb changed its name without merging."
     ],
-    "answer": 1
+    "answer": 0,
+    "quotes": [
+      "BMS formed in 1989 through the merger of Bristol-Myers, founded in 1887, and Squibb, founded in 1858.",
+      "BMS formed in 1989 through the merger of Bristol-Myers, founded in 1887, and Squibb, founded in 1858."
+    ]
   }
 }

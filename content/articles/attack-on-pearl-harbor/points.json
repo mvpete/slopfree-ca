@@ -512,14 +512,17 @@
     false
   ],
   "question": {
-    "point": 18,
-    "text": "What role was the Pearl Harbor strike meant to play in Japan's broader war plans?",
+    "text": "What was Japan’s main military goal in attacking Pearl Harbor?",
     "options": [
-      "It was meant to force Britain to withdraw from Southeast Asia without Japan having to attack British territory.",
-      "It was meant to keep the US Pacific Fleet from disrupting Japan's planned expansion into Southeast Asia.",
-      "It was meant to draw the US Pacific Fleet away from Hawaii so Japan could occupy the islands.",
-      "It was meant to retaliate for a US naval attack on Japanese forces in the Dutch East Indies."
+      "To capture Hawaii",
+      "To disable the US Pacific Fleet",
+      "To seize US oil supplies",
+      "To destroy the British Pacific Fleet"
     ],
-    "answer": 1
+    "answer": 1,
+    "quotes": [
+      "Japan aimed to disable the US Pacific Fleet",
+      "was intended to disable the US Pacific Fleet"
+    ]
   }
 }

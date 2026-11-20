@@ -506,14 +506,17 @@
     false
   ],
   "question": {
-    "point": 14,
-    "text": "How did the major studios' effort to control the use of film equipment help shift production away from Chicago?",
+    "text": "When did film production revive in Chicago?",
     "options": [
-      "The trust offered independents lower licensing fees if they operated in the West.",
-      "The trust's patent enforcement gave independent filmmakers a reason to move west, farther from the companies that could sue them.",
-      "The trust moved west first, and independent filmmakers followed to stay close to its licensed studios.",
-      "The trust ended patent enforcement in Chicago, so independent filmmakers moved west to obtain patent protection."
+      "In the 1920s",
+      "In the 1950s",
+      "In the 1980s",
+      "In the 2000s"
     ],
-    "answer": 1
+    "answer": 2,
+    "quotes": [
+      "Film production returned in the 1980s.",
+      "Film production revived in Chicago in the 1980s"
+    ]
   }
 }

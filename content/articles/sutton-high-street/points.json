@@ -560,14 +560,17 @@
     false
   ],
   "question": {
-    "point": 96,
-    "text": "How was Heritage Action Zone status intended to support Sutton's economy?",
+    "text": "What helped Sutton grow from a village into a town?",
     "options": [
-      "By moving new development away from the town centre and leaving the High Street unchanged.",
-      "By making resources available to improve the historic environment and using local heritage to guide new development.",
-      "By funding a tram route down the High Street instead of improving historic buildings.",
-      "By encouraging developers to replace distinctive older buildings with standard retail premises."
+      "The opening of a shopping centre",
+      "The arrival of the railway",
+      "The creation of a conservation area",
+      "The introduction of bus services"
     ],
-    "answer": 1
+    "answer": 1,
+    "quotes": [
+      "the railway’s arrival in 1847 helped the village grow into a town",
+      "the railway’s arrival in 1847 helped Sutton grow into a town"
+    ]
   }
 }

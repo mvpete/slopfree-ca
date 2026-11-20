@@ -452,14 +452,17 @@
     false
   ],
   "question": {
-    "point": 111,
-    "text": "A PSO run ends with all particles settling at the same point, but a nearby point has a lower cost. What does this tell you about convergence in that run?",
+    "text": "Which positions guide each particle’s movement?",
     "options": [
-      "The run has reached a local optimum because all particles agree on a point.",
-      "The particle positions have converged, but that does not mean the point they settled on is a local optimum.",
-      "The particle positions cannot have converged, because convergence requires them to reach the global minimum.",
-      "The run must still be exploring, because a better point exists nearby."
+      "Its starting position and its neighbors’ average position",
+      "Its own best position and the best position found by its neighbors",
+      "Only its own best position",
+      "Only its neighbors’ current positions"
     ],
-    "answer": 1
+    "answer": 1,
+    "quotes": [
+      "its own best-known position and the best position found by its neighbors",
+      "its own best-known position and the best-known position among its neighbors"
+    ]
   }
 }

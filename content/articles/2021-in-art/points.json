@@ -1152,14 +1152,17 @@
     false
   ],
   "question": {
-    "point": 18,
-    "text": "Why did the sale of Beeple's Everydays: the First 5000 Days stand out among the year's major auctions?",
+    "text": "How much did Beeple’s NFT sell for in 2021?",
     "options": [
-      "It replaced a Diego Rivera painting as the most expensive work by a Latin American artist.",
-      "It brought a record price for an NFT artwork despite starting with a very low estimate.",
-      "It sold the world's largest canvas painting and raised money for charity.",
-      "It brought nearly nine times the previous auction record for a Renaissance painter."
+      "$34.9 million",
+      "$62 million",
+      "$69.35 million",
+      "$92.2 million"
     ],
-    "answer": 1
+    "answer": 2,
+    "quotes": [
+      "Beeple’s NFT *Everydays: The First 5000 Days* brought $69.35 million",
+      "Beeple’s NFT *Everydays: The First 5000 Days* fetched $69.35 million"
+    ]
   }
 }

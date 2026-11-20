@@ -632,14 +632,17 @@
     false
   ],
   "question": {
-    "point": 42,
-    "text": "Which arrangement best reflects Bevan's view of how wealth should affect access to medical care under the NHS?",
+    "text": "Which public service did Aneurin Bevan lead the creation of?",
     "options": [
-      "Patients receive free care only after proving that they cannot afford private treatment.",
-      "Patients pay a standard charge when treated, regardless of their income.",
-      "Patients receive care when they need it without paying at that point, whatever their income.",
-      "Patients pay for care upfront and receive a refund based on their income."
+      "National Health Service",
+      "National Fire Service",
+      "National Ambulance Service",
+      "National Blood Service"
     ],
-    "answer": 2
+    "answer": 0,
+    "quotes": [
+      "led the creation of Britain’s National Health Service",
+      "led the creation of Britain’s National Health Service"
+    ]
   }
 }

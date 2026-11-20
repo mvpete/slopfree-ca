@@ -512,14 +512,17 @@
     false
   ],
   "question": {
-    "point": 26,
-    "text": "Posen was not among the ships interned at Scapa Flow. Why did she nevertheless end up in British hands?",
+    "text": "Where did SMS Posen mainly serve during World War I?",
     "options": [
-      "The British captured her while she was supporting the White Finns in the Baltic.",
-      "She was ceded to Britain to replace German ships that had been scuttled at Scapa Flow.",
-      "Her crew surrendered her after the collision with Elbing made her unable to sail.",
-      "She was sent to Scapa Flow to join the interned fleet before the scuttling."
+      "The Baltic Sea",
+      "The North Sea",
+      "The Mediterranean Sea",
+      "The Atlantic Ocean"
     ],
-    "answer": 1
+    "answer": 1,
+    "quotes": [
+      "During World War I, Posen served mainly in the North Sea",
+      "During World War I, Posen served mainly in the North Sea"
+    ]
   }
 }

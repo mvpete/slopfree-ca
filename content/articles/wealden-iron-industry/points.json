@@ -290,14 +290,17 @@
     false
   ],
   "question": {
-    "point": 6,
-    "text": "Why did the fuel that had helped make the Weald a major ironmaking region cease to give it a competitive advantage?",
+    "text": "What fuel did Wealden ironworks get from local woodland?",
     "options": [
-      "Its woodlands stopped providing enough timber because coppicing could not sustain charcoal production.",
-      "Rival ironworks switched to coke, while the Weald had no accessible coal deposits from which to make it.",
-      "Wealden blast furnaces required coke from the start, so local charcoal was useful only at the forges.",
-      "The Board of Ordnance stopped buying cast-iron cannon and required all suppliers to switch to wrought iron."
+      "Coke",
+      "Peat",
+      "Charcoal",
+      "Coal"
     ],
-    "answer": 1
+    "answer": 2,
+    "quotes": [
+      "charcoal made from woodland",
+      "charcoal from coppiced woodland"
+    ]
   }
 }
