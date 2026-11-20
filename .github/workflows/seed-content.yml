@@ -1,7 +1,7 @@
 name: seed-content
 
 # Manual: build a week of quiz content for the current golden and challenger, without a search.
-# Used to start a trial from maintainer-chosen seed prompts.
+# Used to start a trial from hand-picked seed prompts.
 on:
   workflow_dispatch:
 

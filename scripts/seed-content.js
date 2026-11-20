@@ -1,5 +1,5 @@
 // One-off: build a week of quiz content for the current golden and challenger, without a search.
-// Used to start a trial from maintainer-chosen seed prompts.
+// Used to start a trial from hand-picked seed prompts.
 //
 //   10 eval articles: points, plain baseline, both prompts, all graded (the numbers on the site and Examples page)
 //   20 quiz articles: points and both prompts' summaries, no baseline or grading (just enough for the quiz)
@@ -74,7 +74,7 @@ Summaries by \`${cfg.writerModel}\`, judged by \`${cfg.judgeModel}\`.
 - ${line(report.golden)}
 - ${line(report.challenger)}
 
-Seed prompts are chosen by the maintainer, so they enter the reader trial whether or not they pass the eval. The trial is decided on the date in \`prompts/${model}/trial.json\`.
+Seed prompts are picked by Claude at the maintainer's request, so they enter the reader trial whether or not they pass the eval. The trial is decided on the date in \`prompts/${model}/trial.json\`.
 
 Tokens used: ${ctx.budget.used.toLocaleString()} (${Object.entries(ctx.budget.byModel).map(([m, t]) => `${m}: ${t.input.toLocaleString()} in, ${t.output.toLocaleString()} out`).join("; ")}).
 `;
