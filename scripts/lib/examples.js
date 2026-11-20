@@ -142,7 +142,7 @@ ${slides}
     </div>
   </main>
   <footer class="footer">
-    <span class="made">Proudly made in Canada <span class="leaf" role="img" aria-label="maple leaf">🍁</span>. Natural intelligence, locally sourced. Artificial intelligence, imported.</span>
+    <span class="made">Proudly made in Canada <span class="leaf" role="img" aria-label="maple leaf">🍁</span> Contains natural and artificial intelligence.</span>
     <span>Code MIT · content CC BY-SA 4.0 from Wikipedia</span>
     <a href="https://github.com/mvpete/slopfree-ca">GitHub</a>
   </footer>
