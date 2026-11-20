@@ -147,6 +147,8 @@ if (winner) {
   report.challenger = { id, prompt: winner.prompt, idea: winner.idea, attempt: winner.attempt, moderation: flagged === null ? "error" : flagged ? "flagged" : "clean", search: winner.search, confirm: winner.confirm };
   writeText(`prompts/${model}/${id}.md`, winner.prompt);
   writeJSON(`prompts/${model}/active.json`, [id]);
+  const decideOn = new Date(Date.parse(date) + 7 * 864e5).toISOString().slice(0, 10);
+  writeJSON(`prompts/${model}/trial.json`, { challenger: id, started: date, decideOn });
 
   // Quiz content: each reader should see an article only once, so publish enough for a week of answers.
   let quiz = confirm;

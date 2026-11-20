@@ -223,7 +223,7 @@
     const seen = seenSlugs();
     const fresh = usable.filter((a) => !seen.has(a.slug));
     if (!DATA.sample && fresh.length === 0) {
-      $("mode-note").textContent = "You've read every article this week. New ones arrive Monday.";
+      $("mode-note").textContent = "You've read every article this week. New ones arrive Friday.";
       $("mode-note").hidden = false;
       return;
     }

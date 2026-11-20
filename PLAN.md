@@ -4,7 +4,7 @@ Slop Free is a lossless AI compression prompt: same accuracy as a plain "Summari
 
 ## How a prompt earns golden
 
-A weekly cycle, one challenger per week. Every Monday:
+A weekly cycle, one challenger per week. Every Friday:
 
 1. **Decide last week's trial.** If the challenger beat golden in the reader test, it becomes golden. Otherwise golden stays.
 2. **Archive the loser** in "Close but no cigar" with the reason it lost.
@@ -101,7 +101,7 @@ Each loser is a file in the repo, `prompts/<model>/losers/<id>.md`, holding the 
 
 | Workflow | When | Does | Writes |
 |---|---|---|---|
-| `weekly-topics.yml` | Mondays + manual | Runs `golden-pull.js` (decide last week's trial), then `weekly-topics.js` (eval and search). One bot PR | `golden.json`, `active.json`, `prompts/<model>/`, `content/articles/`, `evals/`, `data/` |
+| `weekly-topics.yml` | Fridays + manual | Runs `golden-pull.js` (decide last week's trial), then `weekly-topics.js` (eval and search). One bot PR | `golden.json`, `active.json`, `prompts/<model>/`, `content/articles/`, `evals/`, `data/` |
 | `golden-pull.yml` | Manual | Decision only, for deciding mid-week | `golden.json`, `active.json`, `prompts/<model>/losers/`, `evals/`, `data/` |
 | `ci.yml` | Every PR and push | Tests; bot-PR guardrails (paths, prompt length, gate and decision recomputed) | nothing |
 | `deploy.yml` | Merge to main | Builds `_site` with `content/index.json` and publishes Pages | nothing committed |

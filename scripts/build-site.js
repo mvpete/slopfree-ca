@@ -20,7 +20,7 @@ const models = fs
 
 // Latest weekly eval report: its numbers back the claim on the page, and it lists this week's articles.
 const reports = fs.existsSync(path.join(ROOT, "evals"))
-  ? fs.readdirSync(path.join(ROOT, "evals")).filter((f) => /^\d{4}-\d{2}-\d{2}\.json$/.test(f)).sort()
+  ? fs.readdirSync(path.join(ROOT, "evals")).filter((f) => /^\d{4}-\d{2}-\d{2}(-seed)?\.json$/.test(f)).sort()
   : [];
 const latest = reports.length ? readJSON(`evals/${reports.at(-1)}`) : null;
 const goldenEvals = fs.existsSync(path.join(ROOT, "evals"))

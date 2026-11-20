@@ -31,6 +31,13 @@ if (!active.length) {
 }
 const challenger = active[0];
 
+// A trial runs until its decideOn date (trial.json). Before then, nothing is decided or replaced.
+const trial = readJSON(`prompts/${model}/trial.json`, null);
+if (trial && trial.challenger === challenger && trial.decideOn && date < trial.decideOn) {
+  finish({ outcome: "running", title: `Trial of prompt ${promptName(challenger)} runs until ${trial.decideOn}`, body: "" });
+  process.exit(0);
+}
+
 async function loadRows() {
   if (process.env.ANSWERS_FILE) return JSON.parse(fs.readFileSync(process.env.ANSWERS_FILE, "utf8")).rows;
   const api = process.env.SLOPFREE_API_URL;
@@ -82,6 +89,7 @@ if (result.outcome === "win") {
   title = `Prompt ${promptName(challenger)} lost the reader test; prompt ${promptName(golden.id)} stays golden`;
 }
 writeJSON(`prompts/${model}/active.json`, []);
+fs.rmSync(path.join(ROOT, `prompts/${model}/trial.json`), { force: true });
 
 finish({
   outcome: result.outcome,

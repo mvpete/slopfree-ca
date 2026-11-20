@@ -4,7 +4,7 @@ name: weekly-topics
 # Both land in one bot PR that auto-merges when CI passes.
 on:
   schedule:
-    - cron: "0 9 * * 1" # Mondays 09:00 UTC
+    - cron: "0 13 * * 5" # Fridays 13:00 UTC (8am Eastern)
   workflow_dispatch:
     inputs:
       max_attempts:
@@ -32,20 +32,26 @@ jobs:
       - run: npm test
 
       - name: Decide last week's reader test
+        id: decide
         run: node scripts/golden-pull.js
         env:
           SLOPFREE_API_URL: ${{ vars.SLOPFREE_API_URL }}
           SLOPFREE_EXPORT_TOKEN: ${{ secrets.SLOPFREE_EXPORT_TOKEN }}
 
+      - name: Trial still running
+        if: steps.decide.outputs.decision == 'running'
+        run: echo "::notice::A reader trial is still running. No decision and no search this time."
+
       - name: Run the eval and search
         id: run
+        if: steps.decide.outputs.decision != 'running'
         run: node scripts/weekly-topics.js
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           MAX_ATTEMPTS: ${{ inputs.max_attempts }}
 
       - name: Keep this run's results (also if the PR step fails)
-        if: always()
+        if: always() && steps.decide.outputs.decision != 'running'
         uses: actions/upload-artifact@v4
         with:
           name: weekly-results
@@ -60,6 +66,7 @@ jobs:
 
       - name: Get a bot token (so CI runs on the PR)
         id: app
+        if: steps.run.conclusion == 'success'
         uses: actions/create-github-app-token@v1
         with:
           app-id: ${{ vars.SLOPFREE_APP_ID }}
@@ -67,6 +74,7 @@ jobs:
 
       - name: Open the PR
         id: pr
+        if: steps.run.conclusion == 'success'
         uses: peter-evans/create-pull-request@v7
         with:
           token: ${{ steps.app.outputs.token }}
@@ -89,7 +97,7 @@ jobs:
 
       # The PR above still records the attempts and losers; the run itself goes red so a failed search is visible.
       - name: Fail if no candidate prompt passed
-        if: steps.run.outputs.outcome != 'challenger'
+        if: steps.run.conclusion == 'success' && steps.run.outputs.outcome != 'challenger'
         run: |
           echo "::error::No candidate prompt passed the eval (outcome: ${{ steps.run.outputs.outcome }}). See the PR and evals/${{ steps.run.outputs.date }}.json."
           exit 1
