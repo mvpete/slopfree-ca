@@ -31,6 +31,17 @@
   document.querySelectorAll(".copy-golden").forEach((b) => b.addEventListener("click", (e) => {
     const btn = e.currentTarget;
     const done = (label) => {
+      if (btn.classList.contains("icon-btn")) {
+        btn.classList.add("done");
+        btn.setAttribute("aria-label", label);
+        btn.title = label;
+        setTimeout(() => {
+          btn.classList.remove("done");
+          btn.setAttribute("aria-label", "Copy the golden prompt");
+          btn.title = "Copy";
+        }, 1500);
+        return;
+      }
       btn.textContent = label;
       setTimeout(() => (btn.textContent = btn.dataset.label), 1500);
     };
