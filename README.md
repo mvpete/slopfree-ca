@@ -4,7 +4,7 @@ A prompt you paste after any request so AI says the same thing in less text.
 
 Every prompt has to earn its place:
 
-1. **Eval.** Each week the pipeline summarizes 10 random Wikipedia articles with a plain "Summarize the following article:" prompt (the baseline) and with candidate prompts. A candidate passes only if it keeps at least 98% as many of the article's points as the baseline does (95% or more; they don't have to be the same points), adds no more unsupported claims, and uses ≥15% fewer words. Then it has to pass again on 10 fresh articles.
+1. **Eval.** Each week the pipeline summarizes 10 random Wikipedia articles with a plain "Summarize the following article:" prompt (the baseline) and with candidate prompts. A candidate passes only if it keeps at least 95% as many of the article's points as the baseline does (they don't have to be the same points), adds no more unsupported claims, and uses ≥15% fewer words. Then it has to pass again on 10 fresh articles.
 2. **Reader test.** The winner runs against the current golden prompt in the site's quiz. Readers decide.
 
 Losers are kept in [`prompts/openai/losers/`](prompts/openai/losers/) with why they lost. The full plan is in [PLAN.md](PLAN.md).
