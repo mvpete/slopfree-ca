@@ -121,6 +121,7 @@ ${slides}
       <a href="./#about">About</a>
       <a href="./#how">How to use</a>
       <a href="./#quiz">Quiz</a>
+      <a href="./#human-first">Human first</a>
       <a href="examples.html" class="active">Examples</a>
       <a href="https://github.com/sponsors/mvpete" class="sponsor">Sponsor</a>
     </nav>
