@@ -59,8 +59,8 @@ export function buildExamples(root, model, golden, challenger, slugs, meta) {
     if (c?.covered) add(totals.challenger, c);
     items.push({ ratio: g.words / base.words, html: `      <article class="example" aria-roledescription="slide">
         <header class="ex-head">
-          <h2>${esc(src.title)}</h2>
-          <p>${src.words.toLocaleString()} words · ${pts ? (pts.key ? `${pts.key.filter(Boolean).length} key of ${pts.points.length} points` : `${pts.points.length} points`) : "?"} · <a class="ex-link" href="${esc(src.url)}">Read the article</a></p>
+          <h2><a href="${esc(src.url)}">${esc(src.title)}</a></h2>
+          <p>${src.words.toLocaleString()} words · ${pts ? (pts.key ? `${pts.key.filter(Boolean).length} key of ${pts.points.length} points` : `${pts.points.length} points`) : "?"}</p>
         </header>
         <div class="ex-cols${c?.covered ? " three" : ""}">
         ${column("Plain", "", base, null, pts?.key)}

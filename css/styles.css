@@ -422,7 +422,8 @@ h3 { font-size: 1.05rem; letter-spacing: -0.01em; }
 .examples { margin-top: 40px; }
 .example { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: clamp(18px, 3vw, 28px); }
 .ex-head h2 { font-size: 1.3rem; }
-.ex-head h2 a { color: var(--text); }
+.ex-head h2 a { color: var(--text); text-decoration: underline; text-decoration-color: var(--gold-soft); text-underline-offset: 4px; }
+.ex-head h2 a:hover { text-decoration-color: var(--gold); }
 .ex-head p { margin: 6px 0 0; color: var(--dim); font-size: 0.85rem; }
 .ex-cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; margin-top: 20px; }
 .ex-cols.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
