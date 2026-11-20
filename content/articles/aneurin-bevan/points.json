@@ -634,15 +634,15 @@
   "question": {
     "text": "What did Aneurin Bevan lead the creation of?",
     "options": [
-      "The United Nations",
       "Britain’s National Health Service",
-      "The British Broadcasting Corporation",
-      "The European Union"
+      "The British Parliament",
+      "The Labour Party",
+      "The General Strike"
     ],
-    "answer": 1,
+    "answer": 0,
     "quotes": [
-      "led the creation of Britain’s National Health Service",
-      "led the creation of Britain’s National Health Service"
+      "Aneurin “Nye” Bevan (1897–1960) was a Welsh Labour politician who led the creation of Britain’s National Health Service and helped establish the welfare state.",
+      "Aneurin “Nye” Bevan was a Welsh Labour politician who led the creation of Britain’s National Health Service and helped establish the welfare state."
     ]
   }
 }

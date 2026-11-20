@@ -634,17 +634,17 @@
     false
   ],
   "question": {
-    "text": "Besides his legal career, what political role did John Dodson have?",
+    "text": "What was John Dodson's profession?",
     "options": [
-      "Town mayor",
-      "Tory MP",
-      "Party treasurer",
-      "Diplomatic envoy"
+      "English judge and lawyer",
+      "English naval officer",
+      "English poet and writer",
+      "English merchant"
     ],
-    "answer": 1,
+    "answer": 0,
     "quotes": [
-      "church lawyer and Tory MP",
-      "judge, and Tory MP"
+      "Sir John Dodson (1780–1858) was an English judge, church lawyer and Tory MP.",
+      "Sir John Dodson (1780–1858) was an English civil lawyer, judge, and Tory MP."
     ]
   }
 }

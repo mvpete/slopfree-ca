@@ -2,17 +2,17 @@
   "points": [],
   "key": [],
   "question": {
-    "text": "What happens where the Blackwater River ends?",
+    "text": "What does the Blackwater River flow into at the Virginia–North Carolina border?",
     "options": [
-      "It empties into a lake",
-      "It joins another river",
-      "It flows directly into the ocean",
-      "It dries up"
+      "Nottoway River",
+      "James River",
+      "Chowan River",
+      "Albemarle Sound"
     ],
-    "answer": 1,
+    "answer": 0,
     "quotes": [
-      "where it joins the Nottoway River to form the Chowan River",
-      "its confluence with the Nottoway River on the Virginia–North Carolina border, where the two form the Chowan River"
+      "It flows from near Petersburg to the Virginia–North Carolina border, where it joins the Nottoway River to form the Chowan River, which empties into Albemarle Sound.",
+      "from swamps near Petersburg to its confluence with the Nottoway River on the Virginia–North Carolina border, where the two form the Chowan River."
     ]
   }
 }

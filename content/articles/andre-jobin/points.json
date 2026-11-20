@@ -2,17 +2,17 @@
   "points": [],
   "key": [],
   "question": {
-    "text": "What was André Jobin known for?",
+    "text": "What political cause did André Jobin support?",
     "options": [
-      "Medicine and teaching",
-      "Notarial work and politics",
-      "Painting and sculpture",
-      "Exploration and trade"
+      "French-Canadian reform",
+      "British colonial rule",
+      "American independence",
+      "Industrialization efforts"
     ],
-    "answer": 1,
+    "answer": 0,
     "quotes": [
-      "was a Montreal notary and politician",
-      "was a Montreal notary and French-Canadian political figure"
+      "André Jobin (1786–1853) was a Montreal notary and politician who supported French-Canadian reform in Lower Canada and the Province of Canada.",
+      "André Jobin (1786–1853) was a Montreal notary and French-Canadian political figure who supported the Patriote movement and later the LaFontaine–Baldwin reform alliance."
     ]
   }
 }

@@ -2,17 +2,17 @@
   "points": [],
   "key": [],
   "question": {
-    "text": "What kind of work does Jüri Reinvere do?",
+    "text": "What is Jüri Reinvere known for?",
     "options": [
-      "Painting and sculpture",
-      "Music and writing",
-      "Medicine and research",
-      "Architecture and planning"
+      "Composer, poet and essayist",
+      "Professional athlete",
+      "Famous actor",
+      "Political leader"
     ],
-    "answer": 1,
+    "answer": 0,
     "quotes": [
-      "an Estonian composer, poet and essayist",
-      "an Estonian composer, poet and essayist"
+      "Jüri Reinvere (born 1971) is an Estonian composer, poet and essayist whose music and writing explore history, politics, nature and human perception.",
+      "Jüri Reinvere (born 1971) is an Estonian composer, poet and essayist who has lived in Germany since 2005 and is a Finnish citizen."
     ]
   }
 }

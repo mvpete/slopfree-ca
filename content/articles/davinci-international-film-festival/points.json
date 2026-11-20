@@ -524,17 +524,17 @@
     true
   ],
   "question": {
-    "text": "Where is the festival based?",
+    "text": "What does the DaVinci International Film Festival celebrate?",
     "options": [
-      "New York",
-      "London",
-      "Los Angeles",
-      "Toronto"
+      "Independent filmmakers and screenwriters",
+      "Blockbuster Hollywood films",
+      "Artists in the music industry",
+      "International fashion designers"
     ],
-    "answer": 2,
+    "answer": 0,
     "quotes": [
-      "a Los Angeles festival",
-      "an annual Los Angeles event"
+      "The DaVinci International Film Festival (DIFF) is a Los Angeles festival celebrating independent filmmakers and screenwriters.",
+      "The DaVinci International Film Festival (DIFF) is an annual Los Angeles event founded in 2017 by filmmaker Chadwick Pelletier."
     ]
   }
 }

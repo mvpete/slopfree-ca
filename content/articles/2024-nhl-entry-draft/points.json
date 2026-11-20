@@ -548,19 +548,5 @@
     false,
     false,
     false
-  ],
-  "question": {
-    "text": "Which team had the first overall pick?",
-    "options": [
-      "Chicago Blackhawks",
-      "Anaheim Ducks",
-      "San Jose Sharks",
-      "Utah Hockey Club"
-    ],
-    "answer": 2,
-    "quotes": [
-      "the San Jose Sharks held the first overall pick",
-      "The San Jose Sharks made Macklin Celebrini the first overall pick"
-    ]
-  }
+  ]
 }

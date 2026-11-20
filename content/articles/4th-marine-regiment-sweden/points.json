@@ -2,17 +2,17 @@
   "points": [],
   "key": [],
   "question": {
-    "text": "Where is the regiment based?",
+    "text": "What is the main role of the 4th Marine Regiment?",
     "options": [
-      "Stockholm",
-      "Gothenburg",
-      "Malmö",
-      "Uppsala"
+      "Training amphibious forces",
+      "Operating fixed coastal artillery",
+      "Producing naval ships",
+      "Conducting air defense"
     ],
-    "answer": 1,
+    "answer": 0,
     "quotes": [
-      "unit based in Gothenburg",
-      "based in Gothenburg"
+      "Formed in 2000 from the Älvsborg Coastal Artillery Regiment, it trained amphibious forces after Sweden ended its fixed coastal artillery.",
+      "It originated in 2000, when Älvsborg Coastal Artillery Regiment was reorganized as a marine regiment following the formation of the Swedish Amphibious Corps."
     ]
   }
 }

@@ -494,17 +494,17 @@
     false
   ],
   "question": {
-    "text": "What kind of service does ITV Anglia provide?",
+    "text": "What is ITV Anglia's main function?",
     "options": [
-      "Nationwide sports coverage",
-      "Regional television broadcasting",
-      "International news coverage",
-      "On-demand film streaming"
+      "Regional service for eastern England",
+      "National broadcaster for UK",
+      "International news channel",
+      "Film production company"
     ],
-    "answer": 1,
+    "answer": 0,
     "quotes": [
-      "ITV’s regional service for eastern England",
-      "ITV’s regional service for the East of England"
+      "ITV Anglia is ITV’s regional service for eastern England, based in Norwich and owned by ITV plc.",
+      "ITV Anglia is ITV’s regional service for the East of England, based at Anglia House in Norwich, with news bureaux in Cambridge and Northampton."
     ]
   }
 }

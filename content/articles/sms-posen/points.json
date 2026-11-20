@@ -512,17 +512,17 @@
     false
   ],
   "question": {
-    "text": "What kind of ship was SMS Posen?",
+    "text": "What was SMS Posen mainly used for during World War I?",
     "options": [
-      "A passenger liner",
-      "A dreadnought battleship",
-      "A cargo ship",
-      "A submarine"
+      "North Sea fleet operations",
+      "Pacific Ocean patrols",
+      "Mediterranean convoy escort",
+      "Arctic exploration"
     ],
-    "answer": 1,
+    "answer": 0,
     "quotes": [
-      "one of the first dreadnoughts built for the German Imperial Navy",
-      "a German Nassau-class battleship, commissioned in 1910 and among the first dreadnoughts built for the Imperial Navy"
+      "During World War I, Posen served mainly in the North Sea and took part in several fleet operations.",
+      "During World War I, Posen served mainly in the North Sea, taking part in fleet sorties and the Battle of Jutland on 31 May–1 June 1916."
     ]
   }
 }

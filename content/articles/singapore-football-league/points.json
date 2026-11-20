@@ -2,17 +2,17 @@
   "points": [],
   "key": [],
   "question": {
-    "text": "What kind of competition is the Singapore Football League?",
+    "text": "What is the Singapore Football League's level in Singapore football?",
     "options": [
-      "Top-tier club football",
-      "International football",
-      "Lower-tier club football",
-      "School football"
+      "Top-tier professional league",
+      "Second- and third-tier competition",
+      "Fourth-tier amateur league",
+      "Youth development league"
     ],
-    "answer": 2,
+    "answer": 1,
     "quotes": [
-      "Singapore’s second- and third-tier football competition",
-      "the country’s second and third football tiers"
+      "The Singapore Football League (SFL) is Singapore’s second- and third-tier football competition for clubs affiliated with the Football Association of Singapore.",
+      "The Singapore Football League (SFL), affiliated with the Football Association of Singapore, is the country’s second and third football tiers."
     ]
   }
 }

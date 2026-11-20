@@ -478,19 +478,5 @@
     false,
     false,
     false
-  ],
-  "question": {
-    "text": "What is Dan Hamilton’s job in Holby City?",
-    "options": [
-      "Ward nurse",
-      "Hospital receptionist",
-      "Orthopaedic surgeon",
-      "Ambulance driver"
-    ],
-    "answer": 2,
-    "quotes": [
-      "a fictional orthopaedic surgeon",
-      "a consultant orthopaedic surgeon"
-    ]
-  }
+  ]
 }

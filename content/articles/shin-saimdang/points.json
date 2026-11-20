@@ -534,19 +534,5 @@
     false,
     false,
     false
-  ],
-  "question": {
-    "text": "Which best describes Shin Saimdang?",
-    "options": [
-      "A military commander",
-      "An artist and poet",
-      "A royal physician",
-      "A merchant and explorer"
-    ],
-    "answer": 1,
-    "quotes": [
-      "Korean artist, writer, calligrapher, and poet",
-      "Korean artist, calligrapher, writer, and poet"
-    ]
-  }
+  ]
 }

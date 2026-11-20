@@ -2,16 +2,16 @@
   "points": [],
   "key": [],
   "question": {
-    "text": "How do the summaries describe Wonersh?",
+    "text": "What is Wonersh described as in the summary?",
     "options": [
-      "A coastal resort",
       "A village and civil parish",
-      "A large industrial city",
-      "A national park"
+      "A large city",
+      "A historic castle",
+      "A coastal town"
     ],
-    "answer": 1,
+    "answer": 0,
     "quotes": [
-      "Wonersh is a village and civil parish in Surrey",
+      "Wonersh is a village and civil parish in Surrey, within the Waverley district and Surrey Hills National Landscape.",
       "Wonersh is a village and civil parish in Surrey’s Waverley district"
     ]
   }

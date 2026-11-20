@@ -2,17 +2,17 @@
   "points": [],
   "key": [],
   "question": {
-    "text": "What kind of work is Zhdanova known for?",
+    "text": "What is Yana Zhdanova known for?",
     "options": [
-      "Sports coaching",
-      "Feminist activism",
-      "Medical research",
-      "Film directing"
+      "Feminist activism with FEMEN",
+      "Writing feminist books",
+      "Organizing charity events",
+      "Leading political campaigns"
     ],
-    "answer": 1,
+    "answer": 0,
     "quotes": [
-      "a Ukrainian feminist activist",
-      "a Ukrainian feminist activist"
+      "Iana Zhdanova is a Ukrainian feminist activist and longtime member of FEMEN",
+      "Yana Zhdanova is a Ukrainian feminist activist and leading member of FEMEN"
     ]
   }
 }

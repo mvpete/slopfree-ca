@@ -2,17 +2,17 @@
   "points": [],
   "key": [],
   "question": {
-    "text": "What was Josip Torbar’s profession outside politics?",
+    "text": "What role did Josip Torbar serve in before World War II?",
     "options": [
-      "Physician",
-      "Engineer",
-      "Lawyer",
-      "Journalist"
+      "Minister of posts, telegraph and telephone",
+      "Prime Minister of Yugoslavia",
+      "General in the army",
+      "Mayor of Zagreb"
     ],
-    "answer": 2,
+    "answer": 0,
     "quotes": [
-      "was a Croatian lawyer",
-      "was a Croatian Peasant Party (HSS) politician and lawyer"
+      "he became minister of posts, telegraph and telephone after the 1939 agreement that gave Croatia autonomy within Yugoslavia.",
+      "Torbar became a member of parliament in 1935 and served as minister of posts, telegraph and telephone from 1939."
     ]
   }
 }

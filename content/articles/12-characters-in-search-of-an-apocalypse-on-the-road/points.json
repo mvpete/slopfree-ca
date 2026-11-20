@@ -2,17 +2,17 @@
   "points": [],
   "key": [],
   "question": {
-    "text": "What issue does Boyd’s essay explore through fictional viewpoints?",
+    "text": "What does Andrew Boyd's 2017 essay present about climate change?",
     "options": [
-      "Space travel",
-      "Climate change",
-      "City traffic",
-      "School exams"
+      "Twelve fictional US perspectives",
+      "Scientific data and graphs",
+      "Historical climate events",
+      "Policy proposals"
     ],
-    "answer": 1,
+    "answer": 0,
     "quotes": [
-      "presents twelve fictional perspectives on how people in the United States experience climate change",
-      "presents climate change through 12 fictional US viewpoints"
+      "Andrew Boyd’s 2017 essay *12 Characters in Search of an Apocalypse* presents twelve fictional perspectives on how people in the United States experience climate change.",
+      "Andrew Boyd’s 2017 essay “12 Characters in Search of an Apocalypse” presents climate change through 12 fictional US viewpoints, each expressing a different response to the crisis."
     ]
   }
 }

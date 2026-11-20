@@ -512,17 +512,17 @@
     false
   ],
   "question": {
-    "text": "What was Japan trying to do by attacking Pearl Harbor?",
+    "text": "What was Japan's goal in attacking Pearl Harbor?",
     "options": [
-      "Disable the US Pacific Fleet",
-      "Defend Hawaii",
-      "Protect US supply ships",
-      "End its expansion overseas"
+      "To disable the US Pacific Fleet",
+      "To capture the Hawaiian Islands",
+      "To negotiate peace terms",
+      "To destroy US mainland cities"
     ],
     "answer": 0,
     "quotes": [
-      "Japan aimed to disable the US Pacific Fleet",
-      "was intended to disable the US Pacific Fleet"
+      "Japan aimed to disable the US Pacific Fleet so it could expand into Southeast Asia without American interference.",
+      "Japan’s December 7, 1941, surprise attack on Pearl Harbor was intended to disable the US Pacific Fleet while Japan expanded into Southeast Asia."
     ]
   }
 }

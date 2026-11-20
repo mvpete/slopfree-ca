@@ -514,17 +514,17 @@
     false
   ],
   "question": {
-    "text": "Who was Gentius?",
+    "text": "What was Gentius's main political action during his reign?",
     "options": [
-      "A Roman general",
-      "The last known Illyrian king",
-      "A Greek philosopher",
-      "An Egyptian priest"
+      "Initially allied with Rome",
+      "Conquered Macedon",
+      "Became Roman emperor",
+      "Founded a new city"
     ],
-    "answer": 1,
+    "answer": 0,
     "quotes": [
-      "Gentius was the last attested Illyrian king",
-      "Gentius ruled the Illyrian kingdom from 181 to 168 BC and was its last attested king"
+      "Gentius was the last attested Illyrian king, ruling from 181 to 168 BC from Scodra, in present-day Albania. Initially allied with Rome, he switched sides in 169 BC and joined Perseus of Macedon.",
+      "Gentius ruled the Illyrian kingdom from 181 to 168 BC and was its last attested king. Son of Pleuratus III, who had maintained friendly relations with Rome, he initially allied with Rome against Macedon in 171 BC."
     ]
   }
 }
