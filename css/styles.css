@@ -36,7 +36,7 @@ a { color: var(--gold); text-decoration: none; }
 a:hover { text-decoration: underline; text-underline-offset: 3px; }
 :focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 4px; }
 
-h1, h2, h3 { margin: 0; font-weight: 700; letter-spacing: -0.02em; line-height: 1.15; }
+h1, h2, h3 { margin: 0; font-weight: 700; letter-spacing: -0.02em; line-height: 1.15; text-wrap: balance; }
 h1 { font-size: clamp(2.5rem, 6vw, 4.25rem); }
 h2 { font-size: clamp(1.75rem, 3.5vw, 2.5rem); }
 h3 { font-size: 1.05rem; letter-spacing: -0.01em; }
@@ -101,7 +101,7 @@ h3 { font-size: 1.05rem; letter-spacing: -0.01em; }
   content: "";
   position: absolute;
   left: 50%; top: 58%;
-  width: min(900px, 100vw); height: 420px;
+  width: min(900px, 100%); height: 420px;
   transform: translate(-50%, -50%);
   background: radial-gradient(closest-side, rgba(212, 175, 55, 0.10), transparent);
   pointer-events: none;
@@ -566,3 +566,83 @@ p.ex-score { margin: auto 0 0; padding-top: 10px; border-top: 1px solid var(--li
 p.ex-score strong { color: var(--gold); font: 600 1.1rem var(--mono); }
 
 .thanks { margin: 0 0 24px; font-size: clamp(2rem, 5vw, 3rem); color: var(--gold); }
+
+/* ---------- Phone layout ---------- */
+.nav-toggle, .nav-button { display: none; }
+@media (max-width: 760px) {
+  /* Menu button and dropdown */
+  .nav-toggle {
+    display: block;
+    position: absolute;
+    right: max(16px, env(safe-area-inset-right, 0px));
+    top: calc(env(safe-area-inset-top, 0px) + 12px);
+    width: 40px;
+    height: 40px;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 2;
+  }
+  .nav-button {
+    display: grid;
+    align-content: center;
+    gap: 5px;
+    width: 40px;
+    height: 40px;
+    padding: 0 9px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+  }
+  .nav-button span { display: block; height: 2px; border-radius: 2px; background: var(--text); transition: transform 0.2s ease, opacity 0.2s ease; }
+  .nav-toggle:focus-visible + .nav-button { outline: 2px solid var(--gold); outline-offset: 2px; }
+  .nav-toggle:checked + .nav-button span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-toggle:checked + .nav-button span:nth-child(2) { opacity: 0; }
+  .nav-toggle:checked + .nav-button span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .topbar nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    gap: 0;
+    padding: 4px max(16px, env(safe-area-inset-right, 0px)) 16px max(16px, env(safe-area-inset-left, 0px));
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+    box-shadow: 0 12px 24px -12px rgba(0, 0, 0, 0.5);
+  }
+  .nav-toggle:checked ~ nav { display: flex; }
+  .topbar nav a { padding: 13px 0; font-size: 1rem; color: var(--text); border-bottom: 1px solid var(--line); }
+  .topbar nav a.active { box-shadow: none; color: var(--gold); }
+  .topbar nav .hide-narrow { display: block; }
+  .topbar nav .sponsor { align-self: flex-start; margin-top: 14px; padding: 8px 16px; border: 1px solid var(--gold); border-radius: 999px; }
+
+  /* Tighter sections */
+  .panel { padding-block: calc(var(--topbar) + 24px) 32px; }
+  .steps { margin-top: 28px; gap: 10px; }
+  .steps li { padding: 16px 18px; display: grid; grid-template-columns: 36px 1fr; column-gap: 12px; align-items: baseline; }
+  .steps .num { margin: 0; font-size: 1.5rem; grid-row: span 2; }
+  .steps li p { grid-column: 2; }
+  .ways { margin-top: 24px; gap: 10px; }
+  .way { padding: 18px; }
+  .facts { margin-top: 28px; padding-top: 24px; }
+  .quiz-card { padding: 22px 18px; }
+  .principle { padding-block: 18px; }
+}
+html.quiz-active { scroll-snap-type: none; }
+
+/* Decorative glow never widens the page. */
+.hero { overflow-x: clip; }
+@media (max-width: 760px) { .scroll-cue { display: none; } }
+
+/* ---------- Examples: phone tabs (Plain / Golden / Challenger) ---------- */
+.tab-bar { display: none; }
+@media (max-width: 900px) {
+  .tab-bar { display: flex; gap: 4px; margin: 14px 0 0; padding: 4px; background: var(--surface-2); border-radius: 10px; }
+  .tab { flex: 1; padding: 9px 6px; border: 0; border-radius: 7px; background: transparent; color: var(--dim); font: 600 0.85rem var(--sans); cursor: pointer; }
+  .tab.active { background: var(--gold); color: var(--bg); }
+  .tabset .tab-panel:not(.active) { display: none; }
+  .tabset .ex-prompts { margin-top: 10px; }
+  .tabset .ex-cols { margin-top: 14px; }
+  .tabset .ex-col { border-top: 0; padding-top: 0; }
+}

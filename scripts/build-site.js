@@ -92,7 +92,7 @@ fs.writeFileSync(path.join(OUT, "golden.json"), JSON.stringify({ ...goldenDoc(mo
 fs.writeFileSync(path.join(OUT, "golden.txt"), index.models[models[0]].golden.text + "\n");
 
 // The Examples page uses the same menu as the home page, so the two never drift apart.
-const homeNav = fs.readFileSync(path.join(REPO, "index.html"), "utf8").match(/<nav aria-label="Main">[\s\S]*?<\/nav>/)[0];
+const homeNav = fs.readFileSync(path.join(REPO, "index.html"), "utf8").match(/<input type="checkbox" id="nav-toggle"[\s\S]*?<\/nav>/)[0];
 const examplesNav = homeNav
   .replace(/href="#/g, 'href="./#')
   .replace(/ data-section="[^"]*"/g, "")

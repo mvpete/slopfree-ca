@@ -61,6 +61,14 @@
     }
   }));
 
+  // ---------- Phone menu: close after choosing a link ----------
+  document.querySelectorAll(".topbar nav a").forEach((a) =>
+    a.addEventListener("click", () => {
+      const t = $("nav-toggle");
+      if (t) t.checked = false;
+    })
+  );
+
   // ---------- Highlight the menu item for the section on screen ----------
   const links = document.querySelectorAll(".topbar nav a[data-section]");
   const observer = new IntersectionObserver(
@@ -393,7 +401,7 @@
       fs.appendChild(btn);
     });
     show("question");
-    fs.querySelector(".choice").focus({ preventScroll: true });
+    // No automatic focus on an answer: on a phone the focus ring looks like a pre-selected choice.
   }
 
   function answer(choice) {

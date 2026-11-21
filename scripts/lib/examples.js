@@ -20,6 +20,13 @@ function paragraphs(text) {
     .join("");
 }
 
+// Phone tabs: one button per column. Hidden on wide screens, where all columns show side by side.
+function tabBar(labels) {
+  return `<div class="tab-bar" role="tablist">${labels
+    .map((l, i) => `<button type="button" class="tab${i === 0 ? " active" : ""}" role="tab" aria-selected="${i === 0}" data-i="${i}">${l}</button>`)
+    .join("")}</div>`;
+}
+
 function column(label, sub, run, base, key) {
   const kept = run.covered.filter((c, i) => c && (!key || key[i])).length;
   const vs = "";
@@ -75,8 +82,11 @@ export function buildExamples(root, model, golden, challenger, slugs, meta) {
         <div class="ex-card">
           <div class="ex-face ex-front">
         ${head("Flip to see unsupported claims")}
+        <div class="tabset">
+        ${tabBar(runs.map(([label]) => label))}
         <div class="ex-cols${three}">
-        ${runs.map(([label, r]) => column(label, "", r, r === base ? null : base, pts?.key)).join("\n        ")}
+        ${runs.map(([label, r], i) => column(label, "", r, r === base ? null : base, pts?.key).replace('<div class="ex-col">', `<div class="ex-col tab-panel${i === 0 ? " active" : ""}">`)).join("\n        ")}
+        </div>
         </div>
           </div>
           <div class="ex-face ex-back" aria-hidden="true">
@@ -131,15 +141,19 @@ ${slides}
       : (sc.kept - sc.candUnsupported) / sc.candWords / ((sc.baseKept - sc.baseUnsupported) / sc.baseWords);
     return Number.isFinite(v) ? `<p class="ex-score">Score: <strong>${v.toFixed(2)}</strong></p>` : "";
   };
-  const box = (label, body, note, s) => `<div class="ex-prompt">
+  const box = (label, body, note, s, active) => `<div class="ex-prompt tab-panel${active ? " active" : ""}">
         <h3>${label}</h3>
         <pre>${esc(body)}</pre>${note ? `<p class="small">${note}</p>` : ""}
         ${scoreRows(s, meta.gate)}
       </div>`;
-  const prompts = `<div class="ex-prompts${meta.challengerText ? " three" : ""}">
-      ${box("Plain", `${meta.wrapper}\n<article>`, "The baseline every score is measured against.", { baseline: true })}
+  const promptLabels = ["Plain", "Golden", ...(meta.challengerText ? ["Challenger"] : [])];
+  const prompts = `<div class="tabset">
+    ${tabBar(promptLabels)}
+    <div class="ex-prompts${meta.challengerText ? " three" : ""}">
+      ${box("Plain", `${meta.wrapper}\n<article>`, "The baseline every score is measured against.", { baseline: true }, true)}
       ${box("Golden", `${meta.wrapper}\n<article>\n\n${golden.text}`, "", meta.scores?.golden)}
       ${meta.challengerText ? box("Challenger", `${meta.wrapper}\n<article>\n\n${meta.challengerText}`, "", meta.scores?.challenger) : ""}
+    </div>
     </div>`;
 
   return `<!doctype html>
@@ -211,6 +225,17 @@ ${slides}
         var ro = new ResizeObserver(fit);
         track.querySelectorAll(".ex-face").forEach(function (f) { ro.observe(f); });
       }
+      document.querySelectorAll(".tabset").forEach(function (set) {
+        var tabs = set.querySelectorAll(".tab"), panels = set.querySelectorAll(".tab-panel");
+        tabs.forEach(function (t) {
+          t.onclick = function () {
+            var i = Number(t.dataset.i);
+            tabs.forEach(function (x, j) { x.classList.toggle("active", j === i); x.setAttribute("aria-selected", j === i ? "true" : "false"); });
+            panels.forEach(function (p, j) { p.classList.toggle("active", j === i); });
+            fit();
+          };
+        });
+      });
       document.querySelectorAll(".ex-flip").forEach(function (b) {
         b.onclick = function () {
           var card = b.closest(".ex-card");
