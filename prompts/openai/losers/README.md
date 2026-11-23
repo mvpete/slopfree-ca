@@ -1,6 +1,6 @@
 # Close but no cigar
 
-Prompts that lost, one file each, with why they lost and their numbers.
+Losing prompts, kept for posterity. One file each, with why it lost and its numbers.
 
-- **Eval losers:** the three closest misses from each weekly search. Every attempt is also logged in `evals/<date>.json`.
-- **Reader-test losers:** challengers that passed the eval but didn't beat golden with readers.
+- **Lost the eval:** the three closest misses from each week. Every try is also logged in `evals/<date>.json`.
+- **Lost the quiz:** passed the eval, but readers didn't do better with it than with golden.
