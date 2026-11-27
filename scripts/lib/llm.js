@@ -121,6 +121,7 @@ export function createOpenAI({ apiKey, budget }) {
   if (!apiKey) throw new Error("OPENAI_API_KEY is not set");
 
   async function post(path, body) {
+    let last = "";
     for (let attempt = 0; attempt < 5; attempt++) {
       const res = await fetch("https://api.openai.com" + path, {
         method: "POST",
@@ -129,10 +130,13 @@ export function createOpenAI({ apiKey, budget }) {
       });
       if (res.ok) return res.json();
       const detail = await res.text();
-      if (res.status !== 429 && res.status < 500) throw new Error(`OpenAI ${res.status}: ${detail.slice(0, 300)}`);
+      last = `OpenAI ${res.status}: ${detail.slice(0, 300)}`;
+      // Out of credit or over the spending limit also comes back as 429; retrying can't fix it.
+      if (/insufficient_quota|billing_hard_limit/.test(detail)) throw new Error(`${last} (the OpenAI account is out of credit or over its spending limit)`);
+      if (res.status !== 429 && res.status < 500) throw new Error(last);
       await sleep(2000 * 2 ** attempt);
     }
-    throw new Error(`OpenAI kept failing on ${path}`);
+    throw new Error(`OpenAI kept failing on ${path}. Last error: ${last}`);
   }
 
   // OpenAI caches repeated prompt prefixes by itself, so shared just goes first.
