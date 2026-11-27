@@ -1,0 +1,813 @@
+{
+  "date": "2026-11-27",
+  "model": "openai",
+  "writerModel": "gpt-6-luna",
+  "judgeModel": "gpt-6.2-sol",
+  "drafterModel": "gpt-6.2-sol",
+  "wrapper": "Summarize the following article:",
+  "gate": {
+    "coverage": 0.95,
+    "floor": 0.85,
+    "efficiency": 0.15,
+    "detailWeight": 0
+  },
+  "golden": {
+    "id": "p-0001",
+    "score": {
+      "n": 10,
+      "coverage": 0.7777777777777778,
+      "floor": 0.3888888888888889,
+      "density": 1.368792682671359,
+      "lengthRatio": 0.6093930893222905,
+      "baseUnsupported": 22,
+      "candUnsupported": 24,
+      "kept": 91,
+      "baseKept": 117,
+      "overlap": 66,
+      "baseWords": 2262,
+      "candWords": 1435,
+      "baseDashes": 19,
+      "candDashes": 0,
+      "baseStyle": 34,
+      "candStyle": 14,
+      "composite": 1.1117109847790207,
+      "baseOfArticlePoints": 0.16572237960339944,
+      "baseOfArticleWords": 0.09105009451795841,
+      "worst": [
+        {
+          "slug": "chestnut-blight",
+          "coverage": 0.3888888888888889,
+          "ratio": 0.5955056179775281,
+          "density": 0.6530398322851153
+        },
+        {
+          "slug": "wheel-of-the-year",
+          "coverage": 0.4375,
+          "ratio": 0.4440677966101695,
+          "density": 0.9852099236641222
+        },
+        {
+          "slug": "happy-end-band",
+          "coverage": 0.5384615384615384,
+          "ratio": 0.6091370558375635,
+          "density": 0.8839743589743589
+        }
+      ]
+    },
+    "passed": false,
+    "reason": "Kept 77.8% as many key points as the baseline (needs 95.0%; 91 vs 117). 24 unsupported claims vs baseline's 22. Worst article kept 38.9% as many key points as the baseline (needs 85.0%).",
+    "stats": [
+      {
+        "slug": "wheel-of-the-year",
+        "totalPoints": 297,
+        "keyPoints": 81,
+        "articleWords": 3000,
+        "baseCovered": 16,
+        "kept": 7,
+        "overlap": 5,
+        "baseUnsupported": 0,
+        "candUnsupported": 2,
+        "baseWords": 295,
+        "candWords": 131,
+        "baseDashes": 12,
+        "candDashes": 0,
+        "baseStyle": 2,
+        "candStyle": 1
+      },
+      {
+        "slug": "short-film",
+        "totalPoints": 264,
+        "keyPoints": 56,
+        "articleWords": 1959,
+        "baseCovered": 11,
+        "kept": 10,
+        "overlap": 9,
+        "baseUnsupported": 3,
+        "candUnsupported": 2,
+        "baseWords": 187,
+        "candWords": 168,
+        "baseDashes": 0,
+        "candDashes": 0,
+        "baseStyle": 4,
+        "candStyle": 3
+      },
+      {
+        "slug": "d-j-saikia",
+        "totalPoints": 168,
+        "keyPoints": 31,
+        "articleWords": 1610,
+        "baseCovered": 13,
+        "kept": 11,
+        "overlap": 9,
+        "baseUnsupported": 3,
+        "candUnsupported": 6,
+        "baseWords": 213,
+        "candWords": 153,
+        "baseDashes": 0,
+        "candDashes": 0,
+        "baseStyle": 5,
+        "candStyle": 2
+      },
+      {
+        "slug": "happy-end-band",
+        "totalPoints": 266,
+        "keyPoints": 55,
+        "articleWords": 2116,
+        "baseCovered": 13,
+        "kept": 7,
+        "overlap": 6,
+        "baseUnsupported": 5,
+        "candUnsupported": 0,
+        "baseWords": 197,
+        "candWords": 120,
+        "baseDashes": 0,
+        "candDashes": 0,
+        "baseStyle": 3,
+        "candStyle": 1
+      },
+      {
+        "slug": "potomac-company",
+        "totalPoints": 224,
+        "keyPoints": 57,
+        "articleWords": 2327,
+        "baseCovered": 7,
+        "kept": 9,
+        "overlap": 4,
+        "baseUnsupported": 1,
+        "candUnsupported": 0,
+        "baseWords": 191,
+        "candWords": 148,
+        "baseDashes": 1,
+        "candDashes": 0,
+        "baseStyle": 2,
+        "candStyle": 1
+      },
+      {
+        "slug": "wkyc",
+        "totalPoints": 339,
+        "keyPoints": 83,
+        "articleWords": 3000,
+        "baseCovered": 10,
+        "kept": 10,
+        "overlap": 9,
+        "baseUnsupported": 2,
+        "candUnsupported": 2,
+        "baseWords": 228,
+        "candWords": 139,
+        "baseDashes": 0,
+        "candDashes": 0,
+        "baseStyle": 4,
+        "candStyle": 0
+      },
+      {
+        "slug": "ulster-constitution-defence-committee",
+        "totalPoints": 184,
+        "keyPoints": 99,
+        "articleWords": 1667,
+        "baseCovered": 8,
+        "kept": 11,
+        "overlap": 5,
+        "baseUnsupported": 2,
+        "candUnsupported": 1,
+        "baseWords": 183,
+        "candWords": 147,
+        "baseDashes": 0,
+        "candDashes": 0,
+        "baseStyle": 2,
+        "candStyle": 1
+      },
+      {
+        "slug": "chestnut-blight",
+        "totalPoints": 276,
+        "keyPoints": 79,
+        "articleWords": 3000,
+        "baseCovered": 18,
+        "kept": 7,
+        "overlap": 6,
+        "baseUnsupported": 2,
+        "candUnsupported": 2,
+        "baseWords": 267,
+        "candWords": 159,
+        "baseDashes": 2,
+        "candDashes": 0,
+        "baseStyle": 2,
+        "candStyle": 2
+      },
+      {
+        "slug": "angustias",
+        "totalPoints": 373,
+        "keyPoints": 82,
+        "articleWords": 3000,
+        "baseCovered": 12,
+        "kept": 11,
+        "overlap": 9,
+        "baseUnsupported": 3,
+        "candUnsupported": 8,
+        "baseWords": 245,
+        "candWords": 144,
+        "baseDashes": 2,
+        "candDashes": 0,
+        "baseStyle": 7,
+        "candStyle": 3
+      },
+      {
+        "slug": "max-stirner",
+        "totalPoints": 260,
+        "keyPoints": 83,
+        "articleWords": 3000,
+        "baseCovered": 9,
+        "kept": 8,
+        "overlap": 4,
+        "baseUnsupported": 1,
+        "candUnsupported": 1,
+        "baseWords": 256,
+        "candWords": 126,
+        "baseDashes": 2,
+        "candDashes": 0,
+        "baseStyle": 3,
+        "candStyle": 0
+      }
+    ]
+  },
+  "attempts": [
+    {
+      "n": 1,
+      "stage": "screen",
+      "passed": false,
+      "prompt": "Identify the main points across the whole article before drafting. Cover each distinct finding, event, or argument that is central to the article, including key outcomes and disagreements. Keep names, dates, figures, and qualifications when they are needed to state a main point accurately.\n\nShorten the wording before dropping any main point. State shared context once, combine related facts when the result is clear, and cut repetition, filler, and examples or background that only illustrate a point already covered. Let the number of main points determine the length rather than using a fixed word count.\n\nCheck that no main point was lost in editing and that every claim is supported by the article. Preserve attribution, uncertainty, and scope. Do not infer causes or significance the article does not state.\n\nUse plain statements only. Do not use em dashes or literary or rhetorical techniques, including metaphors, rhetorical questions, lists of three for rhythm, \"not just X but Y\" constructions, dramatic or promotional language, and stock phrases.",
+      "idea": "I replaced the fixed word target and blanket cuts with a coverage check and sentence-level editing so the summary saves words without losing main points or changing their meaning.",
+      "score": {
+        "n": 3,
+        "coverage": 2.025,
+        "floor": 1.4615384615384615,
+        "density": 0.6128104179285282,
+        "lengthRatio": 2.610169491525424,
+        "baseUnsupported": 6,
+        "candUnsupported": 20,
+        "kept": 81,
+        "baseKept": 40,
+        "overlap": 36,
+        "baseWords": 695,
+        "candWords": 2135,
+        "baseDashes": 12,
+        "candDashes": 0,
+        "baseStyle": 11,
+        "candStyle": 16,
+        "composite": 0.5840336134453782,
+        "baseOfArticlePoints": 0.23809523809523808,
+        "baseOfArticleWords": 0.09833333333333333,
+        "worst": [
+          {
+            "slug": "d-j-saikia",
+            "coverage": 1.4615384615384615,
+            "ratio": 2.384976525821596,
+            "density": 0.6128104179285282
+          },
+          {
+            "slug": "wheel-of-the-year",
+            "coverage": 2.25,
+            "ratio": 2.610169491525424,
+            "density": 0.8620129870129871
+          },
+          {
+            "slug": "short-film",
+            "coverage": 2.3636363636363638,
+            "ratio": 4.5828877005347595,
+            "density": 0.5157526254375729
+          }
+        ]
+      },
+      "distance": 6.812444478094085,
+      "reason": "Key points per word: 0.61× the baseline (needs 1.18×, the same key points in 15.0% fewer words; 2135 words vs baseline's 695 across 3 articles). 20 unsupported claims vs baseline's 6. 16 literary or AI-style phrases vs baseline's 11."
+    },
+    {
+      "n": 2,
+      "stage": "screen",
+      "passed": false,
+      "prompt": "Draft the summary at your usual length. Before returning it, aim to cut about one word in five without losing any of the important facts you included. Start by removing generic openings, repeated context, and examples or background that add no essential fact. Use a specific verb instead of a longer phrase. Combine clauses that share a subject when the connection is clear. Keep a few extra words if cutting them would lose an important outcome, distinction, or qualification.\n\nCheck each claim against the article. Keep the actor, attribution, scope, and degree of certainty accurate. Do not turn a sequence into a cause or an allegation into a fact. Return only the revised summary.\n\nUse plain statements only. No em dashes or literary or rhetorical techniques. Avoid metaphors, rhetorical questions, lists of three for rhythm, \"not just X but Y\" constructions, dramatic or promotional language, and stock phrases.",
+      "idea": "I made concision a revision step with a relative word target so the writer can shorten the wording without starting with fewer facts.",
+      "score": {
+        "n": 3,
+        "coverage": 1.1,
+        "floor": 0.9230769230769231,
+        "density": 0.8816833390824422,
+        "lengthRatio": 1.2566844919786095,
+        "baseUnsupported": 6,
+        "candUnsupported": 8,
+        "kept": 44,
+        "baseKept": 40,
+        "overlap": 31,
+        "baseWords": 695,
+        "candWords": 845,
+        "baseDashes": 12,
+        "candDashes": 0,
+        "baseStyle": 11,
+        "candStyle": 6,
+        "composite": 0.8708666898712147,
+        "baseOfArticlePoints": 0.23809523809523808,
+        "baseOfArticleWords": 0.09833333333333333,
+        "worst": [
+          {
+            "slug": "d-j-saikia",
+            "coverage": 0.9230769230769231,
+            "ratio": 1.0469483568075117,
+            "density": 0.8816833390824422
+          },
+          {
+            "slug": "short-film",
+            "coverage": 1,
+            "ratio": 1.2566844919786095,
+            "density": 0.7957446808510638
+          },
+          {
+            "slug": "wheel-of-the-year",
+            "coverage": 1.3125,
+            "ratio": 1.311864406779661,
+            "density": 1.0004844961240311
+          }
+        ]
+      },
+      "distance": 0.9172358284465907,
+      "reason": "Key points per word: 0.88× the baseline (needs 1.18×, the same key points in 15.0% fewer words; 845 words vs baseline's 695 across 3 articles). 8 unsupported claims vs baseline's 6.",
+      "loserId": "p-0005"
+    },
+    {
+      "n": 3,
+      "stage": "screen",
+      "passed": false,
+      "prompt": "Use compact factual bullets. Start each bullet with a main fact, not a topic label or an introduction. Give each major part of the article room before adding specifics to any one part. Keep distinct findings, outcomes, arguments, and disagreements. Put facts that share a subject in the same bullet so you can name the subject once. Use a new bullet when the subject changes.\n\nKeep a name, date, figure, or example if it states a main fact or changes its meaning. Leave out details that only illustrate a fact you already stated. Skip headings, opening remarks, and closing recaps.\n\nState only what the article supports. Keep attribution, scope, and uncertainty where they affect meaning. Do not imply a cause, motive, or connection the article does not establish.\n\nUse plain statements only. No em dashes and no literary or rhetorical techniques. Avoid metaphors, rhetorical questions, lists of three for rhythm, contrast formulas such as \"not just X but Y,\" dramatic or promotional language, and stock phrases.",
+      "idea": "I switched from word targets and rewrite passes to compact factual bullets that cover the whole article and state shared context once.",
+      "score": {
+        "n": 3,
+        "coverage": 1.4,
+        "floor": 1.1538461538461537,
+        "density": 0.7144454382826476,
+        "lengthRatio": 1.6150234741784038,
+        "baseUnsupported": 6,
+        "candUnsupported": 7,
+        "kept": 56,
+        "baseKept": 40,
+        "overlap": 36,
+        "baseWords": 695,
+        "candWords": 1245,
+        "baseDashes": 12,
+        "candDashes": 0,
+        "baseStyle": 11,
+        "candStyle": 8,
+        "composite": 0.804512166312308,
+        "baseOfArticlePoints": 0.23809523809523808,
+        "baseOfArticleWords": 0.09833333333333333,
+        "worst": [
+          {
+            "slug": "d-j-saikia",
+            "coverage": 1.1538461538461537,
+            "ratio": 1.6150234741784038,
+            "density": 0.7144454382826476
+          },
+          {
+            "slug": "wheel-of-the-year",
+            "coverage": 1.3125,
+            "ratio": 1.383050847457627,
+            "density": 0.9489889705882353
+          },
+          {
+            "slug": "short-film",
+            "coverage": 1.8181818181818181,
+            "ratio": 2.6363636363636362,
+            "density": 0.6896551724137931
+          }
+        ]
+      },
+      "distance": 0.7260547107930828,
+      "reason": "Key points per word: 0.71× the baseline (needs 1.18×, the same key points in 15.0% fewer words; 1245 words vs baseline's 695 across 3 articles). 7 unsupported claims vs baseline's 6.",
+      "loserId": "p-0004"
+    },
+    {
+      "n": 4,
+      "stage": "screen",
+      "passed": false,
+      "prompt": "Before drafting, estimate how many words you would normally use to summarize this article. Set a word limit at three quarters of that estimate. Use the space for facts from across the article, not for extra detail about the first few points.\n\nStart with a fact about the subject. Cover the main claims, events, and outcomes before adding supporting detail. Put facts with the same actor or setting together so you state that context once. Use direct verbs and cut phrases that only announce, connect, or repeat points. If there is room for another major fact, include it rather than expanding a point already covered. Do not pad the summary to reach the limit.\n\nCheck each claim against the article. Keep attribution, scope, and uncertainty where they change the meaning. Do not combine facts in a way that implies a cause or connection the article does not state.\n\nUse plain statements only. No em dashes or literary or rhetorical techniques. Do not use metaphors, rhetorical questions, lists of three for rhythm, contrast formulas such as \"not just X but Y,\" dramatic or promotional language, or stock phrases.",
+      "idea": "I set the word limit before drafting and direct the writer to spend it on coverage across the article rather than trimming an already expanded draft.",
+      "score": {
+        "n": 3,
+        "coverage": 0.8,
+        "floor": 0.625,
+        "density": 0.8575581395348837,
+        "lengthRatio": 0.8309859154929577,
+        "baseUnsupported": 6,
+        "candUnsupported": 7,
+        "kept": 32,
+        "baseKept": 40,
+        "overlap": 26,
+        "baseWords": 695,
+        "candWords": 592,
+        "baseDashes": 12,
+        "candDashes": 0,
+        "baseStyle": 11,
+        "candStyle": 3,
+        "composite": 0.8632253577106518,
+        "baseOfArticlePoints": 0.23809523809523808,
+        "baseOfArticleWords": 0.09833333333333333,
+        "worst": [
+          {
+            "slug": "wheel-of-the-year",
+            "coverage": 0.625,
+            "ratio": 0.7288135593220338,
+            "density": 0.8575581395348837
+          },
+          {
+            "slug": "short-film",
+            "coverage": 0.9090909090909091,
+            "ratio": 1.0695187165775402,
+            "density": 0.8500000000000001
+          },
+          {
+            "slug": "d-j-saikia",
+            "coverage": 0.9230769230769231,
+            "ratio": 0.8309859154929577,
+            "density": 1.1108213820078228
+          }
+        ]
+      },
+      "distance": 1.0270095339237284,
+      "reason": "Kept 80.0% as many key points as the baseline (needs 95.0%; 32 vs 40). Key points per word: 0.86× the baseline (needs 1.18×, the same key points in 15.0% fewer words; 592 words vs baseline's 695 across 3 articles). 7 unsupported claims vs baseline's 6. Worst article kept 62.5% as many key points as the baseline (needs 85.0%)."
+    },
+    {
+      "n": 5,
+      "stage": "screen",
+      "passed": false,
+      "prompt": "Give each main point one short clause where possible. Start with a fact about the subject, not an introduction. Use the next clause for a new main point rather than another detail about one you have covered. Include central events, findings, arguments, and outcomes wherever they appear in the article. Keep a name, date, figure, or example if it states a main point or changes its meaning.\n\nUse direct verbs. When facts share a subject, name it once if the meaning stays clear. Cut phrases that only introduce, connect, or repeat facts. Before returning the summary, check for a main point you missed, especially later in the article. Replace a less important detail with that point if needed. End with the last fact, not a recap.\n\nVerify each claim against the article. Keep the correct actor, attribution, scope, and degree of certainty. Do not join facts in a way that implies an unstated cause or connection.\n\nUse plain statements only. No em dashes or literary or rhetorical techniques. Avoid metaphors, rhetorical questions, lists of three for rhythm, formulas such as \"not just X but Y,\" dramatic or promotional language, and stock phrases.",
+      "idea": "I replaced the overall word limit with a short clause for each main point and a final check that trades less important detail for missed points.",
+      "score": {
+        "n": 3,
+        "coverage": 1.275,
+        "floor": 1.0769230769230769,
+        "density": 0.855568445475638,
+        "lengthRatio": 1.4610169491525424,
+        "baseUnsupported": 6,
+        "candUnsupported": 10,
+        "kept": 51,
+        "baseKept": 40,
+        "overlap": 30,
+        "baseWords": 695,
+        "candWords": 1057,
+        "baseDashes": 12,
+        "candDashes": 0,
+        "baseStyle": 11,
+        "candStyle": 7,
+        "composite": 0.7928933162669042,
+        "baseOfArticlePoints": 0.23809523809523808,
+        "baseOfArticleWords": 0.09833333333333333,
+        "worst": [
+          {
+            "slug": "d-j-saikia",
+            "coverage": 1.0769230769230769,
+            "ratio": 1.0093896713615023,
+            "density": 1.0669051878354203
+          },
+          {
+            "slug": "wheel-of-the-year",
+            "coverage": 1.25,
+            "ratio": 1.4610169491525424,
+            "density": 0.855568445475638
+          },
+          {
+            "slug": "short-film",
+            "coverage": 1.5454545454545454,
+            "ratio": 2.197860962566845,
+            "density": 0.7031630170316302
+          }
+        ]
+      },
+      "distance": 1.606100154679041,
+      "reason": "Key points per word: 0.86× the baseline (needs 1.18×, the same key points in 15.0% fewer words; 1057 words vs baseline's 695 across 3 articles). 10 unsupported claims vs baseline's 6."
+    },
+    {
+      "n": 6,
+      "stage": "screen",
+      "passed": false,
+      "prompt": "Keep the main facts you would include in a regular summary. Shorten how you state each fact rather than narrowing the coverage. Use any priorities the source explicitly marks. Leave out supporting material that does not state a separate main fact or change the meaning of one.\n\nUse the source's shortest clear wording for each fact. Start with the actor or subject and use a direct verb. State shared context once. Cut words that only announce, describe, or repeat a fact. Keep a name, date, number, or example only if it identifies, states, or qualifies a main fact. Start with the first fact and stop after the last one.\n\nCheck each statement against the source. Keep the correct actor, attribution, scope, and degree of certainty. Do not infer causes, motives, or significance. If the source does not link two facts, state them separately.\n\nUse plain statements only. No em dashes and no literary or rhetorical techniques. Do not use metaphors, rhetorical questions, lists of three for rhythm, formulas such as \"not just X but Y,\" dramatic or promotional language, or stock phrases.",
+      "idea": "I kept ordinary summary coverage as the default and used short, source-based wording for each fact instead of setting a word limit or asking for exhaustive coverage.",
+      "score": {
+        "n": 3,
+        "coverage": 1.525,
+        "floor": 1.4375,
+        "density": 0.9667940754897276,
+        "lengthRatio": 1.511737089201878,
+        "baseUnsupported": 6,
+        "candUnsupported": 14,
+        "kept": 61,
+        "baseKept": 40,
+        "overlap": 34,
+        "baseWords": 695,
+        "candWords": 1215,
+        "baseDashes": 12,
+        "candDashes": 0,
+        "baseStyle": 11,
+        "candStyle": 9,
+        "composite": 0.7907286371338659,
+        "baseOfArticlePoints": 0.23809523809523808,
+        "baseOfArticleWords": 0.09833333333333333,
+        "worst": [
+          {
+            "slug": "wheel-of-the-year",
+            "coverage": 1.4375,
+            "ratio": 1.3423728813559321,
+            "density": 1.070864898989899
+          },
+          {
+            "slug": "d-j-saikia",
+            "coverage": 1.4615384615384615,
+            "ratio": 1.511737089201878,
+            "density": 0.9667940754897276
+          },
+          {
+            "slug": "short-film",
+            "coverage": 1.7272727272727273,
+            "ratio": 2.657754010695187,
+            "density": 0.6498993963782697
+          }
+        ]
+      },
+      "distance": 2.844891702500398,
+      "reason": "Key points per word: 0.97× the baseline (needs 1.18×, the same key points in 15.0% fewer words; 1215 words vs baseline's 695 across 3 articles). 14 unsupported claims vs baseline's 6."
+    },
+    {
+      "n": 7,
+      "stage": "screen",
+      "passed": false,
+      "prompt": "Privately draft the summary you would give without these editing instructions. Note its word count and mark the distinct main facts it states. Use those facts as a checklist, not as a reason to cover every detail in the article. Give priority to points the source identifies as important.\n\nReturn a version with at least one fifth fewer words. First delete sentences and clauses that only introduce, illustrate, or repeat a main fact. Then shorten the remaining wording. Name a shared subject or setting once when the reference stays clear. Use direct verbs. Keep names, dates, figures, and examples only when they state, identify, or qualify a main fact. Do not add an opening or a recap.\n\nCompare the revision with the checklist. Restore any missing main fact that the source supports, and save the words elsewhere. Check each claim against the source. Preserve attribution, scope, and uncertainty. Do not imply a link the source does not make.\n\nUse plain statements only. No em dashes and no literary or rhetorical techniques. Do not use metaphors, rhetorical questions, lists of three for rhythm, formulas such as \"not just X but Y,\" dramatic or promotional language, or stock phrases.",
+      "idea": "Use a private draft to set a concrete word budget and a fact checklist, then verify that the cuts removed wording rather than main facts.",
+      "score": {
+        "n": 3,
+        "coverage": 0.775,
+        "floor": 0.625,
+        "density": 0.8947368421052632,
+        "lengthRatio": 0.7887323943661971,
+        "baseUnsupported": 6,
+        "candUnsupported": 7,
+        "kept": 31,
+        "baseKept": 40,
+        "overlap": 22,
+        "baseWords": 695,
+        "candWords": 557,
+        "baseDashes": 12,
+        "candDashes": 0,
+        "baseStyle": 11,
+        "candStyle": 5,
+        "composite": 0.8807688245854896,
+        "baseOfArticlePoints": 0.23809523809523808,
+        "baseOfArticleWords": 0.09833333333333333,
+        "worst": [
+          {
+            "slug": "wheel-of-the-year",
+            "coverage": 0.625,
+            "ratio": 0.7389830508474576,
+            "density": 0.8457568807339451
+          },
+          {
+            "slug": "short-film",
+            "coverage": 0.8181818181818182,
+            "ratio": 0.9144385026737968,
+            "density": 0.8947368421052632
+          },
+          {
+            "slug": "d-j-saikia",
+            "coverage": 0.9230769230769231,
+            "ratio": 0.7887323943661971,
+            "density": 1.1703296703296702
+          }
+        ]
+      },
+      "distance": 1.0217234262125903,
+      "reason": "Kept 77.5% as many key points as the baseline (needs 95.0%; 31 vs 40). Key points per word: 0.89× the baseline (needs 1.18×, the same key points in 15.0% fewer words; 557 words vs baseline's 695 across 3 articles). 7 unsupported claims vs baseline's 6. Worst article kept 62.5% as many key points as the baseline (needs 85.0%)."
+    },
+    {
+      "n": 8,
+      "stage": "screen",
+      "passed": false,
+      "prompt": "If the source distinguishes key points from supporting details, use the key points as your outline. State each distinct key point once. If the source does not mark priorities, select the main points from the whole piece before writing. Omit supporting detail unless a main point would be unclear or misleading without it.\n\nBuild the summary from the shortest source phrases that state those points. Cut modifiers that do not change the fact. When several points share an actor, time, or setting, state it once if it clearly applies to all of them. Give an outcome or finding directly instead of announcing that the article discusses it. Skip headings, previews, transitions that add no information, and recaps.\n\nKeep each statement traceable to the source. Preserve who did or said what, what the claim applies to, and how certain it is. Do not add a cause, motive, or judgment. If a cut changes the claim, restore the necessary words.\n\nUse plain statements only. No em dashes and no literary or rhetorical techniques. Do not use metaphors, rhetorical questions, lists of three for rhythm, formulas such as \"not just X but Y,\" dramatic or promotional language, or stock phrases.",
+      "idea": "I made the source's own priorities the outline and used short source phrases as the starting point, so the writer cuts wording and supporting detail without cutting key facts.",
+      "score": {
+        "n": 3,
+        "coverage": 0.775,
+        "floor": 0.4375,
+        "density": 0.9953271028037384,
+        "lengthRatio": 0.8770053475935828,
+        "baseUnsupported": 6,
+        "candUnsupported": 7,
+        "kept": 31,
+        "baseKept": 40,
+        "overlap": 23,
+        "baseWords": 695,
+        "candWords": 561,
+        "baseDashes": 12,
+        "candDashes": 0,
+        "baseStyle": 11,
+        "candStyle": 3,
+        "composite": 0.8744888329663416,
+        "baseOfArticlePoints": 0.23809523809523808,
+        "baseOfArticleWords": 0.09833333333333333,
+        "worst": [
+          {
+            "slug": "wheel-of-the-year",
+            "coverage": 0.4375,
+            "ratio": 0.6203389830508474,
+            "density": 0.7052595628415301
+          },
+          {
+            "slug": "short-film",
+            "coverage": 1,
+            "ratio": 0.8770053475935828,
+            "density": 1.1402439024390245
+          },
+          {
+            "slug": "d-j-saikia",
+            "coverage": 1,
+            "ratio": 1.0046948356807512,
+            "density": 0.9953271028037384
+          }
+        ]
+      },
+      "distance": 1.156809939913004,
+      "reason": "Kept 77.5% as many key points as the baseline (needs 95.0%; 31 vs 40). Key points per word: 1.00× the baseline (needs 1.18×, the same key points in 15.0% fewer words; 561 words vs baseline's 695 across 3 articles). 7 unsupported claims vs baseline's 6. Worst article kept 43.8% as many key points as the baseline (needs 85.0%)."
+    },
+    {
+      "n": 9,
+      "stage": "screen",
+      "passed": false,
+      "prompt": "Give each distinct main point a short, explicit statement. Use the source's priorities if it marks them. Otherwise, select the main points from the whole piece before writing. Keep a separate finding, outcome, or position even if another point is about the same topic. Leave out material that only illustrates or repeats a point.\n\nAim for 10 to 12 words per main point on average, not a fixed total length. Spend more words on a point that needs a qualification and fewer on simpler points. Start with the first fact. State shared context once when it clearly applies. Cut headings, previews, filler transitions, and recaps. Shorten the wording rather than dropping a main point.\n\nCheck the summary against the source in both directions: each selected point should be stated, not merely implied, and each statement should be supported. Keep the original actor, attribution, scope, and certainty. Do not add a cause, motive, or judgment.\n\nUse plain statements only. No em dashes and no literary or rhetorical techniques. Avoid metaphors, rhetorical questions, lists of three for rhythm, formulas such as \"not just X but Y,\" dramatic or promotional language, and stock phrases.",
+      "idea": "I used an average word budget per point instead of a fixed total length so the summary can stay concise without dropping facts from denser articles.",
+      "score": {
+        "n": 3,
+        "coverage": 1.075,
+        "floor": 0.9230769230769231,
+        "density": 0.9142561983471075,
+        "lengthRatio": 1.1657754010695187,
+        "baseUnsupported": 6,
+        "candUnsupported": 10,
+        "kept": 43,
+        "baseKept": 40,
+        "overlap": 28,
+        "baseWords": 695,
+        "candWords": 805,
+        "baseDashes": 12,
+        "candDashes": 0,
+        "baseStyle": 11,
+        "candStyle": 7,
+        "composite": 0.8379612714651078,
+        "baseOfArticlePoints": 0.23809523809523808,
+        "baseOfArticleWords": 0.09833333333333333,
+        "worst": [
+          {
+            "slug": "d-j-saikia",
+            "coverage": 0.9230769230769231,
+            "ratio": 1.051643192488263,
+            "density": 0.8777472527472527
+          },
+          {
+            "slug": "wheel-of-the-year",
+            "coverage": 1.125,
+            "ratio": 1.230508474576271,
+            "density": 0.9142561983471075
+          },
+          {
+            "slug": "short-film",
+            "coverage": 1.1818181818181819,
+            "ratio": 1.1657754010695187,
+            "density": 1.0137614678899083
+          }
+        ]
+      },
+      "distance": 1.556215564738292,
+      "reason": "Key points per word: 0.91× the baseline (needs 1.18×, the same key points in 15.0% fewer words; 805 words vs baseline's 695 across 3 articles). 10 unsupported claims vs baseline's 6."
+    },
+    {
+      "n": 10,
+      "stage": "screen",
+      "passed": false,
+      "prompt": "Work from the article, not from a draft summary. Scan the whole piece and identify the shortest passage that states each distinct main point. If the article marks points as key, use those marks to decide what to keep. Begin with the facts themselves and omit material that only introduces, illustrates, or repeats them.\n\nBuild sentences from those passages. When several facts share a subject, verb, date, or attribution, write the shared words once if they clearly apply to each fact. Keep each result, event, or position explicit. If a sentence is hard to shorten, remove repeated wording before removing a fact. Use no headings, preview, or recap.\n\nRead each sentence next to its source passage. Restore any qualifier needed to preserve who did or said what, the scope of the claim, or its certainty. Do not join facts in a way that adds a cause, motive, or other relationship. Check that each distinct main point is still stated.\n\nUse plain statements only. No em dashes and no literary or rhetorical techniques. Do not use metaphors, rhetorical questions, lists of three for rhythm, formulas such as \"not just X but Y,\" dramatic or promotional language, or stock phrases.",
+      "idea": "I changed the drafting method to build sentences from short source passages and reuse shared wording, so compression does not depend on dropping facts or paraphrasing them loosely.",
+      "score": {
+        "n": 3,
+        "coverage": 1.375,
+        "floor": 1.1538461538461537,
+        "density": 0.9397754854368932,
+        "lengthRatio": 1.3966101694915254,
+        "baseUnsupported": 6,
+        "candUnsupported": 11,
+        "kept": 55,
+        "baseKept": 40,
+        "overlap": 33,
+        "baseWords": 695,
+        "candWords": 988,
+        "baseDashes": 12,
+        "candDashes": 0,
+        "baseStyle": 11,
+        "candStyle": 10,
+        "composite": 0.910335794236723,
+        "baseOfArticlePoints": 0.23809523809523808,
+        "baseOfArticleWords": 0.09833333333333333,
+        "worst": [
+          {
+            "slug": "d-j-saikia",
+            "coverage": 1.1538461538461537,
+            "ratio": 0.9906103286384976,
+            "density": 1.1647830842143638
+          },
+          {
+            "slug": "wheel-of-the-year",
+            "coverage": 1.3125,
+            "ratio": 1.3966101694915254,
+            "density": 0.9397754854368932
+          },
+          {
+            "slug": "short-film",
+            "coverage": 1.7272727272727273,
+            "ratio": 1.9518716577540107,
+            "density": 0.8849315068493151
+          }
+        ]
+      },
+      "distance": 1.8678575040453076,
+      "reason": "Key points per word: 0.94× the baseline (needs 1.18×, the same key points in 15.0% fewer words; 988 words vs baseline's 695 across 3 articles). 11 unsupported claims vs baseline's 6."
+    },
+    {
+      "n": 11,
+      "stage": "confirm",
+      "passed": false,
+      "prompt": "Use only the material the source marks as key. Consult supporting detail only to resolve a reference or preserve a necessary qualification. If the source gives no priorities, select the facts needed to understand what happened, what was found, or what was argued across the whole piece.\n\nWrite a compact factual brief. Put simple points in clauses of about five to eight words. Give complex points more room only when accuracy requires it. State several facts under one subject or attribution when it applies to all of them. Use the source's terms rather than explaining them again. Do not spend a sentence introducing a fact you can state directly. Omit headings, previews, and recaps.\n\nBefore returning the brief, check it against the source. If a key point is missing or only implied, state it explicitly before spending words on any point already covered. Keep who did or said what, any limits on the claim, and its degree of certainty. Do not add interpretations or connections the source does not make.\n\nUse plain statements only. No em dashes, literary techniques, or rhetorical devices. Do not use metaphors, rhetorical questions, lists of three for rhythm, formulas such as 'not just X but Y,' dramatic or promotional language, or stock phrases.",
+      "idea": "I treated marked detail as reference material and set a short clause target for simple facts so the summary saves words without dropping key points.",
+      "score": {
+        "n": 10,
+        "coverage": 1.3103448275862069,
+        "floor": 0.5,
+        "density": 1.8623873873873875,
+        "lengthRatio": 0.6825174825174825,
+        "baseUnsupported": 32,
+        "candUnsupported": 5,
+        "kept": 152,
+        "baseKept": 116,
+        "overlap": 91,
+        "baseWords": 2300,
+        "candWords": 1656,
+        "baseDashes": 4,
+        "candDashes": 0,
+        "baseStyle": 43,
+        "candStyle": 4,
+        "composite": 2.4305555555555554,
+        "baseOfArticlePoints": 0.19333333333333333,
+        "baseOfArticleWords": 0.09362745098039216,
+        "worst": [
+          {
+            "slug": "infinite-monkey-theorem-in-popular-culture",
+            "coverage": 0.5,
+            "ratio": 0.6203208556149733,
+            "density": 0.8060344827586206
+          },
+          {
+            "slug": "denis-ten",
+            "coverage": 1.0625,
+            "ratio": 0.6923076923076923,
+            "density": 1.534722222222222
+          },
+          {
+            "slug": "the-most-happy-fella",
+            "coverage": 1.1666666666666667,
+            "ratio": 0.5762081784386617,
+            "density": 2.024731182795699
+          }
+        ]
+      },
+      "distance": 0.4117647058823529,
+      "reason": "Worst article kept 50.0% as many key points as the baseline (needs 85.0%).",
+      "loserId": "p-0003"
+    },
+    {
+      "n": 12,
+      "stage": "screen",
+      "passed": false,
+      "prompt": "Work through the source in order. If it marks key points, use those marks; otherwise, identify what each part adds to the main account. A passage can contain more than one key fact. Keep distinct claims, changes, and outcomes explicit. Omit supporting details unless they identify or qualify a key fact.\n\nWrite the shortest clear statement of each fact. Use the source's terms where they are already concise. Share a subject or attribution only when it applies to every clause. Omit headings, previews, recaps, and transitions that add no facts.\n\nCheck the summary against the source one section at a time. If a section adds a key fact that the summary leaves out or only implies, state it directly. Cut a repeated fact or optional detail before cutting any distinct key fact. Check that each claim keeps the original actor, attribution, scope, and certainty. Do not add links or explanations the source does not state.\n\nUse plain statements only. No em dashes or literary or rhetorical techniques. Do not use metaphors, rhetorical questions, lists of three for rhythm, contrasts such as 'not just X but Y,' dramatic or promotional language, or stock phrases.",
+      "idea": "A section-by-section check catches omitted facts in less prominent parts of the source, while short wording and cuts to repetition keep the summary compact."
+    }
+  ],
+  "outcome": "budget",
+  "budgetNote": "Token budget of 1,200,000 spent",
+  "contentSlugs": [],
+  "tokensUsed": 1200616,
+  "tokensByModel": {
+    "gpt-6.2-sol": {
+      "input": 568980,
+      "output": 228569
+    },
+    "gpt-6-luna": {
+      "input": 326104,
+      "output": 76390
+    },
+    "gpt-4.1-mini": {
+      "input": 506,
+      "output": 67
+    }
+  },
+  "autoMerge": true
+}
