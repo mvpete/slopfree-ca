@@ -1,0 +1,831 @@
+{
+  "schemaVersion": 2,
+  "kind": "recovery",
+  "date": "2026-11-27",
+  "source": "evals/2026-11-27.json",
+  "apiCalls": 0,
+  "usd": 0,
+  "method": "No new model calls. Each candidate's totals from the source report were re-scored against the targets below with scripts/lib/qualify.js. Key points per article set = baseKept / baseOfArticlePoints, as the source recorded them. No candidate met every target, so the best by the deterministic ranking (rank()) was picked: targets met first, then distance from the targets, then the objective score, then shorter prompt, then candidate number.",
+  "caveats": [
+    "The source run used the old answer key (all key points, not capped at 30), so coverage numbers are low on that scale and are not comparable with later runs.",
+    "Summaries were written by gpt-6-luna and graded by gpt-6.2-sol (same family). Later runs grade with the other family.",
+    "Candidate #11 was measured on 10 unseen articles; the others only on 3 screening articles.",
+    "The chosen prompt's first sentence refers to material 'the source marks as key'. Real text has no such marks, so that sentence does nothing outside the eval.",
+    "No quiz content was generated (that needs API calls). Until it is, the quiz has no challenger summaries."
+  ],
+  "writer": {
+    "name": "gpt",
+    "model": "gpt-6-luna",
+    "judge": "gpt-6.2-sol"
+  },
+  "targets": {
+    "keyPointCoverage": {
+      "min": 0.75
+    },
+    "compression": {
+      "min": 0.1
+    },
+    "unsupported": {
+      "max": 0
+    },
+    "emDashes": {
+      "max": 0
+    },
+    "style": {
+      "maxOverPlain": 0
+    }
+  },
+  "objectives": {
+    "keyPointCoverage": 1,
+    "compression": 1,
+    "density": 1,
+    "style": 1
+  },
+  "golden": {
+    "id": "p-0001",
+    "score": {
+      "n": 10,
+      "keyPoints": 706,
+      "kept": 91,
+      "coverage": 0.12889518413597734,
+      "words": 1435,
+      "plainWords": 2262,
+      "compression": 0.365605658709107,
+      "unsupported": 24,
+      "dashes": 0,
+      "style": 14,
+      "plainKept": 117,
+      "plainCoverage": 0.16572237960339944,
+      "plainStyle": 34,
+      "plainUnsupported": 22,
+      "density": 1.2260162601626017
+    },
+    "targets": {
+      "passed": false,
+      "margins": {
+        "keyPointCoverage": {
+          "have": 0.12889518413597734,
+          "need": 0.75,
+          "margin": -0.6211048158640227
+        },
+        "compression": {
+          "have": 0.365605658709107,
+          "need": 0.1,
+          "margin": 0.265605658709107
+        },
+        "unsupported": {
+          "have": 24,
+          "need": 0,
+          "margin": -24
+        },
+        "emDashes": {
+          "have": 0,
+          "need": 0,
+          "margin": 0
+        },
+        "style": {
+          "have": 14,
+          "need": 34,
+          "margin": 20
+        }
+      },
+      "distance": 8.611048158640227,
+      "reason": "Kept 12.9% of the key points (needs 75.0%; 91 of 706). 24 unsupported claims (allowed: 0)."
+    }
+  },
+  "ranking": [
+    {
+      "rank": 1,
+      "candidate": 11,
+      "stage": "confirm",
+      "loserId": "p-0003",
+      "articles": 10,
+      "score": {
+        "n": 10,
+        "keyPoints": 600,
+        "kept": 152,
+        "coverage": 0.25333333333333335,
+        "words": 1656,
+        "plainWords": 2300,
+        "compression": 0.28,
+        "unsupported": 5,
+        "dashes": 0,
+        "style": 4,
+        "plainKept": 116,
+        "plainCoverage": 0.19333333333333333,
+        "plainStyle": 43,
+        "plainUnsupported": 32,
+        "density": 1.8199233716475096
+      },
+      "passed": false,
+      "margins": {
+        "keyPointCoverage": {
+          "have": 0.25333333333333335,
+          "need": 0.75,
+          "margin": -0.49666666666666665
+        },
+        "compression": {
+          "have": 0.28,
+          "need": 0.1,
+          "margin": 0.18000000000000002
+        },
+        "unsupported": {
+          "have": 5,
+          "need": 0,
+          "margin": -5
+        },
+        "emDashes": {
+          "have": 0,
+          "need": 0,
+          "margin": 0
+        },
+        "style": {
+          "have": 4,
+          "need": 43,
+          "margin": 39
+        }
+      },
+      "distance": 5.466666666666666,
+      "objective": {
+        "total": 17.43256704980843,
+        "terms": {
+          "keyPointCoverage": 2.533333333333333,
+          "compression": 2.8000000000000003,
+          "density": 8.199233716475096,
+          "style": 3.9
+        }
+      },
+      "reason": "Kept 25.3% of the key points (needs 75.0%; 152 of 600). 5 unsupported claims (allowed: 0)."
+    },
+    {
+      "rank": 2,
+      "candidate": 4,
+      "stage": "screen",
+      "loserId": null,
+      "articles": 3,
+      "score": {
+        "n": 3,
+        "keyPoints": 168,
+        "kept": 32,
+        "coverage": 0.19047619047619047,
+        "words": 592,
+        "plainWords": 695,
+        "compression": 0.1482014388489209,
+        "unsupported": 7,
+        "dashes": 0,
+        "style": 3,
+        "plainKept": 40,
+        "plainCoverage": 0.23809523809523808,
+        "plainStyle": 11,
+        "plainUnsupported": 6,
+        "density": 0.9391891891891891
+      },
+      "passed": false,
+      "margins": {
+        "keyPointCoverage": {
+          "have": 0.19047619047619047,
+          "need": 0.75,
+          "margin": -0.5595238095238095
+        },
+        "compression": {
+          "have": 0.1482014388489209,
+          "need": 0.1,
+          "margin": 0.04820143884892089
+        },
+        "unsupported": {
+          "have": 7,
+          "need": 0,
+          "margin": -7
+        },
+        "emDashes": {
+          "have": 0,
+          "need": 0,
+          "margin": 0
+        },
+        "style": {
+          "have": 3,
+          "need": 11,
+          "margin": 8
+        }
+      },
+      "distance": 7.928571428571429,
+      "objective": {
+        "total": 5.445334851809671,
+        "terms": {
+          "keyPointCoverage": 1.9047619047619047,
+          "compression": 1.482014388489209,
+          "density": -0.6081081081081086,
+          "style": 2.6666666666666665
+        }
+      },
+      "reason": "Kept 19.0% of the key points (needs 75.0%; 32 of 168). 7 unsupported claims (allowed: 0)."
+    },
+    {
+      "rank": 3,
+      "candidate": 8,
+      "stage": "screen",
+      "loserId": null,
+      "articles": 3,
+      "score": {
+        "n": 3,
+        "keyPoints": 168,
+        "kept": 31,
+        "coverage": 0.18452380952380953,
+        "words": 561,
+        "plainWords": 695,
+        "compression": 0.19280575539568345,
+        "unsupported": 7,
+        "dashes": 0,
+        "style": 3,
+        "plainKept": 40,
+        "plainCoverage": 0.23809523809523808,
+        "plainStyle": 11,
+        "plainUnsupported": 6,
+        "density": 0.9601158645276292
+      },
+      "passed": false,
+      "margins": {
+        "keyPointCoverage": {
+          "have": 0.18452380952380953,
+          "need": 0.75,
+          "margin": -0.5654761904761905
+        },
+        "compression": {
+          "have": 0.19280575539568345,
+          "need": 0.1,
+          "margin": 0.09280575539568345
+        },
+        "unsupported": {
+          "have": 7,
+          "need": 0,
+          "margin": -7
+        },
+        "emDashes": {
+          "have": 0,
+          "need": 0,
+          "margin": 0
+        },
+        "style": {
+          "have": 3,
+          "need": 11,
+          "margin": 8
+        }
+      },
+      "distance": 7.988095238095237,
+      "objective": {
+        "total": 6.041120961137889,
+        "terms": {
+          "keyPointCoverage": 1.8452380952380953,
+          "compression": 1.9280575539568345,
+          "density": -0.39884135472370796,
+          "style": 2.6666666666666665
+        }
+      },
+      "reason": "Kept 18.5% of the key points (needs 75.0%; 31 of 168). 7 unsupported claims (allowed: 0)."
+    },
+    {
+      "rank": 4,
+      "candidate": 7,
+      "stage": "screen",
+      "loserId": null,
+      "articles": 3,
+      "score": {
+        "n": 3,
+        "keyPoints": 168,
+        "kept": 31,
+        "coverage": 0.18452380952380953,
+        "words": 557,
+        "plainWords": 695,
+        "compression": 0.19856115107913674,
+        "unsupported": 7,
+        "dashes": 0,
+        "style": 5,
+        "plainKept": 40,
+        "plainCoverage": 0.23809523809523808,
+        "plainStyle": 11,
+        "plainUnsupported": 6,
+        "density": 0.9670107719928186
+      },
+      "passed": false,
+      "margins": {
+        "keyPointCoverage": {
+          "have": 0.18452380952380953,
+          "need": 0.75,
+          "margin": -0.5654761904761905
+        },
+        "compression": {
+          "have": 0.19856115107913674,
+          "need": 0.1,
+          "margin": 0.09856115107913674
+        },
+        "unsupported": {
+          "have": 7,
+          "need": 0,
+          "margin": -7
+        },
+        "emDashes": {
+          "have": 0,
+          "need": 0,
+          "margin": 0
+        },
+        "style": {
+          "have": 5,
+          "need": 11,
+          "margin": 6
+        }
+      },
+      "distance": 7.988095238095237,
+      "objective": {
+        "total": 5.500957325957649,
+        "terms": {
+          "keyPointCoverage": 1.8452380952380953,
+          "compression": 1.9856115107913674,
+          "density": -0.32989228007181404,
+          "style": 2
+        }
+      },
+      "reason": "Kept 18.5% of the key points (needs 75.0%; 31 of 168). 7 unsupported claims (allowed: 0)."
+    },
+    {
+      "rank": 5,
+      "candidate": 2,
+      "stage": "screen",
+      "loserId": "p-0005",
+      "articles": 3,
+      "score": {
+        "n": 3,
+        "keyPoints": 168,
+        "kept": 44,
+        "coverage": 0.2619047619047619,
+        "words": 845,
+        "plainWords": 695,
+        "compression": -0.2158273381294964,
+        "unsupported": 8,
+        "dashes": 0,
+        "style": 6,
+        "plainKept": 40,
+        "plainCoverage": 0.23809523809523808,
+        "plainStyle": 11,
+        "plainUnsupported": 6,
+        "density": 0.9047337278106508
+      },
+      "passed": false,
+      "margins": {
+        "keyPointCoverage": {
+          "have": 0.2619047619047619,
+          "need": 0.75,
+          "margin": -0.4880952380952381
+        },
+        "compression": {
+          "have": -0.2158273381294964,
+          "need": 0.1,
+          "margin": -0.31582733812949637
+        },
+        "unsupported": {
+          "have": 8,
+          "need": 0,
+          "margin": -8
+        },
+        "emDashes": {
+          "have": 0,
+          "need": 0,
+          "margin": 0
+        },
+        "style": {
+          "have": 6,
+          "need": 11,
+          "margin": 5
+        }
+      },
+      "distance": 10.70589242891401,
+      "objective": {
+        "total": 1.1747781825258294,
+        "terms": {
+          "keyPointCoverage": 2.619047619047619,
+          "compression": -2.158273381294964,
+          "density": -0.9526627218934924,
+          "style": 1.6666666666666667
+        }
+      },
+      "reason": "Kept 26.2% of the key points (needs 75.0%; 44 of 168). -21.6% shorter than the plain summary (needs 10.0%; 845 words vs 695). 8 unsupported claims (allowed: 0)."
+    },
+    {
+      "rank": 6,
+      "candidate": 9,
+      "stage": "screen",
+      "loserId": null,
+      "articles": 3,
+      "score": {
+        "n": 3,
+        "keyPoints": 168,
+        "kept": 43,
+        "coverage": 0.25595238095238093,
+        "words": 805,
+        "plainWords": 695,
+        "compression": -0.15827338129496393,
+        "unsupported": 10,
+        "dashes": 0,
+        "style": 7,
+        "plainKept": 40,
+        "plainCoverage": 0.23809523809523808,
+        "plainStyle": 11,
+        "plainUnsupported": 6,
+        "density": 0.9281055900621118
+      },
+      "passed": false,
+      "margins": {
+        "keyPointCoverage": {
+          "have": 0.25595238095238093,
+          "need": 0.75,
+          "margin": -0.49404761904761907
+        },
+        "compression": {
+          "have": -0.15827338129496393,
+          "need": 0.1,
+          "margin": -0.2582733812949639
+        },
+        "unsupported": {
+          "have": 10,
+          "need": 0,
+          "margin": -10
+        },
+        "emDashes": {
+          "have": 0,
+          "need": 0,
+          "margin": 0
+        },
+        "style": {
+          "have": 7,
+          "need": 11,
+          "margin": 4
+        }
+      },
+      "distance": 10.856543336759163,
+      "objective": {
+        "total": 1.5911792305286212,
+        "terms": {
+          "keyPointCoverage": 2.5595238095238093,
+          "compression": -1.5827338129496393,
+          "density": -0.718944099378882,
+          "style": 1.3333333333333333
+        }
+      },
+      "reason": "Kept 25.6% of the key points (needs 75.0%; 43 of 168). -15.8% shorter than the plain summary (needs 10.0%; 805 words vs 695). 10 unsupported claims (allowed: 0)."
+    },
+    {
+      "rank": 7,
+      "candidate": 10,
+      "stage": "screen",
+      "loserId": null,
+      "articles": 3,
+      "score": {
+        "n": 3,
+        "keyPoints": 168,
+        "kept": 55,
+        "coverage": 0.3273809523809524,
+        "words": 988,
+        "plainWords": 695,
+        "compression": -0.42158273381294964,
+        "unsupported": 11,
+        "dashes": 0,
+        "style": 10,
+        "plainKept": 40,
+        "plainCoverage": 0.23809523809523808,
+        "plainStyle": 11,
+        "plainUnsupported": 6,
+        "density": 0.9672317813765181
+      },
+      "passed": false,
+      "margins": {
+        "keyPointCoverage": {
+          "have": 0.3273809523809524,
+          "need": 0.75,
+          "margin": -0.4226190476190476
+        },
+        "compression": {
+          "have": -0.42158273381294964,
+          "need": 0.1,
+          "margin": -0.5215827338129496
+        },
+        "unsupported": {
+          "have": 11,
+          "need": 0,
+          "margin": -11
+        },
+        "emDashes": {
+          "have": 0,
+          "need": 0,
+          "margin": 0
+        },
+        "style": {
+          "have": 10,
+          "need": 11,
+          "margin": 1
+        }
+      },
+      "distance": 13.108684480986637,
+      "objective": {
+        "total": -0.9363666672214579,
+        "terms": {
+          "keyPointCoverage": 3.2738095238095237,
+          "compression": -4.215827338129496,
+          "density": -0.32768218623481893,
+          "style": 0.3333333333333333
+        }
+      },
+      "reason": "Kept 32.7% of the key points (needs 75.0%; 55 of 168). -42.2% shorter than the plain summary (needs 10.0%; 988 words vs 695). 11 unsupported claims (allowed: 0)."
+    },
+    {
+      "rank": 8,
+      "candidate": 5,
+      "stage": "screen",
+      "loserId": null,
+      "articles": 3,
+      "score": {
+        "n": 3,
+        "keyPoints": 168,
+        "kept": 51,
+        "coverage": 0.30357142857142855,
+        "words": 1057,
+        "plainWords": 695,
+        "compression": -0.5208633093525179,
+        "unsupported": 10,
+        "dashes": 0,
+        "style": 7,
+        "plainKept": 40,
+        "plainCoverage": 0.23809523809523808,
+        "plainStyle": 11,
+        "plainUnsupported": 6,
+        "density": 0.8383396404919584
+      },
+      "passed": false,
+      "margins": {
+        "keyPointCoverage": {
+          "have": 0.30357142857142855,
+          "need": 0.75,
+          "margin": -0.44642857142857145
+        },
+        "compression": {
+          "have": -0.5208633093525179,
+          "need": 0.1,
+          "margin": -0.6208633093525179
+        },
+        "unsupported": {
+          "have": 10,
+          "need": 0,
+          "margin": -10
+        },
+        "emDashes": {
+          "have": 0,
+          "need": 0,
+          "margin": 0
+        },
+        "style": {
+          "have": 7,
+          "need": 11,
+          "margin": 4
+        }
+      },
+      "distance": 14.006252141144227,
+      "objective": {
+        "total": -2.4561890695579764,
+        "terms": {
+          "keyPointCoverage": 3.035714285714285,
+          "compression": -5.208633093525179,
+          "density": -1.6166035950804158,
+          "style": 1.3333333333333333
+        }
+      },
+      "reason": "Kept 30.4% of the key points (needs 75.0%; 51 of 168). -52.1% shorter than the plain summary (needs 10.0%; 1057 words vs 695). 10 unsupported claims (allowed: 0)."
+    },
+    {
+      "rank": 9,
+      "candidate": 3,
+      "stage": "screen",
+      "loserId": "p-0004",
+      "articles": 3,
+      "score": {
+        "n": 3,
+        "keyPoints": 168,
+        "kept": 56,
+        "coverage": 0.3333333333333333,
+        "words": 1245,
+        "plainWords": 695,
+        "compression": -0.7913669064748201,
+        "unsupported": 7,
+        "dashes": 0,
+        "style": 8,
+        "plainKept": 40,
+        "plainCoverage": 0.23809523809523808,
+        "plainStyle": 11,
+        "plainUnsupported": 6,
+        "density": 0.7815261044176707
+      },
+      "passed": false,
+      "margins": {
+        "keyPointCoverage": {
+          "have": 0.3333333333333333,
+          "need": 0.75,
+          "margin": -0.4166666666666667
+        },
+        "compression": {
+          "have": -0.7913669064748201,
+          "need": 0.1,
+          "margin": -0.8913669064748201
+        },
+        "unsupported": {
+          "have": 7,
+          "need": 0,
+          "margin": -7
+        },
+        "emDashes": {
+          "have": 0,
+          "need": 0,
+          "margin": 0
+        },
+        "style": {
+          "have": 8,
+          "need": 11,
+          "margin": 3
+        }
+      },
+      "distance": 15.4136690647482,
+      "objective": {
+        "total": -5.765074687238162,
+        "terms": {
+          "keyPointCoverage": 3.333333333333333,
+          "compression": -7.913669064748201,
+          "density": -2.1847389558232932,
+          "style": 1
+        }
+      },
+      "reason": "Kept 33.3% of the key points (needs 75.0%; 56 of 168). -79.1% shorter than the plain summary (needs 10.0%; 1245 words vs 695). 7 unsupported claims (allowed: 0)."
+    },
+    {
+      "rank": 10,
+      "candidate": 6,
+      "stage": "screen",
+      "loserId": null,
+      "articles": 3,
+      "score": {
+        "n": 3,
+        "keyPoints": 168,
+        "kept": 61,
+        "coverage": 0.3630952380952381,
+        "words": 1215,
+        "plainWords": 695,
+        "compression": -0.7482014388489209,
+        "unsupported": 14,
+        "dashes": 0,
+        "style": 9,
+        "plainKept": 40,
+        "plainCoverage": 0.23809523809523808,
+        "plainStyle": 11,
+        "plainUnsupported": 6,
+        "density": 0.8723251028806583
+      },
+      "passed": false,
+      "margins": {
+        "keyPointCoverage": {
+          "have": 0.3630952380952381,
+          "need": 0.75,
+          "margin": -0.3869047619047619
+        },
+        "compression": {
+          "have": -0.7482014388489209,
+          "need": 0.1,
+          "margin": -0.8482014388489209
+        },
+        "unsupported": {
+          "have": 14,
+          "need": 0,
+          "margin": -14
+        },
+        "emDashes": {
+          "have": 0,
+          "need": 0,
+          "margin": 0
+        },
+        "style": {
+          "have": 9,
+          "need": 11,
+          "margin": 2
+        }
+      },
+      "distance": 17.017728674203493,
+      "objective": {
+        "total": -4.461144312063578,
+        "terms": {
+          "keyPointCoverage": 3.6309523809523805,
+          "compression": -7.482014388489208,
+          "density": -1.2767489711934166,
+          "style": 0.6666666666666666
+        }
+      },
+      "reason": "Kept 36.3% of the key points (needs 75.0%; 61 of 168). -74.8% shorter than the plain summary (needs 10.0%; 1215 words vs 695). 14 unsupported claims (allowed: 0)."
+    },
+    {
+      "rank": 11,
+      "candidate": 1,
+      "stage": "screen",
+      "loserId": null,
+      "articles": 3,
+      "score": {
+        "n": 3,
+        "keyPoints": 168,
+        "kept": 81,
+        "coverage": 0.48214285714285715,
+        "words": 2135,
+        "plainWords": 695,
+        "compression": -2.0719424460431655,
+        "unsupported": 20,
+        "dashes": 0,
+        "style": 16,
+        "plainKept": 40,
+        "plainCoverage": 0.23809523809523808,
+        "plainStyle": 11,
+        "plainUnsupported": 6,
+        "density": 0.659192037470726
+      },
+      "passed": false,
+      "margins": {
+        "keyPointCoverage": {
+          "have": 0.48214285714285715,
+          "need": 0.75,
+          "margin": -0.26785714285714285
+        },
+        "compression": {
+          "have": -2.0719424460431655,
+          "need": 0.1,
+          "margin": -2.1719424460431656
+        },
+        "unsupported": {
+          "have": 20,
+          "need": 0,
+          "margin": -20
+        },
+        "emDashes": {
+          "have": 0,
+          "need": 0,
+          "margin": 0
+        },
+        "style": {
+          "have": 16,
+          "need": 11,
+          "margin": -5
+        }
+      },
+      "distance": 32.73132922233641,
+      "objective": {
+        "total": -20.97274218096249,
+        "terms": {
+          "keyPointCoverage": 4.821428571428571,
+          "compression": -20.719424460431654,
+          "density": -3.40807962529274,
+          "style": -1.6666666666666667
+        }
+      },
+      "reason": "Kept 48.2% of the key points (needs 75.0%; 81 of 168). -207.2% shorter than the plain summary (needs 10.0%; 2135 words vs 695). 20 unsupported claims (allowed: 0). 16 AI-style phrases vs the plain summaries' 11 (allowed: 11)."
+    }
+  ],
+  "challenger": {
+    "id": "p-0006",
+    "candidate": 11,
+    "sameTextAs": "p-0003",
+    "passed": false,
+    "margins": {
+      "keyPointCoverage": {
+        "have": 0.25333333333333335,
+        "need": 0.75,
+        "margin": -0.49666666666666665
+      },
+      "compression": {
+        "have": 0.28,
+        "need": 0.1,
+        "margin": 0.18000000000000002
+      },
+      "unsupported": {
+        "have": 5,
+        "need": 0,
+        "margin": -5
+      },
+      "emDashes": {
+        "have": 0,
+        "need": 0,
+        "margin": 0
+      },
+      "style": {
+        "have": 4,
+        "need": 43,
+        "margin": 39
+      }
+    },
+    "distance": 5.466666666666666,
+    "reason": "Kept 25.3% of the key points (needs 75.0%; 152 of 600). 5 unsupported claims (allowed: 0).",
+    "prompt": "Use only the material the source marks as key. Consult supporting detail only to resolve a reference or preserve a necessary qualification. If the source gives no priorities, select the facts needed to understand what happened, what was found, or what was argued across the whole piece.\n\nWrite a compact factual brief. Put simple points in clauses of about five to eight words. Give complex points more room only when accuracy requires it. State several facts under one subject or attribution when it applies to all of them. Use the source's terms rather than explaining them again. Do not spend a sentence introducing a fact you can state directly. Omit headings, previews, and recaps.\n\nBefore returning the brief, check it against the source. If a key point is missing or only implied, state it explicitly before spending words on any point already covered. Keep who did or said what, any limits on the claim, and its degree of certainty. Do not add interpretations or connections the source does not make.\n\nUse plain statements only. No em dashes, literary techniques, or rhetorical devices. Do not use metaphors, rhetorical questions, lists of three for rhythm, formulas such as 'not just X but Y,' dramatic or promotional language, or stock phrases."
+  },
+  "activation": {
+    "status": "held",
+    "why": "The quiz only serves articles with both golden and challenger summaries. Prompt 6 has none yet, so activating it would empty the quiz. It becomes the challenger together with its quiz content."
+  }
+}
