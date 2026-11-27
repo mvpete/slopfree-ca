@@ -825,7 +825,9 @@
     "prompt": "Use only the material the source marks as key. Consult supporting detail only to resolve a reference or preserve a necessary qualification. If the source gives no priorities, select the facts needed to understand what happened, what was found, or what was argued across the whole piece.\n\nWrite a compact factual brief. Put simple points in clauses of about five to eight words. Give complex points more room only when accuracy requires it. State several facts under one subject or attribution when it applies to all of them. Use the source's terms rather than explaining them again. Do not spend a sentence introducing a fact you can state directly. Omit headings, previews, and recaps.\n\nBefore returning the brief, check it against the source. If a key point is missing or only implied, state it explicitly before spending words on any point already covered. Keep who did or said what, any limits on the claim, and its degree of certainty. Do not add interpretations or connections the source does not make.\n\nUse plain statements only. No em dashes, literary techniques, or rhetorical devices. Do not use metaphors, rhetorical questions, lists of three for rhythm, formulas such as 'not just X but Y,' dramatic or promotional language, or stock phrases."
   },
   "activation": {
-    "status": "held",
-    "why": "The quiz only serves articles with both golden and challenger summaries. Prompt 6 has none yet, so activating it would empty the quiz. It becomes the challenger together with its quiz content."
+    "status": "active",
+    "since": "2026-11-27",
+    "content": "evals/2026-11-27-articles.json",
+    "note": "Quiz content written by hand (12 articles), since OpenAI was over its spending limit."
   }
 }

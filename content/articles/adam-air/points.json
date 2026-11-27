@@ -1,0 +1,18 @@
+{
+  "points": [],
+  "key": [],
+  "question": {
+    "text": "Which country was Adam Air based in?",
+    "options": [
+      "Malaysia",
+      "Indonesia",
+      "The Philippines",
+      "Thailand"
+    ],
+    "answer": 1,
+    "quotes": [
+      "a privately owned Indonesian airline based in Jakarta",
+      "a privately owned Indonesian airline"
+    ]
+  }
+}

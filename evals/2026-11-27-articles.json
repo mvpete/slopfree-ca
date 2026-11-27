@@ -1,0 +1,126 @@
+{
+  "date": "2026-11-27",
+  "kind": "manual quiz content",
+  "apiCalls": 0,
+  "usd": 0,
+  "writer": "claude-opus-5-5 (written by hand in Claude Code)",
+  "prompts": [
+    "p-0001",
+    "p-0006"
+  ],
+  "method": "OpenAI was over its project spending limit, so the pipeline could not write quiz summaries. Claude (claude-opus-5-5, the assistant in a Claude Code session) wrote them by hand instead. 12 random Wikipedia articles were fetched by script (revisions pinned in source.json, text capped at 2,000 words). For each article, both prompts were applied to the same text ('Summarize the following article:' + article + prompt), each summary written separately, following its prompt as written. Questions were written about each summary's main point, and a script checked that each answer is quoted word for word in both summaries.",
+  "publication": {
+    "unsupported": "Checked by the writer re-reading each summary against its article. Not an independent check: the configured rule is a judge from the other model family.",
+    "moderation": "Not run: OpenAI's moderation endpoint was unavailable (spending limit)."
+  },
+  "articles": [
+    {
+      "slug": "big-bad-wolf",
+      "title": "Big Bad Wolf",
+      "revision": 1384513677,
+      "words": {
+        "p-0001": 151,
+        "p-0006": 180
+      }
+    },
+    {
+      "slug": "bmw-3-series-e46",
+      "title": "BMW 3 Series (E46)",
+      "revision": 1382073207,
+      "words": {
+        "p-0001": 143,
+        "p-0006": 164
+      }
+    },
+    {
+      "slug": "adam-air",
+      "title": "Adam Air",
+      "revision": 1387859508,
+      "words": {
+        "p-0001": 150,
+        "p-0006": 173
+      }
+    },
+    {
+      "slug": "24k-magic-world-tour",
+      "title": "24K Magic World Tour",
+      "revision": 1387506407,
+      "words": {
+        "p-0001": 138,
+        "p-0006": 157
+      }
+    },
+    {
+      "slug": "mirza-ye-qomi",
+      "title": "Mirza-ye Qomi",
+      "revision": 1371150390,
+      "words": {
+        "p-0001": 126,
+        "p-0006": 163
+      }
+    },
+    {
+      "slug": "marty-peretz",
+      "title": "Marty Peretz",
+      "revision": 1385291208,
+      "words": {
+        "p-0001": 142,
+        "p-0006": 175
+      }
+    },
+    {
+      "slug": "don-2006-hindi-film",
+      "title": "Don (2006 Hindi film)",
+      "revision": 1388000350,
+      "words": {
+        "p-0001": 141,
+        "p-0006": 168
+      }
+    },
+    {
+      "slug": "antikythera-mechanism",
+      "title": "Antikythera mechanism",
+      "revision": 1386604526,
+      "words": {
+        "p-0001": 150,
+        "p-0006": 173
+      }
+    },
+    {
+      "slug": "trevor-mallard",
+      "title": "Trevor Mallard",
+      "revision": 1387965947,
+      "words": {
+        "p-0001": 145,
+        "p-0006": 176
+      }
+    },
+    {
+      "slug": "brompton-cemetery",
+      "title": "Brompton Cemetery",
+      "revision": 1380845253,
+      "words": {
+        "p-0001": 150,
+        "p-0006": 168
+      }
+    },
+    {
+      "slug": "ignazio-abate",
+      "title": "Ignazio Abate",
+      "revision": 1386988117,
+      "words": {
+        "p-0001": 133,
+        "p-0006": 172
+      }
+    },
+    {
+      "slug": "sibling-relationship",
+      "title": "Sibling relationship",
+      "revision": 1369669473,
+      "words": {
+        "p-0001": 143,
+        "p-0006": 187
+      }
+    }
+  ]
+}
