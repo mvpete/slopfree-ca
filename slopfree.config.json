@@ -1,29 +1,75 @@
 {
   "model": "openai",
-  "writerModel": "gpt-6-luna",
-  "judgeModel": "gpt-6.2-sol",
-  "drafterModel": "gpt-6.2-sol",
-  "questionModel": "gpt-4.1-mini",
   "wrapper": "Summarize the following article:",
-
-  "articles": 10,
-  "screenArticles": 3,
-  "quizArticles": 30,
-  "maxAttempts": 20,
-  "minWords": 1500,
-  "maxWords": 3000,
-
-  "gate": {
-    "coverage": 0.95,
-    "floor": 0.85,
-    "efficiency": 0.15,
-    "detailWeight": 0
+  "writers": ["gpt", "claude"],
+  "roles": {
+    "gpt-writer": { "model": "gpt-6-luna", "effort": null },
+    "claude-writer": { "model": "claude-haiku-5-5", "effort": null },
+    "gpt-judge": { "model": "gpt-6.2-sol", "effort": "low" },
+    "claude-judge": { "model": "claude-sonnet-5-5", "effort": "low" },
+    "gpt-screen-judge": { "model": "gpt-6-luna", "effort": null },
+    "claude-screen-judge": { "model": "claude-haiku-5-5", "effort": "low" },
+    "gpt-key-points": { "model": "gpt-6.2-sol", "effort": "medium" },
+    "claude-key-points": { "model": "claude-sonnet-5-5", "effort": "medium" },
+    "drafter": { "model": "gpt-6.2-sol", "effort": "high" },
+    "questions": { "model": "gpt-4.1-mini", "effort": null }
   },
-
+  "targets": {
+    "keyPointCoverage": { "min": 0.75 },
+    "compression": { "min": 0.1 },
+    "unsupported": { "max": 0 },
+    "emDashes": { "max": 0 },
+    "style": { "maxOverPlain": 0 }
+  },
+  "screening": {
+    "keyPointCoverage": { "min": 0.6 },
+    "compression": { "min": 0.05 },
+    "unsupported": { "max": 2 },
+    "emDashes": { "max": 0 },
+    "style": { "maxOverPlain": 2 }
+  },
+  "objectives": {
+    "keyPointCoverage": 1,
+    "compression": 1,
+    "density": 1,
+    "style": 1
+  },
+  "publication": { "unsupported": { "max": 0 }, "moderation": true },
+  "articles": {
+    "search": 8,
+    "screen": 3,
+    "confirm": 6,
+    "quiz": 24,
+    "minWords": 1500,
+    "maxWords": 3000,
+    "maxKeyPoints": 30
+  },
+  "search": {
+    "pool": 12,
+    "reuse": true,
+    "finalists": 2
+  },
   "promptMaxChars": 1500,
-  "maxTokensPerRun": 1200000,
+  "budget": {
+    "maxUsd": 2,
+    "safety": 1.2,
+    "prices": {
+      "gpt-6.2-sol": { "input": 2, "output": 10 },
+      "gpt-6-luna": { "input": 0.1, "output": 0.5 },
+      "gpt-4.1-mini": { "input": 0.4, "output": 1.6 },
+      "claude-sonnet-5-5": { "input": 2, "output": 10 },
+      "claude-haiku-5-5": { "input": 0.1, "output": 0.5 }
+    },
+    "assumedOutputTokens": {
+      "keyPoints": 2500,
+      "summary": 1000,
+      "judge": 1200,
+      "screenJudge": 800,
+      "drafter": 12000,
+      "question": 400
+    }
+  },
   "concurrency": 4,
-
   "wikipedia": {
     "lang": "en",
     "userAgent": "slopfree-ca/0.1 (https://github.com/mvpete/slopfree-ca)"

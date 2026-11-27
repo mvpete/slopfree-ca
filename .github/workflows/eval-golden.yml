@@ -20,6 +20,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+      - run: npm ci
 
       - name: Run the eval
         run: |
@@ -27,6 +28,7 @@ jobs:
           node scripts/eval-golden.js "${{ inputs.articles }}" | tee eval-output.txt
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
 
       - name: Summary
         if: always()

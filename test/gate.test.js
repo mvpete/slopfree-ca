@@ -83,3 +83,43 @@ test("more literary flourishes than the plain summary fails", () => {
   const s = articleStats("x", b, { covered: keyOnly, unsupported: 1, words: 150, style: 3 }, 3000, weights);
   assert.deepEqual(checkGate(score([s]), GATE).failures.map((f) => f.check), ["style"]);
 });
+
+// Weekly gate: the challenger against golden, on net key points per word.
+const VS_GOLDEN = { vs: "golden", coverage: 0.95, margin: 0.05 };
+const goldenRun = { covered: keyOnly, unsupported: 0, words: 200, dashes: 0, style: 0 };
+const vsGolden = (c) => checkGate(score([articleStats("a", goldenRun, { dashes: 0, style: 0, unsupported: 0, ...c }, 3000, weights)]), VS_GOLDEN);
+
+test("vs golden: same key points in fewer words passes", () => {
+  const r = vsGolden({ covered: keyOnly, words: 180 }); // 1.11x
+  assert.equal(r.passed, true, r.failures.map((f) => f.message).join(" "));
+});
+
+test("vs golden: a tie isn't enough, it has to win by the margin", () => {
+  const r = vsGolden({ covered: keyOnly, words: 200 });
+  assert.deepEqual(r.failures.map((f) => f.check), ["margin"]);
+  assert.match(r.failures[0].message, /golden's/);
+});
+
+test("vs golden: made-up claims count against the margin and the accuracy check", () => {
+  // Same words and points, one extra unsupported claim: net points drop from 5 to 4.
+  const r = vsGolden({ covered: keyOnly, words: 180, unsupported: 1 });
+  assert.deepEqual(r.failures.map((f) => f.check).sort(), ["accuracy", "margin"]);
+});
+
+test("vs golden: much shorter but losing key points fails coverage", () => {
+  const lost = [true, true, true, false, false, false, false, false, false, false];
+  const r = vsGolden({ covered: lost, words: 60 });
+  assert.ok(r.failures.some((f) => f.check === "coverage"));
+});
+
+test("one weak article no longer sinks an otherwise clear winner", () => {
+  // 60% of golden's key points on one article: the old 85% floor failed this. 48 of 50 overall.
+  const weak = articleStats("weak", goldenRun, { covered: [true, true, true, false, false, false, false, false, false, false], unsupported: 0, words: 100 }, 3000, weights);
+  const good = Array.from({ length: 9 }, (_, i) => articleStats("g" + i, goldenRun, { covered: keyOnly, unsupported: 0, words: 150 }, 3000, weights));
+  const r = checkGate(score([weak, ...good]), VS_GOLDEN);
+  assert.equal(r.passed, true, r.failures.map((f) => f.message).join(" "));
+});
+
+test("older reports with floor and efficiency still re-check the old way", () => {
+  assert.equal(run([cand({ words: 300 })]).failures[0].check, "efficiency");
+});

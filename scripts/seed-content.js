@@ -6,9 +6,9 @@
 import fs from "node:fs";
 import path from "node:path";
 import { loadConfig, ROOT } from "./lib/config.js";
-import { createContext, prepareArticles, runPrompt, scoreRuns, addQuestions, BudgetExceeded } from "./lib/eval.js";
+import { createContext, prepareArticles, runPrompt, addQuestions, BudgetExceeded } from "./lib/eval.js";
 import { readJSON, readGolden, readText, existingSlugs, writeJSON } from "./lib/store.js";
-import { reasonOf } from "./lib/gate.js";
+import { measure, qualify, reasonOf } from "./lib/qualify.js";
 import { today, promptName } from "./lib/util.js";
 
 const cfg = loadConfig();
@@ -24,7 +24,7 @@ log(`seed content: golden ${golden.id}, challenger ${challenger.id}; writer ${cf
 
 const exclude = existingSlugs();
 const byslug = (runs) => Object.fromEntries(runs.map((r) => [r.slug, r]));
-const report = { date, model, writerModel: cfg.writerModel, judgeModel: cfg.judgeModel, gate: cfg.gate, seed: true };
+const report = { date, model, writer: cfg.writer, writerPick: cfg.writerPick, writerModel: cfg.writerModel, judgeModel: cfg.judgeModel, qualification: cfg.qualification, seed: true };
 
 function write(articles, runs) {
   for (const a of articles) {
@@ -39,12 +39,16 @@ function write(articles, runs) {
 try {
   const evalSet = await prepareArticles(ctx, cfg.articles, exclude);
   const [g, c] = await Promise.all([runPrompt(ctx, golden.text, evalSet), runPrompt(ctx, challenger.text, evalSet)]);
-  const gs = scoreRuns(cfg, evalSet, g);
-  const cs = scoreRuns(cfg, evalSet, c);
-  report.golden = { id: golden.id, score: gs.score, passed: gs.gate.passed, reason: reasonOf(gs.gate), stats: gs.stats };
-  report.challenger = { id: challenger.id, score: cs.score, passed: cs.gate.passed, reason: reasonOf(cs.gate), stats: cs.stats };
-  log(`prompt ${promptName(golden.id)}: ${gs.gate.passed ? "passes" : "fails"}: ${reasonOf(gs.gate)}`);
-  log(`prompt ${promptName(challenger.id)}: ${cs.gate.passed ? "passes" : "fails"}: ${reasonOf(cs.gate)}`);
+  // Both measured against the bar, for the site's numbers and the Examples page.
+  const plains = evalSet.map((a) => ({ slug: a.slug, ...a.baseline }));
+  const gs = measure(g, plains);
+  const cs = measure(c, plains);
+  const gq = qualify(gs, cfg.qualification);
+  const cq = qualify(cs, cfg.qualification);
+  report.golden = { id: golden.id, score: gs, passed: gq.passed, margins: gq.margins, reason: reasonOf(gq) };
+  report.challenger = { id: challenger.id, score: cs, passed: cq.passed, margins: cq.margins, reason: reasonOf(cq) };
+  log(`prompt ${promptName(golden.id)}: ${gq.passed ? "qualifies" : "doesn't qualify"}: ${reasonOf(gq)}`);
+  log(`prompt ${promptName(challenger.id)}: ${cq.passed ? "qualifies" : "doesn't qualify"}: ${reasonOf(cq)}`);
   const evalQuiz = await addQuestions(ctx, evalSet, [g, c]);
   write(evalSet, { [golden.id]: byslug(g), [challenger.id]: byslug(c) });
   report.contentSlugs = evalQuiz.map((a) => a.slug);

@@ -15,6 +15,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+      - run: npm ci
       - run: npm test
 
       - name: Decide the reader test
@@ -49,7 +50,8 @@ jobs:
             data/
           labels: bot
 
-      - if: steps.pr.outputs.pull-request-number
+      # A win changes golden.json, which only a maintainer merges. Other outcomes merge themselves.
+      - if: steps.pr.outputs.pull-request-number && steps.decide.outputs.decision != 'win'
         run: gh pr merge --auto --squash "${{ steps.pr.outputs.pull-request-number }}"
         env:
           GH_TOKEN: ${{ steps.app.outputs.token }}

@@ -1,20 +1,24 @@
-// The four model tasks: extract points, summarize, judge, draft. Plus a fake set for DRY_RUN.
+// The model tasks: answer key, summarize, judge, draft, quiz question. Plus a fake set for DRY_RUN.
+// Every task takes its model and effort from the caller (cfg.writers / cfg.drafter / cfg.questions),
+// and tags its calls with a role so spend and output sizes are tracked per job.
 import { wordCount } from "./util.js";
 
 // Em dashes, and spaced en dashes used as dashes, counted mechanically in every summary.
 export const countDashes = (text) => (text.match(/—|\s–\s/g) || []).length;
 
+// The answer key: only the points that matter, capped, most important first.
 const POINTS_SYSTEM = `You build answer keys for summary evaluation.
-List every point the article makes. Go through it section by section and do not stop early or cap the count: a short article may have a dozen points, a long one hundreds.
-Each point is one atomic, checkable claim in plain words: a fact, cause, effect, date, number, name, or relationship.
-Split compound sentences into separate points. Merge exact repeats. Leave out only navigation text, image captions and citation markers.
+List the key points of the article: what a reader needs to understand what the subject is, why it matters, and what happened. Losing one would leave a reader misinformed or missing the point.
+Leave out supporting specifics a reader can do without: lists of examples, minor figures, secondary names, asides.
+Each point is one atomic, checkable claim in plain words. Split compound claims. No repeats.
+Cover the whole article, not just the opening. Most important first. At most {MAX} points; a short article may need far fewer.`;
 
-Label each point "key" or "detail".
-- key: a reader needs it to understand what the subject is, why it matters, and what happened. Losing it would leave a reader misinformed or missing the point.
-- detail: supporting specifics a reader can do without: lists of examples, minor figures, secondary names, asides.
-Judge each point on its own merits; there is no quota.
-
-Return JSON: {"points": [{"text": "...", "key": true}, ...]}`;
+const POINTS_SCHEMA = {
+  type: "object",
+  properties: { points: { type: "array", items: { type: "string" } } },
+  required: ["points"],
+  additionalProperties: false,
+};
 
 const QUESTION_SYSTEM = `You write one EASY reading check. A reader reads exactly one of the summaries below, once, at normal speed, then answers. It only confirms they read and understood the summary; it is not a test of memory or detail.
 Ask about the summary's main point: what the subject is or did, or the single most important thing the summary says about it. Take it from the first sentence or two. Every summary must state the answer.
@@ -25,55 +29,92 @@ For each summary, quote the exact words that contain the answer (copy them chara
 
 Return JSON: {"text": "...", "options": ["...","...","...","..."], "answer": <0-3>, "quotes": ["<quote from summary 1>", "<quote from summary 2>", ...]}`;
 
-const norm = (s) => s.toLowerCase().replace(/[\u2018\u2019]/g, "'").replace(/[\u201c\u201d]/g, '"').replace(/\s+/g, " ").trim();
+const norm = (s) => s.toLowerCase().replace(/[‘’]/g, "'").replace(/[“”]/g, '"').replace(/\s+/g, " ").trim();
 
-const JUDGE_SYSTEM = `You grade a summary against a numbered list of every point its source article makes. Be strict and literal.
-A point is covered only if the summary states it, or states something that clearly implies it. Paraphrase is fine. Partly stated means not covered.
-List every claim in the summary that no point supports, or that contradicts a point.
-List every piece of AI-style writing in the summary: literary or rhetorical devices instead of plain statement, such as "not just X but Y", rhetorical questions, lists of three for rhythm, metaphors, dramatic or promotional language, stock phrases ("worth noting", "plays a crucial role", "rich history"), and restating what was already said. Quote each one briefly.
-You are not told who wrote the summary. Judge only what is written.
+// The judge reads the article itself, so a claim is only "unsupported" if the article doesn't back it,
+// not merely because it's a detail missing from the key-point list.
+const JUDGE_SYSTEM = `You grade a summary of an article. You get the article, a numbered list of its key points, and the summary. Be strict and literal.
+1. Key points: a point is covered only if the summary states it, or states something that clearly implies it. Paraphrase is fine. Partly stated means not covered.
+2. Unsupported claims: list every claim in the summary that the article does not support, or that contradicts it.
+3. AI-style writing: list every literary or rhetorical device used instead of plain statement, such as "not just X but Y", rhetorical questions, lists of three for rhythm, metaphors, dramatic or promotional language, stock phrases ("worth noting", "plays a crucial role", "rich history"), and restating what was already said. Quote each one briefly.
+You are not told who wrote the summary. Judge only what is written.`;
 
-Return JSON: {"covered": [<1-based numbers of covered points>], "unsupported": ["<claim>", ...], "style": ["<quoted AI-style phrase>", ...]}`;
+const JUDGE_SCHEMA = {
+  type: "object",
+  properties: {
+    covered: { type: "array", items: { type: "integer" }, description: "1-based numbers of the key points the summary covers" },
+    unsupported: { type: "array", items: { type: "string" } },
+    style: { type: "array", items: { type: "string" } },
+  },
+  required: ["covered", "unsupported", "style"],
+  additionalProperties: false,
+};
 
-const DRAFT_SYSTEM = `You improve a postfix prompt. It is pasted after this task: "Summarize the following article:" followed by the article.
-Every point in the article is labelled key or detail. Only key points count. Your targets, measured against the same task with no postfix (the plain summary):
-- Accuracy: keep at least {COVERAGE}% as many key points as the plain summary, and at least {FLOOR}% as many on every single article. They don't have to be the same points the plain summary chose.
-- Efficiency: at least {DENSITY}x as many key points per word as the plain summary. That's the same key points in {EFFICIENCY}% fewer words. Dropping detail is free; padding with detail only costs words.
-- Add no more unsupported claims than the plain summary.
-- No AI-style writing. The summaries must contain no em dashes at all, and no more literary or rhetorical devices than the plain summary ("not just X but Y", rhetorical questions, lists of three for rhythm, metaphors, dramatic or promotional language, stock phrases). Your prompt must tell the writer this explicitly: no em dashes, no literary techniques, plain statements only.
-A prompt that misses any target is rejected, so hit all of them.
-The postfix is also published for everyday use, so it must read as general guidance for clear, information-dense writing, not instructions specific to Wikipedia or to this test.
-Write the prompt itself the same way: plain, direct language, no em dashes, no literary techniques. Keep it under {MAX} characters.
-Learn from the earlier attempts listed and do something meaningfully different from the ones that failed.
+// The drafter never hears about Wikipedia or answer keys: real requests have neither, and a prompt
+// written for the test (2026-11-27: "use only the material the source marks as key") helps nobody.
+// It aims at the fixed bar, consistently, not at beating anyone.
+const DRAFT_SYSTEM = `You write postfix prompts. A postfix is pasted at the end of any request so the AI gives the whole answer in fewer words: every important fact kept, nothing made up, no filler.
+To test one, it is pasted after "Summarize the following article:" plus an article. A candidate qualifies only if, across every test article, the output:
+{CRITERIA}
+Aim to clear every requirement with room to spare on every article, every time. One lucky pass is worth less than a prompt that reliably clears the bar.
+Beyond the bar, more important points, fewer words and plainer writing are all better.
+It is published for everyday use, so write general guidance for any request. Do not mention articles, summaries, sources, Wikipedia, key points or this test.
+Study the failures below: which important points were dropped, which claims were made up, which phrases were flagged. Fix those causes.
+Write {N} candidates that differ in a real way from each other and from earlier attempts. Make at least one a small, targeted edit of the current golden prompt. Each must tell the writer plainly: no em dashes, no literary techniques, plain statements. Write them the same way, under {MAX} characters each.
 
-Return JSON: {"prompt": "...", "idea": "<one sentence on what you changed and why>"}`;
+Return JSON: {"candidates": [{"prompt": "...", "idea": "<one sentence: what's different and which failures it fixes>"}]}`;
+
+// The requirements in words, exactly as they're checked (scripts/lib/qualify.js).
+export function describeCriteria(q) {
+  const pct = (x) => `${Math.round(x * 100)}%`;
+  const lines = [];
+  if (q.keyPointCoverage) lines.push(`- keeps at least ${pct(q.keyPointCoverage.min)} of the article's important points`);
+  if (q.compression) lines.push(`- is at least ${pct(q.compression.min)} shorter than the same AI's answer without the postfix`);
+  if (q.unsupported) lines.push(q.unsupported.max === 0 ? "- makes up nothing: every claim is backed by the source" : `- makes at most ${q.unsupported.max} unsupported claims in total`);
+  if (q.emDashes) lines.push(q.emDashes.max === 0 ? "- contains no em dashes at all" : `- contains at most ${q.emDashes.max} em dashes`);
+  if (q.style) {
+    const what = `literary or rhetorical devices ("not just X but Y", rhetorical questions, lists of three for rhythm, metaphors, dramatic or promotional language, stock phrases)`;
+    lines.push(q.style.maxOverPlain !== undefined && q.style.maxOverPlain !== null
+      ? `- uses no more ${what} than the same AI's answer without the postfix${q.style.maxOverPlain ? `, plus ${q.style.maxOverPlain}` : ""}`
+      : `- uses at most ${q.style.max} ${what}`);
+  }
+  return lines.join("\n");
+}
+
+// Every prompt text that shapes a result, recorded in each report.
+export const PROMPTS = { points: POINTS_SYSTEM, judge: JUDGE_SYSTEM, draft: DRAFT_SYSTEM, question: QUESTION_SYSTEM };
 
 export function createTasks(cfg, llm) {
-  const { writerModel, judgeModel, wrapper } = cfg;
+  const { wrapper } = cfg;
 
-  async function extractPoints(article) {
+  // spec: { model, effort } from cfg.writers[i].keyPoints
+  async function extractPoints(article, spec) {
+    const max = cfg.articles.maxKeyPoints;
     const r = await llm.chat({
-      model: judgeModel,
-      system: POINTS_SYSTEM,
+      model: spec.model,
+      effort: spec.effort,
+      role: "keyPoints",
+      system: POINTS_SYSTEM.replace("{MAX}", String(max)),
       user: `Title: ${article.source.title}\n\n${article.text}`,
-      json: true,
+      schema: POINTS_SCHEMA,
     });
-    const raw = (r.points || [])
-      .map((p) => (typeof p === "string" ? { text: p, key: true } : p))
-      .filter((p) => p && typeof p.text === "string" && p.text.trim());
-    const points = raw.map((p) => p.text.trim());
-    const key = raw.map((p) => p.key === true);
-    if (points.length < 5) throw new Error(`only ${points.length} points`);
-    if (!key.some(Boolean)) throw new Error("no key points");
-    return { points, key };
+    const points = (r.points || [])
+      .map((p) => (typeof p === "string" ? p : p?.text))
+      .filter((p) => typeof p === "string" && p.trim())
+      .map((p) => p.trim())
+      .slice(0, max);
+    if (points.length < 3) throw new Error(`only ${points.length} key points`);
+    return { points, key: points.map(() => true) };
   }
 
-  // One question answerable from every summary. The judge quotes where each summary states the answer,
-  // and the quotes are checked against the summaries, so a question about a dropped fact can't get through.
+  // One question answerable from every summary. The quotes are checked against the summaries, so a
+  // question about a dropped fact can't get through.
   async function writeQuestion(article, summaries) {
     for (let attempt = 0; attempt < 2; attempt++) {
       const r = await llm.chat({
-        model: cfg.questionModel || judgeModel,
+        model: cfg.questions.model,
+        effort: cfg.questions.effort,
+        role: "question",
         system: QUESTION_SYSTEM,
         user: `TOPIC: ${article.source.title}\n\n${summaries.map((s, i) => `SUMMARY ${i + 1}:\n${s}`).join("\n\n")}`,
         json: true,
@@ -89,21 +130,25 @@ export function createTasks(cfg, llm) {
     throw new Error("couldn't write a question answerable from every summary");
   }
 
-  async function summarize(article, postfix) {
+  // writer: { model, effort } from cfg.writers[i]. Production settings, so results transfer.
+  async function summarize(article, postfix, writer) {
     const user = `${wrapper}\n\n${article.text}` + (postfix ? `\n\n${postfix}` : "");
-    const text = (await llm.chat({ model: writerModel, user })).trim();
+    const text = (await llm.chat({ model: writer.model, effort: writer.effort, role: "summary", user })).trim();
     return { text, words: wordCount(text), dashes: countDashes(text) };
   }
 
-  // One grading pass against the point list. The point list holds every claim in the article, so the judge
-  // never re-reads the article: that was about three quarters of the cost. Baseline and candidates are
-  // graded the same way, so the comparison stays fair.
-  async function judge(article, points, summary) {
+  // spec: { model, effort, role } from cfg.writers[i].judge or .screenJudge. Everything compared in one
+  // score must come from the same judge.
+  async function judge(article, points, summary, spec) {
     const r = await llm.chat({
-      model: judgeModel,
+      model: spec.model,
+      effort: spec.effort,
+      role: spec.role || "judge",
       system: JUDGE_SYSTEM,
-      user: `POINTS (from "${article.source.title}"):\n${points.map((p, i) => `${i + 1}. ${p}`).join("\n")}\n\nSUMMARY:\n${summary}`,
-      json: true,
+      // Same article and key points for every summary of it, so this part is cached.
+      shared: `ARTICLE: ${article.source.title}\n${article.text}\n\nKEY POINTS:\n${points.map((p, i) => `${i + 1}. ${p}`).join("\n")}`,
+      user: `SUMMARY:\n${summary}`,
+      schema: JUDGE_SCHEMA,
     });
     const covered = new Set((r.covered || []).map(Number).filter((n) => n >= 1 && n <= points.length));
     const unsupported = (r.unsupported || []).filter((c) => typeof c === "string");
@@ -117,65 +162,63 @@ export function createTasks(cfg, llm) {
     };
   }
 
-  // The drafter (gpt-6.2-sol by default) writes candidate prompts aimed at the gate's own thresholds.
-  async function draft(golden, history, goldenResult) {
-    const recent = history.slice(-12).map((h) => `Attempt ${h.n} (failed at ${h.stage}: ${h.reason})\n${h.prompt}`).join("\n\n---\n\n");
-    const g = cfg.gate;
-    const system = DRAFT_SYSTEM.replace("{MAX}", String(cfg.promptMaxChars))
-      .replace("{COVERAGE}", String(Math.round(g.coverage * 100)))
-      .replace("{FLOOR}", String(Math.round(g.floor * 100)))
-      .replace("{DENSITY}", (1 / (1 - g.efficiency)).toFixed(2))
-      .replace("{EFFICIENCY}", String(Math.round(g.efficiency * 100)));
+  // One call writes n candidates. feedback: plain text built from real failures (see weekly-topics.js).
+  async function draft({ golden, n, criteria, feedback }) {
+    const system = DRAFT_SYSTEM.replace("{CRITERIA}", describeCriteria(criteria)).replace("{N}", String(n)).replace("{MAX}", String(cfg.promptMaxChars));
     const r = await llm.chat({
-      model: cfg.drafterModel || judgeModel,
+      model: cfg.drafter.model,
+      effort: cfg.drafter.effort,
+      role: "drafter",
       system,
-      user: `CURRENT GOLDEN PROMPT:\n${golden}\n\nHOW THE GOLDEN PROMPT DID THIS WEEK:\n${goldenResult || "(not measured)"}\n\nEARLIER ATTEMPTS THIS WEEK:\n${recent || "(none yet)"}`,
+      user: `CURRENT GOLDEN PROMPT:\n${golden}\n\n${feedback || "NO FAILURES RECORDED YET."}`,
       json: true,
     });
-    if (typeof r.prompt !== "string" || !r.prompt.trim()) throw new Error("drafter returned no prompt");
-    return { prompt: r.prompt.trim(), idea: r.idea || "" };
+    const list = (r.candidates || []).filter((c) => typeof c?.prompt === "string" && c.prompt.trim());
+    if (!list.length) throw new Error("drafter returned no prompts");
+    return list.slice(0, n).map((c) => ({ prompt: c.prompt.trim(), idea: c.idea || "" }));
   }
 
   return { extractPoints, summarize, judge, writeQuestion, draft, moderate: llm.moderate };
 }
 
 // Deterministic stand-ins so the whole loop can be exercised without an API key.
-export function createFakeTasks() {
+export function createFakeTasks(cfg) {
   const sentences = (t) => t.replace(/\n+/g, " ").split(/(?<=[.!?])\s+/).filter((s) => s.length > 40);
   const hash = (s) => [...s].reduce((h, c) => (h * 31 + c.charCodeAt(0)) >>> 0, 7);
+  const FILLER = "In this context, it is also worth noting here that ";
+  const max = cfg?.articles?.maxKeyPoints ?? 30;
+  let drafted = 0;
 
   return {
     async extractPoints(article) {
-      const points = sentences(article.text); // fake: every sentence is a point
+      const points = sentences(article.text).slice(0, max); // fake: the first sentences are the key points
       if (points.length < 5) throw new Error("too few sentences");
-      const key = points.map((_, i) => i % 3 === 0); // fake: every third point is key
-      return { points, key };
+      return { points, key: points.map(() => true) };
     },
     async writeQuestion(article, summaries) {
-      // fake: the first sentence all summaries share
       const first = summaries[0].split(/(?<=[.!?])\s+/).find((s) => summaries.every((x) => x.includes(s.slice(0, 40)))) || summaries[0].slice(0, 60);
       return { text: `Which is true of ${article.source.title}?`, options: [first.slice(0, 90), "Option B", "Option C", "Option D"], answer: 0, quotes: summaries.map(() => first.slice(0, 40)) };
     },
-    // Fake writer: the baseline pads every sentence with filler. A postfix usually cuts the filler
-    // (shorter, same points); some postfixes also drop a point or keep the filler, so attempts can fail.
+    // Fake writer: the plain summary pads every sentence with filler. A postfix usually cuts it;
+    // some postfixes drop sentences or keep the filler, so candidates can fail.
     async summarize(article, postfix) {
-      const all = sentences(article.text).slice(0, 30);
-      const FILLER = "In this context, it is also worth noting here that ";
+      const all = sentences(article.text).slice(0, max);
       if (!postfix) {
         const text = all.map((s) => FILLER + s).join(" ");
         return { text, words: wordCount(text), dashes: countDashes(text) };
       }
       const h = hash(postfix);
       let keep = all;
-      if (h % 3 === 0) keep = keep.filter((_, i) => i !== 0); // drops a key point
-      const text = keep.map((s) => (h % 5 === 0 ? FILLER + s : s)).join(" ").replace(/\s*—\s*|\s–\s/g, ", "); // h % 5 === 0 keeps the filler; a postfix removes dashes
+      if (h % 3 === 0) keep = keep.filter((_, i) => i % 4 !== 0); // drops a quarter of the points
+      const text = keep.map((s) => (h % 5 === 0 ? FILLER + s : s)).join(" ").replace(/\s*—\s*|\s–\s/g, ", ");
       return { text, words: wordCount(text), dashes: countDashes(text) };
     },
     async judge(article, points, summary) {
-      return { covered: points.map((p) => summary.includes(p)), unsupported: 0, unsupportedClaims: [], style: 0, styleIssues: [] };
+      const style = summary.split(FILLER).length - 1 > 0 ? 1 : 0; // fake: filler counts as one stock phrase
+      return { covered: points.map((p) => summary.includes(p)), unsupported: 0, unsupportedClaims: [], style, styleIssues: style ? ["worth noting"] : [] };
     },
-    async draft(golden, history) {
-      return { prompt: `${golden}\n- Variant ${history.length + 1}: be briefer.`, idea: "fake" };
+    async draft({ golden, n }) {
+      return Array.from({ length: n }, () => ({ prompt: `${golden}\n- Variant ${++drafted}: be briefer.`, idea: "fake" }));
     },
     async moderate() {
       return false;

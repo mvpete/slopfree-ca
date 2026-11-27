@@ -7,6 +7,12 @@ on:
       count:
         description: "How many articles to add"
         default: "20"
+      open_pr:
+        description: "Open a PR with the articles (false: only keep them as a run artifact)"
+        default: "true"
+      max_usd:
+        description: "Spending cap for this run, in dollars"
+        default: "0.5"
 
 permissions:
   contents: read
@@ -20,6 +26,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+      - run: npm ci
       - run: npm test
 
       - name: Add the articles
@@ -27,6 +34,8 @@ jobs:
         run: node scripts/add-articles.js "${{ inputs.count }}"
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          MAX_USD: ${{ inputs.max_usd }}
 
       - name: Keep the results
         if: always()
@@ -39,12 +48,14 @@ jobs:
           if-no-files-found: ignore
 
       - uses: actions/create-github-app-token@v1
+        if: inputs.open_pr == 'true'
         id: app
         with:
           app-id: ${{ vars.SLOPFREE_APP_ID }}
           private-key: ${{ secrets.SLOPFREE_APP_PRIVATE_KEY }}
 
       - uses: peter-evans/create-pull-request@v7
+        if: inputs.open_pr == 'true'
         id: pr
         with:
           token: ${{ steps.app.outputs.token }}

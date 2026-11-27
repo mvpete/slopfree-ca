@@ -17,6 +17,10 @@ export function createWiki({ lang, userAgent }) {
     throw new Error(`Wikipedia kept failing for ${url}`);
   }
 
+  // List-like pages: no argument to summarize, so key points are a judgment call per item.
+  // 2026-11-27: "Infinite monkey theorem in popular culture" sank that week's best candidate.
+  const LISTY = /^(lists? of|outline of|index of|glossary of|timeline of|chronology of) |\b(in popular culture|in fiction|discography|filmography|bibliography|videography|awards and nominations|episodes|season \d+)$|\(disambiguation\)$/i;
+
   // Random main-namespace pages that look like real articles (not lists, not disambiguation, not stubs).
   async function randomTitles() {
     const data = await get({
@@ -28,7 +32,7 @@ export function createWiki({ lang, userAgent }) {
       ppprop: "disambiguation",
     });
     return (data.query?.pages || [])
-      .filter((p) => !p.pageprops?.disambiguation && p.length >= 12000 && !/^(lists? of|outline of|index of|glossary of) /i.test(p.title))
+      .filter((p) => !p.pageprops?.disambiguation && p.length >= 12000 && !LISTY.test(p.title))
       .map((p) => p.title);
   }
 
