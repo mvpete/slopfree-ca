@@ -1,0 +1,32 @@
+{
+  "date": "2026-11-27",
+  "model": "openai",
+  "golden": "p-0001",
+  "challenger": "p-0002",
+  "seed": "2026-11-27:p-0001:p-0002",
+  "snapshot": "data/answers-2026-11-27.json",
+  "outcome": "thin",
+  "reason": "Not enough evidence: 8 challenger and 12 golden answers (needs 10 each).",
+  "numbers": {
+    "answers": {
+      "golden": 12,
+      "challenger": 8
+    },
+    "accuracy": {
+      "golden": 0.8333333333333334,
+      "challenger": 0.75
+    },
+    "quizzes": 4,
+    "excluded": {
+      "tooGuessable": [],
+      "junkQuizzes": 0
+    },
+    "all": {
+      "accuracyDiff": -0.08333333333333337,
+      "timeDiff": 0.2963726998451298,
+      "pFaster": 0,
+      "pClearlyWorse": 0.437
+    },
+    "nonNative": null
+  }
+}
